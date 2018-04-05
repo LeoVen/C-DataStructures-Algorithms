@@ -18,9 +18,6 @@
     <ClCompile Include="C-Data-Structures.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Structures\Core.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Structures\DArray.c">
       <Filter>Source Files</Filter>
     </ClCompile>
