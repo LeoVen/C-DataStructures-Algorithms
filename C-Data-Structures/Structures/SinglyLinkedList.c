@@ -43,7 +43,13 @@
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_ALLOC if allocation failed
  *
- * @see sll_get_list
+ * @see sll_get_list()
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *sll;
+ * sll_init_list(&sll);
+ * @endcode
  */
 Status sll_init_list(SinglyLinkedList **sll)
 {
@@ -71,6 +77,12 @@ Status sll_init_list(SinglyLinkedList **sll)
  * @return @c DS_ERR_ALLOC if allocation failed
  *
  * @see sll_get_node()
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedNode *sln;
+ * sll_init_node(&sln);
+ * @endcode
  */
 Status sll_init_node(SinglyLinkedNode **sln)
 {
@@ -98,6 +110,13 @@ Status sll_init_node(SinglyLinkedNode **sln)
  *
  * @return Returns a new @c SinglyLinkedList with length of 0.
  *
+ * @see sll_init_list()
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *sll = sll_get_list();
+ * @endcode
+ *
  * @note Avoid using this function as it does not return a status code and
  * does not check for failures. Give preference to @c sll_init_list().
  */
@@ -123,6 +142,13 @@ SinglyLinkedList * sll_get_list()
  *
  * @return Returns a new @c SinglyLinkedNode with data of given parameter
  *
+ * @see sll_init_node()
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedNode *sln = sll_get_node();
+ * @endcode
+ *
  * @note Avoid using this function as it does not return a @c Status code and
  * does not check for failures. Give preference to @c sll_init_node() or
  * @c sll_make_node().
@@ -143,15 +169,21 @@ SinglyLinkedNode * sll_get_node(int value)
  * This function allows you to make a @c SinglyLinkedNode by passing
  * its value as a parameter
  *
+ * @param[out] sln Pointer to new Node 
  * @param[in] value New Node value
- * @param[out] sln Pointer to new Node
  *
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_ALLOC if allocation failed
  *
  * @see sll_init_node()
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedNode *sln;
+ * sll_make_node(10, &sln); // Makes a node with value of 10
+ * @endcode
  */
-Status sll_make_node(int value, SinglyLinkedNode **sln)
+Status sll_make_node(SinglyLinkedNode **sln, int value)
 {
 	*sln = malloc(sizeof(SinglyLinkedNode));
 
@@ -339,7 +371,7 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 }
 
 /**
-* @brief Inserts new @c SinglyLinkedNode at the first position.
+* @brief Inserts new @c SinglyLinkedNode at chosen position.
 *
 * This function inserts a @c SinglyLinkedNode that is initialized inside the
 * function. Its value is assigned and then he is added to the list. Its
@@ -468,6 +500,8 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
 	return DS_OK;
 }
 
+// Insert newly made SinglyLinkedNode to list
+
 //Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node);
 //Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t position);
 //Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node);
@@ -510,6 +544,18 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
  *
  */
 
+ /**
+  * @brief Removes first @c SinglyLinkedNode from the list.
+  *
+  * This function removes the first @c SinglyLinkedNode from the list. If the
+  * list is empty, @c DS_ERR_INVALID_OPERATION is returned.
+  *
+  * @param[in] sll Reference to a @c SinglyLinkedList
+  *
+  * @return @c DS_OK if all operations were successful
+  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
+  * @return @c DS_ERR_INVALID_OPERATION if list is empty
+  */
 Status sll_remove_head(SinglyLinkedList *sll)
 {
 	if (sll == NULL)
@@ -532,6 +578,22 @@ Status sll_remove_head(SinglyLinkedList *sll)
 	return DS_OK;
 }
 
+/**
+ * @brief Removes a @c SinglyLinkedNode from the list at a chosen position.
+ *
+ * This function removes a chosen @c SinglyLinkedNode from the list at a
+ * position relative to the head of the list If the list is empty, @c
+ * DS_ERR_INVALID_OPERATION is returned.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[in] position Relative position to the first element of the list where
+ * a @c SinglyLinkedNode will be removed
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
+ * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
+ * @return @c DS_ERR_ALLOC if allocation faileds
+ */
 Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 {
 	if (sll == NULL || position == NULL)
@@ -582,6 +644,20 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 	return DS_OK;
 }
 
+/**
+ * @brief Removes last @c SinglyLinkedNode from the list.
+ *
+ * This function removes the last @c SinglyLinkedNode from the list. If the
+ * list is empty, @c DS_ERR_INVALID_OPERATION is returned.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[in] position Relative position to the first element of the list where
+ * a @c SinglyLinkedNode will be removed
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
+ * @return @c DS_ERR_INVALID_OPERATION if list is empty
+ */
 Status sll_remove_tail(SinglyLinkedList *sll)
 {
 	if (sll == NULL)
@@ -619,9 +695,9 @@ Status sll_remove_tail(SinglyLinkedList *sll)
 	return DS_OK;
 }
 
-//// +-------------------------------------------------------------------------------------------------+
-//// |                                             Display                                             |
-//// +-------------------------------------------------------------------------------------------------+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Display                                             |
+// +-------------------------------------------------------------------------------------------------+
 
 Status sll_display(SinglyLinkedList *sll)
 {
@@ -629,18 +705,22 @@ Status sll_display(SinglyLinkedList *sll)
 		return DS_ERR_NULL_POINTER;
 
 	if (sll->length == 0 || sll->head == NULL) {
+
 		printf("\nSingly Linked List\n[ empty ]\n");
 		return DS_OK;
+
 	}
 
 	SinglyLinkedNode *scan = sll->head;
 
 	printf("\nSingly Linked List\n");
+
 	while (scan != NULL)
 	{
 		printf(" %d ->", scan->data);
 		scan = scan->next;
 	}
+
 	printf(" NULL\n");
 
 	return DS_OK;
@@ -657,76 +737,136 @@ Status sll_display_raw(SinglyLinkedList *sll)
 	SinglyLinkedNode *scan = sll->head;
 
 	printf("\n");
+
 	while (scan != NULL)
 	{
 		printf("%d ", scan->data);
 		scan = scan->next;
 	}
+
 	printf("\n");
 
 	return DS_OK;
 }
 
-//// +-------------------------------------------------------------------------------------------------+
-//// |                                             Resets                                              |
-//// +-------------------------------------------------------------------------------------------------+
-//
-//void resetTail(SinglyLinkedList *SinglyLinkedList)
-//{
-//	SinglyLinkedList->tail = SinglyLinkedList->head;
-//	if (SinglyLinkedList->tail != NULL) {
-//		while (SinglyLinkedList->tail->next != NULL)
-//		{
-//			SinglyLinkedList->tail = SinglyLinkedList->tail->next;
-//		}
-//	}
-//}
-//
-//int deleteListSLL(SinglyLinkedList **SinglyLinkedList)
-//{
-//	SinglyLinkedNode *kill;
-//	(*SinglyLinkedList)->tail = (*SinglyLinkedList)->head;
-//	while ((*SinglyLinkedList)->tail != NULL)
-//	{
-//		// Free memory from heap
-//		kill = (*SinglyLinkedList)->tail;
-//		(*SinglyLinkedList)->tail = (*SinglyLinkedList)->tail->next;
-//		free(kill);
-//	}
-//	// If user wishes to use the list again
-//	initListSLL(SinglyLinkedList);
-//	return -1; // List erased
-//}
-//
-//// +-------------------------------------------------------------------------------------------------+
-//// |                                             Search                                              |
-//// +-------------------------------------------------------------------------------------------------+
-//
-//int frequencyCountSLL(SinglyLinkedList **SinglyLinkedList, int value)
-//{
-//	SinglyLinkedNode *scanner = (*SinglyLinkedList)->head;
-//	if ((*SinglyLinkedList)->head == NULL) return 0;
-//	int count = 0;
-//	while (scanner != NULL)
-//	{
-//		if (scanner->data == value) count++;
-//		scanner = scanner->next;
-//	}
-//	return count;
-//}
-//
-//bool containsValueSLL(SinglyLinkedList **SinglyLinkedList, int value)
-//{
-//	SinglyLinkedNode *scanner = (*SinglyLinkedList)->head;
-//	if ((*SinglyLinkedList)->head == NULL) return false;
-//	while (scanner != NULL)
-//	{
-//		if (scanner->data == value) return true;
-//		scanner = scanner->next;
-//	}
-//	return false;
-//}
-//
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Resets                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status sll_delete_list(SinglyLinkedList **sll)
+{
+	if ((*sll) == NULL)
+		return DS_ERR_NULL_POINTER;
+	
+	SinglyLinkedNode *prev = (*sll)->head;
+
+	while ((*sll)->head != NULL)
+	{
+		(*sll)->head = (*sll)->head->next;
+		free(prev);
+		prev = (*sll)->head;
+	}
+
+	free((*sll));
+
+	(*sll) = NULL;
+
+	return DS_OK;
+}
+
+Status sll_erase_list(SinglyLinkedList **sll)
+{
+	if ((*sll) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = sll_delete_list(sll);
+	
+	if (st != DS_OK)
+		return st;
+
+	st = sll_init_list(sll);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Search                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status sll_frequency(SinglyLinkedList *sll, int key, size_t *frequency)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll->length == 0 || sll->head == NULL)
+		return DS_ERR_INVALID_OPERATION;
+	
+	SinglyLinkedNode *scan = sll->head;
+
+	*frequency = 0;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key)
+			(*frequency)++;
+
+		scan = scan->next;
+	}
+	
+	return DS_OK;
+}
+
+Status sll_contains(SinglyLinkedList *sll, int key, bool *result)
+{
+	*result = false;
+
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll->length == 0 || sll->head == NULL)
+		return DS_ERR_NOT_FOUND;
+
+	SinglyLinkedNode *scan = sll->head;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key) {
+
+			result = true;
+			break;
+
+		}
+
+		scan = scan->next;
+	}
+	
+	return DS_OK;
+}
+
+bool sll_exists(SinglyLinkedList *sll, int key)
+{
+	if (sll == NULL)
+		return 0;
+
+	if (sll->length == 0 || sll->head == NULL)
+		return 0;
+
+	SinglyLinkedNode *scan = sll->head;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key)
+			return true;
+
+		scan = scan->next;
+	}
+
+	return false;
+}
+
 //int findMin(SinglyLinkedList **SinglyLinkedList)
 //{
 //	SinglyLinkedNode *scanner = (*SinglyLinkedList)->head;

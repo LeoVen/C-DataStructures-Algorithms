@@ -1,10 +1,10 @@
 /*
- * CStructures.h
+ * @file Structures.h
  *
- * Author: Leonardo Vencovsky
- * Created on 18/03/2018
+ * @author Leonardo Vencovsky
+ * @date 18/03/2018
  *
- * Header to Include all C Structures Headers
+ * @brief Header to Include all C Structures Headers
  *
  */
 
@@ -18,6 +18,7 @@ extern "C" {
 #include "..\Headers\DArray.h"
 #include "..\Headers\DoublyLinkedList.h"
 #include "..\Headers\SinglyLinkedList.h"
+#include "..\Headers\CircularLinkedList.h"
 #include "..\Headers\Stack.h"
 #include "..\Headers\StructureConversions.h"
 #include "..\Headers\Vector.h"

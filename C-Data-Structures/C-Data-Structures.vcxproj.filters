@@ -66,6 +66,12 @@
     <ClCompile Include="Core\Core.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\CircularLinkedListTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Structures\CircularLinkedList.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Core.h">
@@ -99,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Tests.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\CircularLinkedList.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

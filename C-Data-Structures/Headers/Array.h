@@ -4,7 +4,7 @@
  * Author: Leonardo Vencovsky
  * Created on 18/03/2018
  *
- * Header for Array in C
+ * Header file for Array implementations in C
  *
  */
 

@@ -23,7 +23,7 @@
  *
  * @param[in] status The status returned by a function
  *
- * @return A string equivalent for the status name
+ * @return A string equivalent of the status name
  */
 char * status_repr(Status status)
 {
@@ -42,6 +42,14 @@ char * status_repr(Status status)
 	}
 }
 
+/**
+ * @brief Visualize status codes in the console
+ *
+ * This function automatically prints a status code in your console. Can be
+ * used for debugging.
+ *
+ * @param[in] status The status returned by a function
+ */
 void print_status_repr(Status status)
 {
 	printf("\n%s", status_repr(status));

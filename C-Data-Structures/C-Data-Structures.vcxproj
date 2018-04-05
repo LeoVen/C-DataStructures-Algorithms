@@ -153,6 +153,7 @@
     </ClCompile>
     <ClCompile Include="Core\Core.c" />
     <ClCompile Include="Structures\Array.c" />
+    <ClCompile Include="Structures\CircularLinkedList.c" />
     <ClCompile Include="Structures\DoublyLinkedList.c" />
     <ClCompile Include="Structures\SinglyLinkedList.c" />
     <ClCompile Include="Structures\Stack.c" />
@@ -160,6 +161,7 @@
     <ClCompile Include="Structures\StructureConversions.c" />
     <ClCompile Include="Structures\Vector.c" />
     <ClCompile Include="Tests\ArrayTests.c" />
+    <ClCompile Include="Tests\CircularLinkedListTests.c" />
     <ClCompile Include="Tests\DoublyLinkedListTests.c" />
     <ClCompile Include="Tests\ConversionTests.c" />
     <ClCompile Include="Tests\SinglyLinkedListTests.c" />
@@ -171,6 +173,7 @@
   <ItemGroup>
     <ClInclude Include="Core\Core.h" />
     <ClInclude Include="Headers\Array.h" />
+    <ClInclude Include="Headers\CircularLinkedList.h" />
     <ClInclude Include="Headers\DoublyLinkedList.h" />
     <ClInclude Include="Headers\Core.h" />
     <ClInclude Include="Headers\SinglyLinkedList.h" />

@@ -1,13 +1,13 @@
 /*
- * SinglyLinkedListTests.c
+ * @file SinglyLinkedListTests.c
  *
- * Author: Leonardo Vencovsky
- * Created on 14/03/2018
+ * @author Leonardo Vencovsky
+ * @date 14/03/2018
  *
- * Test Cases for Singly Linked Lists in C
+ * @brief Test Cases for @c SinglyLinkedLists implementations in C
  *
- * Feel free to break any of my implementations!
- * Just make sure to open an issue :D
+ * Here all functions are tested to assure that they operate as expected. Note
+ * that not all test cases are performed.
  *
  */
 
@@ -105,6 +105,39 @@ int SinglyLinkedListTests()
 	}
 
 	sll_display_raw(sll);
+
+	sll_delete_list(&sll);
+
+	if (sll == NULL)
+		printf("\nOK");
+
+	sll_init_list(&sll);
+
+	for (i = 0; i < 10; i++)
+		sll_insert_tail(sll, i);
+
+	sll_display(sll);
+
+	sll_erase_list(&sll);
+
+	sll_display(sll);
+
+	int a = NULL;
+	printf("\nNULL: %d", (int)a); // lol
+
+	for (i = 0; i < 100; i++)
+		sll_insert_tail(sll, rand() % 10);
+
+	size_t f;
+	for (i = -10; i < 20; i++) {
+		if (sll_exists(sll, i)) {
+			sll_frequency(sll, i, &f);
+			printf("\nData %d frequency : %u", i, f);
+		}
+		else {
+			printf("\nData %d is not in the list", i);
+		}
+	}
 
 	printf("\n");
 	return 0;
