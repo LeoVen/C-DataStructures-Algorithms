@@ -1,5 +1,5 @@
 /*
- * CStack.c
+ * Stack.c
  *
  * Author: Leonardo Vencovsky
  * Created on 31/03/2018
@@ -22,11 +22,11 @@
 // |                                           Initialize                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-int initCStack(CStack **Stack)
+int initCStack(Stack **stk)
 {
-	(*Stack) = malloc(sizeof(CStack));
-	(*Stack)->height = 0;
-	(*Stack)->top = NULL;
+	(*stk) = malloc(sizeof(Stack));
+	(*stk)->height = 0;
+	(*stk)->top = NULL;
 	return 0;
 }
 
@@ -34,17 +34,17 @@ int initCStack(CStack **Stack)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-CStack * getCStack()
+Stack * getCStack()
 {
-	CStack *stack = malloc(sizeof(CStack));
+	Stack *stack = malloc(sizeof(Stack));
 	stack->height = 0;
 	stack->top = NULL;
 	return stack;
 }
 
-CStackBox * getCStackBox(int value)
+StackBox * getCStackBox(int value)
 {
-	CStackBox *box = malloc(sizeof(CStackBox));
+	StackBox *box = malloc(sizeof(StackBox));
 	box->below = NULL;
 	box->data = value;
 }
@@ -53,15 +53,15 @@ CStackBox * getCStackBox(int value)
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-int pushCStack(CStack **Stack, int value)
+int pushCStack(Stack **stk, int value)
 {
-	CStackBox *newBox = getCStackBox(value);
-	if ((*Stack)->top == NULL) {
-		(*Stack)->top = newBox;
+	StackBox *newBox = getCStackBox(value);
+	if ((*stk)->top == NULL) {
+		(*stk)->top = newBox;
 	}
 	else {
-		newBox->below = (*Stack)->top;
-		(*Stack)->top = newBox;
+		newBox->below = (*stk)->top;
+		(*stk)->top = newBox;
 	}
 	return 0; // OK
 }
@@ -70,18 +70,18 @@ int pushCStack(CStack **Stack, int value)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-CStackBox * popCStack(CStack **Stack)
+StackBox * popCStack(Stack **stk)
 {
 	// TODO
 	//
 	//
 }
 
-int sliceCStack(CStack **Stack)
+int sliceCStack(Stack **stk)
 {
-	if (!isEmptyCStack(Stack)) {
-		CStackBox *kill = (*Stack)->top;
-		(*Stack)->top = (*Stack)->top->below;
+	if (!isEmptyCStack(stk)) {
+		StackBox *kill = (*stk)->top;
+		(*stk)->top = (*stk)->top->below;
 		free(kill);
 	}
 	return 1; // Stack is empty
@@ -91,10 +91,10 @@ int sliceCStack(CStack **Stack)
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-int displayCStack(CStack **Stack)
+int displayCStack(Stack **stk)
 {
-	if (!isEmptyCStack(Stack)) {
-		CStackBox *scanner = (*Stack)->top;
+	if (!isEmptyCStack(stk)) {
+		StackBox *scanner = (*stk)->top;
 		printf("\nC Stack\n");
 		// while (scanner)
 		while (scanner != NULL)
@@ -108,10 +108,10 @@ int displayCStack(CStack **Stack)
 	return 1; // Stack is Empty
 }
 
-int displayRawCStack(CStack **Stack)
+int displayRawCStack(Stack **stk)
 {
-	if (!isEmptyCStack(Stack)) {
-		CStackBox *scanner = (*Stack)->top;
+	if (!isEmptyCStack(stk)) {
+		StackBox *scanner = (*stk)->top;
 		printf("\n");
 		while (scanner != NULL)
 		{
@@ -126,14 +126,14 @@ int displayRawCStack(CStack **Stack)
 
 
 
-int peekCStack(CStack **Stack)
+int peekCStack(Stack **stk)
 {
-	return (*Stack)->top->data;
+	return (*stk)->top->data;
 }
 
-bool isEmptyCStack(CStack **Stack)
+bool isEmptyCStack(Stack **stk)
 {
-	if ((*Stack)->top == NULL)
+	if ((*stk)->top == NULL)
 		return true;
 	else
 		return false;

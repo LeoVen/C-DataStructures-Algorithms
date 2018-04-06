@@ -1,12 +1,12 @@
 /*
-* Vector.h
-*
-* Author: Leonardo Vencovsky
-* Created on 20/03/2018
-*
-* Header for Vector in C
-*
-*/
+ * Vector.h
+ *
+ * Author: Leonardo Vencovsky
+ * Created on 20/03/2018
+ *
+ * Header for Vector in C
+ *
+ */
 
 #pragma once
 

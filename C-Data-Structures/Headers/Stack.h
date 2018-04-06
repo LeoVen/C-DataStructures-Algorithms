@@ -1,5 +1,5 @@
 /*
- * CStack.h
+ * Stack.h
  *
  * Author: Leonardo Vencovsky
  * Created on 31/03/2018
@@ -16,15 +16,15 @@ extern "C" {
 
 #include "..\Core\Core.h"
 
-	typedef struct CStackBox {
+	typedef struct StackBox {
 		int data;
-		struct CStackBox *below;
-	} CStackBox;
+		struct StackBox *below;
+	} StackBox;
 
-	typedef struct CStack {
+	typedef struct Stack {
 		int height;
-		CStackBox *top;
-	} CStack;
+		StackBox *top;
+	} Stack;
 
 
 	// +-------------------------------------+
@@ -34,33 +34,33 @@ extern "C" {
 	 *
 	 * @see getCStack() as an alternative
 	 *
-	 * @Param [ CStack **Stack ] Reference to stack
+	 * @Param [ Stack **Stack ] Reference to stack
 	 *
 	 * @Returns [ int ] Return Code (see code table)
 	 */
-	int initCStack(CStack **Stack);
+	int initCStack(Stack **stk);
 
 	// +-------------------------------------+
 	// |              Insertion              |
 	// +-------------------------------------+
 
-	int pushCStack(CStack **Stack, int value);
+	int pushCStack(Stack **stk, int value);
 
 	// +-------------------------------------+
 	// |               Removal               |
 	// +-------------------------------------+
 
-	CStackBox * popCStack(CStack **Stack);
+	StackBox * popCStack(Stack **stk);
 
-	int sliceCStack(CStack **Stack);
+	int sliceCStack(Stack **stk);
 
 	// +-------------------------------------+
 	// |               Display               |
 	// +-------------------------------------+
 	
-	int displayCStack(CStack **Stack);
+	int displayCStack(Stack **stk);
 
-	int peekCStack(CStack **Stack);
+	int peekCStack(Stack **stk);
 
 	// +-------------------------------------+
 	// |               Resets                |
@@ -70,7 +70,7 @@ extern "C" {
 	// |               Search                |
 	// +-------------------------------------+
 
-	bool isEmptyCStack(CStack **Stack);
+	bool isEmptyCStack(Stack **stk);
 	// Is full
 
 	// +-------------------------------------+
@@ -78,17 +78,17 @@ extern "C" {
 	// +-------------------------------------+
 	/* Get a new Stack
 	 *
-	 * @Returns [ CStack * ] Pointer to new Stack
+	 * @Returns [ Stack * ] Pointer to new Stack
 	 */
-	CStack * getCStack();
+	Stack * getCStack();
 
 	/* Gets a new stack box
 	 *
 	 * @Param [ int value ] value of new Box
 	 *
-	 * @Returns [ CStackBox * ] Pointer to new Stack Box
+	 * @Returns [ StackBox * ] Pointer to new Stack Box
 	 */
-	CStackBox * getCStackBox(int value);
+	StackBox * getCStackBox(int value);
 
 	// +-------------------------------------+
 	// |                 Copy                |

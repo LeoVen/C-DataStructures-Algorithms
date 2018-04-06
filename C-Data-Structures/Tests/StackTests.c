@@ -23,7 +23,7 @@ int StackTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	CStack *stack;
+	Stack *stack;
 	initCStack(&stack);
 
 	int i;
