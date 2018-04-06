@@ -31,6 +31,29 @@ int CircularLinkedListTests()
 
 	cll_init_node(&cln);
 
+	if (0 == NULL)
+		printf("\nTrue");
+
+	int i;
+	for (i = 0; i < 20; i++) {
+		cll_insert_after(cll, i);
+	}
+
+	cll_display(cll);
+
+	for (i = 0; i < 10; i++) {
+		cll_remove_after(cll);
+	}
+
+	cll_display(cll);
+
+	CircularLinkedList *jos;
+	size_t k = 13, n = 40, result;
+	if (cll_josephus(&jos, n, k, &result) == DS_OK)
+		printf("\n Josephus (%u, %u) = %u", n, k, result);
+
+
+
 	printf("\n");
 	return 0;
 }

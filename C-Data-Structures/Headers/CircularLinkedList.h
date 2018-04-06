@@ -1,11 +1,12 @@
 /*
- * @file CircularList.h
+ * @file CircularLinkedList.h
  *
  * @author Leonardo Vencovsky
  * @date 05/04/2018
  *
- * Header file for Circular List implementations in C
+ * @brief Header file for Circular List implementations in C
  *
+ * Detailed description
  */
 
 #pragma once
@@ -50,16 +51,25 @@ extern "C" {
 
 	Status cll_make_node(CircularLinkedNode **cln, int value);
 
-	//Status cll_insert_after(CircularLinkedList **cll, int value);
-	//Status cll_insert_before(CircularLinkedList **cll, int value);
+	// Special cases
+	Status cll_insert_first(CircularLinkedList *cll, int value);
+	Status cll_remove_last(CircularLinkedList *cll);
 
-	//status cll_remove_before(CircularLinkedList **cll);
-	//status cll_remove_current(CircularLinkedList **cll);
-	//status cll_remove_after(CircularLinkedList **cll);
+	Status cll_insert_after(CircularLinkedList *cll, int value);
+	//Status cll_insert_before(CircularLinkedList *cll, int value);
 
-	//Status cll_iter_next(CircularLinkedList *cll);
+	Status cll_remove_after(CircularLinkedList *cll);
+	//Status cll_remove_current(CircularLinkedList *cll);
+	//Status cll_remove_before(CircularLinkedList *cll);
+
+	Status cll_iter_next(CircularLinkedList *cll);
 	//Status cll_iter(CircularLinkedList *cll, size_t positions);
 	//Status cll_iter_before(CircularLinkedList *cll);
+
+	Status cll_display(CircularLinkedList *cll);
+	Status cll_display_raw(CircularLinkedList *cll);
+
+	Status cll_josephus(CircularLinkedList **cll, size_t n, size_t k, size_t *result);
 
 #ifdef __cplusplus
 }
