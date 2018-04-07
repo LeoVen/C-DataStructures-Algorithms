@@ -241,8 +241,8 @@ Status cll_display(CircularLinkedList *cll)
 	if (cll->length == 0 || cll->curr == NULL) {
 
 		printf("\nCircular Linked List\n[ empty ]\n");
-		return DS_OK;
 
+		return DS_OK;
 	}
 
 	CircularLinkedNode *scan = cll->curr;

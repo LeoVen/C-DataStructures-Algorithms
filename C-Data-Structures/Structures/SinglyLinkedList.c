@@ -199,22 +199,22 @@ Status sll_make_node(SinglyLinkedNode **sln, int value)
  * @warning Do not pass length parameter as an integer or your program won't
  * finish correctly.
  */
-Status sll_get_length(SinglyLinkedList *sll, size_t *length)
+Status sll_get_length(SinglyLinkedList *sll, size_t *result)
 {
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	SinglyLinkedNode *scanner = sll->head;
 
-	*length = 0;
+	*result = 0;
 
 	while (scanner != NULL)
 	{
 		scanner = scanner->next;
-		(*length)++;
+		(*result)++;
 	}
 
-	if ((*length) != sll->length)
+	if ((*result) != sll->length)
 		return DS_ERR_UNEXPECTED_RESULT;
 
 	return DS_OK;

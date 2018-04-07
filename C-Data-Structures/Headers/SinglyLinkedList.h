@@ -48,8 +48,8 @@ extern "C" {
 	SinglyLinkedNode * sll_get_node(int value);
 
 	Status sll_make_node(SinglyLinkedNode **sln, int value);
-	Status sll_get_length(SinglyLinkedList *sll, size_t *length);
 
+	Status sll_get_length(SinglyLinkedList *sll, size_t *result);
 	Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result);
 	
 	Status sll_insert_head(SinglyLinkedList *sll, int value);

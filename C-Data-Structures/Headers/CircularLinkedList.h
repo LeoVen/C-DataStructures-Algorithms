@@ -51,7 +51,6 @@ extern "C" {
 
 	Status cll_make_node(CircularLinkedNode **cln, int value);
 
-	// Special cases
 	Status cll_insert_first(CircularLinkedList *cll, int value);
 	Status cll_remove_last(CircularLinkedList *cll);
 
