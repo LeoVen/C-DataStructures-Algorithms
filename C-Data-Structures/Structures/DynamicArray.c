@@ -1,5 +1,5 @@
 /*
- * DArray.c
+ * DynamicArray.c
  *
  * Author: Leonardo Vencovsky
  * Created on 20/03/2018
@@ -9,48 +9,48 @@
  * Dynamic Array grows and shrinks as you add and remove values
  */
 
-#include "..\Headers\DArray.h"
+#include "..\Headers\DynamicArray.h"
 
  // +-------------------------------------------------------------------------------------------------+
  // |                                             Getters                                             |
  // +-------------------------------------------------------------------------------------------------+
 
-int initDArray(DArray **array, int maxSize)
+int initDArray(DynamicArray **array, int maxSize)
 {
-	(*array) = malloc(sizeof(DArray));
-	(*array)->array = malloc(sizeof(int) * maxSize);
+	(*array) = malloc(sizeof(DynamicArray));
+	(*array)->buffer = malloc(sizeof(int) * maxSize);
 	(*array)->size = 0;
 	(*array)->threshold = false;
 	(*array)->maxSize = maxSize;
 	return 0;
 }
 
-DArray * getDArray(int maxSize)
+DynamicArray * getDArray(int maxSize)
 {
 	if (maxSize < 0) {
 		printf("\nFATAL ERROR\n");
 		return NULL;
 	}
-	DArray *newArr = malloc(sizeof(DArray));
+	DynamicArray *newArr = malloc(sizeof(DynamicArray));
 	newArr->size = 0;
 	newArr->maxSize = maxSize;
 	newArr->threshold = false;
-	newArr->array = malloc(sizeof(int) * maxSize);
+	newArr->buffer = malloc(sizeof(int) * maxSize);
 	return newArr;
 }
 
-int pushValueDArray(DArray **array, int value)
+int pushValueDArray(DynamicArray **array, int value)
 {
 	adjustSize(array);
-	(*array)->array[(*array)->size] = value;
+	(*array)->buffer[(*array)->size] = value;
 	((*array)->size)++;
 	return 0;
 }
 
-int popValueDArray(DArray **array)
+int popValueDArray(DynamicArray **array)
 {
 	adjustSize(array);
-	(*array)->array[(*array)->size] = 0;
+	(*array)->buffer[(*array)->size] = 0;
 	((*array)->size)--;
 	return 0;
 }
@@ -59,7 +59,7 @@ int popValueDArray(DArray **array)
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-int displayDArray(DArray *array)
+int displayDArray(DynamicArray *array)
 {
 	int i;
 	if (array->size == 0) {
@@ -68,13 +68,13 @@ int displayDArray(DArray *array)
 	}
 	printf("\nD Array\n[ ");
 	for (i = 0; i < array->size; i++) {
-		printf("%d, ", array->array[i]);
+		printf("%d, ", array->buffer[i]);
 	}
 	printf("nil ]\n");
 	return 0;
 }
 
-int displayRawDArray(DArray *array)
+int displayRawDArray(DynamicArray *array)
 {
 	int i;
 	if (array->size == 0) {
@@ -83,7 +83,7 @@ int displayRawDArray(DArray *array)
 	}
 	printf("\n");
 	for (i = 0; i < array->size; i++) {
-		printf("%d ", array->array[i]);
+		printf("%d ", array->buffer[i]);
 	}
 	printf("\n");
 	return 0;
@@ -93,7 +93,7 @@ int displayRawDArray(DArray *array)
 // |                                             Dynamic                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-int adjustSize(DArray **arr)
+int adjustSize(DynamicArray **arr)
 {
 	int i;
 	if ((*arr)->size > (*arr)->maxSize / 2) (*arr)->threshold = true;
@@ -111,14 +111,14 @@ int adjustSize(DArray **arr)
 	}
 }
 
-int shrinkDArray(DArray **arr)
+int shrinkDArray(DynamicArray **arr)
 {
 	int i;
-	DArray *nArray = getDArray((*arr)->maxSize / 2 + 1);
-	DArray *kill = (*arr);
+	DynamicArray *nArray = getDArray((*arr)->maxSize / 2 + 1);
+	DynamicArray *kill = (*arr);
 	// Copy values
 	for (i = 0; i < (*arr)->size; i++) {
-		nArray->array[i] = (*arr)->array[i];
+		nArray->buffer[i] = (*arr)->buffer[i];
 	}
 	nArray->size = (*arr)->size;
 	nArray->threshold = false;
@@ -128,14 +128,14 @@ int shrinkDArray(DArray **arr)
 	return 0; // OK
 }
 
-int growDArray(DArray **arr)
+int growDArray(DynamicArray **arr)
 {
 	int i;
-	DArray *nArray = getDArray((*arr)->maxSize * 2);
-	DArray *kill = (*arr);
+	DynamicArray *nArray = getDArray((*arr)->maxSize * 2);
+	DynamicArray *kill = (*arr);
 	// Copy values
 	for (i = 0; i < (*arr)->size; i++) {
-		nArray->array[i] = (*arr)->array[i];
+		nArray->buffer[i] = (*arr)->buffer[i];
 	}
 	nArray->size = (*arr)->size;
 	nArray->threshold = false;

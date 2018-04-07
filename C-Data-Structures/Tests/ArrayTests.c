@@ -129,7 +129,7 @@ int ArrayTests()
 	printf("\nAll %d s", j);
 	for (i = 0; i < positions->size; i++) {
 		printf("\nPosition %d has a value of %d", 
-			positions->array[i], aarray->array[positions->array[i]]);
+			positions->buffer[i], aarray->buffer[positions->buffer[i]]);
 	}
 	printf("\nThe list has a minimum value of %d and a maximum value of %d", 
 		findMinCArray(aarray), findMaxCArray(aarray));

@@ -20,7 +20,7 @@ extern "C" {
 	int StackTests();
 
 	int ArrayTests();
-	int DArrayTests();
+	int DynamicArrayTests();
 
 	int VectorTests();
 

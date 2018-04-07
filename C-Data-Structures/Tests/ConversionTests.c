@@ -36,7 +36,7 @@ int ConversionTests()
 	
 	displayCArray(array);
 
-	DArray *darray;
+	DynamicArray *darray;
 
 	printf("\n%s", status_repr(convert_sll_to_darray(sll, &darray)));
 

@@ -1,5 +1,5 @@
 /*
- * DArray.h
+ * DynamicArray.h
  *
  * Author: Leonardo Vencovsky
  * Created on 20/03/2018
@@ -16,86 +16,86 @@ extern "C" {
 
 #include "..\Core\Core.h"
 
-	typedef struct DArray {
-		int *array;     // Array of integers
+	typedef struct DynamicArray {
+		int *buffer;    // Array of integers
 		int size;       // Actual Size
 		int maxSize;    // Maximum size.
 		bool threshold; // maxSize / 2
-	} DArray;
+	} DynamicArray;
 
 	// +-------------------------------------+
 	// |             Initialize              |
 	// +-------------------------------------+
 
-	int initDArray(DArray **array, int maxSize);
+	int initDArray(DynamicArray **array, int maxSize);
 
 	// +-------------------------------------+
 	// |              Getters                |
 	// +-------------------------------------+
-	DArray * getDArray(int maxSize);
+	DynamicArray * getDArray(int maxSize);
 
 	// +-------------------------------------+
 	// |             Push / Pop              |
 	// +-------------------------------------+
-	int pushValueDArray(DArray **array, int value);
-	int popValueDArray(DArray **array);
+	int pushValueDArray(DynamicArray **array, int value);
+	int popValueDArray(DynamicArray **array);
 
 	// +-------------------------------------+
 	// |          Insert / Remove            |
 	// +-------------------------------------+
-	int insertValueDArray(DArray *array, int position, int value);
-	int removeValueDArray(DArray *array, int position);
+	int insertValueDArray(DynamicArray *array, int position, int value);
+	int removeValueDArray(DynamicArray *array, int position);
 
 	// +-------------------------------------+
 	// |               Erase                 |
 	// +-------------------------------------+
-	int eraseDArray(DArray *array);
+	int eraseDArray(DynamicArray *array);
 
 	// +-------------------------------------+
 	// |              Display                |
 	// +-------------------------------------+
 	/* Displays array in the console
 	 *
-	 * @Param [ DArray **array ] Reference to array
+	 * @Param [ DynamicArray **array ] Reference to array
 	 *
 	 * @Returns [ int ] Return Code (see code table)
 	 */
-	int displayDArray(DArray *array);
+	int displayDArray(DynamicArray *array);
 
 	/* Displays only numbers of array in the console
 	 *
-	 * @Param [ DArray **array ] Reference to array
+	 * @Param [ DynamicArray **array ] Reference to array
 	 *
 	 * @Returns [ int ] Return Code (see code table)
 	 */
-	int displayRawDArray(DArray *array);
+	int displayRawDArray(DynamicArray *array);
 
 	// +-------------------------------------+
 	// |              Dynamic                |
 	// +-------------------------------------+
 	/* Checks if the array needs to be adjusted (for push and pop)
 	 *
-	 * @Param [ DArray **array ] Reference to array
+	 * @Param [ DynamicArray **array ] Reference to array
 	 *
 	 * @Returns [ int ] Return Code (see code table)
 	 */
-	int adjustSize(DArray **array);
+	int adjustSize(DynamicArray **array);
 
 	/* Makes a bigger copy of current array and frees the memory of the old one
 	 *
-	 * @Param [ DArray **array ] Reference to array
+	 * @Param [ DynamicArray **array ] Reference to array
 	 *
 	 * @Returns [ int ] Return Code (see code table)
 	 */
-	int growDArray(DArray **arr);
+	int growDArray(DynamicArray **arr);
 
 	/* Makes a smaller copy of current array and frees the memory of the old one
 	 *
-	 * @Param [ DArray **array ] Reference to array
+	 * @Param [ DynamicArray **array ] Reference to array
 	 *
 	 * @Returns [ int ] Return Code (see code table)
 	 */
-	int shrinkDArray(DArray **arr);
+	int shrinkDArray(DynamicArray **arr);
 
 #ifdef __cplusplus
 }

@@ -157,7 +157,7 @@
     <ClCompile Include="Structures\DoublyLinkedList.c" />
     <ClCompile Include="Structures\SinglyLinkedList.c" />
     <ClCompile Include="Structures\Stack.c" />
-    <ClCompile Include="Structures\DArray.c" />
+    <ClCompile Include="Structures\DynamicArray.c" />
     <ClCompile Include="Structures\StructureConversions.c" />
     <ClCompile Include="Structures\Vector.c" />
     <ClCompile Include="Tests\ArrayTests.c" />
@@ -167,7 +167,7 @@
     <ClCompile Include="Tests\SinglyLinkedListTests.c" />
     <ClCompile Include="Tests\SortingTests.c" />
     <ClCompile Include="Tests\StackTests.c" />
-    <ClCompile Include="Tests\DArrayTests.c" />
+    <ClCompile Include="Tests\DynamicArrayTests.c" />
     <ClCompile Include="Tests\VectorTests.c" />
   </ItemGroup>
   <ItemGroup>
@@ -180,7 +180,7 @@
     <ClInclude Include="Headers\Stack.h" />
     <ClInclude Include="Core\Structures.h" />
     <ClInclude Include="Core\Tests.h" />
-    <ClInclude Include="Headers\DArray.h" />
+    <ClInclude Include="Headers\DynamicArray.h" />
     <ClInclude Include="Headers\StructureConversions.h" />
     <ClInclude Include="Headers\Vector.h" />
   </ItemGroup>

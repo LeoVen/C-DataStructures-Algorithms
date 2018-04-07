@@ -18,9 +18,6 @@
     <ClCompile Include="C-Data-Structures.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Structures\DArray.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Structures\StructureConversions.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -28,9 +25,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tests\ConversionTests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\DArrayTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tests\VectorTests.c">
@@ -72,12 +66,15 @@
     <ClCompile Include="Structures\CircularLinkedList.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Structures\DynamicArray.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\DynamicArrayTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Headers\DArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\StructureConversions.h">
@@ -108,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\CircularLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\DynamicArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,5 +1,5 @@
 /*
- * DArrayTests.c
+ * DynamicArrayTests.c
  *
  * Author: Leonardo Vencovsky
  * Created on 20/03/2018
@@ -11,9 +11,9 @@
  *
  */
 
-#include "..\Headers\DArray.h"
+#include "..\Headers\DynamicArray.h"
 
-int DArrayTests()
+int DynamicArrayTests()
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");
@@ -23,9 +23,9 @@ int DArrayTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	DArray *array = getDArray(100);
+	DynamicArray *array = getDArray(100);
 
-	DArray *arr;
+	DynamicArray *arr;
 	initDArray(&arr, 100);
 
 	int i;

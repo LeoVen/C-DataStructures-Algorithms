@@ -21,19 +21,19 @@ extern "C" {
 	// +-------------------------------------+
 	Status convert_sll_to_array(SinglyLinkedList *sll, Array **array);
 
-	Status convert_sll_to_darray(SinglyLinkedList *sll, DArray **darr);
+	Status convert_sll_to_darray(SinglyLinkedList *sll, DynamicArray **darr);
 
 	// +-------------------------------------+
 	// |              DAR -> X               |
 	// +-------------------------------------+
 
-	Status convert_darray_to_sll(DArray *darr, SinglyLinkedList **sll);
+	Status convert_darray_to_sll(DynamicArray *darr, SinglyLinkedList **sll);
 
 	// +-------------------------------------+
 	// |              AAR -> X               |
 	// +-------------------------------------+
 
-	Status convert_array_to_darray(Array *arr, DArray **darr);
+	Status convert_array_to_darray(Array *arr, DynamicArray **darr);
 
 #ifdef __cplusplus
 }

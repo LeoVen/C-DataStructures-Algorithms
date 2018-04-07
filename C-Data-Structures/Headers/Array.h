@@ -17,7 +17,7 @@ extern "C" {
 #include "..\Core\Core.h"
 
 	typedef struct Array {
-		int *array;
+		int *buffer;
 		int size;
 	} Array;
 

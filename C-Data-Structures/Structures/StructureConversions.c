@@ -62,7 +62,7 @@ Status convert_sll_to_array(SinglyLinkedList *sll, Array **arr)
 	return DS_OK;
 }
 
-Status convert_sll_to_darray(SinglyLinkedList *sll, DArray **darr)
+Status convert_sll_to_darray(SinglyLinkedList *sll, DynamicArray **darr)
 {
 	if (!sll)
 		return DS_ERR_NULL_POINTER;
@@ -100,7 +100,7 @@ Status convert_sll_to_darray(SinglyLinkedList *sll, DArray **darr)
 // |                                            DAR -> X                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status convert_darray_to_sll(DArray *darr, SinglyLinkedList **sll)
+Status convert_darray_to_sll(DynamicArray *darr, SinglyLinkedList **sll)
 {
 	if (!darr)
 		return DS_ERR_NULL_POINTER;
@@ -129,7 +129,7 @@ Status convert_darray_to_sll(DArray *darr, SinglyLinkedList **sll)
 // |                                            AAR -> X                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status convert_array_to_darray(Array *arr, DArray **darr)
+Status convert_array_to_darray(Array *arr, DynamicArray **darr)
 {
 	if (!arr)
 		return DS_ERR_NULL_POINTER;

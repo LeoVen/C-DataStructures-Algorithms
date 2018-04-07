@@ -28,11 +28,11 @@ void swap(Array *array, int position1, int position2);
 Array * getCArray(int size)
 {
 	Array *array = malloc(sizeof(Array));
-	array->array = malloc(sizeof(int) * size);
+	array->buffer = malloc(sizeof(int) * size);
 	array->size = size;
 	int i;
 	for (i = 0; i < size; i++) {
-		array->array[i] = 0;
+		array->buffer[i] = 0;
 	}
 	return array;
 }
@@ -40,8 +40,8 @@ Array * getCArray(int size)
 int insertValueCArray(Array *array, int position, int value)
 {
 	if (position >= 0 && position < array->size) {
-		if (array->array[position] == 0) {
-			array->array[position] = value;
+		if (array->buffer[position] == 0) {
+			array->buffer[position] = value;
 			return 0; // OK
 		}
 		else return 2; // Position already initialized (use update function)
@@ -52,8 +52,8 @@ int insertValueCArray(Array *array, int position, int value)
 int removeValueCArray(Array *array, int position)
 {
 	if (position >= 0 && position < array->size) {
-		if (array->array[position] != 0) {
-			array->array[position] = 0;
+		if (array->buffer[position] != 0) {
+			array->buffer[position] = 0;
 		}
 		else return 4; // Position already empty
 	}
@@ -65,8 +65,8 @@ int pushValueCArray(Array *array, int value)
 	int i;
 	int ok = 0;
 	for (i = 0; i < array->size; i++) {
-		if (array->array[i] == 0) {
-			array->array[i] = value;
+		if (array->buffer[i] == 0) {
+			array->buffer[i] = value;
 			ok = 1;
 			break;
 		}
@@ -78,8 +78,8 @@ int pushValueCArray(Array *array, int value)
 int updateValueCArray(Array *array, int position, int value)
 {
 	if (position >= 0 && position < array->size) {
-		if (array->array[position] != 0) {
-			array->array[position] = value;
+		if (array->buffer[position] != 0) {
+			array->buffer[position] = value;
 		}
 		else return 3; // Position not initialized (use insert function)
 	}
@@ -90,7 +90,7 @@ int eraseCArray(Array *array)
 {
 	int i;
 	for (i = 0; i < array->size; i++) {
-		array->array[i] = 0;
+		array->buffer[i] = 0;
 	}
 	return 0;
 }
@@ -99,9 +99,9 @@ int switchValuesCArray(Array *array, int position1, int position2)
 {
 	if (position1 >= 0 && position1 < array->size 
 		&& position2 >= 0 && position2 < array->size) {
-		int temp = array->array[position1];
-		array->array[position1] = array->array[position2];
-		array->array[position2] = temp;
+		int temp = array->buffer[position1];
+		array->buffer[position1] = array->buffer[position2];
+		array->buffer[position2] = temp;
 	}
 	return 1; // Invalid Position
 }
@@ -120,7 +120,7 @@ int displayCArray(Array *array)
 	int i;
 	printf("\nC ARRAY\n[ ");
 	for (i = 0; i < array->size; i++) {
-		printf("%d, ", array->array[i]);
+		printf("%d, ", array->buffer[i]);
 	}
 	printf("nil ]\n");
 	return 0;
@@ -131,7 +131,7 @@ int displayRawCArray(Array *array)
 	int i;
 	printf("\n");
 	for (i = 0; i < array->size; i++) {
-		printf("%d ", array->array[i]);
+		printf("%d ", array->buffer[i]);
 	}
 	printf("\n");
 	return 0;
@@ -151,20 +151,20 @@ int blenderCArray(Array *array)
 Array * getCopyCArray(Array *arr)
 {
 	Array *array = malloc(sizeof(Array));
-	array->array = malloc(sizeof(int) * arr->size);
+	array->buffer = malloc(sizeof(int) * arr->size);
 	array->size = arr->size;
 	int i;
 	for (i = 0; i < arr->size; i++) {
-		array->array[i] = arr->array[i];
+		array->buffer[i] = arr->buffer[i];
 	}
 	return array;
 }
 
 void swap(Array *array, int position1, int position2)
 {
-	int temp = array->array[position1];
-	array->array[position1] = array->array[position2];
-	array->array[position2] = temp;
+	int temp = array->buffer[position1];
+	array->buffer[position1] = array->buffer[position2];
+	array->buffer[position2] = temp;
 }
 
 int bubbleSortCArray(Array *array)
@@ -172,7 +172,7 @@ int bubbleSortCArray(Array *array)
 	int i, j;
 	for (i = 0; i < array->size - 1; i++) {
 		for (j = 0; j < array->size - i - 1; j++) {
-			if (array->array[j] > array->array[j + 1]) {
+			if (array->buffer[j] > array->buffer[j + 1]) {
 				swap(array, j, j + 1);
 			}
 		}
@@ -186,7 +186,7 @@ int selectionSortCArray(Array *array)
 	for (i = 0; i < array->size - 1; i++) {
 		min = i;
 		for (j = i + 1; j < array->size; j++)
-			if (array->array[j] < array->array[min]) min = j;
+			if (array->buffer[j] < array->buffer[min]) min = j;
 		swap(array, min, i);
 	}
 	return 0;
@@ -196,14 +196,14 @@ int insertionSortCArray(Array *array)
 {
 	int i, j, num;
 	for (i = 1; i < array->size; i++) {
-		num = array->array[i];
+		num = array->buffer[i];
 		j = i - 1;
-		while (j >= 0 && array->array[j] > num)
+		while (j >= 0 && array->buffer[j] > num)
 		{
-			array->array[j + 1] = array->array[j];
+			array->buffer[j + 1] = array->buffer[j];
 			j--;
 		}
-		array->array[j + 1] = num;
+		array->buffer[j + 1] = num;
 	}
 	return 0;
 }
@@ -212,7 +212,7 @@ int valueOcurranceCArray(Array *array, int value)
 {
 	int i, total = 0;
 	for (i = 0; i < array->size; i++) {
-		if (array->array[i] == value) total++;
+		if (array->buffer[i] == value) total++;
 	}
 	return total;
 }
@@ -223,9 +223,9 @@ Array * valuePositionsCArray(Array *array, int value)
 	int total = valueOcurranceCArray(array, value);
 	Array *resultArray = getCArray(total);
 	for (i = 0; i < array->size; i++) {
-		if (array->array[i] == value) {
+		if (array->buffer[i] == value) {
 			// Hopefully this won't overflow
-			resultArray->array[j] = i;
+			resultArray->buffer[j] = i;
 			j++;
 		}
 	}
@@ -235,10 +235,10 @@ Array * valuePositionsCArray(Array *array, int value)
 int findMinCArray(Array *array)
 {
 	int i;
-	int min = array->array[0];
+	int min = array->buffer[0];
 	for (i = 1; i < array->size; i++) {
-		if (array->array[i] < min) {
-			min = array->array[i];
+		if (array->buffer[i] < min) {
+			min = array->buffer[i];
 		}
 	}
 	return min;
@@ -247,10 +247,10 @@ int findMinCArray(Array *array)
 int findMaxCArray(Array *array)
 {
 	int i;
-	int max = array->array[0];
+	int max = array->buffer[0];
 	for (i = 1; i < array->size; i++) {
-		if (array->array[i] > max) {
-			max = array->array[i];
+		if (array->buffer[i] > max) {
+			max = array->buffer[i];
 		}
 	}
 	return max;

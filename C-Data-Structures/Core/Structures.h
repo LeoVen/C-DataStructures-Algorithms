@@ -15,7 +15,7 @@ extern "C" {
 #endif
 
 #include "..\Headers\Array.h"
-#include "..\Headers\DArray.h"
+#include "..\Headers\DynamicArray.h"
 #include "..\Headers\DoublyLinkedList.h"
 #include "..\Headers\SinglyLinkedList.h"
 #include "..\Headers\CircularLinkedList.h"
