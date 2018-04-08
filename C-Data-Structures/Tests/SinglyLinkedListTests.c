@@ -1,4 +1,4 @@
-/*
+/**
  * @file SinglyLinkedListTests.c
  *
  * @author Leonardo Vencovsky
@@ -139,6 +139,41 @@ int SinglyLinkedListTests()
 		}
 	}
 
+	sll_erase_list(&sll);
+
+	for (i = 0; i < 100; i++) {
+		sll_insert_tail(sll, i);
+	}
+
+	SinglyLinkedList *sll_even = NULL, *sll_odd = NULL;
+	
+	int data;
+
+	if (sll_init_list(&sll_odd) == DS_OK && sll_init_list(&sll_even) == DS_OK) {
+		sll_get_length(sll, &len);
+		for (i = 0; i < len; i++) {
+			sll_get_node_data(sll, 0, &data);
+			if (data % 2 == 0) {
+				sll_remove_node_head(sll, &node);
+				sll_insert_node_tail(sll_even, node);
+			}
+			else {
+				sll_remove_node_head(sll, &node);
+				sll_insert_node_tail(sll_odd, node);
+			}
+		}
+	}
+
+	printf("\n");
+	sll_display(sll);
+	sll_display(sll_even);
+	sll_display(sll_odd);
+
+
+	free(node);
+	free(sll);
+	free(sll_even);
+	free(sll_odd);
 	printf("\n");
 	return 0;
 }

@@ -1,10 +1,10 @@
-/*
- * CArray.c
+/**
+ * @file Array.c
  *
- * Author: Leonardo Vencovsky
- * Created on 19/03/2018
+ * @author Leonardo Vencovsky
+ * @date 19/03/2018
  *
- * Array Implementations in C
+ * @brief Array Implementations in C
  *
  */
 

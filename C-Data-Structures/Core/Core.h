@@ -45,7 +45,6 @@ extern "C" {
 		DS_ERR_UNEXPECTED_RESULT     =  7, /**< When an unexpected result happens. Contact developers. */
 		DS_ERR_ITER                  =  8, /**< When an iteration reaches an unexpected value */
 		DS_ERR_NULL_POINTER          =  9, /**< When a @c NULL parameter is passed to a function */
-		DS_ERR_UNEXPECTED_OPERATION  = 10  /**< When an operation is called for a wrong purpose */
 	} Status;
 	
 	char * status_repr(Status status);

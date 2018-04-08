@@ -1,10 +1,10 @@
-/*
+/**
  * @file SinglyLinkedList.h
  *
  * @author Leonardo Vencovsky
  * @date 14/03/2018
  *
- * Header file for Singly Linked List implementations in C
+ * @brief Header file for Singly Linked List implementations in C
  *
  */
 
@@ -42,12 +42,12 @@ extern "C" {
 	} SinglyLinkedList;
 	
 	Status sll_init_list(SinglyLinkedList **sll);
-	Status sll_init_node(SinglyLinkedNode **sln);
+	Status sll_init_node(SinglyLinkedNode **node);
 
 	SinglyLinkedList * sll_get_list();
 	SinglyLinkedNode * sll_get_node(int value);
 
-	Status sll_make_node(SinglyLinkedNode **sln, int value);
+	Status sll_make_node(SinglyLinkedNode **node, int value);
 
 	Status sll_get_length(SinglyLinkedList *sll, size_t *result);
 	Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result);
@@ -56,13 +56,17 @@ extern "C" {
 	Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position);
 	Status sll_insert_tail(SinglyLinkedList *sll, int value);
 	
-	//Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node);
-	//Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t position);
-	//Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node);
+	Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node);
+	Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t position);
+	Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node);
 
 	Status sll_remove_head(SinglyLinkedList *sll);
 	Status sll_remove_at(SinglyLinkedList *sll, size_t position);
 	Status sll_remove_tail(SinglyLinkedList *sll);
+
+	Status sll_remove_node_head(SinglyLinkedList *sll, SinglyLinkedNode **node);
+	Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t position);
+	Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node);
 	
 	Status sll_display(SinglyLinkedList *sll);
 	Status sll_display_raw(SinglyLinkedList *sll);

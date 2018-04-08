@@ -163,7 +163,7 @@ Status cll_insert_first(CircularLinkedList *cll, int value)
 		return DS_ERR_NULL_POINTER;
 
 	if (cll->length != 0 || cll->curr != NULL)
-		return DS_ERR_UNEXPECTED_OPERATION;
+		return DS_ERR_INVALID_OPERATION;
 
 	CircularLinkedNode *cln;
 	cll_init_node(&cln);
@@ -187,7 +187,7 @@ Status cll_remove_last(CircularLinkedList *cll)
 		return DS_ERR_NULL_POINTER;
 
 	if (cll->length == 0 || cll->length > 1)
-		return DS_ERR_UNEXPECTED_OPERATION;
+		return DS_ERR_INVALID_OPERATION;
 
 	free(cll->curr);
 

@@ -6,9 +6,7 @@
  *
  * @brief Singly Linked List Implementations in C
  *
- * Singly Linked List are linear structures that...
- *
- * @note A note about SLL
+ * Singly Linked List are linear structures...
  *
  */
 
@@ -71,15 +69,15 @@ Status sll_init_list(SinglyLinkedList **sll)
  * sll_init_node(&sln);
  * @endcode
  */
-Status sll_init_node(SinglyLinkedNode **sln)
+Status sll_init_node(SinglyLinkedNode **node)
 {
-	(*sln) = malloc(sizeof(SinglyLinkedNode));
+	(*node) = malloc(sizeof(SinglyLinkedNode));
 
-	if (!sln)
+	if (!node)
 		return DS_ERR_ALLOC;
 
-	(*sln)->data = NULL;
-	(*sln)->next = NULL;
+	(*node)->data = NULL;
+	(*node)->next = NULL;
 
 	return DS_OK;
 }
@@ -170,15 +168,15 @@ SinglyLinkedNode * sll_get_node(int value)
  * sll_make_node(10, &sln); // Makes a node with value of 10
  * @endcode
  */
-Status sll_make_node(SinglyLinkedNode **sln, int value)
+Status sll_make_node(SinglyLinkedNode **node, int value)
 {
-	*sln = malloc(sizeof(SinglyLinkedNode));
+	*node = malloc(sizeof(SinglyLinkedNode));
 
-	if (!sln)
+	if (!node)
 		return DS_ERR_ALLOC;
 
-	(*sln)->next = NULL;
-	(*sln)->data = value;
+	(*node)->next = NULL;
+	(*node)->data = value;
 
 	return DS_OK;
 }
@@ -399,6 +397,7 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 	if (position == 0) {
 
 		Status st = sll_insert_head(sll, value);
+
 		if (st != DS_OK)
 			return st;
 
@@ -406,6 +405,7 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 	else if (position == sll->length) {
 
 		Status st = sll_insert_tail(sll, value);
+
 		if (st != DS_OK)
 			return st;
 
@@ -429,9 +429,9 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 		sln->next = curr->next;
 		curr->next = sln;
 
-	}
+		(sll->length)++;
 
-	(sll->length)++;
+	}
 
 	return DS_OK;
 }
@@ -478,7 +478,7 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
 	else {
 
 		sll->tail->next = sln;
-		sll->tail = sll->tail->next;
+		sll->tail = sln;
 
 	}
 
@@ -487,11 +487,91 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
 	return DS_OK;
 }
 
-// Insert newly made SinglyLinkedNode to list
+Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node)
+{
+	if (sll == NULL || node == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node);
-//Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t position);
-//Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node);
+	node->next = sll->head;
+	sll->head = node;
+
+	(sll->length)++;
+
+	return DS_OK;
+}
+
+Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t position)
+{
+	if (sll == NULL || node == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (position > sll->length)
+		return DS_ERR_INVALID_POSITION;
+
+	if (position == 0) {
+
+		Status st = sll_insert_node_head(sll, node);
+
+		if (st != DS_OK)
+			return st;
+
+	}
+	else if (position == sll->length) {
+
+		Status st = sll_insert_node_tail(sll, node);
+
+		if (st != DS_OK)
+			return st;
+
+	}
+	else {
+
+		SinglyLinkedNode *curr = sll->head;
+
+		int i;
+		for (i = 1; i < position; i++) {
+
+			if (curr == NULL)
+				return DS_ERR_ITER;
+
+			curr = curr->next;
+
+		}
+
+		node->next = curr->next;
+		curr->next = node;
+
+		(sll->length)++;
+
+	}
+
+	return DS_OK;
+}
+
+Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
+{
+	if (sll == NULL || node == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	node->next = NULL;
+
+	if (sll->head == NULL) {
+
+		sll->head = node;
+		sll->tail = node;
+
+	}
+	else {
+
+		sll->tail->next = node;
+		sll->tail = node;
+
+	}
+
+	(sll->length)++;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
@@ -624,9 +704,10 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 
 		prev->next = curr->next;
 		free(curr);
-	}
+		
+		(sll->length)--;
 
-	(sll->length)--;
+	}
 
 	return DS_OK;
 }
@@ -674,6 +755,116 @@ Status sll_remove_tail(SinglyLinkedList *sll)
 		prev->next = NULL;
 		sll->tail = prev;
 		free(curr);
+
+	}
+
+	(sll->length)--;
+
+	return DS_OK;
+}
+
+Status sll_remove_node_head(SinglyLinkedList *sll, SinglyLinkedNode **node)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll->length == 0 || sll->head == NULL)
+		return DS_ERR_INVALID_OPERATION;
+
+	(*node) = sll->head;
+	sll->head = sll->head->next;
+
+	if (sll->head == NULL)
+		sll->tail == NULL;
+
+	(*node)->next = NULL;
+
+	(sll->length)--;
+
+	return DS_OK;
+}
+
+Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t position)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll->length == 0 || sll->head == NULL)
+		return DS_ERR_INVALID_OPERATION;
+
+	if (position >= sll->length)
+		return DS_ERR_INVALID_POSITION;
+
+	if (position == 0) {
+
+		Status st = sll_remove_node_head(sll, node);
+		if (st != DS_OK)
+			return st;
+
+	}
+	else if (position == sll->length - 1) {
+
+		Status st = sll_remove_node_tail(sll, node);
+		if (st != DS_OK)
+			return st;
+
+	}
+	else {
+
+		SinglyLinkedNode *prev = NULL;
+		SinglyLinkedNode *curr = sll->head;
+
+		int i;
+		for (i = 1; i < position; i++) {
+
+			if (curr == NULL)
+				return DS_ERR_ITER;
+
+			prev = curr;
+			curr = curr->next;
+
+		}
+
+		prev->next = curr->next;
+		
+		(*node) = curr;
+
+		(sll->length)--;
+
+	}
+
+	return DS_OK;
+}
+
+Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll->length == 0 || sll->head == NULL)
+		return DS_ERR_INVALID_OPERATION;
+
+	SinglyLinkedNode *prev = NULL;
+	SinglyLinkedNode *curr = sll->head;
+
+	while (curr->next != NULL)
+	{
+		prev = curr;
+		curr = curr->next;
+	}
+
+	if (prev == NULL) {
+
+		(*node) = curr;
+		sll->head = NULL;
+		sll->tail = NULL;
+
+	}
+	else {
+
+		prev->next = NULL;
+		sll->tail = prev;
+		(*node) = curr;
 
 	}
 

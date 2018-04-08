@@ -45,7 +45,7 @@ extern "C" {
 
 	Status stk_look(Stack *stk, int *result);
 	int stk_peek(Stack *stk);
-	Status stk_get_height(StackBox *stk, size_t *result);
+	Status stk_get_height(Stack *stk, size_t *result);
 
 	Status stk_put(Stack *stk, int value);
 	Status stk_push(Stack *stk, StackBox *box);
