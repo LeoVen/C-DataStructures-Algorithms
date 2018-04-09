@@ -30,7 +30,7 @@ Trie                not started
 ### Adapt structures to new standards
 
 ```
-SinglyLinkedList    [########  ]
+SinglyLinkedList    [##########]
 DoublyLinkedList    [          ]
 CircularLinkedList  [##########]
 Stack               [##########]

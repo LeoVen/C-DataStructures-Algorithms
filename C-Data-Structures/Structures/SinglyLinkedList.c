@@ -628,7 +628,7 @@ Status sll_remove_head(SinglyLinkedList *sll)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	SinglyLinkedNode *sln = sll->head;
@@ -666,7 +666,7 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 	if (sll == NULL || position == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	if (position >= sll->length)
@@ -729,7 +729,7 @@ Status sll_remove_tail(SinglyLinkedList *sll)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	SinglyLinkedNode *prev = NULL;
@@ -766,7 +766,7 @@ Status sll_remove_node_head(SinglyLinkedList *sll, SinglyLinkedNode **node)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	(*node) = sll->head;
@@ -787,7 +787,7 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	if (position >= sll->length)
@@ -839,7 +839,7 @@ Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	SinglyLinkedNode *prev = NULL;
@@ -880,7 +880,7 @@ Status sll_display(SinglyLinkedList *sll)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL) {
+	if (sll_is_empty(sll)) {
 
 		printf("\nSingly Linked List\n[ empty ]\n");
 		return DS_OK;
@@ -907,7 +907,7 @@ Status sll_display_raw(SinglyLinkedList *sll)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	SinglyLinkedNode *scan = sll->head;
@@ -977,7 +977,7 @@ Status sll_frequency(SinglyLinkedList *sll, int key, size_t *frequency)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 	
 	SinglyLinkedNode *scan = sll->head;
@@ -1002,7 +1002,7 @@ Status sll_contains(SinglyLinkedList *sll, int key, bool *result)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_NOT_FOUND;
 
 	SinglyLinkedNode *scan = sll->head;
@@ -1027,7 +1027,7 @@ bool sll_exists(SinglyLinkedList *sll, int key)
 	if (sll == NULL)
 		return 0;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return 0;
 
 	SinglyLinkedNode *scan = sll->head;
@@ -1043,12 +1043,20 @@ bool sll_exists(SinglyLinkedList *sll, int key)
 	return false;
 }
 
+bool sll_is_empty(SinglyLinkedList *sll)
+{
+	if (sll->length == 0 || sll->head == NULL)
+		return true;
+	else
+		return false;
+}
+
 Status sll_find_max(SinglyLinkedList *sll, int *result)
 {
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 
@@ -1073,7 +1081,7 @@ Status sll_find_min(SinglyLinkedList *sll, int *result)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 
@@ -1098,7 +1106,7 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	Status st = sll_init_list(result);
@@ -1142,7 +1150,7 @@ Status sll_copy_list(SinglyLinkedList *sll, SinglyLinkedList **result)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0 || sll->head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	Status st = sll_init_list(result);
