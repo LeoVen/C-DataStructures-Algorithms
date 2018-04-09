@@ -9,7 +9,7 @@ SinglyLinkedList    [######### ]
 DoublyLinkedList    [###       ]
 CircularLinkedList  [####      ]
 Stack               [#####     ]
-Array               [########  ]
+Array               [#######   ]
 DynamicArray        [###       ]
 Vector              [###       ]
 Queue               not started

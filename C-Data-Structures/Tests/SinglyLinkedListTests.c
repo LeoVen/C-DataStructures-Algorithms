@@ -169,11 +169,58 @@ int SinglyLinkedListTests()
 	sll_display(sll_even);
 	sll_display(sll_odd);
 
+	sll_erase_list(&sll);
+
+	for (i = 0; i < 20; i++)
+		sll_insert_head(sll, rand());
+
+	int min, max;
+	sll_find_max(sll, &max);
+	sll_find_min(sll, &min);
+
+	sll_display(sll);
+
+	printf("\nMax value: %d\nMin value: %d\n", max, min);
+
+	sll_erase_list(&sll);
+
+	int val = 5;
+	SinglyLinkedList *sll_result;
+
+	for (i = 0; i < 100; i++)
+		sll_insert_tail(sll, rand() % 10);
+
+	printf("\nOccurrance list for value %d\n", val);
+
+	sll_occurrance_list(sll, &sll_result, val);
+
+	sll_display(sll_result);
+
+	sll_get_length(sll_result, &res);
+
+	for (l = 0; l < res; l++) {
+		sll_get_node_data(sll_result, l, &i);
+		sll_get_node_data(sll, (size_t)i, &data); // Not cool
+		printf("\nNode at position %d has a value of %d", i, data);
+	}
+
+	sll_delete_list(&sll_result);
+
+	printf("\n");
+
+	sll_copy_list(sll_odd, &sll_result);
+
+	sll_reverse(sll_result);
+
+	sll_display(sll_result);
 
 	free(node);
+
 	free(sll);
 	free(sll_even);
 	free(sll_odd);
+	free(sll_result);
+
 	printf("\n");
 	return 0;
 }
