@@ -65,8 +65,8 @@ Status sll_init_list(SinglyLinkedList **sll)
  *
  * @b Usage
  * @code{.c}
- * SinglyLinkedNode *sln;
- * sll_init_node(&sln);
+ * SinglyLinkedNode *node;
+ * sll_init_node(&node);
  * @endcode
  */
 Status sll_init_node(SinglyLinkedNode **node)
@@ -131,7 +131,7 @@ SinglyLinkedList * sll_get_list()
  *
  * @b Usage
  * @code{.c}
- * SinglyLinkedNode *sln = sll_get_node();
+ * SinglyLinkedNode *node = sll_get_node();
  * @endcode
  *
  * @note Avoid using this function as it does not return a @c Status code and
@@ -140,12 +140,12 @@ SinglyLinkedList * sll_get_list()
 */
 SinglyLinkedNode * sll_get_node(int value)
 {
-	SinglyLinkedNode *sln = malloc(sizeof(SinglyLinkedNode));
+	SinglyLinkedNode *node = malloc(sizeof(SinglyLinkedNode));
 
-	sln->data = value;
-	sln->next = NULL;
+	node->data = value;
+	node->next = NULL;
 
-	return sln;
+	return node;
 }
 
 /**
@@ -164,8 +164,8 @@ SinglyLinkedNode * sll_get_node(int value)
  *
  * @b Usage
  * @code{.c}
- * SinglyLinkedNode *sln;
- * sll_make_node(10, &sln); // Makes a node with value of 10
+ * SinglyLinkedNode *node;
+ * sll_make_node(&node, 10); // Makes a node with value of 10
  * @endcode
  */
 Status sll_make_node(SinglyLinkedNode **node, int value)
@@ -273,38 +273,6 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-/* INSERT
- *
- * Interval [0, size]
- * Assuming lists starts at the zeroth (0) position.
- *
- * There are three cases:
- *
- * Always:
- *     Check if structure was initialized. Initialization is obligatory!
- *
- * Insert head:
- *     Node->next = head
- *     Reposition head to new Node
- *
- * Insert tail:
- *     Insert new Node to tail->next
- *     Reposition tail to new Node
- *
- * Insert middle:
- *     Position can be the same as the size
- *     This allows you to insert at the last non-existing (yet) position
- *     if (position == 0) - Insert at head
- *     if (position == size) - Insert at tail
- *     else  Insert middle
- *         - interval [0 , size]
- *         - Position tmp pointer one before chosen node
- *         - new Node->next = tmp->next
- *         - tmp->next = new Node
- *     reposition tail
- *
- */
-
 /**
  * @brief Inserts new @c SinglyLinkedNode at the first position.
  * 
@@ -327,26 +295,26 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	SinglyLinkedNode *sln;
+	SinglyLinkedNode *node;
 
-	if (sll_init_node(&sln) != DS_OK)
+	if (sll_init_node(&node) != DS_OK)
 		return DS_ERR_OPERATION_FAILED;
 
-	if (!sln)
+	if (!node)
 		return DS_ERR_ALLOC;
 	
-	sln->data = value;
+	node->data = value;
 
 	if (sll->head == NULL) {
 
-		sll->head = sln;
-		sll->tail = sln;
+		sll->head = node;
+		sll->tail = node;
 
 	}
 	else {
 
-		sln->next = sll->head;
-		sll->head = sln;
+		node->next = sll->head;
+		sll->head = node;
 
 	}
 
@@ -386,12 +354,12 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 	if (position > sll->length)
 		return DS_ERR_INVALID_POSITION;
 
-	SinglyLinkedNode *sln;
+	SinglyLinkedNode *node;
 
-	if (sll_init_node(&sln) != DS_OK)
+	if (sll_init_node(&node) != DS_OK)
 		return DS_ERR_OPERATION_FAILED;
 
-	if (!sln)
+	if (!node)
 		return DS_ERR_ALLOC;
 
 	if (position == 0) {
@@ -424,10 +392,10 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 
 		}
 
-		sln->data = value;
+		node->data = value;
 
-		sln->next = curr->next;
-		curr->next = sln;
+		node->next = curr->next;
+		curr->next = node;
 
 		(sll->length)++;
 
@@ -452,33 +420,33 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
  * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
- * @return @c DS_ERR_ALLOC if allocation faileds
+ * @return @c DS_ERR_ALLOC if allocation fails
  */
 Status sll_insert_tail(SinglyLinkedList *sll, int value)
 {
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	SinglyLinkedNode *sln;
+	SinglyLinkedNode *node;
 
-	if (sll_init_node(&sln) != DS_OK)
+	if (sll_init_node(&node) != DS_OK)
 		return DS_ERR_OPERATION_FAILED;
 
-	if (!sln)
+	if (!node)
 		return DS_ERR_ALLOC;
 
-	sln->data = value;
+	node->data = value;
 
 	if (sll->head == NULL) {
 
-		sll->head = sln;
-		sll->tail = sln;
+		sll->head = node;
+		sll->tail = node;
 
 	}
 	else {
 
-		sll->tail->next = sln;
-		sll->tail = sln;
+		sll->tail->next = node;
+		sll->tail = node;
 
 	}
 
@@ -487,6 +455,34 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
 	return DS_OK;
 }
 
+/**
+ * @brief Inserts an already initialized @c SinglyLinkedNode at the first
+ * position.
+ *
+ * This function inserts an already initialized @c SinglyLinkedNode to the first
+ * position of the list.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[in] node Node to be inserted in the list
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
+ *
+ * @b Usage
+ * @code{.c}
+ *
+ * int i;
+ * SinglyLinkedList *sll;
+ * SinglyLinkedNode *node;
+ *
+ * sll_init_list(&sll);
+ *
+ * for (i = 0; i < 10; i++) {
+ *     sll_make_node(&node, i);
+ *     sll_insert_node_head(sll, node);
+ * }
+ * @endcode
+ */
 Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node)
 {
 	if (sll == NULL || node == NULL)
@@ -500,6 +496,37 @@ Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node)
 	return DS_OK;
 }
 
+/**
+ * @brief Inserts an already initialized @c SinglyLinkedNode at a chosen
+ * position.
+ *
+ * This function inserts an already initialized @c SinglyLinkedNode at a chosen
+ * position of the list relative to the first element.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[in] node Node to be inserted in the list
+ * @param[in] position Relative position to the first element of the list where
+ * the Node will be inserted
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
+ *
+ * @b Usage
+ * @code{.c}
+ *
+ * size_t i;
+ * SinglyLinkedList *sll;
+ * SinglyLinkedNode *node;
+ *
+ * sll_init_list(&sll);
+ *
+ * for (i = 0; i < 10; i++) {
+ *     sll_make_node(&node, i);
+ *     sll_insert_node_at(sll, node, i);
+ * }
+ *
+ * @endcode
+ */
 Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t position)
 {
 	if (sll == NULL || node == NULL)
@@ -548,6 +575,34 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
 	return DS_OK;
 }
 
+/**
+ * @brief Inserts an already initialized @c SinglyLinkedNode at the last
+ * position.
+ *
+ * This function inserts an already initialized @c SinglyLinkedNode to the last
+ * position of the list.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[in] node Node to be inserted in the list
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
+ *
+ * @b Usage
+ * @code{.c}
+ *
+ * int i;
+ * SinglyLinkedList *sll;
+ * SinglyLinkedNode *node;
+ *
+ * sll_init_list(&sll);
+ *
+ * for (i = 0; i < 10; i++) {
+ *     sll_make_node(&node, i);
+ *     sll_insert_node_tail(sll, node);
+ * }
+ * @endcode
+ */
 Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
 {
 	if (sll == NULL || node == NULL)
@@ -577,40 +632,6 @@ Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-/* REMOVE
- *
- * Interval [0, size)
- * Assuming lists starts at the zeroth (0) position.
- *
- * There are three cases:
- *
- * Always:
- *     Check if structure was initialized. Initialization is obligatory!
- *     Check if head == null or if size == 0. If yes, list is empty.
- *
- * Remove head:
- *     Get reference to head
- *     Reposition head = head->next
- *     Remove reference to head
- *
- * Remove tail:
- *     Go to one before tail
- *     Remove next node
- *     Reposition tail ()
- *
- * Remove middle:
- *     Position has to be smaller then size
- *         Because lists also start with 0!
- *     if (position == 0) - Insert at head
- *     if (position == size - 1) - Insert at tail
- *     else - Remove middle with (possibly?) double pointer
- *         - interval [0 , size)
- *         - Position tmp pointer one before chosen node
- *         - tmp->next = (tmp->next)->next // Skipps node to be removed
- *     Reposition tail
- *
- */
-
  /**
   * @brief Removes first @c SinglyLinkedNode from the list.
   *
@@ -631,14 +652,14 @@ Status sll_remove_head(SinglyLinkedList *sll)
 	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
-	SinglyLinkedNode *sln = sll->head;
+	SinglyLinkedNode *node = sll->head;
 	
 	sll->head = sll->head->next;
 
 	if (sll->head == NULL)
 		sll->tail == NULL;
 
-	free(sln);
+	free(node);
 
 	(sll->length)--;
 	
@@ -659,7 +680,7 @@ Status sll_remove_head(SinglyLinkedList *sll)
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
  * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
- * @return @c DS_ERR_ALLOC if allocation faileds
+ * @return @c DS_ERR_ALLOC if allocation fails
  */
 Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 {
