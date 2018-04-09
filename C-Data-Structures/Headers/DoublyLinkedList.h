@@ -41,7 +41,7 @@ extern "C" {
 	 * A Doubly Linked List is a linear structure like @c SinglyLinkedList
 	 * but its nodes have two pointers. One pointing forward and another
 	 * pointing backwards. The structure is composed of two pointers, one to
-	 * the first @c SinglyLinkedNode and another to the last one. This way
+	 * the first @c DoublyLinkedNode and another to the last one. This way
 	 * insertions at both ends are simplified. Also this structure holds a
 	 * length variable that keeps track of the structure's length, allowing for
 	 * checking empty lists or position parameters that are higher than the
@@ -130,7 +130,7 @@ extern "C" {
 	//Status dll_sort_slection(DoublyLinkedList *dll);
 	//Status dll_sort_insertion(DoublyLinkedList *dll);
 
-	//Status dll_merge_sorted(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
+	//Status dll_merge_sorted(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
 
 
 #ifdef __cplusplus

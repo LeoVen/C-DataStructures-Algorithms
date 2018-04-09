@@ -487,4 +487,4 @@ Status dll_find_min(DoublyLinkedList *dll, int *result)
 //Status dll_sort_slection(DoublyLinkedList *dll);
 //Status dll_sort_insertion(DoublyLinkedList *dll);
 
-//Status dll_merge_sorted(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
+//Status dll_merge_sorted(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);

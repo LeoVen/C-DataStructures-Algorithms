@@ -1291,4 +1291,4 @@ Status sll_reverse(SinglyLinkedList *sll)
 //Status sll_sort_slection(SinglyLinkedList *sll);
 //Status sll_sort_insertion(SinglyLinkedList *sll);
 
-//Status sll_merge_sorted(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
+//Status sll_merge_sorted(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
