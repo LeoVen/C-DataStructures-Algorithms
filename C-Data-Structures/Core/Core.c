@@ -35,7 +35,6 @@ char * status_repr(Status status)
 		case DS_ERR_INVALID_SIZE: return "DS_ERR_INVALID_SIZE";
 		case DS_ERR_NOT_FOUND: return "DS_ERR_NOT_FOUND";
 		case DS_ERR_ALLOC: return "DS_ERR_ALLOC";
-		case DS_ERR_OPERATION_FAILED: return "DS_ERR_OPERATION_FAILED";
 		case DS_ERR_UNEXPECTED_RESULT: return "DS_ERR_UNEXPECTED_RESULT";
 		case DS_ERR_ITER: return "DS_ERR_ITER";
 		case DS_ERR_NULL_POINTER: return "DS_ERR_NULL_POINTER";

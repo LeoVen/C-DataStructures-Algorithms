@@ -20,9 +20,17 @@ extern "C" {
 	 * A @c SinglyLinkedNode is what a @c SinglyLinkedList is composed of. It
 	 * has an integer as its data and only one pointer to the next @c
 	 * SinglyLinkedNode of the list or simply NULL when it is the last element.
+	 *
+	 * @b Advantages over @c Array
+	 * - Dynamic size
+	 * - Easy insertion/removal
+	 *
+	 * @b Drawbacks
+	 * - No random access
+	 * - Extra memory for a pointer on each element
 	 */
 	typedef struct SinglyLinkedNode {
-		int data;                           /*!< Pointer to node's content */
+		int data;                           /*!< Node's data */
 		struct SinglyLinkedNode *next;      /*!< Pointer to the next node on the list */
 	} SinglyLinkedNode;
 
@@ -36,12 +44,13 @@ extern "C" {
 	 * higher than the total structure length.
 	 *
 	 * @b Functions
-	 * SinglyLinkedList.c
+	 *
+	 * @c SinglyLinkedList.c
 	 */
 	typedef struct SinglyLinkedList {
 		size_t length;                      /*!< List length */
-		struct SinglyLinkedNode *head;      /*!< Pointer to the first Node */
-		struct SinglyLinkedNode *tail;      /*!< Pointer to the last Node */
+		struct SinglyLinkedNode *head;      /*!< Pointer to the first Node on the list */
+		struct SinglyLinkedNode *tail;      /*!< Pointer to the last Node on the list */
 	} SinglyLinkedList;
 	
 	Status sll_init_list(SinglyLinkedList **sll);
@@ -76,23 +85,24 @@ extern "C" {
 	Status sll_display(SinglyLinkedList *sll);
 	Status sll_display_raw(SinglyLinkedList *sll);
 
+	Status sll_delete_node(SinglyLinkedNode **node);
 	Status sll_delete_list(SinglyLinkedList **sll); // Erases and sets to NULL
 	Status sll_erase_list(SinglyLinkedList **sll); // Erases and inits
+
+	Status sll_frequency(SinglyLinkedList *sll, int key, size_t *frequency);
 	
-	//Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position);
-	//Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position);
+	Status sll_contains(SinglyLinkedList *sll, int key, bool *result);
+	bool sll_exists(SinglyLinkedList *sll, int key);
+	
+	bool sll_is_empty(SinglyLinkedList *sll);
 	
 	Status sll_find_max(SinglyLinkedList *sll, int *result);
 	Status sll_find_min(SinglyLinkedList *sll, int *result);
 
 	Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int key);
 
-	Status sll_frequency(SinglyLinkedList *sll, int key, size_t *frequency);
-	
-	Status sll_contains(SinglyLinkedList *sll, int key, bool *result);
-	bool sll_exists(SinglyLinkedList *sll, int key);
-
-	bool sll_is_empty(SinglyLinkedList *sll);
+	//Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position);
+	//Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position);
 
 	//Status sll_link_head(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
 	//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position1, size_t position 2);
@@ -104,7 +114,7 @@ extern "C" {
 	
 	Status sll_copy_list(SinglyLinkedList *sll, SinglyLinkedList **result);
 	Status sll_copy_node(SinglyLinkedNode *node, SinglyLinkedNode **result);
-	
+
 	Status sll_reverse(SinglyLinkedList *sll);
 	
 	//Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position2);

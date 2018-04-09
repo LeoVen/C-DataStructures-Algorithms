@@ -214,6 +214,55 @@ int SinglyLinkedListTests()
 
 	sll_display(sll_result);
 
+	sll_erase_list(&sll);
+
+	// Test cases
+
+	print_status_repr(sll_insert_head(sll, 1));  //DS_OK
+	print_status_repr(sll_remove_head(sll));     //DS_OK
+
+	print_status_repr(sll_insert_head(sll, 1));  //DS_OK
+	print_status_repr(sll_remove_tail(sll));     //DS_OK
+
+	print_status_repr(sll_insert_head(sll, 1));  //DS_OK
+	print_status_repr(sll_remove_at(sll, 0));    //DS_OK
+
+	print_status_repr(sll_insert_tail(sll, 1));  //DS_OK
+	print_status_repr(sll_remove_head(sll));     //DS_OK
+
+	print_status_repr(sll_insert_tail(sll, 1));  //DS_OK
+	print_status_repr(sll_remove_tail(sll));     //DS_OK
+
+	print_status_repr(sll_insert_tail(sll, 1));  //DS_OK
+	print_status_repr(sll_remove_at(sll, 0));    //DS_OK
+
+	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_OK
+	print_status_repr(sll_remove_head(sll));     //DS_OK
+
+	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_OK
+	print_status_repr(sll_remove_tail(sll));     //DS_OK
+
+	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_OK
+	print_status_repr(sll_remove_at(sll, 0));    //DS_OK
+
+	print_status_repr(sll_remove_head(sll));     // DS_ERR_INVALID_OPERATION
+	print_status_repr(sll_remove_tail(sll));     // DS_ERR_INVALID_OPERATION
+	print_status_repr(sll_remove_at(sll, 0));    // DS_ERR_INVALID_OPERATION
+
+	sll_display(sll);                            // Empty
+
+	sll_delete_list(&sll);
+
+	print_status_repr(sll_insert_head(sll, 1));  //DS_ERR_NULL_POINTER
+	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_ERR_NULL_POINTER
+	print_status_repr(sll_insert_tail(sll, 1));  //DS_ERR_NULL_POINTER
+
+	print_status_repr(sll_remove_head(sll));     //DS_ERR_NULL_POINTER
+	print_status_repr(sll_remove_at(sll, 0));    //DS_ERR_NULL_POINTER
+	print_status_repr(sll_remove_tail(sll));     //DS_ERR_NULL_POINTER
+
+
+
 	free(node);
 
 	free(sll);

@@ -1,13 +1,10 @@
 /*
- * DoublyLinkedListTests.c
+ * @file DoublyLinkedListTests.c
  *
- * Author: Leonardo Vencovsky
- * Created on 18/03/2018
+ * @author Leonardo Vencovsky
+ * @date 18/03/2018
  *
- * Test Cases for Doubly Linked Lists in C
- *
- * Feel free to break any of my implementations!
- * Just make sure to open an issue :D
+ * @brief Test Cases for Doubly Linked Lists in C
  *
  */
 
@@ -23,54 +20,55 @@ int DoublyLinkedListTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	DoublyLinkedList *dll = getCDoublyLinkedList();
-	DoublyLinkedNode *node = getCDoublyLinkedNode(2);
-	int i;
-	for (i = 0; i < 10; i++) {
-		insertTailDLL(&dll, i);
-	}
-	for (i = 0; i < 10; i++) {
-		insertHeadDLL(&dll, i);
-	}
-	displayListDLL(&dll);
-	int size = getListSizeDLL(&dll);
-	for (i = 0; i < size / 2; i++) {
-		removeTailDLL(&dll);
-	}
-	displayListDLL(&dll);
-	for (i = 0; i < size / 2; i++) {
-		removeHeadDLL(&dll);
-	}
-	displayListDLL(&dll);
+	DoublyLinkedList *dll;
+
+	dll_init_list(&dll);
 
 	// Test cases
 
-	insertHeadDLL(&dll, 1);
-	removeHeadDLL(&dll);
-	insertHeadDLL(&dll, 1);
-	removeTailDLL(&dll);
-	// insertHeadDLL(&dll, 1);
-	// removeMiddleDLL(&dll, 0);
+	print_status_repr(dll_insert_head(dll, 1));  //DS_OK
+	print_status_repr(dll_remove_head(dll));     //DS_OK
 
-	insertTailDLL(&dll, 1);
-	removeHeadDLL(&dll);
-	insertTailDLL(&dll, 1);
-	removeTailDLL(&dll);
-	// insertTailDLL(&dll, 1);
-	// removeMiddleDLL(&dll, 0);
+	print_status_repr(dll_insert_head(dll, 1));  //DS_OK
+	print_status_repr(dll_remove_tail(dll));     //DS_OK
 
-	// insertMiddle(&dll, 0, 1);
-	// removeHeadDLL(&dll);
-	// insertMiddle(&dll, 0, 1);
-	// removeTailDLL(&dll);
-	// insertMiddle(&dll, 0, 1);
-	// removeMiddleDLL(&dll, 0);
+	//print_status_repr(dll_insert_head(dll, 1));  //DS_OK
+	//print_status_repr(dll_remove_at(dll, 0));    //DS_OK
 
-	removeHeadDLL(&dll);
-	removeTailDLL(&dll);
-	// removeMiddleDLL(&dll, 0);
+	print_status_repr(dll_insert_tail(dll, 1));  //DS_OK
+	print_status_repr(dll_remove_head(dll));     //DS_OK
 
-	displayListDLL(&dll); // Should give Empty
+	print_status_repr(dll_insert_tail(dll, 1));  //DS_OK
+	print_status_repr(dll_remove_tail(dll));     //DS_OK
+
+	//print_status_repr(dll_insert_tail(dll, 1));  //DS_OK
+	//print_status_repr(dll_remove_at(dll, 0));    //DS_OK
+
+	//print_status_repr(dll_insert_at(dll, 1, 0)); //DS_OK
+	//print_status_repr(dll_remove_head(dll));     //DS_OK
+
+	//print_status_repr(dll_insert_at(dll, 1, 0)); //DS_OK
+	//print_status_repr(dll_remove_tail(dll));     //DS_OK
+
+	//print_status_repr(dll_insert_at(dll, 1, 0)); //DS_OK
+	//print_status_repr(dll_remove_at(dll, 0));    //DS_OK
+
+	print_status_repr(dll_remove_head(dll));     // DS_ERR_INVALID_OPERATION
+	print_status_repr(dll_remove_tail(dll));     // DS_ERR_INVALID_OPERATION
+	//print_status_repr(dll_remove_at(dll, 0));    // DS_ERR_INVALID_OPERATION
+
+	dll_display(dll);                            // Empty
+
+	dll_delete_list(&dll);
+
+	print_status_repr(dll_insert_head(dll, 1));  //DS_ERR_NULL_POINTER
+	//print_status_repr(dll_insert_at(dll, 1, 0)); //DS_ERR_NULL_POINTER
+	print_status_repr(dll_insert_tail(dll, 1));  //DS_ERR_NULL_POINTER
+
+	print_status_repr(dll_remove_head(dll));     //DS_ERR_NULL_POINTER
+	//print_status_repr(dll_remove_at(dll, 0));    //DS_ERR_NULL_POINTER
+	print_status_repr(dll_remove_tail(dll));     //DS_ERR_NULL_POINTER
+	
 
 	free(dll);
 	printf("\n");

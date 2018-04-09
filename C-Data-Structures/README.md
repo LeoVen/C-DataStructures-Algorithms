@@ -31,7 +31,7 @@ Trie                not started
 
 ```
 SinglyLinkedList    [##########]
-DoublyLinkedList    [          ]
+DoublyLinkedList    [##########]
 CircularLinkedList  [##########]
 Stack               [##########]
 Array               [          ]
@@ -43,7 +43,7 @@ Vector              [          ]
 
 ```
 SinglyLinkedList    [#######   ]
-DoublyLinkedList    [          ]
+DoublyLinkedList    [#         ]
 CircularLinkedList  [          ]
 Stack               [          ]
 Array               [          ]

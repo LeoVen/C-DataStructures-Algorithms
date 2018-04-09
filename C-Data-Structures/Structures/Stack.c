@@ -25,7 +25,7 @@ Status stk_init_stack(Stack **stk)
 {
 	(*stk) = malloc(sizeof(Stack));
 
-	if (!stk)
+	if (!(*stk))
 		return DS_ERR_ALLOC;
 
 	(*stk)->height = 0;
@@ -38,7 +38,7 @@ Status stk_init_box(StackBox **box)
 {
 	(*box) = malloc(sizeof(StackBox));
 
-	if (!box)
+	if (!(*box))
 		return DS_ERR_ALLOC;
 
 	(*box)->below = NULL;
@@ -75,7 +75,7 @@ Status stk_make_box(StackBox **box, int value)
 {
 	(*box) = malloc(sizeof(StackBox));
 
-	if (!box)
+	if (!(*box))
 		return DS_ERR_ALLOC;
 
 	(*box)->below = NULL;

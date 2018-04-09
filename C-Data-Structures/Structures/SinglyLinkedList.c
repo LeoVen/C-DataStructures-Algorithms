@@ -40,7 +40,7 @@ Status sll_init_list(SinglyLinkedList **sll)
 {
 	(*sll) = malloc(sizeof(SinglyLinkedList));
 
-	if (!sll)
+	if (!(*sll))
 		return DS_ERR_ALLOC;
 
 	(*sll)->length = 0;
@@ -73,7 +73,7 @@ Status sll_init_node(SinglyLinkedNode **node)
 {
 	(*node) = malloc(sizeof(SinglyLinkedNode));
 
-	if (!node)
+	if (!(*node))
 		return DS_ERR_ALLOC;
 
 	(*node)->data = NULL;
@@ -115,6 +115,7 @@ SinglyLinkedList * sll_get_list()
 
 	return sll;
 }
+
 /**
  * @brief Initializes a new @c SinglyLinkedNode and returns it as a
  * result.
@@ -172,7 +173,7 @@ Status sll_make_node(SinglyLinkedNode **node, int value)
 {
 	(*node) = malloc(sizeof(SinglyLinkedNode));
 
-	if (!node)
+	if (!(*node))
 		return DS_ERR_ALLOC;
 
 	(*node)->next = NULL;
@@ -217,6 +218,10 @@ Status sll_get_length(SinglyLinkedList *sll, size_t *result)
 
 	return DS_OK;
 }
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                              Node                                               |
+// +-------------------------------------------------------------------------------------------------+
 
 /**
  * @brief Get a specific @c SinglyLinkedNode data
@@ -268,6 +273,7 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
 	return DS_OK;
 }
 
+//Status sll_update_node_data(SinglyLinkedList *sll, int value, size_t position)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Insertion                                            |
@@ -297,13 +303,13 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 
 	SinglyLinkedNode *node;
 
-	if (sll_init_node(&node) != DS_OK)
-		return DS_ERR_OPERATION_FAILED;
+	Status st = sll_make_node(&node, value);
+
+	if (st != DS_OK)
+		return st;
 
 	if (!node)
 		return DS_ERR_ALLOC;
-	
-	node->data = value;
 
 	if (sll->head == NULL) {
 
@@ -348,19 +354,11 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 */
 Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 {
-	if (sll == NULL || position == NULL)
+	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	if (position > sll->length)
 		return DS_ERR_INVALID_POSITION;
-
-	SinglyLinkedNode *node;
-
-	if (sll_init_node(&node) != DS_OK)
-		return DS_ERR_OPERATION_FAILED;
-
-	if (!node)
-		return DS_ERR_ALLOC;
 
 	if (position == 0) {
 
@@ -379,6 +377,16 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 
 	}
 	else {
+
+		SinglyLinkedNode *node;
+
+		Status st = sll_init_node(&node);
+
+		if (st != DS_OK)
+			return st;
+
+		if (!node)
+			return DS_ERR_ALLOC;
 
 		SinglyLinkedNode *curr = sll->head;
 
@@ -429,13 +437,13 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
 
 	SinglyLinkedNode *node;
 
-	if (sll_init_node(&node) != DS_OK)
-		return DS_ERR_OPERATION_FAILED;
+	Status st = sll_make_node(&node, value);
+
+	if (st != DS_OK)
+		return st;
 
 	if (!node)
 		return DS_ERR_ALLOC;
-
-	node->data = value;
 
 	if (sll->head == NULL) {
 
@@ -684,7 +692,7 @@ Status sll_remove_head(SinglyLinkedList *sll)
  */
 Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 {
-	if (sll == NULL || position == NULL)
+	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	if (sll_is_empty(sll))
@@ -765,6 +773,7 @@ Status sll_remove_tail(SinglyLinkedList *sll)
 	if (prev == NULL) {
 
 		free(curr);
+
 		sll->head = NULL;
 		sll->tail = NULL;
 
@@ -773,6 +782,7 @@ Status sll_remove_tail(SinglyLinkedList *sll)
 
 		prev->next = NULL;
 		sll->tail = prev;
+
 		free(curr);
 
 	}
@@ -949,6 +959,15 @@ Status sll_display_raw(SinglyLinkedList *sll)
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
+
+Status sll_delete_node(SinglyLinkedNode **node)
+{
+	free(*node);
+	
+	(*node) = NULL;
+
+	return DS_OK;
+}
 
 Status sll_delete_list(SinglyLinkedList **sll)
 {
@@ -1162,6 +1181,21 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 	return DS_OK;
 }
 
+//Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position);
+//Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position);
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                         Slice / Link                                            |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status sll_link_head(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
+//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position1, size_t position 2);
+//Status sll_link_tail(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
+
+//Status sll_slice_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
+//Status sll_slice_sublist(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position1, size_t position2);
+//Status sll_slice_tail(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
@@ -1247,3 +1281,14 @@ Status sll_reverse(SinglyLinkedList *sll)
 
 	return DS_OK;
 }
+
+//Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position2);
+//Status sll_switch_head(SinglyLinkedList *sll, size_t position);
+//Status sll_switch_tail(SinglyLinkedList *sll, size_t position);
+//Status sll_switch_ends(SinglyLinkedList *sll);
+
+//Status sll_sort_bubble(SinglyLinkedList *sll);
+//Status sll_sort_slection(SinglyLinkedList *sll);
+//Status sll_sort_insertion(SinglyLinkedList *sll);
+
+//Status sll_merge_sorted(SinglyLinkedList *sll1, SinglyLinkedList *sll2);

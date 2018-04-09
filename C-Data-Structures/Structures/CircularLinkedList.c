@@ -19,7 +19,7 @@ Status cll_init_list(CircularLinkedList **cll)
 {
 	(*cll) = malloc(sizeof(CircularLinkedList));
 
-	if (!cll)
+	if (!(*cll))
 		return DS_ERR_ALLOC;
 
 	(*cll)->curr = NULL;
@@ -32,7 +32,7 @@ Status cll_init_node(CircularLinkedNode **cln)
 {
 	(*cln) = malloc(sizeof(CircularLinkedNode));
 
-	if (!cln)
+	if (!(*cln))
 		return DS_ERR_ALLOC;
 
 	(*cln)->data = NULL;
@@ -65,7 +65,7 @@ Status cll_make_node(CircularLinkedNode **cln, int value)
 {
 	*cln = malloc(sizeof(CircularLinkedNode));
 
-	if (!cln)
+	if (!(*cln))
 		return DS_ERR_ALLOC;
 
 	(*cln)->next = NULL;
@@ -306,9 +306,6 @@ Status cll_display_raw(CircularLinkedList *cll)
  */
 Status cll_josephus(CircularLinkedList **cll, size_t n, size_t k, size_t *result)
 {
-
-	if (n)
-
 	cll_init_list(cll);
 
 	if (!(*cll))
