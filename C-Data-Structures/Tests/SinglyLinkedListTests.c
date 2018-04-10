@@ -132,7 +132,7 @@ int SinglyLinkedListTests()
 	for (i = -10; i < 20; i++) {
 		if (sll_exists(sll, i)) {
 			sll_frequency(sll, i, &f);
-			printf("\nData %d frequency : %u", i, f);
+			printf("\nData %d frequency : %zu", i, f);
 		}
 		else {
 			printf("\nData %d is not in the list", i);
@@ -196,9 +196,9 @@ int SinglyLinkedListTests()
 
 	sll_display(sll_result);
 
-	sll_get_length(sll_result, &res);
+	sll_get_length(sll_result, &f);
 
-	for (l = 0; l < res; l++) {
+	for (l = 0; l < f; l++) {
 		sll_get_node_data(sll_result, l, &i);
 		sll_get_node_data(sll, (size_t)i, &data); // Not cool
 		printf("\nNode at position %d has a value of %d", i, data);
@@ -260,8 +260,6 @@ int SinglyLinkedListTests()
 	print_status_repr(sll_remove_head(sll));     //DS_ERR_NULL_POINTER
 	print_status_repr(sll_remove_at(sll, 0));    //DS_ERR_NULL_POINTER
 	print_status_repr(sll_remove_tail(sll));     //DS_ERR_NULL_POINTER
-
-
 
 	free(node);
 

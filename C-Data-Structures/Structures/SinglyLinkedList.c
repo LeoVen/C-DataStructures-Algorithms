@@ -1065,10 +1065,10 @@ Status sll_contains(SinglyLinkedList *sll, int key, bool *result)
 bool sll_exists(SinglyLinkedList *sll, int key)
 {
 	if (sll == NULL)
-		return 0;
+		return false;
 
 	if (sll_is_empty(sll))
-		return 0;
+		return false;
 
 	SinglyLinkedNode *scan = sll->head;
 
@@ -1189,7 +1189,7 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 // +-------------------------------------------------------------------------------------------------+
 
 //Status sll_link_head(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
-//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position1, size_t position 2);
+//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position);
 //Status sll_link_tail(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
 
 //Status sll_slice_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);

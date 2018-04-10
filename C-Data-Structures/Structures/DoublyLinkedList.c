@@ -387,10 +387,76 @@ Status dll_erase_list(DoublyLinkedList **dll)
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status dll_frequency(DoublyLinkedList *dll, int key, size_t *frequency);
+Status dll_frequency(DoublyLinkedList *dll, int key, size_t *frequency)
+{
+	if (dll == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status dll_contains(DoublyLinkedList *dll, int key, bool *result);
-//bool dll_exists(DoublyLinkedList *dll, int key);
+	if (dll_is_empty(dll))
+		return DS_ERR_INVALID_OPERATION;
+
+	DoublyLinkedNode *scan = dll->head;
+
+	*frequency = 0;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key)
+			(*frequency)++;
+
+		scan = scan->next;
+	}
+
+	return DS_OK;
+}
+
+Status dll_contains(DoublyLinkedList *dll, int key, bool *result)
+{
+	*result = false;
+
+	if (dll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dll_is_empty(dll))
+		return DS_ERR_NOT_FOUND;
+
+	DoublyLinkedNode *scan = dll->head;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key) {
+
+			result = true;
+			break;
+
+		}
+
+		scan = scan->next;
+	}
+
+	return DS_OK;
+}
+
+bool dll_exists(DoublyLinkedList *dll, int key)
+{
+	if (dll == NULL)
+		return false;
+
+	if (sll_is_empty(dll))
+		return false;
+
+	DoublyLinkedNode *scan = dll->head;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key)
+			return true;
+
+		scan = scan->next;
+	}
+
+	return false;
+}
 
 bool dll_is_empty(DoublyLinkedList *dll)
 {
@@ -460,7 +526,7 @@ Status dll_find_min(DoublyLinkedList *dll, int *result)
 // +-------------------------------------------------------------------------------------------------+
 
 //Status dll_link_head(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
-//Status dll_link_at(DoublyLinkedList *dll1, DoublyLinkedList *dll2, size_t position1, size_t position 2);
+//Status dll_link_at(DoublyLinkedList *dll1, DoublyLinkedList *dll2, size_t position);
 //Status dll_link_tail(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
 
 //Status dll_slice_head(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position);

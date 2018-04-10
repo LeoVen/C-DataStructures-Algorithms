@@ -5,17 +5,10 @@
  * @date 31/03/2018
  *
  * @brief Stack Implementations in C
+ *
  */
 
 #include "..\Headers\Stack.h"
-
- /*
-    Return Codes
-
-    0 - Success
-	1 - Stack is empty
-
- */
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |

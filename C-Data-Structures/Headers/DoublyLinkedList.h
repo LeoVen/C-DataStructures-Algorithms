@@ -93,10 +93,10 @@ extern "C" {
 	Status dll_delete_list(DoublyLinkedList **dll); // Erases and sets to NULL
 	Status dll_erase_list(DoublyLinkedList **dll); // Erases and inits
 
-	//Status dll_frequency(DoublyLinkedList *dll, int key, size_t *frequency);
+	Status dll_frequency(DoublyLinkedList *dll, int key, size_t *frequency);
 
-	//Status dll_contains(DoublyLinkedList *dll, int key, bool *result);
-	//bool dll_exists(DoublyLinkedList *dll, int key);
+	Status dll_contains(DoublyLinkedList *dll, int key, bool *result);
+	bool dll_exists(DoublyLinkedList *dll, int key);
 
 	bool dll_is_empty(DoublyLinkedList *dll);
 
@@ -109,7 +109,7 @@ extern "C" {
 	//Status dll_find_occurrance_last(DoublyLinkedList *dll, int key, size_t *position);
 
 	//Status dll_link_head(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
-	//Status dll_link_at(DoublyLinkedList *dll1, DoublyLinkedList *dll2, size_t position1, size_t position 2);
+	//Status dll_link_at(DoublyLinkedList *dll1, DoublyLinkedList *dll2, size_t position);
 	//Status dll_link_tail(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
 
 	//Status dll_slice_head(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position);

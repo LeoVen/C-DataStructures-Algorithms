@@ -50,7 +50,7 @@ int CircularLinkedListTests()
 	CircularLinkedList *jos;
 	size_t k = 13, n = 40, result;
 	if (cll_josephus(&jos, n, k, &result) == DS_OK)
-		printf("\n Josephus (%u, %u) = %u", n, k, result);
+		printf("\n Josephus (%zu, %zu) = %zu", n, k, result);
 
 
 

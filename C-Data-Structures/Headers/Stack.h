@@ -16,8 +16,11 @@ extern "C" {
 #include "..\Core\Core.h"
 
 	/**
-	 * 
-	 *
+	 * A @c StackBox is just like a @c SinglyLinkedNode but it is part of the
+	 * @c Stack implementation. The names are different for didactic purposes.
+	 * The structure has an integer as its data and a @c *below pointer that
+	 * points to the box underneath it, pointing to @c NULL if it is the very
+	 * first box above the ground.
 	 */
 	typedef struct StackBox {
 		int data;
@@ -75,7 +78,6 @@ extern "C" {
 	// +-------------------------------------+
 
 	bool stk_is_empty(Stack *stk);
-	// Is full
 
 	// +-------------------------------------+
 	// |                 Copy                |

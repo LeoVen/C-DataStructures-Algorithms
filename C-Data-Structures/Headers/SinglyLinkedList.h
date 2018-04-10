@@ -105,7 +105,7 @@ extern "C" {
 	//Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position);
 
 	//Status sll_link_head(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
-	//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position1, size_t position 2);
+	//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position);
 	//Status sll_link_tail(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
 	
 	//Status sll_slice_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
