@@ -64,7 +64,7 @@ extern "C" {
 	Status sll_get_length(SinglyLinkedList *sll, size_t *result);
 
 	Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result);
-	//Status sll_update_node_data(SinglyLinkedList *sll, int value, size_t position);
+	Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value);
 	
 	Status sll_insert_head(SinglyLinkedList *sll, int value);
 	Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position);
@@ -101,16 +101,16 @@ extern "C" {
 
 	Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int key);
 
-	//Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position);
-	//Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position);
+	Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position);
+	Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position);
 
 	//Status sll_link_head(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
 	//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position);
 	//Status sll_link_tail(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
 	
-	//Status sll_slice_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
-	//Status sll_slice_sublist(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position1, size_t position2);
-	//Status sll_slice_tail(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
+	//Status sll_unlink_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
+	//Status sll_unlink_sublist(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position1, size_t position2);
+	//Status sll_unlink_tail(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
 	
 	Status sll_copy_list(SinglyLinkedList *sll, SinglyLinkedList **result);
 	Status sll_copy_node(SinglyLinkedNode *node, SinglyLinkedNode **result);

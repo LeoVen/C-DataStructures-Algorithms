@@ -261,12 +261,46 @@ int SinglyLinkedListTests()
 	print_status_repr(sll_remove_at(sll, 0));    //DS_ERR_NULL_POINTER
 	print_status_repr(sll_remove_tail(sll));     //DS_ERR_NULL_POINTER
 
-	free(node);
+	// Occurrance
+	sll_find_occurrance_first(sll_even, 16, &l);
+	sll_remove_at(sll_even, l);
+	
+	sll_find_occurrance_first(sll_even, 32, &l);
+	sll_remove_at(sll_even, l);
 
-	free(sll);
-	free(sll_even);
-	free(sll_odd);
-	free(sll_result);
+	sll_display(sll_even);
+	
+	sll_get_length(sll_even, &l);
+
+	for (j = 0; j < l; j++) {
+		sll_update_node_data(sll_even, j, 0);
+	}
+
+	sll_display(sll_even);
+
+	sll_find_occurrance_last(sll_even, 0, &l);
+	sll_update_node_data(sll_even, l, 9);
+
+	sll_find_occurrance_last(sll_even, 0, &l);
+	print_status_repr(sll_update_node_data(sll_even, l, 8));
+
+	sll_display(sll_even);
+
+	// Link and unlink
+	sll_init_list(&sll);
+
+	for (i = 110; i > 100; i--) {
+		if (i % 2 != 0)
+			sll_insert_tail(sll, i);
+	}
+
+	sll_display(sll);
+
+	// Free memory
+	sll_delete_list(&sll);
+	sll_delete_list(&sll_even);
+	sll_delete_list(&sll_odd);
+	sll_delete_list(&sll_result);
 
 	printf("\n");
 	return 0;

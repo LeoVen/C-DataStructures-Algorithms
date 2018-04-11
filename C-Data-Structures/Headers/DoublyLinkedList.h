@@ -112,9 +112,9 @@ extern "C" {
 	//Status dll_link_at(DoublyLinkedList *dll1, DoublyLinkedList *dll2, size_t position);
 	//Status dll_link_tail(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
 
-	//Status dll_slice_head(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position);
-	//Status dll_slice_sublist(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position1, size_t position2);
-	//Status dll_slice_tail(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position);
+	//Status dll_unlink_head(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position);
+	//Status dll_unlink_sublist(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position1, size_t position2);
+	//Status dll_unlink_tail(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position);
 	
 	//Status dll_copy_list(DoublyLinkedList *dll, DoublyLinkedList **result);
 	//Status dll_copy_node(DoublyLinkedList *node, DoublyLinkedList **result);

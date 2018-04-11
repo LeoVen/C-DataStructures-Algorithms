@@ -273,7 +273,53 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
 	return DS_OK;
 }
 
-//Status sll_update_node_data(SinglyLinkedList *sll, int value, size_t position)
+/**
+ * @brief Updates a specific @c SinglyLinkedNode data
+ *
+ * This function searches for a Node at given position and then assigns its
+ * data as the value parameter.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[in] position Node relative position to the first element of the list
+ * @param[in] value New value for Node at specified position
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if referenced list points
+ * to NULL
+ * @return @c DS_ERR_INVALID_OPERATION if list length is 0
+ * @return @c DS_ERR_ITER if a variable points to NULL during
+ * iteration
+ * @return @c DS_ERR_INVALID_POSITION if position is higher than 
+ *
+ * @warning Do not pass position parameter as an integer or your program won't
+ * finish correctly.
+ */
+Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll->length == 0)
+		return DS_ERR_INVALID_OPERATION;
+
+	if (position >= sll->length)
+		return DS_ERR_INVALID_POSITION;
+
+	SinglyLinkedNode *curr = sll->head;
+
+	int i;
+	for (i = 0; i < position; i++) {
+
+		if (curr == NULL)
+			return  DS_ERR_ITER;
+
+		curr = curr->next;
+	}
+
+	curr->data = value;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Insertion                                            |
@@ -1181,8 +1227,66 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 	return DS_OK;
 }
 
-//Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position);
-//Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position);
+Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position)
+{
+	*position = 0;
+
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll_is_empty(sll))
+		return DS_ERR_NOT_FOUND;
+
+	SinglyLinkedNode *scan = sll->head;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key)
+			return DS_OK;
+
+		(*position)++;
+
+		scan = scan->next;
+
+	}
+
+	return DS_ERR_NOT_FOUND;
+}
+
+Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position)
+{
+	*position = 0;
+
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll_is_empty(sll))
+		return DS_ERR_NOT_FOUND;
+
+	SinglyLinkedNode *scan = sll->head;
+
+	bool found = false;
+
+	size_t iter = 0;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key) {
+			found = true;
+			*position = iter;
+		}
+		
+		iter++;
+
+		scan = scan->next;
+
+	}
+
+	if (found)
+		return DS_OK;
+
+	return DS_ERR_NOT_FOUND;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                         Slice / Link                                            |
@@ -1192,9 +1296,9 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 //Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position);
 //Status sll_link_tail(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
 
-//Status sll_slice_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
-//Status sll_slice_sublist(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position1, size_t position2);
-//Status sll_slice_tail(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
+//Status sll_unlink_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
+//Status sll_unlink_sublist(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position1, size_t position2);
+//Status sll_unlink_tail(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
