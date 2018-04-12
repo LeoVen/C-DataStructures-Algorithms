@@ -1,10 +1,10 @@
 /**
  * @file SinglyLinkedList.c
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 14/03/2018
  *
- * @brief Singly Linked List Implementations in C
+ * @brief Source file for @c SinglyLinkedList implementations in C
  *
  * Singly Linked List are linear structures...
  *

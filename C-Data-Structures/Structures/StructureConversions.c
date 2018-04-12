@@ -1,10 +1,10 @@
-/*
- * StructureConversions.c
+/**
+ * @file StructureConversions.c
  *
- * Author: Leonardo Vencovsky
- * Created on 02/04/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 02/04/2018
  *
- * Structure Conversions in C
+ * @brief Source file for Structure Conversions in C
  *
  * Functions that can convert one structure to another exchanging integers
  *

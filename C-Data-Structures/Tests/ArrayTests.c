@@ -1,13 +1,13 @@
-/*
- * CArrayTests.c
+/**
+ * @file ArrayTests.c
  *
- * Author: Leonardo Vencovsky
- * Created on 19/03/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 19/03/2018
  *
- * Test Cases for Array Implementations in C
+ * @brief Test Cases for @c Array implementations in C
  *
- * Feel free to break any of my implementations!
- * Just make sure to open an issue :D
+ * Here all functions are tested to assure that they operate as expected. Note
+ * that not all test cases are performed.
  *
  */
 

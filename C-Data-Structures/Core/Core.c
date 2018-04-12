@@ -1,7 +1,7 @@
 /**
  * @file Core.c
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 04/04/2018
  *
  * @brief Source file for Core module

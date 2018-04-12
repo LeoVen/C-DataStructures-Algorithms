@@ -1,12 +1,13 @@
-/*
- * DynamicArray.c
+/**
+ * @file DynamicArray.c
  *
- * Author: Leonardo Vencovsky
- * Created on 20/03/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 20/03/2018
  *
- * Dynamic Array Implementations in C
+ * @brief Source file for @c DynamicArray implementations in C
  *
  * Dynamic Array grows and shrinks as you add and remove values
+ *
  */
 
 #include "..\Headers\DynamicArray.h"

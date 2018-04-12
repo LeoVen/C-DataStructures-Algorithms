@@ -1,10 +1,11 @@
 /**
  * @file StackTests.c
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 31/03/2018
  *
- * @brief Test Cases for Stack implementations in C
+ * @brief Test Cases for @c Stack implementations in C
+ *
  */
 
 #include "..\Headers\Stack.h"

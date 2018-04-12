@@ -1,7 +1,7 @@
 /**
  * @file SinglyLinkedListTests.c
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 14/03/2018
  *
  * @brief Test Cases for @c SinglyLinkedLists implementations in C

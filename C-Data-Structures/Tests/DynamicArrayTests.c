@@ -1,13 +1,13 @@
-/*
- * DynamicArrayTests.c
+/**
+ * @file DynamicArrayTests.c
  *
- * Author: Leonardo Vencovsky
- * Created on 20/03/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 20/03/2018
  *
- * Test Cases for Dynamic Array Implementations in C
+ * @brief Test Cases for @c DynamicArray implementations in C
  *
- * Feel free to break any of my implementations!
- * Just make sure to open an issue :D
+ * Here all functions are tested to assure that they operate as expected. Note
+ * that not all test cases are performed.
  *
  */
 

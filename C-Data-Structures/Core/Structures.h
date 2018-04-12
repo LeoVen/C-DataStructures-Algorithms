@@ -1,7 +1,7 @@
-/*
+/**
  * @file Structures.h
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/03/2018
  *
  * @brief Header to Include all C Structures Headers

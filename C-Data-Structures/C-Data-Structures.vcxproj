@@ -163,7 +163,7 @@
     <ClCompile Include="Tests\ArrayTests.c" />
     <ClCompile Include="Tests\CircularLinkedListTests.c" />
     <ClCompile Include="Tests\DoublyLinkedListTests.c" />
-    <ClCompile Include="Tests\ConversionTests.c" />
+    <ClCompile Include="Tests\StructureConversionsTests.c" />
     <ClCompile Include="Tests\SinglyLinkedListTests.c" />
     <ClCompile Include="Tests\SortingTests.c" />
     <ClCompile Include="Tests\StackTests.c" />

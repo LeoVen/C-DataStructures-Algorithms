@@ -1,7 +1,7 @@
-/*
+/**
  * @file CircularLinkedListTests.c
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 05/04/2018
  *
  * @brief Test Cases for @c CircularLinkedLists implementations in C

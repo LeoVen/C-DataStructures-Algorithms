@@ -1,12 +1,11 @@
-/*
+/**
  * @file CircularLinkedList.c
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 05/04/2018
  *
- * @brief Source file for Circular List implementations in C
+ * @brief Source file for @c CircularLinkedList implementations in C
  *
- * Detailed description
  */
 
 #include "..\Headers\CircularLinkedList.h"

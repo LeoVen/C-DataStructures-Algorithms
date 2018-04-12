@@ -1,12 +1,12 @@
-/*
-* Vector.c
-*
-* Author: Leonardo Vencovsky
-* Created on 20/03/2018
-*
-* Vector implementations
-*
-*/
+/**
+ * @file Vector.c
+ *
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 20/03/2018
+ *
+ * @brief Source file for @c Vector implementations in C
+ *
+ */
 
 #include "..\Headers\Vector.h"
 

@@ -1,10 +1,10 @@
-/*
- * DynamicArray.h
+/**
+ * @file DynamicArray.h
  *
- * Author: Leonardo Vencovsky
- * Created on 20/03/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 20/03/2018
  *
- * Header for Dynamic Array in C
+ * @brief Header file for Dynamic Array implementations in C
  *
  */
 

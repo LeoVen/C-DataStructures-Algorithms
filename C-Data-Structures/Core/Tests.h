@@ -1,10 +1,10 @@
-/*
- * CTests.h
+/**
+ * @file Tests.h
  *
- * Author: Leonardo Vencovsky
- * Created on 18/03/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 18/03/2018
  *
- * Header to Include Structure Test Functions in C
+ * @brief Header to Include Structure Test Functions in C
  *
  */
 
@@ -26,7 +26,7 @@ extern "C" {
 
 	int SortingTests();
 
-	int ConversionTests();
+	int StructureConversionsTests();
 
 #ifdef __cplusplus
 }

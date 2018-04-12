@@ -1,10 +1,11 @@
 /**
  * @file Stack.h
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 31/03/2018
  *
- * @brief Header for Stack implementatiosn in C
+ * @brief Header file for Stack implementatiosn in C
+ *
  */
 
 #pragma once

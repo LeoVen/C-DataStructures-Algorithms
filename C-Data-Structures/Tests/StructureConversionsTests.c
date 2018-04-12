@@ -1,19 +1,19 @@
-/*
- * ConversionTests.c
+/**
+ * @file StructureConversionsTests.c
  *
- * Author: Leonardo Vencovsky
- * Created on 02/04/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 02/04/2018
  *
- * Test Cases for Conversions in C
+ * @brief Test Cases for Structure Conversions in C
  *
- * Feel free to break any of my implementations!
- * Just make sure to open an issue :D
+ * Here all functions are tested to assure that they operate as expected. Note
+ * that not all test cases are performed.
  *
  */
 
 #include "..\Headers\StructureConversions.h"
 
-int ConversionTests()
+int StructureConversionsTests()
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

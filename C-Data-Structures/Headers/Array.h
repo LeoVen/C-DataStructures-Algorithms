@@ -1,10 +1,10 @@
-/*
- * CArray.h
+/**
+ * @file Array.h
  *
- * Author: Leonardo Vencovsky
- * Created on 18/03/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 18/03/2018
  *
- * Header file for Array implementations in C
+ * @brief Header file for Array implementations in C
  *
  */
 

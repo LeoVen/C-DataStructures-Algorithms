@@ -1,10 +1,10 @@
-/*
+/**
  * @file DoublyLinkedList.h
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/03/2018
  *
- * @brief Header for Doubly Linked List implementations in C
+ * @brief Header file for Doubly Linked List implementations in C
  *
  */
 

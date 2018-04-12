@@ -24,9 +24,6 @@
     <ClCompile Include="Structures\Vector.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\ConversionTests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Tests\VectorTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -70,6 +67,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Tests\DynamicArrayTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\StructureConversionsTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

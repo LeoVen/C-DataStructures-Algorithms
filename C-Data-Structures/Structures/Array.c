@@ -1,10 +1,10 @@
 /**
  * @file Array.c
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 19/03/2018
  *
- * @brief Array Implementations in C
+ * @brief Source file for @c Array implementations in C
  *
  */
 

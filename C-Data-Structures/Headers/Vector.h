@@ -1,10 +1,10 @@
-/*
- * Vector.h
+/**
+ * @file Vector.h
  *
- * Author: Leonardo Vencovsky
- * Created on 20/03/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 20/03/2018
  *
- * Header for Vector in C
+ * @brief Header file for Vector implementations in C
  *
  */
 

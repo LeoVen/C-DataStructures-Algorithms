@@ -1,10 +1,11 @@
-/*
- * StructureConversions.h
+/**
+ * @file StructureConversions.h
  *
- * Author: Leonardo Vencovsky
- * Created on 02/04/2018
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 02/04/2018
  *
- * Structure Conversions Header in C
+ * @brief Structure Conversions Header in C
+ *
  */
 
 #pragma once

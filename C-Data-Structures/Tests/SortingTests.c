@@ -1,12 +1,15 @@
-/*
-* CSortingTests.c
-*
-* Author: Leonardo Vencovsky
-* Created on 19/03/2018
-*
-* Sorting Tests to really push up the boundries
-*
-*/
+/**
+ * @file SortingTests.c
+ *
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 19/03/2018
+ *
+ * @brief Sorting Tests to really push up the boundries
+ *
+ * Here all functions are tested to assure that they operate as expected. Note
+ * that not all test cases are performed.
+ *
+ */
 
 #include "..\Headers\Array.h"
 

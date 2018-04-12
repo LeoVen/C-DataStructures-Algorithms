@@ -1,10 +1,10 @@
 /**
  * @file Stack.c
  *
- * @author Leonardo Vencovsky
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 31/03/2018
  *
- * @brief Stack Implementations in C
+ * @brief Source file for @c Stack implementations in C
  *
  */
 
