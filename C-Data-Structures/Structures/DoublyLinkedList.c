@@ -8,18 +8,6 @@
  *
  */
 
- /*
-    Return Codes
-
-   -1 - List Erased
-    0 - Success
-    1 - List not Initialized or locked
-    2 - Invalid Position
-    3 - List is Empty
-    4 - Only one node -> won't reverse list
-
-  */
-
 #include "..\Headers\DoublyLinkedList.h"
 
 // +-------------------------------------------------------------------------------------------------+
