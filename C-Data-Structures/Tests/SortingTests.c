@@ -23,6 +23,7 @@ int SortingTests() {
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
+	/*
 	int i;
 
 	// Testing limits of Insertion Sort
@@ -42,5 +43,7 @@ int SortingTests() {
 	// displayCArray(earray);
 
 	free(earray);
+
+	*/
 	return 0;
 }

@@ -25,87 +25,205 @@
 
 void swap(Array *array, int position1, int position2);
 
-Array * getCArray(int size)
+// +-------------------------------------------------------------------------------------------------+
+// |                                          Initializers                                           |
+// +-------------------------------------------------------------------------------------------------+
+
+Status arr_init_array(Array **arr, size_t size)
 {
-	Array *array = malloc(sizeof(Array));
-	array->buffer = malloc(sizeof(int) * size);
-	array->size = size;
-	int i;
-	for (i = 0; i < size; i++) {
-		array->buffer[i] = 0;
-	}
-	return array;
+	(*arr) = malloc(sizeof(Array));
+
+	if (!(*arr))
+		return DS_ERR_ALLOC;
+
+	(*arr)->buffer = calloc(size, sizeof(int));
+
+	if (!(*arr)->buffer)
+		return DS_ERR_ALLOC;
+	
+	(*arr)->size = size;
+
+	return DS_OK;
 }
 
-int insertValueCArray(Array *array, int position, int value)
+// +-------------------------------------------------------------------------------------------------+
+// |                                            Getters                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Array * arr_get_array(size_t size)
 {
-	if (position >= 0 && position < array->size) {
-		if (array->buffer[position] == 0) {
-			array->buffer[position] = value;
-			return 0; // OK
-		}
-		else return 2; // Position already initialized (use update function)
-	}
-	return 1; // Invalid position
+	Array *arr;
+
+	arr = malloc(sizeof(Array));
+
+	arr->buffer = calloc(size, sizeof(int));
+
+	return arr;
 }
 
-int removeValueCArray(Array *array, int position)
+// +-------------------------------------------------------------------------------------------------+
+// |                                            Insertion                                            |
+// +-------------------------------------------------------------------------------------------------+
+
+Status arr_insert(Array *arr, size_t position, int value)
 {
-	if (position >= 0 && position < array->size) {
-		if (array->buffer[position] != 0) {
-			array->buffer[position] = 0;
-		}
-		else return 4; // Position already empty
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (position >= arr->size)
+		return DS_ERR_INVALID_POSITION;
+
+	if (arr->buffer[position] == 0) {
+
+		arr->buffer[position] = value;
+
+		return DS_OK;
+
 	}
-	return 1; // Invalid position
+
+	return DS_ERR_INVALID_OPERATION;
 }
 
-int pushValueCArray(Array *array, int value)
+Status arr_push(Array *arr, int value)
 {
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
 	int i;
 	int ok = 0;
-	for (i = 0; i < array->size; i++) {
-		if (array->buffer[i] == 0) {
-			array->buffer[i] = value;
+
+	for (i = 0; i < arr->size; i++) {
+	
+		if (arr->buffer[i] == 0) {
+		
+			arr->buffer[i] = value;
+			
 			ok = 1;
 			break;
 		}
 	}
-	if (ok == 1) return 0;
-	else return 5; // Array is full
+
+	if (ok == 1)
+		return DS_OK;
+
+	return DS_ERR_FULL;
 }
 
-int updateValueCArray(Array *array, int position, int value)
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Update                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status arr_update(Array *arr, size_t position, int value)
 {
-	if (position >= 0 && position < array->size) {
-		if (array->buffer[position] != 0) {
-			array->buffer[position] = value;
-		}
-		else return 3; // Position not initialized (use insert function)
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (position >= arr->size)
+		return DS_ERR_INVALID_POSITION;
+
+	if (arr->buffer[position] != 0) {
+
+		arr->buffer[position] = value;
+
+		return DS_OK;
+
 	}
-	return 1; // Invalid Position
+	
+	return DS_ERR_INVALID_OPERATION;
 }
 
-int eraseCArray(Array *array)
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Removal                                             |
+// +-------------------------------------------------------------------------------------------------+
+
+Status arr_remove(Array *arr, size_t position)
+{
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (position >= arr->size)
+		return DS_ERR_INVALID_POSITION;
+
+	if (arr->buffer[position] != 0) {
+		
+		arr->buffer[position] = 0;
+	
+	}
+	
+	return DS_ERR_INVALID_OPERATION;
+}
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Display                                             |
+// +-------------------------------------------------------------------------------------------------+
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Resets                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status arr_erase_array(Array *array)
 {
 	int i;
+
 	for (i = 0; i < array->size; i++) {
+	
 		array->buffer[i] = 0;
 	}
-	return 0;
+
+	return DS_OK;
 }
 
-int switchValuesCArray(Array *array, int position1, int position2)
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Search                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                         Slice / Link                                            |
+// +-------------------------------------------------------------------------------------------------+
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Copy                                                |
+// +-------------------------------------------------------------------------------------------------+
+
+Status arr_copy(Array *arr, Array **result)
 {
-	if (position1 >= 0 && position1 < array->size 
-		&& position2 >= 0 && position2 < array->size) {
-		int temp = array->buffer[position1];
-		array->buffer[position1] = array->buffer[position2];
-		array->buffer[position2] = temp;
-	}
-	return 1; // Invalid Position
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	arr_init_array(result, arr->size);
+
+	if (!(*result))
+		return DS_ERR_ALLOC;
+
+	int i;
+	for (i = 0; i < arr->size; i++)
+		(*result)->buffer[i] = arr->buffer[i];
+
+	return DS_OK;
 }
 
+// +-------------------------------------------------------------------------------------------------+
+// |                                           Sorting                                               |
+// +-------------------------------------------------------------------------------------------------+
+
+// int switchValuesCArray(Array *array, int position1, int position2)
+Status arr_switch_values(Array *arr, size_t pos1, size_t pos2)
+{
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (pos1 >= arr->size || pos2 >= arr->size)
+		return DS_ERR_INVALID_POSITION;
+
+	int temp = arr->buffer[pos1];
+	arr->buffer[pos1] = arr->buffer[pos2];
+	arr->buffer[pos2] = temp;
+
+	return DS_OK;
+}
+
+
+/*
 int reverseCArray(Array *array)
 {
 	int i;
@@ -255,3 +373,6 @@ int findMaxCArray(Array *array)
 	}
 	return max;
 }
+
+
+*/

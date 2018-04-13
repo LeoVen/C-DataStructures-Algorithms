@@ -23,6 +23,7 @@ int ArrayTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
+	/*
 	Array *array = getCArray(10);
 
 	int i;
@@ -150,5 +151,7 @@ int ArrayTests()
 	free(carray);
 	free(darray);
 	printf("\n");
+
+	*/
 	return 0;
 }
