@@ -36,38 +36,24 @@ extern "C" {
 	Status arr_display_raw(Array *arr);
 
 	Status arr_erase(Array *array);
+	Status arr_delete(Array **arr);
+
+	Status arr_max(Array *arr, int *result);
+	Status arr_min(Array *arr, int *result);
+	Status arr_frequency(Array *arr, int key, int *result);
+	Status arr_key_positions(Array *arr, Array **result, int key);
 
 	Status arr_copy(Array *arr, Array **result);
 	
-	Status arr_blend(Array *arr);
-
 	Status arr_switch(Array *arr, size_t pos1, size_t pos2);
 	Status arr_reverse(Array *arr);
+	Status arr_blend(Array *arr);
 
-	/*
-
-	// +-------------------------------------+
-	// |              Sorting                |
-	// +-------------------------------------+
-	int bubbleSortCArray(Array *array);
-	int selectionSortCArray(Array *array);
-	int insertionSortCArray(Array *array);
-	int blenderCArray(Array *array);
-
-	// +-------------------------------------+
-	// |             Searching               |
-	// +-------------------------------------+
-	int valueOcurranceCArray(Array *array, int value);
-	Array * valuePositionsCArray(Array *array, int value);
-	int findMaxCArray(Array *array);
-	int findMinCArray(Array *array);
-
-	// +-------------------------------------+
-	// |              Display                |
-	// +-------------------------------------+
-	int displayCArray(Array *array);
-	int displayRawCArray(Array *array);
-	*/
+	Status arr_sort_bubble(Array *arr);
+	Status arr_sort_selection(Array *arr);
+	Status arr_sort_insertion(Array *arr);
+	
+	
 #ifdef __cplusplus
 }
 #endif

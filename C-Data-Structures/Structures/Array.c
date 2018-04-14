@@ -197,14 +197,27 @@ Status arr_display_raw(Array *arr)
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status arr_erase(Array *array)
+Status arr_erase(Array *arr)
 {
 	int i;
 
-	for (i = 0; i < array->size; i++) {
+	for (i = 0; i < arr->size; i++) {
 	
-		array->buffer[i] = 0;
+		arr->buffer[i] = 0;
 	}
+
+	return DS_OK;
+}
+
+Status arr_delete(Array **arr)
+{
+	if (*arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	free((*arr)->buffer);
+	free((*arr));
+
+	(*arr) = NULL;
 
 	return DS_OK;
 }
@@ -213,8 +226,103 @@ Status arr_erase(Array *array)
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
+Status arr_max(Array *arr, int *result)
+{
+	*result = 0;
+
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	int i;
+	int min = arr->buffer[0];
+
+	for (i = 1; i < arr->size; i++) {
+
+		if (arr->buffer[i] > min) {
+
+			min = arr->buffer[i];
+
+		}
+	}
+
+	*result = min;
+
+	return DS_OK;
+}
+
+Status arr_min(Array *arr, int *result)
+{
+	*result = 0;
+
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	int i;
+	int min = arr->buffer[0];
+
+	for (i = 1; i < arr->size; i++) {
+
+		if (arr->buffer[i] < min) {
+
+			min = arr->buffer[i];
+
+		}
+	}
+
+	*result = min;
+
+	return DS_OK;
+}
+
+Status arr_frequency(Array *arr, int key, int *result)
+{
+	*result = 0;
+
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	int i;
+	for (i = 0; i < arr->size; i++) {
+	
+		if (arr->buffer[i] == key)
+			(*result)++;
+
+	}
+	
+	return DS_OK;
+}
+
+Status arr_key_positions(Array *arr, Array **result, int key)
+{
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	int i, j = 0, total = 0;
+
+	Status st = arr_frequency(arr, key, &total);
+
+	if (st != DS_OK)
+		return st;
+
+	st = arr_init(result, total);
+
+	if (st != DS_OK)
+		return st;
+
+	for (i = 0; i < arr->size; i++) {
+
+		if (arr->buffer[i] == key) {
+
+			(*result)->buffer[j] = i;
+			j++;
+		}
+	}
+
+	return DS_OK;
+}
+
 // +-------------------------------------------------------------------------------------------------+
-// |                                         Slice / Link                                            |
+// |                                   Slice / Link / Trim / Grow                                    |
 // +-------------------------------------------------------------------------------------------------+
 
 // +-------------------------------------------------------------------------------------------------+
@@ -296,96 +404,77 @@ Status arr_blend(Array *arr)
 	return DS_OK;
 }
 
-/*
-
-int bubbleSortCArray(Array *array)
+Status arr_sort_bubble(Array *arr)
 {
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (arr->size < 2)
+		return DS_ERR_INVALID_OPERATION;
+
 	int i, j;
-	for (i = 0; i < array->size - 1; i++) {
-		for (j = 0; j < array->size - i - 1; j++) {
-			if (array->buffer[j] > array->buffer[j + 1]) {
-				swap(array, j, j + 1);
+	for (i = 0; i < arr->size - 1; i++) {
+
+		for (j = 0; j < arr->size - i - 1; j++) {
+
+			if (arr->buffer[j] > arr->buffer[j + 1]) {
+
+				arr_switch(arr, j, j + 1);
+
 			}
 		}
 	}
-	return 0;
+
+	return DS_OK;
 }
 
-int selectionSortCArray(Array *array)
+Status arr_sort_selection(Array *arr)
 {
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (arr->size < 2)
+		return DS_ERR_INVALID_OPERATION;
+
 	int i, j, min;
-	for (i = 0; i < array->size - 1; i++) {
+
+	for (i = 0; i < arr->size - 1; i++) {
+
 		min = i;
-		for (j = i + 1; j < array->size; j++)
-			if (array->buffer[j] < array->buffer[min]) min = j;
-		swap(array, min, i);
+
+		for (j = i + 1; j < arr->size; j++)
+			if (arr->buffer[j] < arr->buffer[min])
+				min = j;
+
+		arr_switch(arr, min, i);
 	}
-	return 0;
+
+	return DS_OK;
 }
 
-int insertionSortCArray(Array *array)
+Status arr_sort_insertion(Array *arr)
 {
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (arr->size < 2)
+		return DS_ERR_INVALID_OPERATION;
+
 	int i, j, num;
-	for (i = 1; i < array->size; i++) {
-		num = array->buffer[i];
+	for (i = 1; i < arr->size; i++) {
+
+		num = arr->buffer[i];
+
 		j = i - 1;
-		while (j >= 0 && array->buffer[j] > num)
+
+		while (j >= 0 && arr->buffer[j] > num)
 		{
-			array->buffer[j + 1] = array->buffer[j];
+			arr->buffer[j + 1] = arr->buffer[j];
 			j--;
 		}
-		array->buffer[j + 1] = num;
+
+		arr->buffer[j + 1] = num;
 	}
-	return 0;
+
+	return DS_OK;
 }
-
-int valueOcurranceCArray(Array *array, int value)
-{
-	int i, total = 0;
-	for (i = 0; i < array->size; i++) {
-		if (array->buffer[i] == value) total++;
-	}
-	return total;
-}
-
-Array * valuePositionsCArray(Array *array, int value)
-{
-	int i, j = 0;
-	int total = valueOcurranceCArray(array, value);
-	Array *resultArray = getCArray(total);
-	for (i = 0; i < array->size; i++) {
-		if (array->buffer[i] == value) {
-			// Hopefully this won't overflow
-			resultArray->buffer[j] = i;
-			j++;
-		}
-	}
-	return resultArray;
-}
-
-int findMinCArray(Array *array)
-{
-	int i;
-	int min = array->buffer[0];
-	for (i = 1; i < array->size; i++) {
-		if (array->buffer[i] < min) {
-			min = array->buffer[i];
-		}
-	}
-	return min;
-}
-
-int findMaxCArray(Array *array)
-{
-	int i;
-	int max = array->buffer[0];
-	for (i = 1; i < array->size; i++) {
-		if (array->buffer[i] > max) {
-			max = array->buffer[i];
-		}
-	}
-	return max;
-}
-
-
-*/
