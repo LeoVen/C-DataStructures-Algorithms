@@ -23,49 +23,50 @@ int ArrayTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	/*
-	Array *array = getCArray(10);
+	
+	Array *array;
 
+	size_t size = 100;
+
+	arr_init(&array, size);
+	
 	int i;
-	for (i = 0; i < array->size; i++) {
-		insertValueCArray(array, i, i+1);
+	size_t t;
+	for (t = 0; t < array->size; t++) {
+		arr_insert(array, t, t + 1);
 	}
 
-	displayCArray(array);
-	printf("\nCode: %d\n", pushValueCArray(array, 11)); // 5
+	// Copy
+	Array *arr;
+	arr_copy(array, &arr);
+
+	// Reverse copy
+	arr_reverse(arr);
+
+	arr_display_raw(array);  // Original
+	arr_display_raw(arr);    // Reversed
+
+	print_status_repr(arr_push(array, 11)); // DS_ERR_FULL
 
 	for (i = 0; i < array->size; i++) {
-		removeValueCArray(array, i);
+		arr_remove(array, i);
 	}
 	
-	displayCArray(array);
+	arr_display_raw(array); // All 0's
 
-	printf("\nCode: %d", removeValueCArray(array, -1)); // 1
-	printf("\nCode: %d\n", insertValueCArray(array, -1, 1)); // 1
+	print_status_repr(arr_remove(array, -1));    // DS_ERR_INVALID_POSITION
+	print_status_repr(arr_insert(array, -1, 1)); // DS_ERR_INVALID_POSITION
 
 	// Erase
 	for (i = 0; i < array->size; i++) {
-		insertValueCArray(array, i, i + 1);
-	}
-	eraseCArray(array);
-	displayCArray(array); // Should give all 0s
-
-	// Switching
-	Array *arr = getCArray(13);
-	for (i = 0; i < arr->size; i++) {
-		insertValueCArray(arr, i, i + 1);
-	}
-	displayCArray(arr);
-	for (i = 0; i < arr->size / 2; i++) {
-		switchValuesCArray(arr, i, arr->size - i - 1);
+		arr_insert(array, i, i + 1);
 	}
 
-	displayCArray(arr);
+	arr_erase(array);
 
-	// Or simply...
-	reverseCArray(arr);
+	arr_display_raw(array); // Should give all 0s
 
-	displayCArray(arr);
+	/*
 	
 	// Sorting
 	srand(time(NULL));

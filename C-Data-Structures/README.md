@@ -34,7 +34,7 @@ SinglyLinkedList    [##########]
 DoublyLinkedList    [##########]
 CircularLinkedList  [##########]
 Stack               [##########]
-Array               [####      ]
+Array               [#######   ]
 DynamicArray        [          ]
 Vector              [          ]
 ```

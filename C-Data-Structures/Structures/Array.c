@@ -23,13 +23,11 @@
 
 #include "..\Headers\Array.h"
 
-void swap(Array *array, int position1, int position2);
-
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |
 // +-------------------------------------------------------------------------------------------------+
 
-Status arr_init_array(Array **arr, size_t size)
+Status arr_init(Array **arr, size_t size)
 {
 	(*arr) = malloc(sizeof(Array));
 
@@ -50,7 +48,7 @@ Status arr_init_array(Array **arr, size_t size)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Array * arr_get_array(size_t size)
+Array * arr_get(size_t size)
 {
 	Array *arr;
 
@@ -157,11 +155,49 @@ Status arr_remove(Array *arr, size_t position)
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
 
+Status arr_display(Array *arr)
+{
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	int i;
+
+	printf("\nC Array\n[ ");
+	
+	for (i = 0; i < arr->size; i++) {
+	
+		printf("%d, ", arr->buffer[i]);
+	}
+
+	printf("nil ]\n");
+	
+	return DS_OK;
+}
+
+Status arr_display_raw(Array *arr)
+{
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	int i;
+
+	printf("\n");
+
+	for (i = 0; i < arr->size; i++) {
+
+		printf("%d ", arr->buffer[i]);
+	}
+
+	printf("\n");
+
+	return DS_OK;
+}
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status arr_erase_array(Array *array)
+Status arr_erase(Array *array)
 {
 	int i;
 
@@ -190,7 +226,7 @@ Status arr_copy(Array *arr, Array **result)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	arr_init_array(result, arr->size);
+	arr_init(result, arr->size);
 
 	if (!(*result))
 		return DS_ERR_ALLOC;
@@ -206,8 +242,7 @@ Status arr_copy(Array *arr, Array **result)
 // |                                           Sorting                                               |
 // +-------------------------------------------------------------------------------------------------+
 
-// int switchValuesCArray(Array *array, int position1, int position2)
-Status arr_switch_values(Array *arr, size_t pos1, size_t pos2)
+Status arr_switch(Array *arr, size_t pos1, size_t pos2)
 {
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -222,68 +257,46 @@ Status arr_switch_values(Array *arr, size_t pos1, size_t pos2)
 	return DS_OK;
 }
 
+Status arr_reverse(Array *arr)
+{
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st;
+
+	int i;
+	for (i = 0; i < arr->size / 2; i++) {
+
+		st = arr_switch(arr, i, arr->size - i - 1);
+
+		if (st != DS_OK)
+			return st;
+
+	}
+
+	return DS_OK;
+}
+
+Status arr_blend(Array *arr)
+{
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (arr->size < 2)
+		return DS_ERR_INVALID_OPERATION;
+
+	int i;
+
+	int loop = arr->size * 100;
+	for (i = 0; i < loop; i++) {
+
+		arr_switch(arr, (size_t)rand() % arr->size, (size_t)rand() % arr->size);
+	}
+
+	return DS_OK;
+}
 
 /*
-int reverseCArray(Array *array)
-{
-	int i;
-	for (i = 0; i < array->size / 2; i++) {
-		swap(array, i, array->size - i - 1);
-	}
-	return 0;
-}
-
-int displayCArray(Array *array)
-{
-	int i;
-	printf("\nC ARRAY\n[ ");
-	for (i = 0; i < array->size; i++) {
-		printf("%d, ", array->buffer[i]);
-	}
-	printf("nil ]\n");
-	return 0;
-}
-
-int displayRawCArray(Array *array)
-{
-	int i;
-	printf("\n");
-	for (i = 0; i < array->size; i++) {
-		printf("%d ", array->buffer[i]);
-	}
-	printf("\n");
-	return 0;
-}
-
-int blenderCArray(Array *array)
-{
-	srand(time(NULL) * array->size);
-	int i;
-	int total = array->size * 100;
-	for (i = 0; i < total; i++) {
-		swap(array, rand() % array->size, rand() % array->size);
-	}
-	return 0;
-}
-
-Array * getCopyCArray(Array *arr)
-{
-	Array *array = malloc(sizeof(Array));
-	array->buffer = malloc(sizeof(int) * arr->size);
-	array->size = arr->size;
-	int i;
-	for (i = 0; i < arr->size; i++) {
-		array->buffer[i] = arr->buffer[i];
-	}
-	return array;
-}
-
-void swap(Array *array, int position1, int position2)
-{
-	int temp = array->buffer[position1];
-	array->buffer[position1] = array->buffer[position2];
-	array->buffer[position2] = temp;
-}
 
 int bubbleSortCArray(Array *array)
 {

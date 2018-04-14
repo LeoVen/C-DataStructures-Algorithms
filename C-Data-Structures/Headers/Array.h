@@ -21,9 +21,9 @@ extern "C" {
 		size_t size;
 	} Array;
 
-	Status arr_init_array(Array **arr, size_t size);
+	Status arr_init(Array **arr, size_t size);
 
-	Array * arr_get_array(size_t size);
+	Array * arr_get(size_t size);
 
 	Status arr_insert(Array *arr, size_t position, int value);
 	Status arr_push(Array *arr, int value);
@@ -32,14 +32,19 @@ extern "C" {
 
 	Status arr_remove(Array *arr, size_t position);
 
-	Status arr_erase_array(Array *array);
+	Status arr_display(Array *arr);
+	Status arr_display_raw(Array *arr);
 
-	Status arr_switch_values(Array *arr, size_t pos1, size_t pos2);
+	Status arr_erase(Array *array);
 
 	Status arr_copy(Array *arr, Array **result);
+	
+	Status arr_blend(Array *arr);
+
+	Status arr_switch(Array *arr, size_t pos1, size_t pos2);
+	Status arr_reverse(Array *arr);
 
 	/*
-	int reverseCArray(Array *array);
 
 	// +-------------------------------------+
 	// |              Sorting                |
