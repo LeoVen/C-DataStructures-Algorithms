@@ -12,136 +12,258 @@
 
 #include "..\Headers\DynamicArray.h"
 
- // +-------------------------------------------------------------------------------------------------+
- // |                                             Getters                                             |
- // +-------------------------------------------------------------------------------------------------+
+// +-------------------------------------------------------------------------------------------------+
+// |                                          Initializers                                           |
+// +-------------------------------------------------------------------------------------------------+
 
-int initDArray(DynamicArray **array, int maxSize)
+Status darr_init(DynamicArray **darr, size_t size)
 {
-	(*array) = malloc(sizeof(DynamicArray));
-	(*array)->buffer = malloc(sizeof(int) * maxSize);
-	(*array)->size = 0;
-	(*array)->threshold = false;
-	(*array)->maxSize = maxSize;
-	return 0;
+	(*darr) = malloc(sizeof(DynamicArray));
+
+	if (!(*darr))
+		return DS_ERR_ALLOC;
+
+	(*darr)->buffer = calloc(size, sizeof(int));
+
+	if (!(*darr)->buffer)
+		return DS_ERR_ALLOC;
+
+	(*darr)->size = 0;
+	(*darr)->threshold = false;
+	(*darr)->maxSize = size;
+
+	return DS_OK;
 }
 
-DynamicArray * getDArray(int maxSize)
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Getters                                             |
+// +-------------------------------------------------------------------------------------------------+
+
+DynamicArray * darr_get(size_t size)
 {
-	if (maxSize < 0) {
+	if (size < 0) {
 		printf("\nFATAL ERROR\n");
 		return NULL;
 	}
+
 	DynamicArray *newArr = malloc(sizeof(DynamicArray));
+
+	newArr->buffer = calloc(size, sizeof(int));
+
 	newArr->size = 0;
-	newArr->maxSize = maxSize;
 	newArr->threshold = false;
-	newArr->buffer = malloc(sizeof(int) * maxSize);
+	newArr->maxSize = size;
+
 	return newArr;
 }
 
-int pushValueDArray(DynamicArray **array, int value)
+// +-------------------------------------------------------------------------------------------------+
+// |                                            Insertion                                            |
+// +-------------------------------------------------------------------------------------------------+
+
+Status darr_push(DynamicArray **darr, int value)
 {
-	adjustSize(array);
-	(*array)->buffer[(*array)->size] = value;
-	((*array)->size)++;
-	return 0;
+	Status st = darr_resize(darr);
+
+	if (st != DS_OK)
+		return st;
+
+	(*darr)->buffer[(*darr)->size] = value;
+	((*darr)->size)++;
+
+	return DS_OK;
 }
 
-int popValueDArray(DynamicArray **array)
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Removal                                             |
+// +-------------------------------------------------------------------------------------------------+
+
+Status darr_pop(DynamicArray **darr)
 {
-	adjustSize(array);
-	(*array)->buffer[(*array)->size] = 0;
-	((*array)->size)--;
-	return 0;
+	Status st = darr_resize(darr);
+
+	if (st != DS_OK)
+		return st;
+
+	(*darr)->buffer[(*darr)->size] = 0;
+	((*darr)->size)--;
+
+	return DS_OK;
 }
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-int displayDArray(DynamicArray *array)
+Status darr_display(DynamicArray *darr)
 {
+	if (darr == NULL)
+		return DS_ERR_NULL_POINTER;
+
 	int i;
-	if (array->size == 0) {
+
+	if (darr->size == 0) {
+
 		printf("\n[ Empty ] \n");
-		return 1;
+
+		return DS_OK;
 	}
+
 	printf("\nD Array\n[ ");
-	for (i = 0; i < array->size; i++) {
-		printf("%d, ", array->buffer[i]);
+
+	for (i = 0; i < darr->size; i++) {
+
+		printf("%d, ", darr->buffer[i]);
 	}
+
 	printf("nil ]\n");
-	return 0;
+
+	return DS_OK;
 }
 
-int displayRawDArray(DynamicArray *array)
+Status darr_display_raw(DynamicArray *darr)
 {
+	if (darr == NULL)
+		return DS_ERR_NULL_POINTER;
+
 	int i;
-	if (array->size == 0) {
+
+	if (darr->size == 0) {
+
 		printf("\n[ Empty ] \n");
-		return 1;
+		
+		return DS_OK;
 	}
+
 	printf("\n");
-	for (i = 0; i < array->size; i++) {
-		printf("%d ", array->buffer[i]);
+
+	for (i = 0; i < darr->size; i++) {
+
+		printf("%d ", darr->buffer[i]);
 	}
+
 	printf("\n");
-	return 0;
+	
+	return DS_OK;
+}
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Resets                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status darr_erase(DynamicArray *darr)
+{
+	if (darr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	int i;
+
+	for (i = 0; i < darr->size; i++) {
+
+		darr->buffer[i] = 0;
+	}
+
+	return DS_OK;
+}
+
+Status darr_delete(DynamicArray **darr)
+{
+	if (*darr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	free((*darr)->buffer);
+	free((*darr));
+
+	(*darr) = NULL;
+
+	return DS_OK;
 }
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Dynamic                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-int adjustSize(DynamicArray **arr)
+Status darr_resize(DynamicArray **darr)
 {
-	int i;
-	if ((*arr)->size > (*arr)->maxSize / 2) (*arr)->threshold = true;
-	if ((*arr)->size >= (*arr)->maxSize - 1) {
-		// Grow
-		return growDArray(arr);
-	}
-	else if ((*arr)->threshold && (*arr)->size < (*arr)->maxSize / 2) {
-		// Shrink
-		return shrinkDArray(arr);
-	}
-	else {
-		// OK
-		return 0;
-	}
+	if ((*darr) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if ((*darr)->size > (*darr)->maxSize / 2)
+		(*darr)->threshold = true;
+
+	if ((*darr)->size >= (*darr)->maxSize - 1)
+		return darr_grow(darr);
+
+	else if ((*darr)->threshold && (*darr)->size < (*darr)->maxSize / 2)
+		return darr_shrink(darr);
+
+	return DS_OK;
 }
 
-int shrinkDArray(DynamicArray **arr)
+Status darr_shrink(DynamicArray **darr)
 {
+	if ((*darr) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	DynamicArray *nArray;
+
+	Status st = darr_init(&nArray, (*darr)->maxSize / 2 + 1);
+
+	if (st != DS_OK)
+		return st;
+	
+	DynamicArray *kill = (*darr);
+
 	int i;
-	DynamicArray *nArray = getDArray((*arr)->maxSize / 2 + 1);
-	DynamicArray *kill = (*arr);
-	// Copy values
-	for (i = 0; i < (*arr)->size; i++) {
-		nArray->buffer[i] = (*arr)->buffer[i];
+	for (i = 0; i < (*darr)->size; i++) {
+
+		nArray->buffer[i] = (*darr)->buffer[i];
+
 	}
-	nArray->size = (*arr)->size;
+
+	nArray->size = (*darr)->size;
 	nArray->threshold = false;
-	(*arr) = nArray;
-	// Free old array
-	free(kill);
-	return 0; // OK
+	
+	(*darr) = nArray;
+
+	st = darr_delete(&kill);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
 }
 
-int growDArray(DynamicArray **arr)
+Status darr_grow(DynamicArray **darr)
 {
+	if (*darr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	DynamicArray *nArray;
+
+	Status st = darr_init(&nArray, (*darr)->maxSize * 2);
+
+	if (st != DS_OK)
+		return st;
+
+	DynamicArray *kill = (*darr);
+
 	int i;
-	DynamicArray *nArray = getDArray((*arr)->maxSize * 2);
-	DynamicArray *kill = (*arr);
-	// Copy values
-	for (i = 0; i < (*arr)->size; i++) {
-		nArray->buffer[i] = (*arr)->buffer[i];
+	for (i = 0; i < (*darr)->size; i++) {
+
+		nArray->buffer[i] = (*darr)->buffer[i];
+
 	}
-	nArray->size = (*arr)->size;
+
+	nArray->size = (*darr)->size;
 	nArray->threshold = false;
-	*arr = nArray;
-	// Free old array
-	free(kill);
-	return 0; // OK
+
+	(*darr) = nArray;
+
+	st = darr_delete(&kill);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
 }

@@ -43,6 +43,9 @@ extern "C" {
 	Status arr_frequency(Array *arr, int key, int *result);
 	Status arr_key_positions(Array *arr, Array **result, int key);
 
+	// Status arr_grow(Array **arr);
+	// Status arr_shrink(Array **arr);
+
 	Status arr_copy(Array *arr, Array **result);
 	
 	Status arr_switch(Array *arr, size_t pos1, size_t pos2);

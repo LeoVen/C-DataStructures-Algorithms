@@ -199,6 +199,9 @@ Status arr_display_raw(Array *arr)
 
 Status arr_erase(Array *arr)
 {
+	if (arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
 	int i;
 
 	for (i = 0; i < arr->size; i++) {
@@ -325,6 +328,9 @@ Status arr_key_positions(Array *arr, Array **result, int key)
 // |                                   Slice / Link / Trim / Grow                                    |
 // +-------------------------------------------------------------------------------------------------+
 
+// Status arr_grow(Array **arr);
+// Status arr_shrink(Array **arr);
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
@@ -395,7 +401,7 @@ Status arr_blend(Array *arr)
 
 	int i;
 
-	int loop = arr->size * 100;
+	size_t loop = arr->size * 100;
 	for (i = 0; i < loop; i++) {
 
 		arr_switch(arr, (size_t)rand() % arr->size, (size_t)rand() % arr->size);

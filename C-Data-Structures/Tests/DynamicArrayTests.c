@@ -23,22 +23,25 @@ int DynamicArrayTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	DynamicArray *array = getDArray(100);
+	DynamicArray *arr, *array;
 
-	DynamicArray *arr;
-	initDArray(&arr, 100);
+	darr_init(&array, 100);
+	darr_init(&arr, 100);
 
 	int i;
 	for (i = 0; i < 200; i++) {
-		pushValueDArray(&array, i);
-		pushValueDArray(&arr, i);
+		darr_push(&array, i);
+		darr_push(&arr, i);
 	}
-	displayDArray(array);
+
+	darr_display(arr);
+
 	for (i = 0; i < 200; i++) {
-		popValueDArray(&array);
-		popValueDArray(&arr);
+		darr_pop(&array);
+		darr_pop(&arr);
 	}
-	displayDArray(arr);
+
+	darr_display_raw(arr);
 
 	printf("\n");
 	return 0;
