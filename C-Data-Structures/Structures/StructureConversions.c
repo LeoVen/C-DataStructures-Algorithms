@@ -27,32 +27,40 @@
 // +-------------------------------------------------------------------------------------------------+
 // |                                            SLL -> X                                             |
 // +-------------------------------------------------------------------------------------------------+
-/*
-Status convert_sll_to_array(SinglyLinkedList *sll, Array **arr)
+
+Status convert_sll_to_arr(SinglyLinkedList *sll, Array **arr)
 {
-	if (!sll)
+	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
+
+	if (sll_is_empty(sll))
+		return DS_ERR_INVALID_OPERATION;
 
 	SinglyLinkedNode *head = sll->head;
 
-	if (head == NULL)
-		return DS_ERR_INVALID_OPERATION;
+	size_t list_size = 0;
 
-	int list_size = sll_get_length(sll);
+	Status st = sll_get_length(sll, &list_size);
 	
-	if (list_size < 0)
-		return DS_ERR_OPERATION_FAILED;
+	if (st != DS_OK)
+		return st;
 
-	(*arr) = getCArray(list_size);
+	st = arr_init(arr, list_size);
+
+	if (st != DS_OK)
+		return st;
 
 	if (!(*arr))
 		return DS_ERR_ALLOC;
 
 	int i;
 	for (i = 0; i < list_size; i++) {
+
 		if (head == NULL)
 			return DS_ERR_ITER;
-		(*arr)->array[i] = head->data;
+		
+		(*arr)->buffer[i] = head->data;
+		
 		head = head->next;
 	}
 
@@ -62,31 +70,39 @@ Status convert_sll_to_array(SinglyLinkedList *sll, Array **arr)
 	return DS_OK;
 }
 
-Status convert_sll_to_darray(SinglyLinkedList *sll, DynamicArray **darr)
+Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **darr)
 {
-	if (!sll)
+	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	SinglyLinkedNode *head = sll->head;
-	
-	if (head == NULL)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
-	int list_size = getListSizeSLL(&sll);
+	SinglyLinkedNode *head = sll->head;
 
-	if (list_size < 0)
-		return DS_ERR_OPERATION_FAILED;
+	size_t list_size = 0;
 
-	(*darr) = getDArray(list_size);
+	Status st = sll_get_length(sll, &list_size);
+
+	if (st != DS_OK)
+		return st;
+
+	st = arr_init(darr, list_size);
+
+	if (st != DS_OK)
+		return st;
 
 	if (!(*darr))
 		return DS_ERR_ALLOC;
 
 	int i;
 	for (i = 0; i < list_size; i++) {
+
 		if (head == NULL)
 			return DS_ERR_ITER;
-		pushValueDArray(darr, head->data);
+
+		darr_push(darr, head->data);
+
 		head = head->next;
 	}
 
@@ -100,23 +116,26 @@ Status convert_sll_to_darray(SinglyLinkedList *sll, DynamicArray **darr)
 // |                                            DAR -> X                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status convert_darray_to_sll(DynamicArray *darr, SinglyLinkedList **sll)
+Status convert_darr_to_sll(DynamicArray *darr, SinglyLinkedList **sll)
 {
-	if (!darr)
+	if (darr == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	if (darr->size <= 0)
 		return DS_ERR_INVALID_OPERATION;
 
-	// TODO implement functions with status errors
-	initListSLL(sll);
+	Status st = sll_init_list(sll);
+
+	if (st != DS_OK)
+		return st;
 
 	if (!(*sll))
 		return DS_ERR_ALLOC;
 
 	int i;
 	for (i = 0; i < darr->size; i++) {
-		insertTailSLL(sll, darr->array[i]);
+
+		sll_insert_tail((*sll), darr->buffer[i]);
 	}
 
 	if ((*sll)->length != darr->size)
@@ -129,28 +148,30 @@ Status convert_darray_to_sll(DynamicArray *darr, SinglyLinkedList **sll)
 // |                                            AAR -> X                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status convert_array_to_darray(Array *arr, DynamicArray **darr)
+Status convert_arr_to_darr(Array *arr, DynamicArray **darr)
 {
-	if (!arr)
+	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	if (arr->size <= 0)
 		return DS_ERR_INVALID_OPERATION;
 
-	// TODO implement functions with status errors
-	initDArray(darr, arr->size);
+	Status st = darr_init(darr, arr->size);
+
+	if (st != DS_OK)
+		return st;
 
 	if (!(*darr))
 		return DS_ERR_ALLOC;
 
 	int i;
 	for (i = 0; i < arr->size; i++) {
-		pushValueDArray(darr, arr->array[i]);
+
+		darr_push(darr, arr->buffer[i]);
 	}
 
 	if ((*darr)->size != arr->size)
-		return DS_ERR_OPERATION_FAILED;
+		return DS_ERR_UNEXPECTED_RESULT;
 
 	return DS_OK;
 }
-*/

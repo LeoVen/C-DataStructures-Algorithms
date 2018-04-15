@@ -43,6 +43,8 @@ extern "C" {
 	Status arr_frequency(Array *arr, int key, int *result);
 	Status arr_key_positions(Array *arr, Array **result, int key);
 
+	// bool arr_is_empty(Array *arr);
+
 	// Status arr_grow(Array **arr);
 	// Status arr_shrink(Array **arr);
 

@@ -22,45 +22,46 @@ int StructureConversionsTests()
 	printf(" |                                     |\n");
 	printf(" +-------------------------------------+\n");
 	printf("\n");
-	/*
+
 	int i;
 	SinglyLinkedList *sll;
-	initListSLL(&sll);
+	sll_init_list(&sll);
 	
-	for (i = 0; i < 10; i++) {
-		insertTailSLL(&sll, i);
-	}
+	for (i = 0; i < 10; i++)
+		sll_insert_tail(sll, i);
 
 	Array *array;
-	printf("\n%s", status_repr(convert_sll_to_array(sll, &array)));
+	printf("\n%s", status_repr(convert_sll_to_arr(sll, &array)));
 	
-	displayCArray(array);
+	arr_display(array);
 
+	// Not working... see line 26 in DynamicArray.c
+	/*
 	DynamicArray *darray;
 
-	printf("\n%s", status_repr(convert_sll_to_darray(sll, &darray)));
+	printf("\n%s", status_repr(convert_sll_to_darr(sll, &darray)));
 
-	displayDArray(darray);
+	darr_display(darray);
 
 	for (i = 0; i < 20; i++)
-		pushValueDArray(&darray, 99);
+		darr_push(&darray, 99);
 
 	
-	free(sll);
+	sll_delete_list(&sll);
 
-	convert_darray_to_sll(darray, &sll);
+	convert_darr_to_sll(darray, &sll);
 
-	displayListSLL(&sll);
+	sll_display_raw(&sll);
 
-	free(array);
+	arr_delete(array);
 
-	convert_sll_to_array(sll, &array);
+	convert_sll_to_arr(sll, &array);
 
-	free(darray);
+	darr_delete(darray);
 
-	convert_array_to_darray(array, &darray);
+	convert_arr_to_darr(array, &darray);
 
-	displayDArray(darray);
+	darr_display(darray);
 	*/
 	printf("\n");
 	return 0;

@@ -8,19 +8,6 @@
  *
  */
 
- /*
- Return Codes
-
- -1 - Array Erased
- 0 - Success
- 1 - Invalid Position
- 2 - Position already initialized (use update function)
- 3 - Position not initialized (use insert function)
- 4 - Position already empty
- 5 - Array is full
-
- */
-
 #include "..\Headers\Array.h"
 
 // +-------------------------------------------------------------------------------------------------+
@@ -323,6 +310,8 @@ Status arr_key_positions(Array *arr, Array **result, int key)
 
 	return DS_OK;
 }
+
+// bool arr_is_empty(Array *arr);
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                   Slice / Link / Trim / Grow                                    |
