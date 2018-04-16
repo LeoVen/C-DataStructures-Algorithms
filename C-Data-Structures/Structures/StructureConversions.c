@@ -87,7 +87,7 @@ Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **darr)
 	if (st != DS_OK)
 		return st;
 
-	st = arr_init(darr, list_size);
+	st = darr_init(darr, list_size);
 
 	if (st != DS_OK)
 		return st;
@@ -116,12 +116,12 @@ Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **darr)
 // |                                            DAR -> X                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status convert_darr_to_sll(DynamicArray *darr, SinglyLinkedList **sll)
+Status convert_darr_to_sll(DynamicArray **darr, SinglyLinkedList **sll)
 {
-	if (darr == NULL)
+	if ((*darr) == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (darr->size <= 0)
+	if ((*darr)->size <= 0)
 		return DS_ERR_INVALID_OPERATION;
 
 	Status st = sll_init_list(sll);
@@ -133,12 +133,12 @@ Status convert_darr_to_sll(DynamicArray *darr, SinglyLinkedList **sll)
 		return DS_ERR_ALLOC;
 
 	int i;
-	for (i = 0; i < darr->size; i++) {
+	for (i = 0; i < (*darr)->size; i++) {
 
-		sll_insert_tail((*sll), darr->buffer[i]);
+		sll_insert_tail((*sll), (*darr)->buffer[i]);
 	}
 
-	if ((*sll)->length != darr->size)
+	if ((*sll)->length != (*darr)->size)
 		return DS_ERR_UNEXPECTED_RESULT;
 
 	return DS_OK;

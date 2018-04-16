@@ -28,7 +28,7 @@ extern "C" {
 	// |              DAR -> X               |
 	// +-------------------------------------+
 
-	Status convert_darr_to_sll(DynamicArray *darr, SinglyLinkedList **sll);
+	Status convert_darr_to_sll(DynamicArray **darr, SinglyLinkedList **sll);
 
 	// +-------------------------------------+
 	// |              AAR -> X               |

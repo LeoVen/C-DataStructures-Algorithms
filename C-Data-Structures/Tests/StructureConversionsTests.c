@@ -31,38 +31,38 @@ int StructureConversionsTests()
 		sll_insert_tail(sll, i);
 
 	Array *array;
-	printf("\n%s", status_repr(convert_sll_to_arr(sll, &array)));
+	status_repr(convert_sll_to_arr(sll, &array));
 	
 	arr_display(array);
 
-	// Not working... see line 26 in DynamicArray.c
-	/*
 	DynamicArray *darray;
 
-	printf("\n%s", status_repr(convert_sll_to_darr(sll, &darray)));
-
-	darr_display(darray);
+	convert_sll_to_darr(sll, &darray);
 
 	for (i = 0; i < 20; i++)
 		darr_push(&darray, 99);
-
 	
+	darr_display(darray);
+
 	sll_delete_list(&sll);
 
-	convert_darr_to_sll(darray, &sll);
+	convert_darr_to_sll(&darray, &sll);
 
-	sll_display_raw(&sll);
+	sll_display(sll);
 
-	arr_delete(array);
+	arr_delete(&array);
 
 	convert_sll_to_arr(sll, &array);
 
-	darr_delete(darray);
+	darr_delete(&darray);
 
 	convert_arr_to_darr(array, &darray);
 
+	for (i = 0; i < 5; i++)
+		darr_push(&darray, 12);
+
 	darr_display(darray);
-	*/
+
 	printf("\n");
 	return 0;
 }

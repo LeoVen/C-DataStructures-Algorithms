@@ -109,7 +109,7 @@ Status darr_display(DynamicArray *darr)
 		return DS_OK;
 	}
 
-	printf("\nD Array\n[ ");
+	printf("\nDynamic Array\n[ ");
 
 	for (i = 0; i < darr->size; i++) {
 
