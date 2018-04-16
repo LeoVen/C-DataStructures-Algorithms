@@ -67,6 +67,7 @@ extern "C" {
 
 	Status dll_get_length(DoublyLinkedList *dll, size_t *result);
 
+	Status dll_get_node_at(DoublyLinkedList *dll, DoublyLinkedNode **result, size_t position);
 	//Status dll_get_node_data(DoublyLinkedList *dll, size_t position, int *result);
 	//Status dll_update_node_data(DoublyLinkedList *dll, int value, size_t position);
 
