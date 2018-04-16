@@ -187,6 +187,7 @@ Status dll_insert_at(DoublyLinkedList *dll, int value, size_t position)
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else if (position == dll->length) {
 
@@ -195,6 +196,7 @@ Status dll_insert_at(DoublyLinkedList *dll, int value, size_t position)
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else {
 
@@ -221,9 +223,10 @@ Status dll_insert_at(DoublyLinkedList *dll, int value, size_t position)
 		curr->prev->next = node;
 		curr->prev = node;
 
+		(dll->length)++;
+
+		return DS_OK;
 	}
-	
-	return DS_OK;
 }
 
 Status dll_insert_tail(DoublyLinkedList *dll, int value)
@@ -338,6 +341,8 @@ Status dll_remove_at(DoublyLinkedList *dll, size_t position)
 		curr->next->prev = curr->prev;
 
 		dll_delete_node(&curr);
+
+		(dll->length)--;
 
 		return DS_OK;
 	}

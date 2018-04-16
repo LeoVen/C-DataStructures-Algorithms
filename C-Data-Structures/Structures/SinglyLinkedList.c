@@ -406,27 +406,31 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 	if (position > sll->length)
 		return DS_ERR_INVALID_POSITION;
 
+	Status st;
+
 	if (position == 0) {
 
-		Status st = sll_insert_head(sll, value);
+		st = sll_insert_head(sll, value);
 
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else if (position == sll->length) {
 
-		Status st = sll_insert_tail(sll, value);
+		st = sll_insert_tail(sll, value);
 
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else {
 
 		SinglyLinkedNode *node;
 
-		Status st = sll_init_node(&node);
+		st = sll_make_node(&node, value);
 
 		if (st != DS_OK)
 			return st;
@@ -446,16 +450,13 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 
 		}
 
-		node->data = value;
-
 		node->next = curr->next;
 		curr->next = node;
 
 		(sll->length)++;
 
+		return DS_OK;
 	}
-
-	return DS_OK;
 }
 
 
@@ -589,21 +590,25 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
 	if (position > sll->length)
 		return DS_ERR_INVALID_POSITION;
 
+	Status st;
+
 	if (position == 0) {
 
-		Status st = sll_insert_node_head(sll, node);
+		st = sll_insert_node_head(sll, node);
 
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else if (position == sll->length) {
 
-		Status st = sll_insert_node_tail(sll, node);
+		st = sll_insert_node_tail(sll, node);
 
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else {
 
@@ -624,9 +629,8 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
 
 		(sll->length)++;
 
+		return DS_OK;
 	}
-
-	return DS_OK;
 }
 
 /**
@@ -747,19 +751,25 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 	if (position >= sll->length)
 		return DS_ERR_INVALID_POSITION;
 
+	Status st;
+
 	if (position == 0) {
 
-		Status st = sll_remove_head(sll);
+		st = sll_remove_head(sll);
+
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else if (position == sll->length - 1) {
 
-		Status st = sll_remove_tail(sll);
+		st = sll_remove_tail(sll);
+
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else {
 
@@ -782,9 +792,8 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 		
 		(sll->length)--;
 
+		return DS_OK;
 	}
-
-	return DS_OK;
 }
 
 /**
@@ -870,19 +879,25 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 	if (position >= sll->length)
 		return DS_ERR_INVALID_POSITION;
 
+	Status st;
+
 	if (position == 0) {
 
-		Status st = sll_remove_node_head(sll, node);
+		st = sll_remove_node_head(sll, node);
+
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else if (position == sll->length - 1) {
 
-		Status st = sll_remove_node_tail(sll, node);
+		st = sll_remove_node_tail(sll, node);
+
 		if (st != DS_OK)
 			return st;
 
+		return DS_OK;
 	}
 	else {
 
@@ -901,14 +916,13 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 		}
 
 		prev->next = curr->next;
-		
+
 		(*node) = curr;
 
 		(sll->length)--;
 
+		return DS_OK;
 	}
-
-	return DS_OK;
 }
 
 Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node)
