@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 20/03/2018
  *
- * @brief Header file for Vector implementations in C
+ * @brief Header file for @c Vector implementations in C
  *
  */
 

@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 20/03/2018
  *
- * @brief Header file for Dynamic Array implementations in C
+ * @brief Header file for @c DynamicArray implementations in C
  *
  */
 

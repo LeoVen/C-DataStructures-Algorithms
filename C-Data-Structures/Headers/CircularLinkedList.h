@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 05/04/2018
  *
- * @brief Header file for Circular List implementations in C
+ * @brief Header file for @c CircularLinkedList implementations in C
  *
  */
 

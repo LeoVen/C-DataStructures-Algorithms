@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/03/2018
  *
- * @brief Header file for Array implementations in C
+ * @brief Header file for @c Array implementations in C
  *
  */
 

@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 20/03/2018
  *
- * @brief Test Cases for Vector Implementations in C
+ * @brief Test Cases for @c Vector Implementations in C
  *
  * Here all functions are tested to assure that they operate as expected. Note
  * that not all test cases are performed.

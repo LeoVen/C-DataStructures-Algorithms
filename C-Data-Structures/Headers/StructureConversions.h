@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 02/04/2018
  *
- * @brief Structure Conversions Header in C
+ * @brief Header file for Structure Conversion implementations in C
  *
  */
 

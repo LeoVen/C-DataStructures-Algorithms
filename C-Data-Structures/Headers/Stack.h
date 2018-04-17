@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 31/03/2018
  *
- * @brief Header file for Stack implementatiosn in C
+ * @brief Header file for @c Stack implementatiosn in C
  *
  */
 

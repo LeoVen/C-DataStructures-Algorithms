@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 02/04/2018
  *
- * @brief Test Cases for Structure Conversions in C
+ * @brief Test Cases for Structure Conversion implementations in C
  *
  * Here all functions are tested to assure that they operate as expected. Note
  * that not all test cases are performed.
