@@ -39,6 +39,7 @@ char * status_repr(Status status)
 		case DS_ERR_ITER: return "DS_ERR_ITER";
 		case DS_ERR_NULL_POINTER: return "DS_ERR_NULL_POINTER";
 		case DS_ERR_FULL: return "DS_ERR_FULL";
+		case DS_ERR_INVALID_ARGUMENT: return "DS_ERR_INVALID_ARGUMENT";
 		default: return "DS_UNKNOWN_ERROR";
 	}
 }

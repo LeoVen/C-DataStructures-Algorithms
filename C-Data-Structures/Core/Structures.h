@@ -16,12 +16,22 @@ extern "C" {
 
 #include "..\Headers\Array.h"
 #include "..\Headers\DynamicArray.h"
-#include "..\Headers\DoublyLinkedList.h"
+
 #include "..\Headers\SinglyLinkedList.h"
 #include "..\Headers\CircularLinkedList.h"
+#include "..\Headers\DoublyLinkedList.h"
+
 #include "..\Headers\Stack.h"
+//#include "..\Headers\StaticStack.h"
+
+#include "..\Headers\Queue.h"
+#include "..\Headers\StaticQueue.h"
+
 #include "..\Headers\StructureConversions.h"
+
 #include "..\Headers\Vector.h"
+
+#include "..\Headers\String.h"
 
 #ifdef __cplusplus
 }

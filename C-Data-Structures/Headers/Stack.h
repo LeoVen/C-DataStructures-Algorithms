@@ -24,19 +24,30 @@ extern "C" {
 	 * first box above the ground.
 	 */
 	typedef struct StackBox {
-		int data;
-		struct StackBox *below;
+		int data;                           /*!< Node's data */
+		struct StackBox *below;             /*!< Pointer to the box underneath it */
 	} StackBox;
 	
 	 /**
-	  * A @c Stack is much like a @c SinglyLinkedList but with FIFO operations, that
-	  * is, First-in First-out, so the first item added is the first one to be
-	  * removed. This way, only one pointer to the top of the @c Stack is needed
-	  * since all operations are made relative to the top.
+	  * A @c Stack is much like a @c SinglyLinkedList but with LIFO operations,
+	  * that is, Last-in First-out, so the last item added is the first one to
+	  * be removed. This way, only one pointer to the top of the @c Stack is
+	  * needed since all operations are made relative to the top.
+	  *
+	  * @b Advantages over @c SinglyLinkedList
+	  * - Its functionality is restricted to attend only LIFO operations
+	  *
+	  * @b Drawbacks
+	  * - Restricted operations may cause some functions to be not available
+	  *
+	  * @b Functions
+	  *
+	  * @c Stack.c
+	  *
 	  */
 	typedef struct Stack {
-		int height;
-		StackBox *top;
+		int height;                         /*!< Height of the Stack */
+		StackBox *top;                      /*!< @c StackBox on top */
 	} Stack;
 	
 	Status stk_init_stack(Stack **stk);

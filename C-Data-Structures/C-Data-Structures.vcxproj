@@ -155,14 +155,20 @@
     <ClCompile Include="Structures\Array.c" />
     <ClCompile Include="Structures\CircularLinkedList.c" />
     <ClCompile Include="Structures\DoublyLinkedList.c" />
+    <ClCompile Include="Structures\Queue.c" />
     <ClCompile Include="Structures\SinglyLinkedList.c" />
     <ClCompile Include="Structures\Stack.c" />
     <ClCompile Include="Structures\DynamicArray.c" />
+    <ClCompile Include="Structures\StaticQueue.c" />
+    <ClCompile Include="Structures\String.c" />
     <ClCompile Include="Structures\StructureConversions.c" />
     <ClCompile Include="Structures\Vector.c" />
     <ClCompile Include="Tests\ArrayTests.c" />
     <ClCompile Include="Tests\CircularLinkedListTests.c" />
     <ClCompile Include="Tests\DoublyLinkedListTests.c" />
+    <ClCompile Include="Tests\QueueTests.c" />
+    <ClCompile Include="Tests\StaticQueueTests.c" />
+    <ClCompile Include="Tests\StringTests.c" />
     <ClCompile Include="Tests\StructureConversionsTests.c" />
     <ClCompile Include="Tests\SinglyLinkedListTests.c" />
     <ClCompile Include="Tests\SortingTests.c" />
@@ -176,11 +182,14 @@
     <ClInclude Include="Headers\CircularLinkedList.h" />
     <ClInclude Include="Headers\DoublyLinkedList.h" />
     <ClInclude Include="Headers\Core.h" />
+    <ClInclude Include="Headers\Queue.h" />
     <ClInclude Include="Headers\SinglyLinkedList.h" />
     <ClInclude Include="Headers\Stack.h" />
     <ClInclude Include="Core\Structures.h" />
     <ClInclude Include="Core\Tests.h" />
     <ClInclude Include="Headers\DynamicArray.h" />
+    <ClInclude Include="Headers\StaticQueue.h" />
+    <ClInclude Include="Headers\String.h" />
     <ClInclude Include="Headers\StructureConversions.h" />
     <ClInclude Include="Headers\Vector.h" />
   </ItemGroup>

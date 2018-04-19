@@ -17,16 +17,23 @@ extern "C" {
 	int SinglyLinkedListTests();
 	int DoublyLinkedListTests();
 	int CircularLinkedListTests();
+
 	int StackTests();
+	//int StaticStackTests();
+
+	int QueueTests();
+	int StaticQueueTests();
 
 	int ArrayTests();
 	int DynamicArrayTests();
 
 	int VectorTests();
 
-	int SortingTests();
-
 	int StructureConversionsTests();
+
+	int StringTests();
+
+	int SortingTests();
 
 #ifdef __cplusplus
 }

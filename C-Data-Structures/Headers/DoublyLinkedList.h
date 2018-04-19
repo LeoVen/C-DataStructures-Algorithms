@@ -23,13 +23,6 @@ extern "C" {
 	 * Nodes in both ends have either the @c *prev pointer or the @c *next
 	 * pointer pointing to @c NULL symbolizing the end of the list.
 	 *
-	 * @b Advantages over @c SinglyLinkedList
-	 * - Can be traversed both ways
-	 * - No need for the pointer immediately before the node to be removed
-	 *
-	 * @b Drawbacks
-	 * - No random access
-	 * - Extra memory for yet another pointer on each element
 	 */
 	typedef struct DoublyLinkedNode {
 		int data;                           /*!< Node's data */
@@ -46,6 +39,14 @@ extern "C" {
 	 * length variable that keeps track of the structure's length, allowing for
 	 * checking empty lists or position parameters that are higher than the
 	 * total structure length.
+	 *
+	 * @b Advantages over @c SinglyLinkedList
+	 * - Can be traversed both ways
+	 * - No need for the pointer immediately before the node to be removed
+	 *
+	 * @b Drawbacks
+	 * - No random access
+	 * - Extra memory for yet another pointer on each element
 	 *
 	 * @b Functions
 	 * 

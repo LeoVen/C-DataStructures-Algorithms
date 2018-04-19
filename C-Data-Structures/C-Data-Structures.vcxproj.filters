@@ -72,6 +72,24 @@
     <ClCompile Include="Tests\StructureConversionsTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Structures\String.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\StringTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Structures\Queue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\QueueTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Structures\StaticQueue.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\StaticQueueTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers\Core.h">
@@ -108,6 +126,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Headers\DynamicArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\StaticQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

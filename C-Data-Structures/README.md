@@ -9,10 +9,12 @@ SinglyLinkedList    [######### ]
 DoublyLinkedList    [###       ]
 CircularLinkedList  [####      ]
 Stack               [#####     ]
+StaticStack         not started
 Array               [#######   ]
 DynamicArray        [###       ]
 Vector              [###       ]
-Queue               not started
+Queue               [#         ]
+StaticQueue         [#         ]
 Deque               not started
 PriorityQueue       not started
 BinaryTree          not started
@@ -21,6 +23,7 @@ Heap                not started
 HashTable           not started
 HashSet             not started
 Trie                not started
+String              [##        ]
 ```
 
 ### Generic structures

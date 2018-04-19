@@ -35,6 +35,21 @@ extern "C" {
 	 * inaccessible. But in a circular list you must be careful to not fall
 	 * into an infinite loop as the list won't have a node pointing to @c NULL
 	 * as if it was the end of it.
+	 *
+	 * @b Advantages over @c SinglyLinkedList
+	 * - Can be used to many problems where a circular structure is needed
+	 * - No need for a tail pointer as the list wraps around itself
+	 * - No chances of loosing reference to previous Nodes if the pointer to
+	 * the first element of the list moves forward
+	 *
+	 * @b Drawbacks
+	 * - Insertions at the end of the list are much slower
+	 * - The end of the list is relative and may change
+	 *
+	 * @b Functions
+	 *
+	 * @c CircularLinkedList.c
+	 *
 	 */
 	typedef struct CircularLinkedList {
 		int length;                         /*!< List length */
@@ -61,7 +76,7 @@ extern "C" {
 	//Status cll_remove_before(CircularLinkedList *cll);
 
 	Status cll_iter_next(CircularLinkedList *cll);
-	//Status cll_iter(CircularLinkedList *cll, size_t positions);
+	Status cll_iter(CircularLinkedList *cll, size_t positions);
 	//Status cll_iter_before(CircularLinkedList *cll);
 
 	Status cll_display(CircularLinkedList *cll);

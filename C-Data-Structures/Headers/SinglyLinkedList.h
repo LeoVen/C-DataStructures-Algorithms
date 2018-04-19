@@ -21,13 +21,6 @@ extern "C" {
 	 * has an integer as its data and only one pointer to the next @c
 	 * SinglyLinkedNode of the list or simply NULL when it is the last element.
 	 *
-	 * @b Advantages over @c Array
-	 * - Dynamic size
-	 * - Easy insertion/removal
-	 *
-	 * @b Drawbacks
-	 * - No random access
-	 * - Extra memory for a pointer on each element
 	 */
 	typedef struct SinglyLinkedNode {
 		int data;                           /*!< Node's data */
@@ -42,6 +35,14 @@ extern "C" {
 	 * structure holds a length variable that keeps track of the structure's
 	 * length, allowing for checking empty lists or position parameters that are
 	 * higher than the total structure length.
+	 *
+	 * @b Advantages over @c Array
+	 * - Dynamic size
+	 * - Easy insertion/removal
+	 *
+	 * @b Drawbacks
+	 * - No random access
+	 * - Extra memory for a pointer on each element
 	 *
 	 * @b Functions
 	 *
