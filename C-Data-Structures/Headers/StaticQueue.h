@@ -1,12 +1,12 @@
 /**
-* @file StaticQueue.h
-*
-* @author Leonardo Vencovsky (https://github.com/LeoVen)
-* @date 18/04/2018
-*
-* @brief Header file for @c StaticQueue implementations in C
-*
-*/
+ * @file StaticQueue.h
+ *
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 18/04/2018
+ *
+ * @brief Header file for @c StaticQueue implementations in C
+ *
+ */
 
 #pragma once
 

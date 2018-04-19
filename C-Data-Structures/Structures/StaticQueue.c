@@ -1,5 +1,5 @@
 /**
- * @file Queue.c
+ * @file StaticQueue.c
  *
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/04/2018

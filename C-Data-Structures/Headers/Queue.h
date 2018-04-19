@@ -1,12 +1,12 @@
 /**
-* @file Stack.h
-*
-* @author Leonardo Vencovsky (https://github.com/LeoVen)
-* @date 18/04/2018
-*
-* @brief Header file for @c Queue implementations in C
-*
-*/
+ * @file Queue.h
+ *
+ * @author Leonardo Vencovsky (https://github.com/LeoVen)
+ * @date 18/04/2018
+ *
+ * @brief Header file for @c Queue implementations in C
+ *
+ */
 
 #pragma once
 
