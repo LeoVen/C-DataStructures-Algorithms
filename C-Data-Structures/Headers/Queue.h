@@ -60,15 +60,23 @@ extern "C" {
 
 	//Status que_get_length(Queue *que, size_t *result);
 
-	//Status que_enqueue(Queue *que, int value);
+	//Status que_peek_front(Queue *que, int *result);
+	//Status que_peek_rear(Queue *que, int *result);
+
+	Status que_enqueue(Queue *que, int value);
 	//Status que_enqueue_node(Queue *que, QueueNode *node);
    
-	//Status que_dequeue(Queue *que);
+	Status que_dequeue(Queue *que);
 	//Status que_dequeue_node(Queue *que, QueueNode **node);
+
+	Status que_display(Queue *que);
+	Status que_display_raw(Queue *que);
 
 	//Status que_delete_node(QueueNode **node);
 	//Status que_delete_queue(Queue **que); // Erases and sets to NULL
 	//Status que_erase_queue(Queue **que); // Erases and inits
+
+	bool que_is_empty(Queue *que);
 
 #ifdef __cplusplus
 }

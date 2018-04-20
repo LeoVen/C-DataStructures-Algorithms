@@ -15,7 +15,7 @@ int QueueTests()
 	printf("\n");
 	printf(" +-------------------------------------+\n");
 	printf(" |                                     |\n");
-	printf(" |            C Static Queue           |\n");
+	printf(" |               C Queue               |\n");
 	printf(" |                                     |\n");
 	printf(" +-------------------------------------+\n");
 	printf("\n");
@@ -24,7 +24,18 @@ int QueueTests()
 
 	que_init_queue(&que);
 
-	printf("\nLength: %zu", que->length);
+	int i;
+	for (i = 0; i < 4; i++) {
+		que_enqueue(que, i);
+		que_display(que);
+	}
+
+	for (i = 0; i < 4; i++) {
+		que_dequeue(que);
+		que_display(que);
+	}
+
+
 
 	printf("\n");
 	return 0;

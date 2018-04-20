@@ -58,12 +58,120 @@ Status que_make_node(QueueNode **node, int value)
 
 //Status que_get_length(Queue *que, size_t *result)
 
-//Status que_enqueue(Queue *sll, int value)
-//Status que_enqueue_node(Queue *sll, QueueNode *node)
+Status que_enqueue(Queue *que, int value)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status que_dequeue(Queue *sll)
-//Status que_dequeue_node(Queue *sll, QueueNode **node)
+	QueueNode *node;
+
+	que_make_node(&node, value);
+
+	if (!node)
+		return DS_ERR_ALLOC;
+
+	if (que->rear == NULL) {
+
+		que->rear = node;
+		que->front = node;
+
+	}
+	else {
+
+		que->rear->before = node;
+		que->rear = node;
+
+	}
+
+	(que->length)++;
+
+	return DS_OK;
+}
+
+//Status que_enqueue_node(Queue *que, QueueNode *node)
+
+Status que_dequeue(Queue *que)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
+
+	QueueNode *node = que->front;
+
+	que->front = que->front->before;
+
+	if (que->front == NULL)
+		que->rear == NULL;
+
+	free(node);
+
+	(que->length)--;
+
+	return DS_OK;
+}
+
+//Status que_dequeue_node(Queue *que, QueueNode **node)
+
+Status que_display(Queue *que)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (que_is_empty(que)) {
+
+		printf("\nQueue\n[ empty ]\n");
+		return DS_OK;
+
+	}
+
+	QueueNode *scan = que->front;
+
+	printf("\nQueue\nfront <-");
+
+	while (scan != NULL)
+	{
+		printf(" %d <-", scan->data);
+		scan = scan->before;
+	}
+
+	printf(" rear\n");
+
+	return DS_OK;
+}
+
+Status que_display_raw(Queue *que)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
+
+	QueueNode *scan = que->front;
+
+	printf("\n");
+
+	while (scan != NULL)
+	{
+		printf("%d ", scan->data);
+		scan = scan->before;
+	}
+
+	printf("\n");
+
+	return DS_OK;
+}
 
 //Status que_delete_node(QueueNode **node)
-//Status que_delete_queue(Queue **sll)
-//Status que_erase_queue(Queue **sll)
+//Status que_delete_queue(Queue **que)
+//Status que_erase_queue(Queue **que)
+
+bool que_is_empty(Queue *que)
+{
+	if (que->length == 0 || que->rear == NULL)
+		return true;
+	else
+		return false;
+}

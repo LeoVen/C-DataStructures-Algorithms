@@ -370,7 +370,7 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 
 	}
 
-	sll->length++;
+	(sll->length)++;
 
 	return DS_OK;
 }

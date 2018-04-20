@@ -15,7 +15,7 @@ int StaticQueueTests()
 	printf("\n");
 	printf(" +-------------------------------------+\n");
 	printf(" |                                     |\n");
-	printf(" |               C Queue               |\n");
+	printf(" |            C Static Queue           |\n");
 	printf(" |                                     |\n");
 	printf(" +-------------------------------------+\n");
 	printf("\n");
