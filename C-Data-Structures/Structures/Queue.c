@@ -39,8 +39,28 @@ Status que_init_node(QueueNode **node)
 	return DS_OK;
 }
 
-//Queue * que_get_queue()
-//QueueNode * que_get_node(int value)
+Queue * que_get_queue()
+{
+	Queue *que = malloc(sizeof(Queue));
+
+	que->front = NULL;
+	que->rear = NULL;
+
+	que->length = 0;
+
+	return que;
+}
+
+QueueNode * que_get_node(int value)
+{
+	QueueNode *node = malloc(sizeof(QueueNode));
+
+	node->before = NULL;
+
+	node->data = value;
+
+	return node;
+}
 
 Status que_make_node(QueueNode **node, int value)
 {
@@ -57,6 +77,26 @@ Status que_make_node(QueueNode **node, int value)
 }
 
 //Status que_get_length(Queue *que, size_t *result)
+
+Status que_peek_front(Queue *que, int *result)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	*result = que->front->data;
+
+	return DS_OK;
+}
+
+Status que_peek_rear(Queue *que, int *result)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	*result = que->rear->data;
+
+	return DS_OK;
+}
 
 Status que_enqueue(Queue *que, int value)
 {

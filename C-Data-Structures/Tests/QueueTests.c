@@ -25,12 +25,19 @@ int QueueTests()
 	que_init_queue(&que);
 
 	int i;
-	for (i = 0; i < 4; i++) {
+	for (i = 0; i < 6; i++) {
 		que_enqueue(que, i);
 		que_display(que);
 	}
 
-	for (i = 0; i < 4; i++) {
+	int result;
+	que_peek_front(que, &result);
+	printf("\nfront: %d", result);
+
+	que_peek_rear(que, &result);
+	printf("\nrear: %d\n", result);
+
+	for (i = 0; i < 6; i++) {
 		que_dequeue(que);
 		que_display(que);
 	}
