@@ -39,7 +39,7 @@ extern "C" {
 		DS_ERR_INVALID_POSITION      =  1, /**< When an invalid position is passed as argument */
 		DS_ERR_INVALID_OPERATION     =  2, /**< When an invalid operation is made (e.g. remove element of an empty list ) */
 		DS_ERR_INVALID_SIZE          =  3, /**< When an invalid size is given */
-		DS_ERR_NOT_FOUND             =  4, /**< When a search fails to find a value ) */
+		DS_ERR_NOT_FOUND             =  4, /**< When a search fails to find a value */
 		DS_ERR_ALLOC                 =  5, /**< When a function fails to allocate memory  */
 		DS_ERR_UNEXPECTED_RESULT     =  6, /**< When an unexpected result happens. Contact developers. */
 		DS_ERR_ITER                  =  7, /**< When an iteration reaches an unexpected value */

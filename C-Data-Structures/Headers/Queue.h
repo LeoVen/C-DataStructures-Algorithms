@@ -58,10 +58,7 @@ extern "C" {
 
 	Status que_make_node(QueueNode **node, int value);
 
-	//Status que_get_length(Queue *que, size_t *result);
-
-	Status que_peek_front(Queue *que, int *result);
-	Status que_peek_rear(Queue *que, int *result);
+	Status que_get_length(Queue *que, size_t *result);
 
 	Status que_enqueue(Queue *que, int value);
 	//Status que_enqueue_node(Queue *que, QueueNode *node);
@@ -72,9 +69,12 @@ extern "C" {
 	Status que_display(Queue *que);
 	Status que_display_raw(Queue *que);
 
-	//Status que_delete_node(QueueNode **node);
-	//Status que_delete_queue(Queue **que); // Erases and sets to NULL
-	//Status que_erase_queue(Queue **que); // Erases and inits
+	Status que_delete_node(QueueNode **node);
+	Status que_delete_queue(Queue **que); // Erases and sets to NULL
+	Status que_erase_queue(Queue **que); // Erases and inits
+
+	Status que_peek_front(Queue *que, int *result);
+	Status que_peek_rear(Queue *que, int *result);
 
 	bool que_is_empty(Queue *que);
 

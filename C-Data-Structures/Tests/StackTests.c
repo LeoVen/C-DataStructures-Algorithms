@@ -64,7 +64,10 @@ int StackTests()
 	stk_display_raw(stk_even);
 	stk_display_raw(stk_odd);
 
-	free(stack);
+	stk_delete_stack(&stack);
+	stk_delete_stack(&stk_even);
+	stk_delete_stack(&stk_odd);
+
 	printf("\n");
 	return 0;
 }

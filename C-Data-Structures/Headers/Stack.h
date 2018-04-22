@@ -58,46 +58,25 @@ extern "C" {
 
 	Status stk_make_box(StackBox **box, int value);
 
-	Status stk_look(Stack *stk, int *result);
-	int stk_peek(Stack *stk);
 	Status stk_get_height(Stack *stk, size_t *result);
 
 	Status stk_put(Stack *stk, int value);
 	Status stk_push(Stack *stk, StackBox *box);
 
-	Status stk_pop(Stack *stk, StackBox **box);
-
 	Status stk_slice(Stack *stk);
-
-	// +-------------------------------------+
-	// |               Display               |
-	// +-------------------------------------+
+	Status stk_pop(Stack *stk, StackBox **box);
 	
 	Status stk_display(Stack *stk);
 	Status stk_display_raw(Stack *stk);
 
+	Status stk_delete_box(StackBox **box);
 	Status stk_delete_stack(Stack **stk); // Erases and sets to NULL
 	Status stk_erase_stack(Stack **stk); // Erases and inits
 
-	
-
-	// +-------------------------------------+
-	// |               Resets                |
-	// +-------------------------------------+
-
-	// +-------------------------------------+
-	// |               Search                |
-	// +-------------------------------------+
+	Status stk_look(Stack *stk, int *result);
+	int stk_peek(Stack *stk);
 
 	bool stk_is_empty(Stack *stk);
-
-	// +-------------------------------------+
-	// |                 Copy                |
-	// +-------------------------------------+
-
-	// +-------------------------------------+
-	// |              Sorting                |
-	// +-------------------------------------+
 
 #ifdef __cplusplus
 }

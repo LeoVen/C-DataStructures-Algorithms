@@ -138,20 +138,6 @@ Status stk_push(Stack *stk, StackBox *box)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status stk_pop(Stack *stk, StackBox **box)
-{
-	if (stk == NULL || box == NULL)
-		return DS_ERR_NULL_POINTER;
-
-	(*box) = stk->top;
-	stk->top = stk->top->below;
-	(*box)->below = NULL;
-
-	(stk->height)--;
-
-	return DS_OK;
-}
-
 Status stk_slice(Stack *stk)
 {
 	if (stk == NULL)
@@ -165,6 +151,20 @@ Status stk_slice(Stack *stk)
 	stk->top = stk->top->below;
 
 	free(kill);
+
+	(stk->height)--;
+
+	return DS_OK;
+}
+
+Status stk_pop(Stack *stk, StackBox **box)
+{
+	if (stk == NULL || box == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	(*box) = stk->top;
+	stk->top = stk->top->below;
+	(*box)->below = NULL;
 
 	(stk->height)--;
 
@@ -224,6 +224,15 @@ Status stk_display_raw(Stack *stk)
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
+Status stk_delete_box(StackBox **box)
+{
+	free(*box);
+
+	*box = NULL;
+
+	return DS_OK;
+}
+
 Status stk_delete_stack(Stack **stk)
 {
 	if ((*stk) == NULL)
@@ -262,6 +271,10 @@ Status stk_erase_stack(Stack **stk)
 
 	return DS_OK;
 }
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Search                                              |
+// +-------------------------------------------------------------------------------------------------+
 
 Status stk_look(Stack *stk, int *result)
 {

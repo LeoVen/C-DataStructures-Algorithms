@@ -10,6 +10,10 @@
 
 #include "..\Headers\Queue.h"
 
+// +-------------------------------------------------------------------------------------------------+
+// |                                          Initializers                                           |
+// +-------------------------------------------------------------------------------------------------+
+
 Status que_init_queue(Queue **que)
 {
 	(*que) = malloc(sizeof(Queue));
@@ -38,6 +42,10 @@ Status que_init_node(QueueNode **node)
 
 	return DS_OK;
 }
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                            Getters                                              |
+// +-------------------------------------------------------------------------------------------------+
 
 Queue * que_get_queue()
 {
@@ -76,27 +84,34 @@ Status que_make_node(QueueNode **node, int value)
 	return DS_OK;
 }
 
-//Status que_get_length(Queue *que, size_t *result)
-
-Status que_peek_front(Queue *que, int *result)
+Status que_get_length(Queue *que, size_t *result)
 {
+	*result = 0;
+
 	if (que == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	*result = que->front->data;
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
+
+	QueueNode *scan = que->front;
+
+	while (scan != NULL)
+	{
+		(*result)++;
+
+		scan = scan->before;
+	}
+
+	if ((*result) != que->length)
+		return DS_ERR_UNEXPECTED_RESULT;
 
 	return DS_OK;
 }
 
-Status que_peek_rear(Queue *que, int *result)
-{
-	if (que == NULL)
-		return DS_ERR_NULL_POINTER;
-
-	*result = que->rear->data;
-
-	return DS_OK;
-}
+// +-------------------------------------------------------------------------------------------------+
+// |                                            Insertion                                            |
+// +-------------------------------------------------------------------------------------------------+
 
 Status que_enqueue(Queue *que, int value)
 {
@@ -130,6 +145,10 @@ Status que_enqueue(Queue *que, int value)
 
 //Status que_enqueue_node(Queue *que, QueueNode *node)
 
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Removal                                             |
+// +-------------------------------------------------------------------------------------------------+
+
 Status que_dequeue(Queue *que)
 {
 	if (que == NULL)
@@ -142,17 +161,21 @@ Status que_dequeue(Queue *que)
 
 	que->front = que->front->before;
 
-	if (que->front == NULL)
-		que->rear == NULL;
-
 	free(node);
 
 	(que->length)--;
+
+	if (que->length == 0)
+		que->rear = NULL;
 
 	return DS_OK;
 }
 
 //Status que_dequeue_node(Queue *que, QueueNode **node)
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Display                                             |
+// +-------------------------------------------------------------------------------------------------+
 
 Status que_display(Queue *que)
 {
@@ -204,9 +227,60 @@ Status que_display_raw(Queue *que)
 	return DS_OK;
 }
 
-//Status que_delete_node(QueueNode **node)
-//Status que_delete_queue(Queue **que)
-//Status que_erase_queue(Queue **que)
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Resets                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status que_delete_node(QueueNode **node)
+{
+	free(*node);
+
+	(*node) = NULL;
+
+	return DS_OK;
+}
+
+Status que_delete_queue(Queue **que)
+{
+	free(*que);
+
+	*que = NULL;
+
+	return DS_OK;
+}
+
+Status que_erase_queue(Queue **que)
+{
+	free(*que);
+
+	que_init_queue(que);
+
+	return DS_OK;
+}
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Search                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status que_peek_front(Queue *que, int *result)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	*result = que->front->data;
+
+	return DS_OK;
+}
+
+Status que_peek_rear(Queue *que, int *result)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	*result = que->rear->data;
+
+	return DS_OK;
+}
 
 bool que_is_empty(Queue *que)
 {

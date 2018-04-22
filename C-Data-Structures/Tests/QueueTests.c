@@ -42,7 +42,16 @@ int QueueTests()
 		que_display(que);
 	}
 
+	for (i = 0; i < 10; i++)
+		que_enqueue(que, i);
+	
+	size_t size;
 
+	que_get_length(que, &size);
+
+	que_display(que);
+
+	printf("\nQueue length: %zu", size);
 
 	printf("\n");
 	return 0;

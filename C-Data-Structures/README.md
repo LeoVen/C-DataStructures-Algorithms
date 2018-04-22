@@ -8,12 +8,12 @@
 SinglyLinkedList    [######### ]
 DoublyLinkedList    [###       ]
 CircularLinkedList  [####      ]
-Stack               [#####     ]
+Stack               [######    ]
 StaticStack         not started
 Array               [#######   ]
 DynamicArray        [###       ]
 Vector              [###       ]
-Queue               [#         ]
+Queue               [#####     ]
 StaticQueue         [#         ]
 Deque               not started
 PriorityQueue       not started
