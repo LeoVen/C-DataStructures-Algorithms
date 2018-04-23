@@ -143,7 +143,30 @@ Status que_enqueue(Queue *que, int value)
 	return DS_OK;
 }
 
-//Status que_enqueue_node(Queue *que, QueueNode *node)
+Status que_enqueue_node(Queue *que, QueueNode *node)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	node->before = NULL;
+
+	if (que->rear == NULL) {
+
+		que->rear = node;
+		que->front = node;
+
+	}
+	else {
+
+		que->rear->before = node;
+		que->rear = node;
+
+	}
+
+	(que->length)++;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
@@ -171,7 +194,27 @@ Status que_dequeue(Queue *que)
 	return DS_OK;
 }
 
-//Status que_dequeue_node(Queue *que, QueueNode **node)
+Status que_dequeue_node(Queue *que, QueueNode **result)
+{
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
+
+	QueueNode *node = que->front;
+
+	que->front = que->front->before;
+
+	(*result) = node;
+
+	(que->length)--;
+
+	if (que->length == 0)
+		que->rear = NULL;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
@@ -242,18 +285,39 @@ Status que_delete_node(QueueNode **node)
 
 Status que_delete_queue(Queue **que)
 {
-	free(*que);
+	if ((*que) == NULL)
+		return DS_ERR_NULL_POINTER;
 
-	*que = NULL;
+	QueueNode *prev = (*que)->front;
+
+	while ((*que)->front != NULL)
+	{
+		(*que)->front = (*que)->front->before;
+		free(prev);
+		prev = (*que)->front;
+	}
+
+	free((*que));
+
+	(*que) = NULL;
 
 	return DS_OK;
 }
 
 Status que_erase_queue(Queue **que)
 {
-	free(*que);
+	if ((*que) == NULL)
+		return DS_ERR_NULL_POINTER;
 
-	que_init_queue(que);
+	Status st = sll_delete_list(que);
+
+	if (st != DS_OK)
+		return st;
+
+	st = que_init_queue(que);
+
+	if (st != DS_OK)
+		return st;
 
 	return DS_OK;
 }

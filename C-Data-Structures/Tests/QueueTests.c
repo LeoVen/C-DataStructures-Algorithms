@@ -53,6 +53,38 @@ int QueueTests()
 
 	printf("\nQueue length: %zu", size);
 
+	que_erase_queue(&que);
+
+	for (i = 0; i < 100; i++)
+		que_enqueue(que, i);
+
+	Queue *que_even = NULL, *que_odd = NULL;
+	QueueNode *node;
+	int data;
+	size_t len, j;
+	if (que_init_queue(&que_odd) == DS_OK && que_init_queue(&que_even) == DS_OK) {
+		que_get_length(que, &len);
+		for (j = 0; j < len; j++) {
+			que_peek_front(que, &data);
+			if (data % 2 == 0) {
+				que_dequeue_node(que, &node);
+				que_enqueue_node(que_even, node);
+			}
+			else {
+				que_dequeue_node(que, &node);
+				que_enqueue_node(que_odd, node);
+			}
+		}
+	}
+
+	que_display(que);
+	que_display(que_odd);
+	que_display(que_even);
+
+	que_delete_queue(&que);
+	que_delete_queue(&que_odd);
+	que_delete_queue(&que_even);
+
 	printf("\n");
 	return 0;
 }

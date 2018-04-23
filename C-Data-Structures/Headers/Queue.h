@@ -23,8 +23,8 @@ extern "C" {
 	 *
 	 */
 	typedef struct QueueNode {
-		int data;
-		struct QueueNode *before;
+		int data;                           /*!< Node's data */
+		struct QueueNode *before;           /*!< Pointer to the previous node int he @c Queue */
 	} QueueNode;
 
 	/**
@@ -61,10 +61,10 @@ extern "C" {
 	Status que_get_length(Queue *que, size_t *result);
 
 	Status que_enqueue(Queue *que, int value);
-	//Status que_enqueue_node(Queue *que, QueueNode *node);
+	Status que_enqueue_node(Queue *que, QueueNode *node);
    
 	Status que_dequeue(Queue *que);
-	//Status que_dequeue_node(Queue *que, QueueNode **node);
+	Status que_dequeue_node(Queue *que, QueueNode **result);
 
 	Status que_display(Queue *que);
 	Status que_display_raw(Queue *que);
