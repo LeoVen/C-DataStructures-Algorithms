@@ -132,7 +132,7 @@ SinglyLinkedList * sll_get_list()
  *
  * @b Usage
  * @code{.c}
- * SinglyLinkedNode *node = sll_get_node();
+ * SinglyLinkedNode *node = sll_get_node(12);
  * @endcode
  *
  * @note Avoid using this function as it does not return a @c Status code and
@@ -197,6 +197,18 @@ Status sll_make_node(SinglyLinkedNode **node, int value)
  *
  * @warning Do not pass length parameter as an integer or your program won't
  * finish correctly.
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * size_t len;
+ * sll_init_list(&list);
+ *
+ * sll_insert_head(list, 12);
+ *
+ * sll_get_length(list, &len); // Variable len has length of the list
+ * @endcode
+ *
  */
 Status sll_get_length(SinglyLinkedList *sll, size_t *result)
 {
@@ -239,6 +251,18 @@ Status sll_get_length(SinglyLinkedList *sll, size_t *result)
  * @return @c DS_ERR_INVALID_OPERATION if list length is 0
  * @return @c DS_ERR_ITER if a variable points to NULL during
  * iteration
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * int i, result;
+ * sll_init_list(&list);
+ *
+ * for (i = 10; i < 20; i++)
+ *     sll_insert_head(list, i);
+ *
+ * sll_get_node_data(sll, 3, &result); // Result has value of 13
+ * @endcode
  *
  * @warning Do not pass position parameter as an integer or your program won't
  * finish correctly.
@@ -291,6 +315,18 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
  * iteration
  * @return @c DS_ERR_INVALID_POSITION if position is higher than 
  *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * int i;
+ * sll_init_list(&list);
+ *
+ * for (i = 0; i < 10; i++)
+ *     sll_insert_head(list, i);
+ *
+ * sll_update_node_data(sll, 0, 12); // First position has now a value of 12
+ * @endcode
+ *
  * @warning Do not pass position parameter as an integer or your program won't
  * finish correctly.
  */
@@ -341,6 +377,16 @@ Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value)
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
  * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
  * @return @c DS_ERR_ALLOC if allocation failed
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * sll_init_list(&list);
+ *
+ * sll_insert_head(list, 4);
+ * sll_insert_head(list, 5); // 5 -> 4 -> NULL
+ * @endcode
+ *
  */
 Status sll_insert_head(SinglyLinkedList *sll, int value)
 {
@@ -394,6 +440,17 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 * @return @c DS_ERR_INVALID_POSITION if position is out of range
 * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
 * @return @c DS_ERR_ALLOC if allocation failed
+*
+* @b Usage
+* @code{.c}
+* SinglyLinkedList *list;
+* sll_init_list(&list);
+*
+* sll_insert_head(list, 5);
+* sll_insert_head(list, 3);
+*
+* sll_insert_at(list, 4, 1); // 3 -> 4 -> 5 -> NULL
+* @endcode
 *
 * @warning Do not pass position parameter as an integer or your program won't
 * finish correctly.
@@ -476,6 +533,16 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
  * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
  * @return @c DS_ERR_ALLOC if allocation fails
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * sll_init_list(&list);
+ *
+ * sll_insert_tail(list, 1);
+ * sll_insert_tail(list, 2); // 1 -> 2 -> NULL
+ * @endcode
+ *
  */
 Status sll_insert_tail(SinglyLinkedList *sll, int value)
 {
@@ -534,7 +601,7 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
  *
  * for (i = 0; i < 10; i++) {
  *     sll_make_node(&node, i);
- *     sll_insert_node_head(sll, node);
+ *     sll_insert_node_head(sll, node); // 9 -> 8 -> ... -> 2 -> 1 -> 0 -> NULL
  * }
  * @endcode
  */
@@ -657,7 +724,7 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
  *
  * for (i = 0; i < 10; i++) {
  *     sll_make_node(&node, i);
- *     sll_insert_node_tail(sll, node);
+ *     sll_insert_node_tail(sll, node); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
  * }
  * @endcode
  */
@@ -701,6 +768,19 @@ Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
   * @return @c DS_OK if all operations were successful
   * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
   * @return @c DS_ERR_INVALID_OPERATION if list is empty
+  *
+  * @b Usage
+  * @code{.c}
+  * SinglyLinkedList *list;
+  * sll_init_list(&list);
+  * int i;
+  *
+  * for (i = 0; i < 10; i++)
+  *     sll_insert_tail(list, i); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
+  *
+  * sll_remove_head(list); // 1 -> 2 -> 3 -> ... -> 8 -> 9 -> NULL
+  * @endcode
+  *
   */
 Status sll_remove_head(SinglyLinkedList *sll)
 {
