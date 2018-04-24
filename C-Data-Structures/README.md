@@ -6,7 +6,7 @@
 
 ```
 SinglyLinkedList    [######### ]
-DoublyLinkedList    [###       ]
+DoublyLinkedList    [######    ]
 CircularLinkedList  [####      ]
 Stack               [#######   ]
 StaticStack         not started

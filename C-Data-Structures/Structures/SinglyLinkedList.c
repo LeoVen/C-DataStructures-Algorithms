@@ -272,7 +272,7 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	if (position >= sll->length)
@@ -335,7 +335,7 @@ Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll->length == 0)
+	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
 	if (position >= sll->length)
@@ -732,8 +732,6 @@ Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
 {
 	if (sll == NULL || node == NULL)
 		return DS_ERR_NULL_POINTER;
-
-	node->next = NULL;
 
 	if (sll->head == NULL) {
 

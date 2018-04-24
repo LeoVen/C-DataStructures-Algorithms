@@ -72,8 +72,40 @@ int DoublyLinkedListTests()
 	print_status_repr(dll_remove_at(dll, 0));    //DS_ERR_NULL_POINTER
 	print_status_repr(dll_remove_tail(dll));     //DS_ERR_NULL_POINTER
 	
+	dll_init_list(&dll);
 
-	free(dll);
+	size_t len, i;
+	for (i = 0; i < 100; i++) {
+		dll_insert_tail(dll, i);
+	}
+
+	DoublyLinkedList *dll_even = NULL, *dll_odd = NULL;
+	DoublyLinkedNode *node;
+	int data;
+	if (dll_init_list(&dll_odd) == DS_OK && dll_init_list(&dll_even) == DS_OK) {
+		dll_get_length(dll, &len);
+		for (i = 0; i < len; i++) {
+			dll_get_node_data(dll, 0, &data);
+			if (data % 2 == 0) {
+				dll_remove_node_head(dll, &node);
+				dll_insert_node_tail(dll_even, node);
+			}
+			else {
+				dll_remove_node_head(dll, &node);
+				dll_insert_node_tail(dll_odd, node);
+			}
+		}
+	}
+
+	printf("\n");
+	dll_display(dll);
+	dll_display(dll_even);
+	dll_display(dll_odd);
+	
+	dll_delete_list(&dll);
+	dll_delete_list(&dll_even);
+	dll_delete_list(&dll_odd);
+
 	printf("\n");
 	return 0;
 }
