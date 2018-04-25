@@ -68,6 +68,45 @@ int StackTests()
 	stk_delete_stack(&stk_even);
 	stk_delete_stack(&stk_odd);
 
+	bool is_balanced;
+
+	char *text;
+
+	// Balanced
+	print_status_repr(stk_check_balanced_brackets("[()]{}{[()()]()}", &is_balanced));
+	text = (is_balanced) ? "String 1 is balanced" : "String 1 is not balanced";
+	printf("\n%s", text);
+
+	// Not balanced
+	print_status_repr(stk_check_balanced_brackets("(()))()(", &is_balanced));
+	text = (is_balanced) ? "String 2 is balanced" : "String 2 is not balanced";
+	printf("\n%s", text);
+
+	// Not balanced
+	print_status_repr(stk_check_balanced_brackets("[(])", &is_balanced));
+	text = (is_balanced) ? "String 3 is balanced" : "String 3 is not balanced";
+	printf("\n%s", text);
+
+	// Is balanced
+	print_status_repr(stk_check_balanced_brackets("[]{{}([])}{()[[]{}]}", &is_balanced));
+	text = (is_balanced) ? "String 4 is balanced" : "String 4 is not balanced";
+	printf("\n%s", text);
+
+	// Is balanced
+	print_status_repr(stk_check_balanced_brackets("[]{{([])}{}()[[]{}]}", &is_balanced));
+	text = (is_balanced) ? "String 5 is balanced" : "String 5 is not balanced";
+	printf("\n%s", text);
+
+	// Is balanced
+	print_status_repr(stk_check_balanced_brackets("printf('Hello World!);", &is_balanced));
+	text = (is_balanced) ? "String 6 is balanced" : "String 6 is not balanced";
+	printf("\n%s", text);
+
+	// Not balanced
+	print_status_repr(stk_check_balanced_brackets("for ((i = 0; (i < 10); (i++)) {};", &is_balanced));
+	text = (is_balanced) ? "String 7 is balanced" : "String 7 is not balanced";
+	printf("\n%s", text);
+
 	printf("\n");
 	return 0;
 }

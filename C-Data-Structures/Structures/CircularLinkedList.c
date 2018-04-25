@@ -40,6 +40,10 @@ Status cll_init_node(CircularLinkedNode **cln)
 	return DS_OK;
 }
 
+// +-------------------------------------------------------------------------------------------------+
+// |                                            Getters                                              |
+// +-------------------------------------------------------------------------------------------------+
+
 CircularLinkedList * cll_get_list()
 {
 	CircularLinkedList *cll = malloc(sizeof(CircularLinkedList));
@@ -59,6 +63,10 @@ CircularLinkedNode * cll_get_node(int value)
 
 	return cln;
 }
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                              Node                                               |
+// +-------------------------------------------------------------------------------------------------+
 
 Status cll_make_node(CircularLinkedNode **cln, int value)
 {
@@ -112,7 +120,7 @@ Status cll_insert_after(CircularLinkedList *cll, int value)
 	return DS_OK;
 }
 
-//Status cll_insert_before(CircularLinkedList *cll, int value);
+//Status cll_insert_before(CircularLinkedList *cll, int value)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
@@ -149,7 +157,19 @@ Status cll_remove_after(CircularLinkedList *cll)
 	return DS_OK;
 }
 
-//Status cll_remove_current(CircularLinkedList *cll);
+Status cll_remove_current(CircularLinkedList *cll)
+{
+	if (cll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (cll_is_empty(cll))
+		return DS_ERR_INVALID_OPERATION;
+
+
+
+	return DS_OK;
+}
+
 //Status cll_remove_before(CircularLinkedList *cll);
 
 // +-------------------------------------------------------------------------------------------------+
@@ -223,14 +243,30 @@ Status cll_iter(CircularLinkedList *cll, size_t positions)
 		return DS_ERR_INVALID_OPERATION;
 
 	int i;
-	for (i = 0; i < positions; i++) {
+	for (i = 0; i < positions; i++)
 		cll->curr = cll->curr->next;
-	}
 
 	return DS_OK;
 }
 
-//Status cll_iter_before(CircularLinkedList *cll);
+Status cll_iter_before(CircularLinkedList *cll)
+{
+	if (cll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (cll->length == 0 || cll->curr == NULL)
+		return DS_ERR_INVALID_OPERATION;
+
+	int i;
+	for (i = 0; i < cll->length - 1; i++)
+		cll->curr = cll->curr->next;
+
+	return DS_OK;
+}
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Display                                             |
+// +-------------------------------------------------------------------------------------------------+
 
 Status cll_display(CircularLinkedList *cll)
 {
@@ -291,6 +327,29 @@ Status cll_display_raw(CircularLinkedList *cll)
 	return DS_OK;
 }
 
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Resets                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status cll_delete(CircularLinkedList **cll);
+//Status cll_erase(CircularLinkedList **cll);
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Search                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+bool cll_is_empty(CircularLinkedList *cll)
+{
+	if (cll->length == 0 || cll->curr == NULL)
+		return true;
+	else
+		return false;
+}
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Extras                                              |
+// +-------------------------------------------------------------------------------------------------+
+
 /**
  * People are standing in a circle waiting to be executed. Counting begins at a
  * specified point in the circle and proceeds around the circle in a specified
@@ -302,6 +361,11 @@ Status cll_display_raw(CircularLinkedList *cll)
  * The problem — given the number of people, starting point, direction, and
  * number to be skipped — is to choose the position in the initial circle to
  * avoid execution.
+ *
+ * @param[in] n Number of people
+ * @param[in] k Skip value
+ * @param[out] result Remaining position
+ *
  */
 Status cll_josephus(CircularLinkedList **cll, size_t n, size_t k, size_t *result)
 {

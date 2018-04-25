@@ -77,10 +77,15 @@ extern "C" {
 
 	Status cll_iter_next(CircularLinkedList *cll);
 	Status cll_iter(CircularLinkedList *cll, size_t positions);
-	//Status cll_iter_before(CircularLinkedList *cll);
+	Status cll_iter_before(CircularLinkedList *cll);
 
 	Status cll_display(CircularLinkedList *cll);
 	Status cll_display_raw(CircularLinkedList *cll);
+
+	//Status cll_delete(CircularLinkedList **cll);
+	//Status cll_erase(CircularLinkedList **cll);
+
+	bool cll_is_empty(CircularLinkedList *cll);
 
 	Status cll_josephus(CircularLinkedList **cll, size_t n, size_t k, size_t *result);
 

@@ -301,3 +301,63 @@ bool stk_is_empty(Stack *stk)
 	else
 		return false;
 }
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Extras                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status stk_check_balanced_brackets(const char *string, bool *result)
+{
+	size_t i, height, str_len = strlen(string);
+
+	*result = false;
+	
+	if (str_len == 0)
+		return DS_ERR_INVALID_ARGUMENT;
+
+	Status st;
+
+	Stack *stk;
+	StackBox *box;
+
+	st = stk_init_stack(&stk);
+
+	if (st != DS_OK)
+		return st;
+
+	for (i = 0; i < str_len; i++)
+	{
+
+		if (string[i] == '{' || string[i] == '(' || string[i] == '[')
+			stk_put(stk, string[i]);
+
+		if (string[i] == '}' || string[i] == ')' || string[i] == ']')
+		{
+
+			stk_get_height(stk, &height);
+
+			if (height == 0)
+				return DS_OK; // False
+
+			stk_pop(stk, &box);
+
+			
+
+			if ((box->data == '(' && string[i] == ')') ||
+				(box->data == '{' && string[i] == '}') ||
+				(box->data == '[' && string[i] == ']'))
+				continue;
+			else
+				return DS_OK;
+
+		}
+
+	}
+
+	stk_get_height(stk, &height);
+
+	if (height == 0)
+		*result = true;
+
+	return DS_OK;
+}

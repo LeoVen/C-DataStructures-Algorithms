@@ -7,8 +7,8 @@
 ```
 SinglyLinkedList    [######### ]
 DoublyLinkedList    [######    ]
-CircularLinkedList  [####      ]
-Stack               [#######   ]
+CircularLinkedList  [######    ]
+Stack               [########  ]
 StaticStack         not started
 Array               [#######   ]
 DynamicArray        [###       ]

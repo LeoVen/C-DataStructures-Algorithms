@@ -78,6 +78,8 @@ extern "C" {
 
 	bool stk_is_empty(Stack *stk);
 
+	Status stk_check_balanced_brackets(const char *string, bool *result);
+
 #ifdef __cplusplus
 }
 #endif;
