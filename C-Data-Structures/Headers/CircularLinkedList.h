@@ -63,6 +63,8 @@ extern "C" {
 	CircularLinkedList * cll_get_list();
 	CircularLinkedNode * cll_get_node(int value);
 
+	//Status cll_get_length(CircularLinkedList *cll, size_t *result);
+
 	Status cll_make_node(CircularLinkedNode **cln, int value);
 
 	Status cll_insert_first(CircularLinkedList *cll, int value);
@@ -71,9 +73,16 @@ extern "C" {
 	Status cll_insert_after(CircularLinkedList *cll, int value);
 	//Status cll_insert_before(CircularLinkedList *cll, int value);
 
+	//Status cll_push_after(CircularLinkedList *cll, CircularLinkedNode *node);
+	//Status cll_push_before(CircularLinkedList *cll, CircularLinkedNode *node);
+
 	Status cll_remove_after(CircularLinkedList *cll);
-	//Status cll_remove_current(CircularLinkedList *cll);
+	Status cll_remove_current(CircularLinkedList *cll);
 	//Status cll_remove_before(CircularLinkedList *cll);
+
+	//Status cll_pop_after(CircularLinkedList *cll, CircularLinkedNode **result);
+	//Status cll_pop_current(CircularLinkedList *cll, CircularLinkedNode **result);
+	//Status cll_pop_before(CircularLinkedList *cll, CircularLinkedNode **result);
 
 	Status cll_iter_next(CircularLinkedList *cll);
 	Status cll_iter(CircularLinkedList *cll, size_t positions);
@@ -82,8 +91,8 @@ extern "C" {
 	Status cll_display(CircularLinkedList *cll);
 	Status cll_display_raw(CircularLinkedList *cll);
 
-	//Status cll_delete(CircularLinkedList **cll);
-	//Status cll_erase(CircularLinkedList **cll);
+	Status cll_delete(CircularLinkedList **cll);
+	Status cll_erase(CircularLinkedList **cll);
 
 	bool cll_is_empty(CircularLinkedList *cll);
 

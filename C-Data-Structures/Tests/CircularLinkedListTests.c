@@ -61,6 +61,16 @@ int CircularLinkedListTests()
 	cll_iter_before(cll);
 	cll_display(cll);
 
+	size_t cll_len;
+
+	cll_get_length(cll, &cll_len);
+
+	for (i = 0; i < cll_len; i++) {
+		print_status_repr(cll_remove_current(cll));
+		cll_display(cll);
+	}
+
+	cll_delete(&cll);
 
 	printf("\n");
 	return 0;

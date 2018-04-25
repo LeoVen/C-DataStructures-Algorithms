@@ -64,6 +64,19 @@ CircularLinkedNode * cll_get_node(int value)
 	return cln;
 }
 
+Status cll_get_length(CircularLinkedList *cll, size_t *result)
+{
+	if (cll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	// TODO implement with while pointer does not point to the same memory
+	// location as the first pointer
+
+	*result = cll->length;
+
+	return DS_OK;
+}
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                              Node                                               |
 // +-------------------------------------------------------------------------------------------------+
@@ -165,12 +178,34 @@ Status cll_remove_current(CircularLinkedList *cll)
 	if (cll_is_empty(cll))
 		return DS_ERR_INVALID_OPERATION;
 
+	Status st;
 
+	if (cll->length == 1) {
+
+		Status st = cll_remove_last(cll);
+
+		if (st != DS_OK)
+			return st;
+
+	}
+	else {
+
+		st = cll_iter_before(cll);
+
+		if (st != DS_OK)
+			return st;
+
+		st = cll_remove_after(cll);
+
+		if (st != DS_OK)
+			return st;
+
+	}
 
 	return DS_OK;
 }
 
-//Status cll_remove_before(CircularLinkedList *cll);
+//Status cll_remove_before(CircularLinkedList *cll)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Special Cases                                          |
@@ -331,8 +366,45 @@ Status cll_display_raw(CircularLinkedList *cll)
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status cll_delete(CircularLinkedList **cll);
-//Status cll_erase(CircularLinkedList **cll);
+Status cll_delete(CircularLinkedList **cll)
+{
+	if ((*cll) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st;
+
+	while ((*cll)->curr != NULL)
+	{
+		st = cll_remove_after(*cll);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	free(*cll);
+
+	*cll = NULL;
+
+	return DS_OK;
+}
+
+Status cll_erase(CircularLinkedList **cll)
+{
+	if ((*cll) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = cll_delete(cll);
+
+	if (st != DS_OK)
+		return st;
+
+	st = cll_init_list(cll);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |
@@ -358,14 +430,17 @@ bool cll_is_empty(CircularLinkedList *cll)
  * with the next person, going in the same direction and skipping the same
  * number of people, until only one person remains, and is freed.
  *
- * The problem — given the number of people, starting point, direction, and
- * number to be skipped — is to choose the position in the initial circle to
+ * The problem - given the number of people, starting point, direction, and
+ * number to be skipped - is to choose the position in the initial circle to
  * avoid execution.
  *
  * @param[in] n Number of people
  * @param[in] k Skip value
  * @param[out] result Remaining position
  *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_ALLOC if allocation failed
+ * @return @c DS_ERR_UNEXPECTED_RESULT if the list size is not 1 by the end
  */
 Status cll_josephus(CircularLinkedList **cll, size_t n, size_t k, size_t *result)
 {
