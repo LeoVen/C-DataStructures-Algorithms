@@ -25,7 +25,8 @@ extern "C" {
 //#include "..\Headers\StaticStack.h"
 
 #include "..\Headers\Queue.h"
-#include "..\Headers\StaticQueue.h"
+
+#include "..\Headers\CircularBuffer.h"
 
 #include "..\Headers\StructureConversions.h"
 

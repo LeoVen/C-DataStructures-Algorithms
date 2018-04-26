@@ -84,10 +84,10 @@
     <ClCompile Include="Tests\QueueTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Structures\StaticQueue.c">
+    <ClCompile Include="Structures\CircularBuffer.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\StaticQueueTests.c">
+    <ClCompile Include="Tests\CircularBufferTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -134,7 +134,7 @@
     <ClInclude Include="Headers\Queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Headers\StaticQueue.h">
+    <ClInclude Include="Headers\CircularBuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

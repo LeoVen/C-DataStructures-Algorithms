@@ -22,7 +22,7 @@ extern "C" {
 	//int StaticStackTests();
 
 	int QueueTests();
-	int StaticQueueTests();
+	int CircularBufferTests();
 
 	int ArrayTests();
 	int DynamicArrayTests();

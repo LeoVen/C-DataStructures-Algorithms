@@ -135,6 +135,9 @@ Status cll_insert_after(CircularLinkedList *cll, int value)
 
 //Status cll_insert_before(CircularLinkedList *cll, int value)
 
+//Status cll_push_after(CircularLinkedList *cll, CircularLinkedNode *node)
+//Status cll_push_before(CircularLinkedList *cll, CircularLinkedNode *node)
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
@@ -206,6 +209,10 @@ Status cll_remove_current(CircularLinkedList *cll)
 }
 
 //Status cll_remove_before(CircularLinkedList *cll)
+
+//Status cll_pop_after(CircularLinkedList *cll, CircularLinkedNode **result)
+//Status cll_pop_current(CircularLinkedList *cll, CircularLinkedNode **result)
+//Status cll_pop_before(CircularLinkedList *cll, CircularLinkedNode **result)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Special Cases                                          |
@@ -410,6 +417,11 @@ Status cll_erase(CircularLinkedList **cll)
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
+//Status cll_frequency(CircularLinkedList *cll, int key, size_t *frequency)
+
+//Status cll_contains(CircularLinkedList *cll, int key, bool *result)
+//bool cll_exists(CircularLinkedList *cll, int key)
+
 bool cll_is_empty(CircularLinkedList *cll)
 {
 	if (cll->length == 0 || cll->curr == NULL)
@@ -417,6 +429,9 @@ bool cll_is_empty(CircularLinkedList *cll)
 	else
 		return false;
 }
+
+//Status cll_find_max(CircularLinkedList *cll, int *result)
+//Status cll_find_min(CircularLinkedList *cll, int *result)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Extras                                              |

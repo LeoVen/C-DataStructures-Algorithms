@@ -1,30 +1,30 @@
 /**
- * @file StaticQueueTests.c
+ * @file CircularBufferTests.c
  *
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/04/2018
  *
- * @brief Test Cases for @c StaticQueue implementations in C
+ * @brief Test Cases for @c CircularBuffer implementations in C
  *
  */
 
-#include "..\Headers\StaticQueue.h"
+#include "..\Headers\CircularBuffer.h"
 
-int StaticQueueTests()
+int CircularBufferTests()
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");
 	printf(" |                                     |\n");
-	printf(" |            C Static Queue           |\n");
+	printf(" |          C Circular Buffer          |\n");
 	printf(" |                                     |\n");
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	StaticQueue *squ;
+	CircularBuffer *cbf;
 
-	que_stc_init(&squ, 20);
+	cbf_init(&cbf, 20);
 
-	printf("\nLength: %zu", squ->length);
+	printf("\nLength: %zu", cbf->length);
 
 	printf("\n");
 	return 0;

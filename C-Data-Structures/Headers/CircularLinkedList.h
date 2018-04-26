@@ -94,7 +94,15 @@ extern "C" {
 	Status cll_delete(CircularLinkedList **cll);
 	Status cll_erase(CircularLinkedList **cll);
 
+	//Status cll_frequency(CircularLinkedList *cll, int key, size_t *frequency);
+
+	//Status cll_contains(CircularLinkedList *cll, int key, bool *result);
+	//bool cll_exists(CircularLinkedList *cll, int key);
+
 	bool cll_is_empty(CircularLinkedList *cll);
+
+	//Status cll_find_max(CircularLinkedList *cll, int *result);
+	//Status cll_find_min(CircularLinkedList *cll, int *result);
 
 	Status cll_josephus(CircularLinkedList **cll, size_t n, size_t k, size_t *result);
 
