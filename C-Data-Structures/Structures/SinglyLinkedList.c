@@ -235,6 +235,26 @@ Status sll_get_length(SinglyLinkedList *sll, size_t *result)
 // |                                              Node                                               |
 // +-------------------------------------------------------------------------------------------------+
 
+Status sll_get_node_at(SinglyLinkedList *sll, SinglyLinkedNode **result, size_t position)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	(*result) = sll->head;
+
+	size_t i;
+	for (i = 0; i < position; i++) {
+
+		if ((*result) == NULL)
+			return DS_ERR_ITER;
+
+		(*result) = (*result)->next;
+
+	}
+
+	return DS_OK;
+}
+
 /**
  * @brief Get a specific @c SinglyLinkedNode data
  *
@@ -1384,13 +1404,43 @@ Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position
 // |                                         Slice / Link                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status sll_link_head(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
-//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position);
-//Status sll_link_tail(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
+Status sll_link(SinglyLinkedList *sll1, SinglyLinkedList *sll2)
+{
+	if (sll1 == NULL || sll2 == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status sll_unlink_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
-//Status sll_unlink_sublist(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position1, size_t position2);
-//Status sll_unlink_tail(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
+	if (sll_is_empty(sll2))
+		return DS_ERR_INVALID_OPERATION;
+
+	if (sll_is_empty(sll1)) {
+
+		sll1->head = sll2->head;
+		sll1->tail = sll2->tail;
+
+		sll1->length = sll2->length;
+
+	}
+	else {
+
+		sll1->tail->next = sll2->head;
+		sll1->tail = sll2->tail;
+
+		(sll1->length) += sll2->length;
+
+	}
+
+	sll2->head = NULL;
+	sll2->tail = NULL;
+
+	sll2->length = 0;
+
+	return DS_OK;
+}
+
+//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position);
+
+//Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t position);
+//Status sll_unlink_at(SinglyLinkedList *sll, SinglyLinkedList *result, size_t position1, size_t position2);
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
@@ -1478,7 +1528,7 @@ Status sll_reverse(SinglyLinkedList *sll)
 	return DS_OK;
 }
 
-//Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position2);
+//Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position2)
 //Status sll_switch_head(SinglyLinkedList *sll, size_t position);
 //Status sll_switch_tail(SinglyLinkedList *sll, size_t position);
 //Status sll_switch_ends(SinglyLinkedList *sll);

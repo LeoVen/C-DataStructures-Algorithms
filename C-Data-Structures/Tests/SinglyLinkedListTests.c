@@ -296,6 +296,11 @@ int SinglyLinkedListTests()
 
 	sll_display(sll);
 
+	sll_link(sll_even, sll_odd);
+
+	sll_display(sll_even);
+	sll_display(sll_odd);
+
 	// Free memory
 	sll_delete_list(&sll);
 	sll_delete_list(&sll_even);

@@ -30,7 +30,19 @@ Status cbf_init(CircularBuffer **cbf, size_t length)
 	return DS_OK;
 }
 
-//CircularBuffer * cbf_get()
+CircularBuffer * cbf_get(size_t length)
+{
+	CircularBuffer *cbf = malloc(sizeof(CircularBuffer));
+
+	cbf->buffer = malloc(length * sizeof(int));
+
+	cbf->length = length;
+
+	cbf->start = 0;
+	cbf->end = 0;
+
+	return cbf;
+}
 
 //Status cbf_get_length(CircularBuffer *cbf, size_t *result)
 
@@ -38,8 +50,38 @@ Status cbf_init(CircularBuffer **cbf, size_t length)
 
 //Status cbf_remove(CircularBuffer *cbf, int *value)
 
-//Status cbf_delete(CircularBuffer **cbf)
-//Status cbf_erase(CircularBuffer **cbf)
+Status cbf_delete(CircularBuffer **cbf)
+{
+	if ((*cbf) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	free((*cbf)->buffer);
+	free(*cbf);
+
+	*cbf = NULL;
+
+	return DS_OK;
+}
+
+Status cbf_erase(CircularBuffer **cbf)
+{
+	if ((*cbf) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t len = (*cbf)->length;
+
+	Status st = cbf_delete(cbf);
+
+	if (st != DS_OK)
+		return st;
+
+	st = cbf_init(cbf, len);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
 
 /**
  * This allows the buffer to be circular. The insertion point wraps around

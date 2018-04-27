@@ -774,13 +774,11 @@ Status dll_find_min(DoublyLinkedList *dll, int *result)
 // |                                         Slice / Link                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status dll_link_head(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
+//Status dll_link(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
 //Status dll_link_at(DoublyLinkedList *dll1, DoublyLinkedList *dll2, size_t position);
-//Status dll_link_tail(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
 
-//Status dll_unlink_head(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position);
-//Status dll_unlink_sublist(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position1, size_t position2);
-//Status dll_unlink_tail(DoublyLinkedList *dll, DoublyLinkedList **result, size_t position);
+//Status dll_unlink(DoublyLinkedList *dll, DoublyLinkedList *result, size_t position);
+//Status dll_unlink_at(DoublyLinkedList *dll, DoublyLinkedList *result, size_t position1, size_t position2);
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |

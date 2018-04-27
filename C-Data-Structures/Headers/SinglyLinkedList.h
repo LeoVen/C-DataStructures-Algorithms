@@ -64,6 +64,7 @@ extern "C" {
 
 	Status sll_get_length(SinglyLinkedList *sll, size_t *result);
 
+	//Status sll_get_node_at(SinglyLinkedList *sll, SinglyLinkedNode **result, size_t position);
 	Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result);
 	Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value);
 	
@@ -96,6 +97,7 @@ extern "C" {
 	bool sll_exists(SinglyLinkedList *sll, int key);
 	
 	bool sll_is_empty(SinglyLinkedList *sll);
+	//bool sll_is_sorted(SinglyLinkedList *sll);
 	
 	Status sll_find_max(SinglyLinkedList *sll, int *result);
 	Status sll_find_min(SinglyLinkedList *sll, int *result);
@@ -105,13 +107,11 @@ extern "C" {
 	Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position);
 	Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position);
 
-	//Status sll_link_head(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
+	Status sll_link(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
 	//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position);
-	//Status sll_link_tail(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
 	
-	//Status sll_unlink_head(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
-	//Status sll_unlink_sublist(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position1, size_t position2);
-	//Status sll_unlink_tail(SinglyLinkedList *sll, SinglyLinkedList **result, size_t position);
+	//Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t position);
+	//Status sll_unlink_at(SinglyLinkedList *sll, SinglyLinkedList *result, size_t position1, size_t position2);
 	
 	Status sll_copy_list(SinglyLinkedList *sll, SinglyLinkedList **result);
 	Status sll_copy_node(SinglyLinkedNode *node, SinglyLinkedNode **result);
