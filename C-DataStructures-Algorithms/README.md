@@ -1,6 +1,6 @@
-# C-Data-Structures
+# Algorithms
 
-## TO-DO
+## To-do
 
 ### Develop algorithms
 
@@ -63,9 +63,9 @@ Classification      [          ]
 ```
 
 
-# C-Data-Structures
+# Data Structures
 
-## TO-DO
+## To-do
 
 ### Develop implementations
 
