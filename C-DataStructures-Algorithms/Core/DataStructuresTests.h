@@ -1,5 +1,5 @@
 /**
- * @file Tests.h
+ * @file DataStructuresTests.h
  *
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/03/2018

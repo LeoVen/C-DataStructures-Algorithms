@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\Core\Core.h"
+#include "..\..\Core\Core.h"
 
 	/**
 	 * A @c SinglyLinkedNode is what a @c SinglyLinkedList is composed of. It

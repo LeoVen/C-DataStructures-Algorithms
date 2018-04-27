@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\Core\Core.h"
+#include "..\..\Core\Core.h"
 
 	/**
 	 * A @c CircularLinkedNode is what a @c CircularLinkedList is composed of.

@@ -20,9 +20,9 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{832F51AD-5AA3-4988-883D-C2EB2568877A}</ProjectGuid>
+    <ProjectGuid>{0AB5D636-ED7B-4FD8-A289-23F5FE912630}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>CDataStructures</RootNamespace>
+    <RootNamespace>CDataStructuresAlgorithms</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -85,12 +85,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalOptions>/Y-</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,50 +147,62 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C-Data-Structures.c">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-    </ClCompile>
+    <ClCompile Include="Algorithms\AlgorithmsMenu.c" />
+    <ClCompile Include="Algorithms\Generators\ArrayGenerator.c" />
+    <ClCompile Include="Algorithms\Mathematics\Josephus.c" />
+    <ClCompile Include="Algorithms\Sorting\BubbleSort.c" />
+    <ClCompile Include="Algorithms\Tests\GeneratorsTests.c" />
+    <ClCompile Include="Algorithms\Tests\MathematicsTests.c" />
+    <ClCompile Include="Algorithms\Tests\SortingTests.c" />
+    <ClCompile Include="C-DataStructures-Algorithms.c" />
     <ClCompile Include="Core\Core.c" />
-    <ClCompile Include="Structures\Array.c" />
-    <ClCompile Include="Structures\CircularLinkedList.c" />
-    <ClCompile Include="Structures\DoublyLinkedList.c" />
-    <ClCompile Include="Structures\Queue.c" />
-    <ClCompile Include="Structures\SinglyLinkedList.c" />
-    <ClCompile Include="Structures\Stack.c" />
-    <ClCompile Include="Structures\DynamicArray.c" />
-    <ClCompile Include="Structures\CircularBuffer.c" />
-    <ClCompile Include="Structures\String.c" />
-    <ClCompile Include="Structures\StructureConversions.c" />
-    <ClCompile Include="Structures\Vector.c" />
-    <ClCompile Include="Tests\ArrayTests.c" />
-    <ClCompile Include="Tests\CircularLinkedListTests.c" />
-    <ClCompile Include="Tests\DoublyLinkedListTests.c" />
-    <ClCompile Include="Tests\QueueTests.c" />
-    <ClCompile Include="Tests\CircularBufferTests.c" />
-    <ClCompile Include="Tests\StringTests.c" />
-    <ClCompile Include="Tests\StructureConversionsTests.c" />
-    <ClCompile Include="Tests\SinglyLinkedListTests.c" />
-    <ClCompile Include="Tests\SortingTests.c" />
-    <ClCompile Include="Tests\StackTests.c" />
-    <ClCompile Include="Tests\DynamicArrayTests.c" />
-    <ClCompile Include="Tests\VectorTests.c" />
+    <ClCompile Include="Core\Display.c" />
+    <ClCompile Include="DataStructures\DataStructuresMenu.c" />
+    <ClCompile Include="DataStructures\Structures\Array.c" />
+    <ClCompile Include="DataStructures\Structures\CircularBuffer.c" />
+    <ClCompile Include="DataStructures\Structures\CircularLinkedList.c" />
+    <ClCompile Include="DataStructures\Structures\DoublyLinkedList.c" />
+    <ClCompile Include="DataStructures\Structures\DynamicArray.c" />
+    <ClCompile Include="DataStructures\Structures\Queue.c" />
+    <ClCompile Include="DataStructures\Structures\SinglyLinkedList.c" />
+    <ClCompile Include="DataStructures\Structures\Stack.c" />
+    <ClCompile Include="DataStructures\Structures\String.c" />
+    <ClCompile Include="DataStructures\Structures\StructureConversions.c" />
+    <ClCompile Include="DataStructures\Structures\Vector.c" />
+    <ClCompile Include="DataStructures\Tests\ArrayTests.c" />
+    <ClCompile Include="DataStructures\Tests\CircularBufferTests.c" />
+    <ClCompile Include="DataStructures\Tests\CircularLinkedListTests.c" />
+    <ClCompile Include="DataStructures\Tests\DoublyLinkedListTests.c" />
+    <ClCompile Include="DataStructures\Tests\DynamicArrayTests.c" />
+    <ClCompile Include="DataStructures\Tests\QueueTests.c" />
+    <ClCompile Include="DataStructures\Tests\SinglyLinkedListTests.c" />
+    <ClCompile Include="DataStructures\Tests\SortingTests.c" />
+    <ClCompile Include="DataStructures\Tests\StackTests.c" />
+    <ClCompile Include="DataStructures\Tests\StringTests.c" />
+    <ClCompile Include="DataStructures\Tests\StructureConversionsTests.c" />
+    <ClCompile Include="DataStructures\Tests\VectorTests.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithms\Generators\Generators.h" />
+    <ClInclude Include="Algorithms\Mathematics\Mathematics.h" />
+    <ClInclude Include="Core\Algorithms.h" />
+    <ClInclude Include="Algorithms\Sorting\Sorting.h" />
+    <ClInclude Include="Core\AlgorithmsTests.h" />
     <ClInclude Include="Core\Core.h" />
-    <ClInclude Include="Headers\Array.h" />
-    <ClInclude Include="Headers\CircularLinkedList.h" />
-    <ClInclude Include="Headers\DoublyLinkedList.h" />
-    <ClInclude Include="Headers\Core.h" />
-    <ClInclude Include="Headers\Queue.h" />
-    <ClInclude Include="Headers\SinglyLinkedList.h" />
-    <ClInclude Include="Headers\Stack.h" />
-    <ClInclude Include="Core\Structures.h" />
-    <ClInclude Include="Core\Tests.h" />
-    <ClInclude Include="Headers\DynamicArray.h" />
-    <ClInclude Include="Headers\CircularBuffer.h" />
-    <ClInclude Include="Headers\String.h" />
-    <ClInclude Include="Headers\StructureConversions.h" />
-    <ClInclude Include="Headers\Vector.h" />
+    <ClInclude Include="Core\Display.h" />
+    <ClInclude Include="Core\DataStructures.h" />
+    <ClInclude Include="Core\DataStructuresTests.h" />
+    <ClInclude Include="DataStructures\Headers\Array.h" />
+    <ClInclude Include="DataStructures\Headers\CircularBuffer.h" />
+    <ClInclude Include="DataStructures\Headers\CircularLinkedList.h" />
+    <ClInclude Include="DataStructures\Headers\DoublyLinkedList.h" />
+    <ClInclude Include="DataStructures\Headers\DynamicArray.h" />
+    <ClInclude Include="DataStructures\Headers\Queue.h" />
+    <ClInclude Include="DataStructures\Headers\SinglyLinkedList.h" />
+    <ClInclude Include="DataStructures\Headers\Stack.h" />
+    <ClInclude Include="DataStructures\Headers\String.h" />
+    <ClInclude Include="DataStructures\Headers\StructureConversions.h" />
+    <ClInclude Include="DataStructures\Headers\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

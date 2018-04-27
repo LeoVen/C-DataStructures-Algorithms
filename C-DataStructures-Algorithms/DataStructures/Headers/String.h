@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\Core\Core.h"
+#include "..\..\Core\Core.h"
 
 	typedef struct String {
 		size_t length;

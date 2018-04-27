@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\Core\Core.h"
+#include "..\..\Core\Core.h"
 
 	typedef struct CircularBuffer {
 		size_t length;                      /*!< Maximum Buffer length */
