@@ -1425,7 +1425,7 @@ Status sll_link(SinglyLinkedList *sll1, SinglyLinkedList *sll2)
 		sll1->tail->next = sll2->head;
 		sll1->tail = sll2->tail;
 
-		(sll1->length) += sll2->length;
+		sll1->length += sll2->length;
 
 	}
 
@@ -1437,9 +1437,109 @@ Status sll_link(SinglyLinkedList *sll1, SinglyLinkedList *sll2)
 	return DS_OK;
 }
 
-//Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position);
+Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t position)
+{
+	if (sll1 == NULL || sll2 == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t position);
+	if (position > sll1->length)
+		return DS_ERR_INVALID_POSITION;
+
+	if (sll_is_empty(sll1) || sll_is_empty(sll2))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st;
+
+
+	if (position == 0) {
+
+		sll2->tail->next = sll1->head;
+
+		sll1->head = sll2->head;
+
+	}
+	else if (position == sll1->length) {
+
+		sll1->tail->next = sll2->head;
+		sll1->tail = sll2->tail;
+
+	}
+	else {
+
+		SinglyLinkedNode *before;
+
+		sll_get_node_at(sll1, &before, position - 1);
+
+		sll2->tail->next = before->next;
+
+		before->next = sll2->head;
+
+	}
+
+	sll2->head = NULL;
+	sll2->tail = NULL;
+
+	sll1->length += sll2->length;
+	sll2->length = 0;
+
+	return DS_OK;
+}
+
+Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t position)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (!sll_is_empty(result))
+		return DS_ERR_INVALID_OPERATION;
+
+	if (position >= sll->length)
+		return DS_ERR_INVALID_POSITION;
+
+	Status st;
+
+	size_t len;
+	st = sll_get_length(sll, &len);
+
+	if (st != DS_OK)
+		return st;
+
+	if (position == 0) {
+
+		result->head = sll->head;
+		result->tail = sll->tail;
+
+		result->length = sll->length;
+
+		result->tail = NULL;
+		result->head = NULL;
+
+	}
+	else {
+
+		SinglyLinkedNode *before;
+
+		st = sll_get_node_at(sll, &before, position - 1);
+
+		if (st != DS_OK)
+			return st;
+
+		result->head = before->next;
+		result->tail = sll->tail;
+
+		sll->tail = before;
+
+		before->next = NULL;
+
+	}
+	
+	sll->length = position;
+
+	result->length = len - position;
+
+	return DS_OK;
+}
+
 //Status sll_unlink_at(SinglyLinkedList *sll, SinglyLinkedList *result, size_t position1, size_t position2);
 
 // +-------------------------------------------------------------------------------------------------+

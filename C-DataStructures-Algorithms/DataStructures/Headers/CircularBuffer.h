@@ -25,7 +25,7 @@ extern "C" {
 
 	Status cbf_init(CircularBuffer **squ, size_t length);
 
-	//CircularBuffer * cbf_get();
+	CircularBuffer * cbf_get(size_t size);
 
 	//Status cbf_get_length(CircularBuffer *cbf, size_t *result);
 
@@ -33,8 +33,8 @@ extern "C" {
 
 	//Status cbf_remove(CircularBuffer *cbf, int *value);
 
-	//Status cbf_delete(CircularBuffer **cbf);
-	//Status cbf_erase(CircularBuffer **cbf);
+	Status cbf_delete(CircularBuffer **cbf);
+	Status cbf_erase(CircularBuffer **cbf);
 
 	//Status cbf_wrap(CircularBuffer **cbf);
 

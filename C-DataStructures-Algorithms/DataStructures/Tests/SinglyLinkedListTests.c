@@ -296,10 +296,94 @@ int SinglyLinkedListTests()
 
 	sll_display(sll);
 
-	sll_link(sll_even, sll_odd);
+	print_status_repr(sll_link(sll_even, sll_odd));
+
+	sll_display(sll_even);
+	print_status_repr(sll_get_length(sll_even, &len));
+	printf("\nLength: %zu\n", len);
+
+	sll_display(sll_odd);
+	print_status_repr(sll_get_length(sll_odd, &len));
+	printf("\nLength: %zu\n", len);
+
+	sll_erase_list(&sll_even);
+	sll_erase_list(&sll_odd);
+	sll_erase_list(&sll_result);
+
+	for (i = 0; i > -5; i--)
+		sll_insert_tail(sll_result, i);
+
+	for (i = 0; i < 10; i++) {
+		if (i % 2 == 0)
+			sll_insert_tail(sll_even, i);
+		else
+			sll_insert_tail(sll_odd, i);
+	}
 
 	sll_display(sll_even);
 	sll_display(sll_odd);
+
+	// Link even to odd making even list empty
+	sll_link(sll_odd, sll_even);
+	
+	sll_display(sll_odd);
+	print_status_repr(sll_get_length(sll_odd, &len));
+	printf("\nLength: %zu\n", len);
+	
+	sll_display(sll_even);
+	print_status_repr(sll_get_length(sll_even, &len));
+	printf("\nLength: %zu\n", len);
+
+	// Unlink at first occurrance of a key
+	sll_find_occurrance_first(sll_odd, 2, &len);
+
+	sll_unlink(sll_odd, sll_even, len);
+
+	sll_display(sll_odd);
+	print_status_repr(sll_get_length(sll_odd, &len));
+	printf("\nLength: %zu\n", len);
+
+	sll_display(sll_even);
+	print_status_repr(sll_get_length(sll_even, &len));
+	printf("\nLength: %zu\n", len);
+
+	// Link back at the first occurrence of a key
+	sll_find_occurrance_first(sll_odd, 3, &len);
+
+	// After key number
+	sll_link_at(sll_odd, sll_even, len + 1);
+
+	sll_display(sll_odd);
+	print_status_repr(sll_get_length(sll_odd, &len));
+	printf("\nLength: %zu\n", len);
+
+	sll_display(sll_even);
+	print_status_repr(sll_get_length(sll_even, &len));
+	printf("\nLength: %zu\n", len);
+
+	// Link at the beggining
+	sll_link_at(sll_odd, sll, 0);
+
+	sll_display(sll);
+	print_status_repr(sll_get_length(sll, &len));
+	printf("\nLength: %zu\n", len);
+
+	sll_display(sll_odd);
+	print_status_repr(sll_get_length(sll_odd, &len));
+	printf("\nLength: %zu\n", len);
+
+	// Link at the end
+	sll_get_length(sll_result, &len);
+
+	sll_link_at(sll_result, sll_odd, len);
+
+	sll_display(sll_odd);
+	print_status_repr(sll_get_length(sll_odd, &len));
+	printf("\nLength: %zu\n", len);
+
+	sll_display(sll_result);
+	print_status_repr(sll_get_length(sll_result, &len));
+	printf("\nLength: %zu\n", len);
 
 	// Free memory
 	sll_delete_list(&sll);
