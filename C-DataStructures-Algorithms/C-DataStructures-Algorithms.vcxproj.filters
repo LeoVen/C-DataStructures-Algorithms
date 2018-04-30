@@ -84,9 +84,6 @@
     <ClCompile Include="DataStructures\Tests\SinglyLinkedListTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Tests\SortingTests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DataStructures\Tests\StackTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -115,6 +112,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Algorithms\Tests\GeneratorsTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Dev.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Tests\DS_SortingTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

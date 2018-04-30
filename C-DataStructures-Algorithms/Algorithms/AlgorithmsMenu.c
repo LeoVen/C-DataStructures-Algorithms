@@ -24,6 +24,10 @@ int AlgorithmsMenu()
 	printf(" |                                                                    |\n");
 	printf(" |                             Algorithms                             |\n");
 	printf(" |                                                                    |\n");
+	printf(" |                                                                    |\n");
+	printf(" |                                                                    |\n");
+	printf(" |                                                                    |\n");
+	printf(" |                                                                    |\n");
 	printf(" +--------------------------------------------------------------------+\n");
 	printf("\n");
 
@@ -49,7 +53,6 @@ int AlgorithmsMenu()
 
 int alg_print_menu()
 {
-	printf("\n");
 	printf(" +--------------------------------------------------------------------+\n");
 	printf(" |                                                                    |\n");
 	printf(" |                          Interactive Menu                          |\n");

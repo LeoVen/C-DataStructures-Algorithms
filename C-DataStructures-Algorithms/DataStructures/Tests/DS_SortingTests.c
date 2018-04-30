@@ -1,5 +1,5 @@
 /**
- * @file SortingTests.c
+ * @file DS_SortingTests.c
  *
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 19/03/2018
@@ -13,7 +13,7 @@
 
 #include "..\Headers\Array.h"
 
-int SortingTests() {
+int DS_SortingTests() {
 
 	printf("\n");
 	printf(" +-------------------------------------+\n");

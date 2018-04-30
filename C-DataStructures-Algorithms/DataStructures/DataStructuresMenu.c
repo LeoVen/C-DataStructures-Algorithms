@@ -82,7 +82,7 @@ int DataStructuresMenu()
 		system(CLEAR_SCREEN);
 	}
 
-	//SortingTests();
+	//DS_SortingTests();
 
 	printf("\n");
 	return 0;
@@ -90,7 +90,6 @@ int DataStructuresMenu()
 
 int ds_print_menu()
 {
-	printf("\n");
 	printf(" +--------------------------------------------------------------------+\n");
 	printf(" |                                                                    |\n");
 	printf(" |                          Interactive Menu                          |\n");

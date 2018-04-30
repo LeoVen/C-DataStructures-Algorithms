@@ -23,11 +23,11 @@ int MathematicsTests()
 	printf("\n");
 
 	size_t n = 32, k = 54;
-	printf("\nJosephus of %d by %d : %d", n, k, Josephus(n, k));
+	printf("\nJosephus of %zu by %zu : %d", n, k, Josephus(n, k));
 
 	n = 331;
 	k = 98;
-	printf("\nJosephus of %d by %d : %d", n, k, Josephus(n, k));
+	printf("\nJosephus of %zu by %zu : %d", n, k, Josephus(n, k));
 
 	printf("\n");
 	return 0;

@@ -79,7 +79,7 @@ Array               [#######   ]
 DynamicArray        [###       ]
 Vector              [###       ]
 Queue               [#######   ]
-StaticQueue         [#         ]
+CircularBuffer      [######    ]
 Deque               not started
 PriorityQueue       not started
 BinaryTree          not started
