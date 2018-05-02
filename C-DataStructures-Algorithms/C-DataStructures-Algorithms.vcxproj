@@ -156,6 +156,7 @@
     <ClCompile Include="Algorithms\Tests\SortingTests.c" />
     <ClCompile Include="C-DataStructures-Algorithms.c" />
     <ClCompile Include="Core\Core.c" />
+    <ClCompile Include="Core\Dev.c" />
     <ClCompile Include="Core\Display.c" />
     <ClCompile Include="DataStructures\DataStructuresMenu.c" />
     <ClCompile Include="DataStructures\Structures\Array.c" />
@@ -176,7 +177,7 @@
     <ClCompile Include="DataStructures\Tests\DynamicArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\QueueTests.c" />
     <ClCompile Include="DataStructures\Tests\SinglyLinkedListTests.c" />
-    <ClCompile Include="DataStructures\Tests\SortingTests.c" />
+    <ClCompile Include="DataStructures\Tests\DS_SortingTests.c" />
     <ClCompile Include="DataStructures\Tests\StackTests.c" />
     <ClCompile Include="DataStructures\Tests\StringTests.c" />
     <ClCompile Include="DataStructures\Tests\StructureConversionsTests.c" />

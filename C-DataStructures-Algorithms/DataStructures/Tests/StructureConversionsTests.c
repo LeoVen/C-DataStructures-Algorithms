@@ -63,6 +63,18 @@ int StructureConversionsTests()
 
 	darr_display(darray);
 
+	sll_delete_list(&sll);
+
+	convert_darr_to_sll(&darray, &sll);
+
+	sll_display(sll);
+
+	DoublyLinkedList *dll;
+
+	convert_sll_to_dll(sll, &dll);
+
+	dll_display(dll);
+
 	printf("\n");
 	return 0;
 }

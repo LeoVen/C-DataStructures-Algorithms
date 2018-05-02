@@ -544,11 +544,11 @@ Status dll_display(DoublyLinkedList *dll)
 
 	DoublyLinkedNode *scan = dll->head;
 
-	printf("\nDoubly Linked List\n");
+	printf("\nDoubly Linked List\nNULL <->");
 
 	while (scan != NULL)
 	{
-		printf(" %d ->", scan->data);
+		printf(" %d <->", scan->data);
 		scan = scan->next;
 	}
 

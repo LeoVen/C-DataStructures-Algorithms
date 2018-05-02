@@ -26,6 +26,9 @@ extern "C" {
 #include <math.h>
 #include <time.h>
 
+#define CLEAR_SCREEN "cls"
+//#define CLEAR_SCREEN "clear"
+
 	/**
 	 * @brief Status code returned by functions
 	 *
@@ -51,6 +54,8 @@ extern "C" {
 	char * status_repr(Status status);
 
 	void print_status_repr(Status status);
+
+	int dev_short_cut();
 
 #ifdef __cplusplus
 }

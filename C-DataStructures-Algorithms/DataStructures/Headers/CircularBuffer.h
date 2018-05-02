@@ -17,9 +17,11 @@ extern "C" {
 #include "..\..\Core\Core.h"
 
 	typedef struct CircularBuffer {
-		size_t length;                      /*!< Maximum Buffer length */
-		size_t *start;                      /*!< Where elements are added */
-		size_t *end;                        /*!< Where elements are removed */
+		bool is_empty;                      /*!< If buffer is empty or not */
+		size_t length;                      /*!< Current Buffer length */
+		size_t max_length;                  /*!< Maximum Buffer length */
+		size_t start;                       /*!< Where elements are added */
+		size_t end;                         /*!< Where elements are removed */
 		int * buffer;                       /*!< Buffer */
 	} CircularBuffer;
 
@@ -27,19 +29,21 @@ extern "C" {
 
 	CircularBuffer * cbf_get(size_t size);
 
-	//Status cbf_get_length(CircularBuffer *cbf, size_t *result);
+	Status cbf_get_length(CircularBuffer *cbf, size_t *result);
 
-	//Status cbf_add(CircularBuffer *cbf, int value);
+	Status cbf_add(CircularBuffer *cbf, int value);
 
-	//Status cbf_remove(CircularBuffer *cbf, int *value);
+	Status cbf_remove(CircularBuffer *cbf, int *value);
 
-	Status cbf_delete(CircularBuffer **cbf);
-	Status cbf_erase(CircularBuffer **cbf);
+	Status cbf_display(CircularBuffer *cbf);
 
-	//Status cbf_wrap(CircularBuffer **cbf);
+	Status cbf_delete(CircularBuffer **cbf); // Deletes structure
+	Status cbf_erase(CircularBuffer **cbf); // Erases and init
 
-	//bool cbf_is_empty(CircularBuffer *cbf);
-	//bool cbf_is_full(CircularBuffer *cbf);
+	Status cbf_wrap(CircularBuffer *cbf);
+
+	bool cbf_is_empty(CircularBuffer *cbf);
+	bool cbf_is_full(CircularBuffer *cbf);
 
 #ifdef __cplusplus
 }
