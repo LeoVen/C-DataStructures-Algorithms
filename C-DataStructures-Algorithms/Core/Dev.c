@@ -15,7 +15,7 @@
 int dev_short_cut()
 {
 
-	CircularBufferTests();
+	StructureConversionsTests();
 
 
 	printf("\nPress enter to continue...");

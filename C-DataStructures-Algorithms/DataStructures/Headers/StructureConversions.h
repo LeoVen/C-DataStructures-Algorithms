@@ -24,6 +24,8 @@ extern "C" {
 
 	Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **darr);
 
+	Status convert_sll_to_dll(SinglyLinkedList *sll, DoublyLinkedList **dll);
+
 	// +-------------------------------------+
 	// |              DAR -> X               |
 	// +-------------------------------------+
