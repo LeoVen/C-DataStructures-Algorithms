@@ -17,6 +17,7 @@ extern "C" {
 	int SinglyLinkedListTests();
 	int DoublyLinkedListTests();
 	int CircularLinkedListTests();
+	int SparseMatrixTests();
 
 	int StackTests();
 	//int StaticStackTests();

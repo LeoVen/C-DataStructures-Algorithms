@@ -166,6 +166,7 @@
     <ClCompile Include="DataStructures\Structures\DynamicArray.c" />
     <ClCompile Include="DataStructures\Structures\Queue.c" />
     <ClCompile Include="DataStructures\Structures\SinglyLinkedList.c" />
+    <ClCompile Include="DataStructures\Structures\SparseMatrix.c" />
     <ClCompile Include="DataStructures\Structures\Stack.c" />
     <ClCompile Include="DataStructures\Structures\String.c" />
     <ClCompile Include="DataStructures\Structures\StructureConversions.c" />
@@ -178,6 +179,7 @@
     <ClCompile Include="DataStructures\Tests\QueueTests.c" />
     <ClCompile Include="DataStructures\Tests\SinglyLinkedListTests.c" />
     <ClCompile Include="DataStructures\Tests\DS_SortingTests.c" />
+    <ClCompile Include="DataStructures\Tests\SparseMatrixTests.c" />
     <ClCompile Include="DataStructures\Tests\StackTests.c" />
     <ClCompile Include="DataStructures\Tests\StringTests.c" />
     <ClCompile Include="DataStructures\Tests\StructureConversionsTests.c" />
@@ -200,6 +202,7 @@
     <ClInclude Include="DataStructures\Headers\DynamicArray.h" />
     <ClInclude Include="DataStructures\Headers\Queue.h" />
     <ClInclude Include="DataStructures\Headers\SinglyLinkedList.h" />
+    <ClInclude Include="DataStructures\Headers\SparseMatrix.h" />
     <ClInclude Include="DataStructures\Headers\Stack.h" />
     <ClInclude Include="DataStructures\Headers\String.h" />
     <ClInclude Include="DataStructures\Headers\StructureConversions.h" />

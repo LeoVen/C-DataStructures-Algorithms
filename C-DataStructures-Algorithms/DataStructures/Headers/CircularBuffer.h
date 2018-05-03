@@ -48,6 +48,3 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif;
-
-
-#pragma once

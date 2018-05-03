@@ -15,7 +15,7 @@
 int dev_short_cut()
 {
 
-	StructureConversionsTests();
+	SparseMatrixTests();
 
 
 	printf("\nPress enter to continue...");

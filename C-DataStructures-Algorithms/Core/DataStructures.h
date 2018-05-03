@@ -20,6 +20,7 @@ extern "C" {
 #include "..\DataStructures\Headers\SinglyLinkedList.h"
 #include "..\DataStructures\Headers\CircularLinkedList.h"
 #include "..\DataStructures\Headers\DoublyLinkedList.h"
+#include "..\DataStructures\Headers\SparseMatrix.h"
 
 #include "..\DataStructures\Headers\Stack.h"
 //#include "..\Headers\StaticStack.h"

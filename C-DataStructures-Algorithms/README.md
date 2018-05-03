@@ -73,6 +73,7 @@ Classification      [          ]
 SinglyLinkedList    [######### ]
 DoublyLinkedList    [######    ]
 CircularLinkedList  [#######   ]
+SparseMatrix        [##        ]
 Stack               [########  ]
 StaticStack         not started
 Array               [#######   ]
