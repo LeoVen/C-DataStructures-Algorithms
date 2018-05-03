@@ -50,6 +50,9 @@ extern "C" {
 	//Status spm_remove_row(SparseMatrix *spm, int row);
 	//Status spm_remove_col(SparseMatrix *spm, int col);
 
+	//Status spm_display(SparseMatrix *spm);
+	//Status spm_display_raw(SparseMatrix *spm);
+
 	//Status spm_delete(SparseMatrix **spm);
 
 	//Status spm_exists(SparseMatrix *spm, int x, int y);
