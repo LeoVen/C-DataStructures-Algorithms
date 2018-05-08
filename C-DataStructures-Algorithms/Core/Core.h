@@ -9,8 +9,6 @@
  * The Core includes an @c enum type for status codes and other utility
  * functions.
  *
- * @note A note about Core.h
- *
  */
 
 #pragma once
