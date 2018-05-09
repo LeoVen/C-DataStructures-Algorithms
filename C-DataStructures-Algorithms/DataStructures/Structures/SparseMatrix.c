@@ -105,12 +105,12 @@ Status spm_init_node(SparseMatrixNode **node, int x, int y, int data)
 // +-------------------------------------------------------------------------------------------------+
 
 /**
-* This function returns two pointers to nodes of x and y positions
-* If insert is true then new nodes will be added to the axes until the
-* necessary x and/or y positions are met. If false, then its removing a node
-* so if either x or y axis reaches an end before finding a node then its an
-* invalid (x,y) coordinate.
-*/
+ * This function returns two pointers to nodes of x and y positions
+ * If insert is true then new nodes will be added to the axes until the
+ * necessary x and/or y positions are met. If false, then its removing a node
+ * so if either x or y axis reaches an end before finding a node then its an
+ * invalid (x,y) coordinate.
+ */
 //Status spm_goto(SparseMatrixNode **x_node, SparseMatrixNode **y_node, int x_pos, int y_pos);
 
 /**

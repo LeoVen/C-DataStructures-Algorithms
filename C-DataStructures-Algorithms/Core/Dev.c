@@ -16,6 +16,7 @@ int dev_short_cut()
 {
 
 	SparseMatrixTests();
+	PriorityQueueTests();
 
 
 	printf("\nPress enter to continue...");

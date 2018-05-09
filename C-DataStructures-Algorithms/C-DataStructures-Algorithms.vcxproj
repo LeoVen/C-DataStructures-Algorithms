@@ -164,6 +164,7 @@
     <ClCompile Include="DataStructures\Structures\CircularLinkedList.c" />
     <ClCompile Include="DataStructures\Structures\DoublyLinkedList.c" />
     <ClCompile Include="DataStructures\Structures\DynamicArray.c" />
+    <ClCompile Include="DataStructures\Structures\PriorityQueue.c" />
     <ClCompile Include="DataStructures\Structures\Queue.c" />
     <ClCompile Include="DataStructures\Structures\SinglyLinkedList.c" />
     <ClCompile Include="DataStructures\Structures\SparseMatrix.c" />
@@ -176,6 +177,7 @@
     <ClCompile Include="DataStructures\Tests\CircularLinkedListTests.c" />
     <ClCompile Include="DataStructures\Tests\DoublyLinkedListTests.c" />
     <ClCompile Include="DataStructures\Tests\DynamicArrayTests.c" />
+    <ClCompile Include="DataStructures\Tests\PriorityQueueTests.c" />
     <ClCompile Include="DataStructures\Tests\QueueTests.c" />
     <ClCompile Include="DataStructures\Tests\SinglyLinkedListTests.c" />
     <ClCompile Include="DataStructures\Tests\DS_SortingTests.c" />
@@ -200,6 +202,7 @@
     <ClInclude Include="DataStructures\Headers\CircularLinkedList.h" />
     <ClInclude Include="DataStructures\Headers\DoublyLinkedList.h" />
     <ClInclude Include="DataStructures\Headers\DynamicArray.h" />
+    <ClInclude Include="DataStructures\Headers\PriorityQueue.h" />
     <ClInclude Include="DataStructures\Headers\Queue.h" />
     <ClInclude Include="DataStructures\Headers\SinglyLinkedList.h" />
     <ClInclude Include="DataStructures\Headers\SparseMatrix.h" />

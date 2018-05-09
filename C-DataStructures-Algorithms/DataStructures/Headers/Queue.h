@@ -24,7 +24,7 @@ extern "C" {
 	 */
 	typedef struct QueueNode {
 		int data;                           /*!< Node's data */
-		struct QueueNode *before;           /*!< Pointer to the previous node int he @c Queue */
+		struct QueueNode *before;           /*!< Pointer to the previous node in the @c Queue */
 	} QueueNode;
 
 	/**
