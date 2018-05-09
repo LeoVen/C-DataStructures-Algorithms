@@ -296,10 +296,7 @@ int stk_peek(Stack *stk)
 
 bool stk_is_empty(Stack *stk)
 {
-	if (stk->top == NULL || stk->height == 0)
-		return true;
-	else
-		return false;
+	return (stk->top == NULL || stk->height == 0);
 }
 
 // +-------------------------------------------------------------------------------------------------+

@@ -709,10 +709,7 @@ bool dll_exists(DoublyLinkedList *dll, int key)
 
 bool dll_is_empty(DoublyLinkedList *dll)
 {
-	if (dll->length == 0 || dll->head == NULL)
-		return true;
-	else
-		return false;
+	return (dll->length == 0 || dll->head == NULL);
 }
 
 Status dll_find_max(DoublyLinkedList *dll, int *result)

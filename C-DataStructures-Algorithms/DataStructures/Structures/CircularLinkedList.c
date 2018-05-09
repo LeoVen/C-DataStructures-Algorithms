@@ -424,10 +424,7 @@ Status cll_erase(CircularLinkedList **cll)
 
 bool cll_is_empty(CircularLinkedList *cll)
 {
-	if (cll->length == 0 || cll->curr == NULL)
-		return true;
-	else
-		return false;
+	return (cll->length == 0 || cll->curr == NULL);
 }
 
 //Status cll_find_max(CircularLinkedList *cll, int *result)

@@ -184,11 +184,13 @@ int ds_all()
 	SinglyLinkedListTests();
 	DoublyLinkedListTests();
 	CircularLinkedListTests();
+	SparseMatrixTests();
 
 	StackTests();
 	//StaticStackTests();
 
 	QueueTests();
+	PriorityQueueTests();
 	CircularBufferTests();
 
 	ArrayTests();

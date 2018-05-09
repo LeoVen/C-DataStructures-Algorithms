@@ -1243,10 +1243,7 @@ bool sll_exists(SinglyLinkedList *sll, int key)
 
 bool sll_is_empty(SinglyLinkedList *sll)
 {
-	if (sll->length == 0 || sll->head == NULL)
-		return true;
-	else
-		return false;
+	return (sll->length == 0 || sll->head == NULL);
 }
 
 Status sll_find_max(SinglyLinkedList *sll, int *result)

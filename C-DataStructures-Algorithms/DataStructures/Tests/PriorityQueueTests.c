@@ -24,6 +24,9 @@ int PriorityQueueTests()
 
 	pqe_init_queue(&pqe);
 
+	if (pqe_is_empty(pqe))
+		printf("Priority Queue is Empty");
+
 	printf("\n");
 	return 0;
 }

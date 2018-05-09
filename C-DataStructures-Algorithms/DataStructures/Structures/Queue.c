@@ -348,8 +348,5 @@ Status que_peek_rear(Queue *que, int *result)
 
 bool que_is_empty(Queue *que)
 {
-	if (que->length == 0 || que->rear == NULL)
-		return true;
-	else
-		return false;
+	return (que->length == 0 || que->rear == NULL);
 }

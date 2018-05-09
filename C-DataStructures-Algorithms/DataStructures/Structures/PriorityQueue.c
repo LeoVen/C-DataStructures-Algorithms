@@ -150,10 +150,7 @@ Status pqe_get_length(PriorityQueue *pqe, size_t *result)
 
 bool pqe_is_empty(PriorityQueue *pqe)
 {
-	if (pqe->length == 0 || pqe->rear == NULL)
-		return true;
-	else
-		return false;
+	return (pqe->length == 0 || pqe->rear == NULL);
 }
 
 //Status pqe_priority_highest(PriorityQueue *pqe, int *result)
