@@ -49,8 +49,8 @@ extern "C" {
 	*/
 	typedef struct PriorityQueue {
 		size_t length;                      /*!< Total Queue length */
-		struct PriorityQueue *front;        /*!< Where @c QueueNode are removed */
-		struct PriorityQueue *rear;         /*!< Where @c QueueNode are inserted */
+		struct PriorityQueueNode *front;    /*!< Where @c PriorityQueueNode are removed */
+		struct PriorityQueueNode *rear;     /*!< Where @c PriorityQueueNode are inserted */
 	} PriorityQueue;
 
 	Status pqe_init_queue(PriorityQueue **pqe);
@@ -61,28 +61,28 @@ extern "C" {
 
 	Status pqe_make_node(PriorityQueueNode **node, int value, int priority);
 
-	//Status pqe_get_length(PriorityQueue *pqe, size_t *result);
+	Status pqe_get_length(PriorityQueue *pqe, size_t *result);
 
-	//Status pqe_enqueue(PriorityQueue *pqe, int value);
-	//Status pqe_enqueue_node(PriorityQueue *pqe, PriorityQueueNode *node);
+	Status pqe_enqueue(PriorityQueue *pqe, int value, int priority);
+	Status pqe_enqueue_node(PriorityQueue *pqe, PriorityQueueNode *node);
 
-	//Status pqe_dequeue(PriorityQueue *pqe);
-	//Status pqe_dequeue_node(PriorityQueue *pqe, PriorityQueueNode **result);
+	Status pqe_dequeue(PriorityQueue *pqe);
+	Status pqe_dequeue_node(PriorityQueue *pqe, PriorityQueueNode **result);
 
-	//Status pqe_display(PriorityQueue *pqe);
-	//Status pqe_display_raw(PriorityQueue *pqe);
+	Status pqe_display(PriorityQueue *pqe);
+	Status pqe_display_raw(PriorityQueue *pqe);
 
-	//Status pqe_delete_node(PriorityQueueNode **node);
-	//Status pqe_delete_queue(PriorityQueue **pqe); // Erases and sets to NULL
-	//Status pqe_erase_queue(PriorityQueue **pqe); // Erases and inits
+	Status pqe_delete_node(PriorityQueueNode **node);
+	Status pqe_delete_queue(PriorityQueue **pqe); // Erases and sets to NULL
+	Status pqe_erase_queue(PriorityQueue **pqe); // Erases and inits
 
-	//Status pqe_peek_front(PriorityQueue *pqe, int *result);
-	//Status pqe_peek_rear(PriorityQueue *pqe, int *result);
+	Status pqe_peek_front(PriorityQueue *pqe, int *result);
+	Status pqe_peek_rear(PriorityQueue *pqe, int *result);
 
 	bool pqe_is_empty(PriorityQueue *pqe);
 
-	//Status pqe_priority_highest(PriorityQueue *pqe, int *result);
-	//Status pqe_priority_lowest(PriorityQueue *pqe, int *result);
+	Status pqe_priority_highest(PriorityQueue *pqe, int *result);
+	Status pqe_priority_lowest(PriorityQueue *pqe, int *result);
 
 
 #ifdef __cplusplus

@@ -82,7 +82,7 @@ Vector              [###       ]
 Queue               [#######   ]
 CircularBuffer      [######    ]
 Deque               not started
-PriorityQueue       [##        ]
+PriorityQueue       [#######   ]
 BinaryTree          not started
 BinarySearchTree    not started
 Heap                not started
