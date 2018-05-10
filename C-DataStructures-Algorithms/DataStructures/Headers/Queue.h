@@ -45,9 +45,9 @@ extern "C" {
 	 *
 	 */
 	typedef struct Queue {
-		size_t length;                      /*!< Total Queue length */
-		QueueNode *front;                   /*!< Where @c QueueNode are removed */
-		QueueNode *rear;                    /*!< Where @c QueueNode are inserted */
+		size_t length;                      /*!< Total @c Queue length */
+		struct QueueNode *front;            /*!< Where @c QueueNode are removed */
+		struct QueueNode *rear;             /*!< Where @c QueueNode are inserted */
 	} Queue;
 
 	Status que_init_queue(Queue **que);
@@ -71,7 +71,7 @@ extern "C" {
 
 	Status que_delete_node(QueueNode **node);
 	Status que_delete_queue(Queue **que); // Erases and sets to NULL
-	Status que_erase_queue(Queue **que); // Erases and inits
+	Status que_erase_queue(Queue **que);  // Erases and inits
 
 	Status que_peek_front(Queue *que, int *result);
 	Status que_peek_rear(Queue *que, int *result);

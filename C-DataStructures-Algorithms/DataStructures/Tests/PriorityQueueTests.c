@@ -20,93 +20,93 @@ int PriorityQueueTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	PriorityQueue *pqe;
+	PriorityQueue *prq;
 
 	Status st = DS_OK;
 
 	size_t i, len = 0;
 
-	pqe_init_queue(&pqe);
+	prq_init_queue(&prq);
 
-	if (pqe_is_empty(pqe))
+	if (prq_is_empty(prq))
 		printf("Priority Queue is Empty");
 
-	pqe_enqueue(pqe, 0, 20);
-	pqe_enqueue(pqe, 1, 10);
-	pqe_enqueue(pqe, 2, 12);
-	pqe_enqueue(pqe, 3, 11);
-	pqe_enqueue(pqe, 4, 11);
-	pqe_enqueue(pqe, 5, 11);
-	pqe_enqueue(pqe, 6, 13);
-	pqe_enqueue(pqe, 7, 21);
-	pqe_enqueue(pqe, 8, 20);
+	prq_enqueue(prq, 0, 20);
+	prq_enqueue(prq, 1, 10);
+	prq_enqueue(prq, 2, 12);
+	prq_enqueue(prq, 3, 11);
+	prq_enqueue(prq, 4, 11);
+	prq_enqueue(prq, 5, 11);
+	prq_enqueue(prq, 6, 13);
+	prq_enqueue(prq, 7, 21);
+	prq_enqueue(prq, 8, 20);
 
-	pqe_display(pqe);
+	prq_display(prq);
 	// front <- 7 <- 0 <- 8 <- 6 <- 2 <- 3 <- 4 <- 5 <- 1 <- rear
 
-	pqe_erase_queue(&pqe);
+	prq_erase_queue(&prq);
 
-	pqe_enqueue_node(pqe, pqe_get_node(0, 20));
-	pqe_enqueue_node(pqe, pqe_get_node(1, 10));
-	pqe_enqueue_node(pqe, pqe_get_node(2, 12));
-	pqe_enqueue_node(pqe, pqe_get_node(3, 11));
-	pqe_enqueue_node(pqe, pqe_get_node(4, 11));
-	pqe_enqueue_node(pqe, pqe_get_node(5, 11));
-	pqe_enqueue_node(pqe, pqe_get_node(6, 13));
-	pqe_enqueue_node(pqe, pqe_get_node(7, 21));
-	pqe_enqueue_node(pqe, pqe_get_node(8, 20));
+	prq_enqueue_node(prq, prq_get_node(0, 20));
+	prq_enqueue_node(prq, prq_get_node(1, 10));
+	prq_enqueue_node(prq, prq_get_node(2, 12));
+	prq_enqueue_node(prq, prq_get_node(3, 11));
+	prq_enqueue_node(prq, prq_get_node(4, 11));
+	prq_enqueue_node(prq, prq_get_node(5, 11));
+	prq_enqueue_node(prq, prq_get_node(6, 13));
+	prq_enqueue_node(prq, prq_get_node(7, 21));
+	prq_enqueue_node(prq, prq_get_node(8, 20));
 
-	pqe_display(pqe);
+	prq_display(prq);
 	// front <- 7 <- 0 <- 8 <- 6 <- 2 <- 3 <- 4 <- 5 <- 1 <- rear
 
 	int highest, lowest;
 
-	pqe_priority_highest(pqe, &highest);
-	pqe_priority_lowest(pqe, &lowest);
+	prq_priority_highest(prq, &highest);
+	prq_priority_lowest(prq, &lowest);
 
 	printf("\nHighest priority : %d\nLowest Priority : %d\n", highest, lowest);
 
-	pqe_get_length(pqe, &len);
+	prq_get_length(prq, &len);
 
 	for (i = 0; i < len; i++) {
-		pqe_dequeue(pqe);
+		prq_dequeue(prq);
 	}
 
-	pqe_display(pqe);
+	prq_display(prq);
 
-	que_erase_queue(&pqe);
+	prq_erase_queue(&prq);
 
 	for (i = 0; i < 100; i++)
-		pqe_enqueue(pqe, i, i % 5);
+		prq_enqueue(prq, i, i % 5);
 
-	pqe_display(pqe);
+	prq_display(prq);
 
-	PriorityQueue *pqe_even = NULL, *pqe_odd = NULL;
+	PriorityQueue *prq_even = NULL, *prq_odd = NULL;
 	PriorityQueueNode *node;
 	int data;
 	size_t j;
-	if (pqe_init_queue(&pqe_odd) == DS_OK && pqe_init_queue(&pqe_even) == DS_OK) {
-		pqe_get_length(pqe, &len);
+	if (prq_init_queue(&prq_odd) == DS_OK && prq_init_queue(&prq_even) == DS_OK) {
+		prq_get_length(prq, &len);
 		for (j = 0; j < len; j++) {
-			pqe_peek_front(pqe, &data);
+			prq_peek_front(prq, &data);
 			if (data % 2 == 0) {
-				que_dequeue_node(pqe, &node);
-				que_enqueue_node(pqe_even, node);
+				prq_dequeue_node(prq, &node);
+				prq_enqueue_node(prq_even, node);
 			}
 			else {
-				que_dequeue_node(pqe, &node);
-				que_enqueue_node(pqe_odd, node);
+				prq_dequeue_node(prq, &node);
+				prq_enqueue_node(prq_odd, node);
 			}
 		}
 	}
 
-	pqe_display(pqe);
-	pqe_display(pqe_odd);
-	pqe_display(pqe_even);
+	prq_display(prq);
+	prq_display(prq_odd);
+	prq_display(prq_even);
 
-	pqe_delete_queue(&pqe);
-	pqe_delete_queue(&pqe_odd);
-	pqe_delete_queue(&pqe_even);
+	prq_delete_queue(&prq);
+	prq_delete_queue(&prq_odd);
+	prq_delete_queue(&prq_even);
 
 	printf("\n");
 	return 0;

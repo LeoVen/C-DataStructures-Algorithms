@@ -105,7 +105,7 @@ int alg_switch_function(int f)
 		break;
 	}
 
-	return 0;
+	return true;
 }
 
 int alg_all()

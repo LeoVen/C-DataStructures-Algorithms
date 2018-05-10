@@ -26,8 +26,8 @@ extern "C" {
 //#include "..\Headers\StaticStack.h"
 
 #include "..\DataStructures\Headers\Queue.h"
+#include "..\DataStructures\Headers\Deque.h"
 #include "..\DataStructures\Headers\PriorityQueue.h"
-
 #include "..\DataStructures\Headers\CircularBuffer.h"
 
 #include "..\DataStructures\Headers\StructureConversions.h"

@@ -162,6 +162,7 @@
     <ClCompile Include="DataStructures\Structures\Array.c" />
     <ClCompile Include="DataStructures\Structures\CircularBuffer.c" />
     <ClCompile Include="DataStructures\Structures\CircularLinkedList.c" />
+    <ClCompile Include="DataStructures\Structures\Deque.c" />
     <ClCompile Include="DataStructures\Structures\DoublyLinkedList.c" />
     <ClCompile Include="DataStructures\Structures\DynamicArray.c" />
     <ClCompile Include="DataStructures\Structures\PriorityQueue.c" />
@@ -175,6 +176,7 @@
     <ClCompile Include="DataStructures\Tests\ArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\CircularBufferTests.c" />
     <ClCompile Include="DataStructures\Tests\CircularLinkedListTests.c" />
+    <ClCompile Include="DataStructures\Tests\DequeTests.c" />
     <ClCompile Include="DataStructures\Tests\DoublyLinkedListTests.c" />
     <ClCompile Include="DataStructures\Tests\DynamicArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\PriorityQueueTests.c" />
@@ -200,6 +202,7 @@
     <ClInclude Include="DataStructures\Headers\Array.h" />
     <ClInclude Include="DataStructures\Headers\CircularBuffer.h" />
     <ClInclude Include="DataStructures\Headers\CircularLinkedList.h" />
+    <ClInclude Include="DataStructures\Headers\Deque.h" />
     <ClInclude Include="DataStructures\Headers\DoublyLinkedList.h" />
     <ClInclude Include="DataStructures\Headers\DynamicArray.h" />
     <ClInclude Include="DataStructures\Headers\PriorityQueue.h" />

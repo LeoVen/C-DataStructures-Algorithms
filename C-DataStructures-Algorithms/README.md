@@ -80,12 +80,13 @@ Array               [#######   ]
 DynamicArray        [###       ]
 Vector              [###       ]
 Queue               [#######   ]
-CircularBuffer      [######    ]
-Deque               not started
+Deque               [#######   ]
 PriorityQueue       [#######   ]
+CircularBuffer      [#######   ]
 BinaryTree          not started
 BinarySearchTree    not started
-Heap                not started
+MaxHeap             not started
+MinHeap             not started
 HashTable           not started
 HashSet             not started
 Trie                not started

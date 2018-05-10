@@ -46,7 +46,7 @@ extern "C" {
 	  *
 	  */
 	typedef struct Stack {
-		int height;                         /*!< Height of the Stack */
+		int height;                         /*!< @c Stack Height */
 		StackBox *top;                      /*!< @c StackBox on top */
 	} Stack;
 	

@@ -132,6 +132,12 @@
     <ClCompile Include="DataStructures\Tests\PriorityQueueTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataStructures\Structures\Deque.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Tests\DequeTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h">
@@ -198,6 +204,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataStructures\Headers\PriorityQueue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Headers\Deque.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

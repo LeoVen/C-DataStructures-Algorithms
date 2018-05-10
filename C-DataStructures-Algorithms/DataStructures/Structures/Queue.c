@@ -125,7 +125,7 @@ Status que_enqueue(Queue *que, int value)
 	if (!node)
 		return DS_ERR_ALLOC;
 
-	if (que->rear == NULL) {
+	if (que_is_empty(que)) {
 
 		que->rear = node;
 		que->front = node;
@@ -150,7 +150,7 @@ Status que_enqueue_node(Queue *que, QueueNode *node)
 
 	node->before = NULL;
 
-	if (que->rear == NULL) {
+	if (que_is_empty(que)) {
 
 		que->rear = node;
 		que->front = node;
@@ -202,11 +202,11 @@ Status que_dequeue_node(Queue *que, QueueNode **result)
 	if (que_is_empty(que))
 		return DS_ERR_INVALID_OPERATION;
 
-	QueueNode *node = que->front;
+	(*result) = que->front;
 
 	que->front = que->front->before;
 
-	(*result) = node;
+	(*result)->before = NULL;
 
 	(que->length)--;
 
@@ -293,7 +293,9 @@ Status que_delete_queue(Queue **que)
 	while ((*que)->front != NULL)
 	{
 		(*que)->front = (*que)->front->before;
+
 		free(prev);
+
 		prev = (*que)->front;
 	}
 
@@ -309,7 +311,7 @@ Status que_erase_queue(Queue **que)
 	if ((*que) == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	Status st = sll_delete_list(que);
+	Status st = que_delete_queue(que);
 
 	if (st != DS_OK)
 		return st;
