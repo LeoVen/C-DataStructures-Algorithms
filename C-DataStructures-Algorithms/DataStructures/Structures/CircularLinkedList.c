@@ -446,7 +446,6 @@ bool cll_is_empty(CircularLinkedList *cll)
  * number to be skipped - is to choose the position in the initial circle to
  * avoid execution.
  *
- * @param[
  * @param[in] n Number of people
  * @param[in] k Skip value
  * @param[out] result Remaining position
