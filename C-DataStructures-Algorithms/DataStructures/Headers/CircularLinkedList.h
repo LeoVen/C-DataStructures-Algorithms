@@ -104,7 +104,7 @@ extern "C" {
 	//Status cll_find_max(CircularLinkedList *cll, int *result);
 	//Status cll_find_min(CircularLinkedList *cll, int *result);
 
-	Status cll_josephus(CircularLinkedList **cll, size_t n, size_t k, size_t *result);
+	Status cll_josephus(size_t n, size_t k, size_t *result);
 
 #ifdef __cplusplus
 }

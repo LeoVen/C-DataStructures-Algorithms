@@ -446,6 +446,7 @@ bool cll_is_empty(CircularLinkedList *cll)
  * number to be skipped - is to choose the position in the initial circle to
  * avoid execution.
  *
+ * @param[
  * @param[in] n Number of people
  * @param[in] k Skip value
  * @param[out] result Remaining position
@@ -454,28 +455,30 @@ bool cll_is_empty(CircularLinkedList *cll)
  * @return @c DS_ERR_ALLOC if allocation failed
  * @return @c DS_ERR_UNEXPECTED_RESULT if the list size is not 1 by the end
  */
-Status cll_josephus(CircularLinkedList **cll, size_t n, size_t k, size_t *result)
+Status cll_josephus(size_t n, size_t k, size_t *result)
 {
-	cll_init_list(cll);
+	CircularLinkedList *cll;
 
-	if (!(*cll))
+	cll_init_list(&cll);
+
+	if (!cll)
 		return DS_ERR_ALLOC;
 
 	int i;
 	for (i = 1; i <= n; i++) {
 
-		cll_insert_after(*cll, i);
+		cll_insert_after(cll, i);
 
 	}
 
-	while ((*cll)->length > 1)
+	while (cll->length > 1)
 	{
-		cll_iter(*cll, k - 1);
-		cll_remove_after(*cll);
+		cll_iter(cll, k - 1);
+		cll_remove_after(cll);
 	}
 
-	if ((*cll)->length == 1) {
-		*result = (size_t)(*cll)->curr->data;
+	if (cll->length == 1) {
+		*result = (size_t)cll->curr->data;
 	}
 	else
 		return DS_ERR_UNEXPECTED_RESULT;

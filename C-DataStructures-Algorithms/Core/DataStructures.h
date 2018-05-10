@@ -1,5 +1,5 @@
 /**
- * @file Structures.h
+ * @file DataStructures.h
  *
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/03/2018
