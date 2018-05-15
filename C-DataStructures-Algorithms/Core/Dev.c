@@ -19,6 +19,7 @@ int dev_short_cut()
 	QueueTests();
 	PriorityQueueTests();
 	DequeTests();
+	CryptographyTests();
 
 
 	printf("\nPress enter to continue...");

@@ -14,6 +14,8 @@
 extern "C" {
 #endif
 
+	int CryptographyTests();
+
 	int GeneratorsTests();
 
 	int MathematicsTests();

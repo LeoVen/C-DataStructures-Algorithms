@@ -17,6 +17,7 @@ extern "C" {
 #include "Core.h"
 #include "Display.h"
 
+#include "..\Algorithms\Cryptography\Cryptography.h"
 #include "..\Algorithms\Generators\Generators.h"
 #include "..\Algorithms\Mathematics\Mathematics.h"
 #include "..\Algorithms\Sorting\Sorting.h"

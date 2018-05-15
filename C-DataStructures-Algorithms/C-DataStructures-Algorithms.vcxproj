@@ -148,9 +148,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Algorithms\AlgorithmsMenu.c" />
+    <ClCompile Include="Algorithms\Cryptography\CaesarCipher.c" />
     <ClCompile Include="Algorithms\Generators\ArrayGenerator.c" />
     <ClCompile Include="Algorithms\Mathematics\Josephus.c" />
     <ClCompile Include="Algorithms\Sorting\BubbleSort.c" />
+    <ClCompile Include="Algorithms\Tests\CryptographyTests.c" />
     <ClCompile Include="Algorithms\Tests\GeneratorsTests.c" />
     <ClCompile Include="Algorithms\Tests\MathematicsTests.c" />
     <ClCompile Include="Algorithms\Tests\SortingTests.c" />
@@ -190,6 +192,7 @@
     <ClCompile Include="DataStructures\Tests\VectorTests.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithms\Cryptography\Cryptography.h" />
     <ClInclude Include="Algorithms\Generators\Generators.h" />
     <ClInclude Include="Algorithms\Mathematics\Mathematics.h" />
     <ClInclude Include="Core\Algorithms.h" />
