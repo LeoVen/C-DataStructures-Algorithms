@@ -29,6 +29,11 @@ Status spm_init_matrix(SparseMatrix **spm)
 		return st;
 
 	(*spm)->center = center;
+	
+	(*spm)->x_pos = center;
+	(*spm)->x_neg = center;
+	(*spm)->y_pos = center;
+	(*spm)->y_neg = center;
 
 	(*spm)->elements = 0;
 

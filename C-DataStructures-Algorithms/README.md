@@ -12,6 +12,10 @@ N to M Conversion   [          ]
 
 #### Binary operations
 
+#### Cryptography
+
+Caesar Cipher       [######### ]
+
 #### Generators
 
 ```

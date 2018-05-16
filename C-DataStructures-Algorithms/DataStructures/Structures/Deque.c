@@ -465,7 +465,6 @@ Status deq_peek_rear(Deque *deq, int *result)
 	return DS_OK;
 }
 
-
 bool deq_is_empty(Deque *deq)
 {
 	return (deq->length == 0 || deq->rear == NULL);

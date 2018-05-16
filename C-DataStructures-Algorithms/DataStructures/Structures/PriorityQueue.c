@@ -354,7 +354,7 @@ Status prq_erase_queue(PriorityQueue **prq)
 	if ((*prq) == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	Status st = sll_delete_list(prq);
+	Status st = prq_delete_queue(prq);
 
 	if (st != DS_OK)
 		return st;
