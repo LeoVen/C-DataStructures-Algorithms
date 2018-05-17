@@ -30,6 +30,8 @@ extern "C" {
 #include "..\DataStructures\Headers\PriorityQueue.h"
 #include "..\DataStructures\Headers\CircularBuffer.h"
 
+#include "..\DataStructures\Headers\BinaryTree.h"
+
 #include "..\DataStructures\Headers\StructureConversions.h"
 
 #include "..\DataStructures\Headers\Vector.h"

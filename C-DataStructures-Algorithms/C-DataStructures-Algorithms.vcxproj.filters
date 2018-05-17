@@ -144,6 +144,12 @@
     <ClCompile Include="Algorithms\Tests\CryptographyTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataStructures\Structures\BinaryTree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Tests\BinaryTreeTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h">
@@ -216,6 +222,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Algorithms\Cryptography\Cryptography.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Headers\BinaryTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -15,11 +15,7 @@
 int dev_short_cut()
 {
 
-	SparseMatrixTests();
-	QueueTests();
-	PriorityQueueTests();
-	DequeTests();
-	CryptographyTests();
+	BinaryTreeTests();
 
 
 	printf("\nPress enter to continue...");

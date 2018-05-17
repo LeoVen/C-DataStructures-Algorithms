@@ -27,6 +27,8 @@ extern "C" {
 	int PriorityQueueTests();
 	int CircularBufferTests();
 
+	int BinaryTreeTests();
+
 	int ArrayTests();
 	int DynamicArrayTests();
 
