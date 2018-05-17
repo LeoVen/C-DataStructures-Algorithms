@@ -16,6 +16,7 @@ int dev_short_cut()
 {
 
 	BinaryTreeTests();
+	BinarySearchTreeTests();
 
 
 	printf("\nPress enter to continue...");

@@ -13,25 +13,10 @@
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |
 // +-------------------------------------------------------------------------------------------------+
-/*
-Status bt_init_tree(BinaryTree **bt)
+
+Status bt_init_node(BinaryTree **leaf, int value)
 {
-	(*bt) = malloc(sizeof(BinaryTree));
-
-	if (!(*bt))
-		return DS_ERR_ALLOC;
-
-	(*bt)->root = NULL;
-
-	(*bt)->depth = 0;
-	(*bt)->size = 0;
-
-	return DS_OK;
-}
-*/
-Status bt_init_node(BinaryTreeNode **leaf, int value)
-{
-	(*leaf) = malloc(sizeof(BinaryTreeNode));
+	(*leaf) = malloc(sizeof(BinaryTree));
 
 	if (!(*leaf))
 		return DS_ERR_ALLOC;
@@ -50,25 +35,10 @@ Status bt_init_node(BinaryTreeNode **leaf, int value)
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+*
-/*
-BinaryTree * bt_get_tree()
+
+BinaryTree * bt_get_node(int value)
 {
-	BinaryTree *bt = malloc(sizeof(BinaryTree));
-
-	if (!bt)
-		return DS_ERR_ALLOC;
-
-	bt->root = NULL;
-
-	bt->depth = 0;
-	bt->size = 0;
-
-	return bt;
-}
-*/
-BinaryTreeNode * bt_get_node(int value)
-{
-	BinaryTreeNode *leaf = malloc(sizeof(BinaryTreeNode));
+	BinaryTree *leaf = malloc(sizeof(BinaryTree));
 
 	leaf->left = NULL;
 	leaf->right = NULL;
@@ -80,28 +50,12 @@ BinaryTreeNode * bt_get_node(int value)
 	
 	return leaf;
 }
-/*
-Status bt_make_node(BinaryTreeNode **leaf, int value)
-{
-	(*leaf) = malloc(sizeof(BinaryTreeNode));
 
-	(*leaf)->data = value;
-
-	(*leaf)->left = NULL;
-	(*leaf)->right = NULL;
-
-	(*leaf)->parent = NULL;
-
-	(*leaf)->level = 0;
-
-	return DS_OK;
-}
-*/
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-Status bt_insert(BinaryTreeNode *ref, BinaryTreeNode *new, BTLeaf leaf)
+Status bt_insert(BinaryTree *ref, BinaryTree *new, BTLeaf leaf)
 {
 	if (ref == NULL || new == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -128,13 +82,25 @@ Status bt_insert(BinaryTreeNode *ref, BinaryTreeNode *new, BTLeaf leaf)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status bt_remove(BinaryTreeNode *ref, BinaryTreeNode *new, BTLeaf leaf)
+Status bt_remove(BinaryTree *ref, BTLeaf leaf)
+{
+	if (ref == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (leaf == Right_bt && ref->right == NULL)
+		return DS_ERR_INVALID_POSITION;
+
+	if (leaf == Left_bt && ref->left == NULL)
+		return DS_ERR_INVALID_POSITION;
+
+
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status bt_display(BinaryTreeNode *root)
+Status bt_display(BinaryTree *root)
 {
 	if (root == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -149,7 +115,7 @@ Status bt_display(BinaryTreeNode *root)
 	return DS_OK;
 }
 
-Status bt_display_raw(BinaryTreeNode *root)
+Status bt_display_raw(BinaryTree *root)
 {
 	if (root == NULL)
 		return DS_OK;
@@ -162,16 +128,92 @@ Status bt_display_raw(BinaryTreeNode *root)
 	printf("%d\n", root->data);
 
 	bt_display_raw(root->left);
+
+	return DS_OK;
 }
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status bt_delete(BinaryTree **bt)
+Status bt_delete(BinaryTree **bt)
+{
+	if ((*bt)->left == NULL && (*bt)->right == NULL) {
+
+		if ((*bt)->parent != NULL) {
+
+			if ((*bt)->parent->right == (*bt))
+				(*bt)->parent->right = NULL;
+			else
+				(*bt)->parent->left = NULL;
+
+		}
+
+		free((*bt));
+
+		return DS_OK;
+	}
+
+	bt_delete(&((*bt)->right));
+
+	bt_delete(&((*bt)->left));
+
+	return DS_OK;
+}
+
+Status bt_erase(BinaryTree **bt)
+{
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
 //Status bt_is_empty(BinaryTree *bt)
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                           Traversal                                             |
+// +-------------------------------------------------------------------------------------------------+
+
+Status bt_traversal_preorder(BinaryTree *bt)
+{
+	if (bt == NULL)
+		return DS_OK;
+
+	printf("%d ", bt->data);
+
+	bt_traversal_preorder(bt->left);
+
+	bt_traversal_preorder(bt->right);
+
+	return DS_OK;
+}
+
+Status bt_traversal_inorder(BinaryTree *bt)
+{
+	if (bt == NULL)
+		return DS_OK;
+
+	bt_traversal_inorder(bt->left);
+
+	printf("%d ", bt->data);
+
+	bt_traversal_inorder(bt->right);
+
+	return DS_OK;
+}
+
+Status bt_traversal_postorder(BinaryTree *bt)
+{
+	if (bt == NULL)
+		return DS_OK;
+
+	bt_traversal_postorder(bt->left);
+
+	bt_traversal_postorder(bt->right);
+
+	printf("%d ", bt->data);
+
+	return DS_OK;
+}

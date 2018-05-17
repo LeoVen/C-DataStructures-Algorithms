@@ -28,6 +28,7 @@ extern "C" {
 	int CircularBufferTests();
 
 	int BinaryTreeTests();
+	int BinarySearchTreeTests();
 
 	int ArrayTests();
 	int DynamicArrayTests();

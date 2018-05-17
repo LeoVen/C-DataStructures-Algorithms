@@ -20,7 +20,7 @@ int BinaryTreeTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	BinaryTreeNode *root, *b_R, *b_L, *b_R_R, *b_R_L, *b_L_R, *b_L_L;
+	BinaryTree *root, *b_R, *b_L, *b_R_R, *b_R_L, *b_L_R, *b_L_L;
 
 	bt_init_node(&root, 0);
 
@@ -37,8 +37,8 @@ int BinaryTreeTests()
 	bt_insert(b_L, b_L_L, Left_bt);
 	bt_insert(b_L, b_L_R, Right_bt);
 
-	bt_insert(b_R, b_R_L, Right_bt);
-	bt_insert(b_R, b_R_R, Left_bt);
+	bt_insert(b_R, b_R_L, Left_bt);
+	bt_insert(b_R, b_R_R, Right_bt);
 
 	bt_insert(b_L_L, bt_get_node(111), Left_bt);
 	bt_insert(b_L_L, bt_get_node(112), Right_bt);
@@ -58,13 +58,17 @@ int BinaryTreeTests()
 	printf("\n ---------- ---------- ---------- ----------");
 	bt_display(b_L);
 
-	free(root);
-	free(b_R);
-	free(b_L);
-	free(b_R_R);
-	free(b_R_L);
-	free(b_L_R);
-	free(b_L_L);
+	printf("\nPreOrder InOrder and PostOrder traversals:\n");
+
+	bt_traversal_preorder(root);
+	printf("\n");
+	bt_traversal_inorder(root);
+	printf("\n");
+	bt_traversal_postorder(root);
+
+	// Almost right
+	bt_delete(&b_L);
+	bt_display(root);
 
 	printf("\n");
 	return 0;

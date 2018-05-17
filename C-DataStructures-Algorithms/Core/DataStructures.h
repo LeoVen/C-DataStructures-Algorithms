@@ -31,6 +31,7 @@ extern "C" {
 #include "..\DataStructures\Headers\CircularBuffer.h"
 
 #include "..\DataStructures\Headers\BinaryTree.h"
+#include "..\DataStructures\Headers\BinarySearchTree.h"
 
 #include "..\DataStructures\Headers\StructureConversions.h"
 

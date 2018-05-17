@@ -162,6 +162,7 @@
     <ClCompile Include="Core\Display.c" />
     <ClCompile Include="DataStructures\DataStructuresMenu.c" />
     <ClCompile Include="DataStructures\Structures\Array.c" />
+    <ClCompile Include="DataStructures\Structures\BinarySearchTree.c" />
     <ClCompile Include="DataStructures\Structures\BinaryTree.c" />
     <ClCompile Include="DataStructures\Structures\CircularBuffer.c" />
     <ClCompile Include="DataStructures\Structures\CircularLinkedList.c" />
@@ -177,6 +178,7 @@
     <ClCompile Include="DataStructures\Structures\StructureConversions.c" />
     <ClCompile Include="DataStructures\Structures\Vector.c" />
     <ClCompile Include="DataStructures\Tests\ArrayTests.c" />
+    <ClCompile Include="DataStructures\Tests\BinarySearchTreeTests.c" />
     <ClCompile Include="DataStructures\Tests\BinaryTreeTests.c" />
     <ClCompile Include="DataStructures\Tests\CircularBufferTests.c" />
     <ClCompile Include="DataStructures\Tests\CircularLinkedListTests.c" />
@@ -205,6 +207,7 @@
     <ClInclude Include="Core\DataStructures.h" />
     <ClInclude Include="Core\DataStructuresTests.h" />
     <ClInclude Include="DataStructures\Headers\Array.h" />
+    <ClInclude Include="DataStructures\Headers\BinarySearchTree.h" />
     <ClInclude Include="DataStructures\Headers\BinaryTree.h" />
     <ClInclude Include="DataStructures\Headers\CircularBuffer.h" />
     <ClInclude Include="DataStructures\Headers\CircularLinkedList.h" />

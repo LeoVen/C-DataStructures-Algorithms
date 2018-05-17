@@ -77,7 +77,7 @@ Classification      [          ]
 SinglyLinkedList    [######### ]
 DoublyLinkedList    [######    ]
 CircularLinkedList  [#######   ]
-SparseMatrix        [##        ]
+SparseMatrix        [#         ]
 Stack               [########  ]
 StaticStack         not started
 Array               [#######   ]
@@ -87,13 +87,13 @@ Queue               [#######   ]
 Deque               [#######   ]
 PriorityQueue       [#######   ]
 CircularBuffer      [#######   ]
-BinaryTree          not started
-BinarySearchTree    not started
-MaxHeap             not started
-MinHeap             not started
+BinaryTree          [########  ]
+BinarySearchTree    [######    ]
+Heap                not started
+AVLTree             not started
+Trie                not started
 HashTable           not started
 HashSet             not started
-Trie                not started
 String              [##        ]
 ```
 

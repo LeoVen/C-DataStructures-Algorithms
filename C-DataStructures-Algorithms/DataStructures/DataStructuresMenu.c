@@ -190,8 +190,12 @@ int ds_all()
 	//StaticStackTests();
 
 	QueueTests();
+	DequeTests();
 	PriorityQueueTests();
 	CircularBufferTests();
+	
+	BinaryTreeTests();
+	BinarySearchTreeTests();
 
 	ArrayTests();
 	DynamicArrayTests();
