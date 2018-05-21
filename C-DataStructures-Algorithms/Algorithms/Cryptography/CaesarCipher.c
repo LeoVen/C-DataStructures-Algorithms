@@ -17,7 +17,13 @@ Status caesar_cipher(char *string, char **result, int shifts)
 
 	size_t len = strlen(string);
 
+	if (len == 0)
+		return DS_ERR_INVALID_ARGUMENT;
+
 	(*result) = malloc(sizeof(char) * len + 1);
+	
+	if (!(*result))
+		return DS_ERR_ALLOC;
 
 	int i, s;
 	for (i = 0; string[i] != '\0'; i++)
@@ -47,7 +53,13 @@ Status caesar_decipher(char *string, char **result, int shifts)
 
 	size_t len = strlen(string);
 
+	if (len == 0)
+		return DS_ERR_INVALID_ARGUMENT;
+
 	(*result) = malloc(sizeof(char) * len + 1);
+
+	if (!(*result))
+		return DS_ERR_ALLOC;
 
 	shifts = 26 - shifts;
 

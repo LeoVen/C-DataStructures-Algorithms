@@ -183,7 +183,7 @@ Status sll_make_node(SinglyLinkedNode **node, int value)
 }
 
 /**
- * @brief Get SinglyLinkedList length
+ * @brief Get @c SinglyLinkedList length
  *
  * This function
  *
@@ -191,8 +191,7 @@ Status sll_make_node(SinglyLinkedNode **node, int value)
  * @param[out] result Length of specified Singly Linked List
  *
  * @return @c DS_OK if all operations were successful
- * @return @c DS_ERR_NULL_POINTER if referenced list points
- * to NULL
+ * @return @c DS_ERR_NULL_POINTER if referenced list points to NULL
  * @return @c DS_ERR_UNEXPECTED_RESULT if lengths don't match
  *
  * @warning Do not pass length parameter as an integer or your program won't
@@ -207,8 +206,8 @@ Status sll_make_node(SinglyLinkedNode **node, int value)
  * sll_insert_head(list, 12);
  *
  * sll_get_length(list, &len); // Variable len has length of the list
- * @endcode
  *
+ * @endcode
  */
 Status sll_get_length(SinglyLinkedList *sll, size_t *result)
 {
@@ -235,6 +234,33 @@ Status sll_get_length(SinglyLinkedList *sll, size_t *result)
 // |                                              Node                                               |
 // +-------------------------------------------------------------------------------------------------+
 
+/**
+ * @brief Gets a reference of a Node at specific position in the list
+ *
+ * This function retrieves a references of a @c SinglyLinkedNode at a specific
+ * position in the list
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[out] result Resulting node
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if referenced list points to NULL
+ * @return @c DS_ERR_ITER if a variable points to NULL during iteration
+ *
+ * @warning 
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * size_t len;
+ * sll_init_list(&list);
+ *
+ * sll_insert_head(list, 12);
+ *
+ * sll_get_length(list, &len); // Variable len has length of the list
+ *
+ * @endcode
+ */
 Status sll_get_node_at(SinglyLinkedList *sll, SinglyLinkedNode **result, size_t position)
 {
 	if (sll == NULL)
@@ -269,8 +295,7 @@ Status sll_get_node_at(SinglyLinkedList *sll, SinglyLinkedNode **result, size_t 
  * @return @c DS_ERR_NULL_POINTER if referenced list points
  * to NULL
  * @return @c DS_ERR_INVALID_OPERATION if list length is 0
- * @return @c DS_ERR_ITER if a variable points to NULL during
- * iteration
+ * @return @c DS_ERR_ITER if a variable points to NULL during iteration
  *
  * @b Usage
  * @code{.c}
@@ -331,8 +356,7 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
  * @return @c DS_ERR_NULL_POINTER if referenced list points
  * to NULL
  * @return @c DS_ERR_INVALID_OPERATION if list length is 0
- * @return @c DS_ERR_ITER if a variable points to NULL during
- * iteration
+ * @return @c DS_ERR_ITER if a variable points to NULL during iteration
  * @return @c DS_ERR_INVALID_POSITION if position is higher than 
  *
  * @b Usage
@@ -395,7 +419,6 @@ Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value)
  *
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
- * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
  * @return @c DS_ERR_ALLOC if allocation failed
  *
  * @b Usage
@@ -458,7 +481,6 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 * @return @c DS_OK if all operations were successful
 * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
 * @return @c DS_ERR_INVALID_POSITION if position is out of range
-* @return @c DS_ERR_OPERATION_FAILED if any external functions failed
 * @return @c DS_ERR_ALLOC if allocation failed
 *
 * @b Usage
@@ -551,7 +573,6 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
  *
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
- * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
  * @return @c DS_ERR_ALLOC if allocation fails
  *
  * @b Usage
@@ -598,11 +619,13 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
 }
 
 /**
- * @brief Inserts an already initialized @c SinglyLinkedNode at the first
+ * @brief Pushes an already initialized @c SinglyLinkedNode at the first
  * position.
  *
- * This function inserts an already initialized @c SinglyLinkedNode to the first
- * position of the list.
+ * This function pushes an already initialized @c SinglyLinkedNode to the first
+ * position of the list. It can be used in conjunction with @c
+ * sll_remove_node_head, @c sll_remove_node_at, @c sll_remove_node_tail to
+ * pop an already created node and use it in this function.
  *
  * @param[in] sll Reference to a @c SinglyLinkedList
  * @param[in] node Node to be inserted in the list
@@ -639,11 +662,14 @@ Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node)
 }
 
 /**
- * @brief Inserts an already initialized @c SinglyLinkedNode at a chosen
+ * @brief Pushes an already initialized @c SinglyLinkedNode at a chosen
  * position.
  *
- * This function inserts an already initialized @c SinglyLinkedNode at a chosen
- * position of the list relative to the first element.
+ * This function pushes an already initialized @c SinglyLinkedNode at a chosen
+ * position of the list relative to the first element. It can be used in
+ * conjunction with @c sll_remove_node_head, @c sll_remove_node_at, @c
+ * sll_remove_node_tail to pop an already created node and use it in this
+ * function.
  *
  * @param[in] sll Reference to a @c SinglyLinkedList
  * @param[in] node Node to be inserted in the list
@@ -652,6 +678,7 @@ Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node)
  *
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
+ * @return @c DS_ERR_INVALID_POSITION if position is out of range
  *
  * @b Usage
  * @code{.c}
@@ -721,11 +748,13 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
 }
 
 /**
- * @brief Inserts an already initialized @c SinglyLinkedNode at the last
+ * @brief Pushes an already initialized @c SinglyLinkedNode at the last
  * position.
  *
- * This function inserts an already initialized @c SinglyLinkedNode to the last
- * position of the list.
+ * This function pushes an already initialized @c SinglyLinkedNode to the last
+ * position of the list. It can be used in conjunction with @c
+ * sll_remove_node_head, @c sll_remove_node_at, @c sll_remove_node_tail to pop
+ * an already created node and use it in this function.
  *
  * @param[in] sll Reference to a @c SinglyLinkedList
  * @param[in] node Node to be inserted in the list
@@ -746,6 +775,7 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
  *     sll_make_node(&node, i);
  *     sll_insert_node_tail(sll, node); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
  * }
+ *
  * @endcode
  */
 Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
@@ -778,8 +808,8 @@ Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
  /**
   * @brief Removes first @c SinglyLinkedNode from the list.
   *
-  * This function removes the first @c SinglyLinkedNode from the list. If the
-  * list is empty, @c DS_ERR_INVALID_OPERATION is returned.
+  * This function removes the first @c SinglyLinkedNode from the list and frees
+  * it from memory.
   *
   * @param[in] sll Reference to a @c SinglyLinkedList
   *
@@ -797,8 +827,8 @@ Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
   *     sll_insert_tail(list, i); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
   *
   * sll_remove_head(list); // 1 -> 2 -> 3 -> ... -> 8 -> 9 -> NULL
-  * @endcode
   *
+  * @endcode
   */
 Status sll_remove_head(SinglyLinkedList *sll)
 {
@@ -826,17 +856,31 @@ Status sll_remove_head(SinglyLinkedList *sll)
  * @brief Removes a @c SinglyLinkedNode from the list at a chosen position.
  *
  * This function removes a chosen @c SinglyLinkedNode from the list at a
- * position relative to the head of the list If the list is empty, @c
- * DS_ERR_INVALID_OPERATION is returned.
+ * position relative to the head of the list and frees it from memory.
  *
  * @param[in] sll Reference to a @c SinglyLinkedList
  * @param[in] position Relative position to the first element of the list where
  * a @c SinglyLinkedNode will be removed
  *
  * @return @c DS_OK if all operations were successful
- * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
- * @return @c DS_ERR_OPERATION_FAILED if any external functions failed
- * @return @c DS_ERR_ALLOC if allocation fails
+ * @return @c DS_ERR_NULL_POINTER if list reference is @c NULL
+ * @return @c DS_ERR_INVALID_OPERATION if list is empty
+ * @return @c DS_ERR_INVALID_POSITION if position is out of range
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * sll_init_list(&list);
+ * int i;
+ *
+ * for (i = 0; i < 10; i++)
+ *     sll_insert_tail(list, i); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
+ *
+ * sll_remove_at(list, 2); // 0 -> 1 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9 -> NULL
+ * sll_remove_at(list, 7); // 0 -> 1 -> 3 -> 4 -> 5 -> 6 -> 7 -> 9 -> NULL
+ * sll_remove_at(list, 4); // 0 -> 1 -> 3 -> 4 -> 6 -> 7 -> 9 -> NULL
+ *
+ * @endcode
  */
 Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 {
@@ -897,14 +941,28 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 /**
  * @brief Removes last @c SinglyLinkedNode from the list.
  *
- * This function removes the last @c SinglyLinkedNode from the list. If the
- * list is empty, @c DS_ERR_INVALID_OPERATION is returned.
+ * This function removes the last @c SinglyLinkedNode from the list and frees
+ * it from memory.
  *
  * @param[in] sll Reference to a @c SinglyLinkedList
  *
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
  * @return @c DS_ERR_INVALID_OPERATION if list is empty
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * sll_init_list(&list);
+ * int i;
+ *
+ * for (i = 0; i < 10; i++)
+ *     sll_insert_tail(list, i); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
+ *
+ * sll_remove_tail(list); // 0 -> 1 -> 2 ... -> 6 -> 7 -> 8 -> NULL
+ * sll_remove_tail(list); // 0 -> 1 -> 2 ... -> 5 -> 6 -> 7 -> NULL
+ *
+ * @endcode
  */
 Status sll_remove_tail(SinglyLinkedList *sll)
 {
@@ -945,6 +1003,36 @@ Status sll_remove_tail(SinglyLinkedList *sll)
 	return DS_OK;
 }
 
+/**
+ * @brief Pops the first @c SinglyLinkedNode from the list.
+ *
+ * This function pops the first @c SinglyLinkedNode from the list. It can be
+ * used in conjunction with @c sll_insert_node_head, @c sll_insert_node_at, @c
+ * sll_insert_node_tail to insert that node back into any other list.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[out] node Resulting node of the operation
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if list parameter is @c NULL
+ * @return @c DS_ERR_INVALID_OPERATION if list is empty
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * sll_init_list(&list);
+ * int i;
+ *
+ * for (i = 0; i < 10; i++)
+ *     sll_insert_tail(list, i); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
+ *
+ * SinglyLinkedNode *node;
+ *
+ * sll_remove_node_head(list, &node); // 1 -> 2 -> ... -> 8 -> 9 -> NULL
+ * // Variable node has 0 as its data
+ *
+ * @endcode
+ */
 Status sll_remove_node_head(SinglyLinkedList *sll, SinglyLinkedNode **node)
 {
 	if (sll == NULL)
@@ -966,6 +1054,40 @@ Status sll_remove_node_head(SinglyLinkedList *sll, SinglyLinkedNode **node)
 	return DS_OK;
 }
 
+/**
+ * @brief Pops a @c SinglyLinkedNode from a chosen position.
+ *
+ * This function pops a @c SinglyLinkedNode from a chosen position relative to
+ * the first node on the list. It can beused in conjunction with @c
+ * sll_insert_node_head, @c sll_insert_node_at, @c sll_insert_node_tail to
+ * insert that node back into any other list.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[out] node Resulting node of the operation
+ * @param[in] position Relative position to the first element of the list where
+ * a @c SinglyLinkedNode will be popped out
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if list parameter is @c NULL
+ * @return @c DS_ERR_INVALID_OPERATION if list is empty
+ * @return @c DS_ERR_INVALID_POSITION if position is out of range
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * sll_init_list(&list);
+ * int i;
+ *
+ * for (i = 0; i < 10; i++)
+ *     sll_insert_tail(list, i); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
+ *
+ * SinglyLinkedNode *node;
+ *
+ * sll_remove_node_head(list, &node, 2); // 0 -> 1 -> 3 -> ... -> 8 -> 9 -> NULL
+ * // Variable node has 2 as its data
+ *
+ * @endcode
+ */
 Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t position)
 {
 	if (sll == NULL)
@@ -1023,6 +1145,36 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 	}
 }
 
+/**
+ * @brief Pops the last @c SinglyLinkedNode from the list.
+ *
+ * This function pops the last @c SinglyLinkedNode from the list. It can be
+ * used in conjunction with @c sll_insert_node_head, @c sll_insert_node_at, @c
+ * sll_insert_node_tail to insert that node back into any other list.
+ *
+ * @param[in] sll Reference to a @c SinglyLinkedList
+ * @param[out] node Resulting node of the operation
+ *
+ * @return @c DS_OK if all operations were successful
+ * @return @c DS_ERR_NULL_POINTER if list parameter is @c NULL
+ * @return @c DS_ERR_INVALID_OPERATION if list is empty
+ *
+ * @b Usage
+ * @code{.c}
+ * SinglyLinkedList *list;
+ * sll_init_list(&list);
+ * int i;
+ *
+ * for (i = 0; i < 10; i++)
+ *     sll_insert_tail(list, i); // 0 -> 1 -> 2 -> ... -> 8 -> 9 -> NULL
+ *
+ * SinglyLinkedNode *node;
+ *
+ * sll_remove_node_tail(list, &node); // 0 -> 1 -> ... -> 7 -> 8 -> NULL
+ * // Variable node has 9 as its data
+ *
+ * @endcode
+ */
 Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node)
 {
 	if (sll == NULL)
