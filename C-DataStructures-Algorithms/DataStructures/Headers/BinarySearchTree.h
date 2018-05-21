@@ -16,6 +16,12 @@ extern "C" {
 
 #include "..\..\Core\Core.h"
 
+	/**
+	 * A @c BinarySearchTreeNode is what a @c BinarySearchTree is composed of.
+	 * It it much like a @c BinaryTree (Node) with one pointer to its left
+	 * child, one to its right child and another to its parent, being NULL if
+	 * that Node is the @c root.
+	 */
 	typedef struct BinarySearchTreeNode {
 		int data;                           /*!< Node's data */
 		size_t level;                       /*!< On what level the Node is in */
@@ -24,6 +30,18 @@ extern "C" {
 		struct BinarySearchTreeNode *parent;/*!< Pointer to parent Node */
 	} BinarySearchTreeNode;
 
+	/**
+	 * A @c BinarySearchTree is much like a @c BinaryTree but now with a rule
+	 * for inserting the nodes. This now makes every @c BinarySearchTreeNode
+	 * binded to its descriptor, the @c BinarySearchTree, which has a size
+	 * variable counting the amount of elements in that tree, a depth variable
+	 * which keeps track of the deepest leaf and a pointer to the first node
+	 * added, the @c root. The insertion rule is that every Node to the left
+	 * must have a lower (key) value (data in this case) than its parent,
+	 * higher values to the right and no duplicate nodes.
+	 *
+	 * @note For simplicity the keys of each node are actually its data.
+	 */
 	typedef struct BinarySearchTree {
 		size_t depth;                       /*!< @c BinarySearchTree depth */
 		size_t size;                        /*!< Total @c BinarySearchTree elements */

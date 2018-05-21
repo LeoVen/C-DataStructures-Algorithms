@@ -50,6 +50,14 @@ int BinarySearchTreeTests()
 
 	//bst_delete(&bst);
 
+	BinarySearchTree *b;
+	bst_init_tree(&b);
+
+	for (i = 0; i < 500; i++)
+		bst_insert(b, rand() % 500);
+
+	bst_display(b);
+
 	printf("\n");
 	return 0;
 }

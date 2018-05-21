@@ -16,6 +16,14 @@ extern "C" {
 
 #include "..\..\Core\Core.h"
 
+	/**
+	 * A @c CircularBuffer, Circular Queue, Cyclic Buffer or a Ring Buffer is a
+	 * Data Structure that has a fixed-size buffer that is connected by its
+	 * ends making a circular buffer zone. The @c CircularBuffer has FIFO
+	 * operations so it can also be used as a static @c Queue where the amount
+	 * of items that can be queued up is fixed to the maximum size of the
+	 * buffer.
+	 */
 	typedef struct CircularBuffer {
 		bool is_empty;                      /*!< If buffer is empty or not */
 		size_t length;                      /*!< Current Buffer length */
