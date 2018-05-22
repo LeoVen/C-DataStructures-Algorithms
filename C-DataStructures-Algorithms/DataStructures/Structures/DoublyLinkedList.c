@@ -344,7 +344,51 @@ Status dll_insert_node_head(DoublyLinkedList *dll, DoublyLinkedNode *node)
 	return DS_OK;
 }
 
-//Status dll_insert_node_at(DoublyLinkedList *dll, DoublyLinkedNode *node, size_t position);
+Status dll_insert_node_at(DoublyLinkedList *dll, DoublyLinkedNode *node, size_t position)
+{
+	if (dll == NULL || node == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (position > dll->length)
+		return DS_ERR_INVALID_POSITION;
+
+	Status st;
+
+	if (position == 0) {
+
+		st = dll_insert_node_head(dll, node);
+
+		if (st != DS_OK)
+			return st;
+
+		return DS_OK;
+	}
+	else if (position == dll->length) {
+
+		st = dll_insert_node_tail(dll, node);
+
+		if (st != DS_OK)
+			return st;
+
+		return DS_OK;
+	}
+	else {
+
+		DoublyLinkedNode *curr;
+
+		st = dll_get_node_at(dll, &curr, position);
+
+		node->prev = curr->prev;
+		node->next = curr;
+
+		curr->prev->next = node;
+		curr->prev = node;
+
+		(dll->length)++;
+
+		return DS_OK;
+	}
+}
 
 Status dll_insert_node_tail(DoublyLinkedList *dll, DoublyLinkedNode *node)
 {
@@ -499,7 +543,56 @@ Status dll_remove_node_head(DoublyLinkedList *dll, DoublyLinkedNode **node)
 	return DS_OK;
 }
 
-//Status dll_remove_node_at(DoublyLinkedList *dll, DoublyLinkedNode **node, size_t position)
+Status dll_remove_node_at(DoublyLinkedList *dll, DoublyLinkedNode **node, size_t position)
+{
+	if (dll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dll_is_empty(dll))
+		return DS_ERR_INVALID_OPERATION;
+
+	if (position >= dll->length)
+		return DS_ERR_INVALID_POSITION;
+
+	Status st;
+
+	if (position == 0) {
+
+		st = dll_remove_node_head(dll, node);
+
+		if (st != DS_OK)
+			return st;
+
+		return DS_OK;
+	}
+	else if (position == dll->length - 1) {
+
+		st = dll_remove_node_tail(dll, node);
+
+		if (st != DS_OK)
+			return st;
+
+		return DS_OK;
+	}
+	else {
+
+		DoublyLinkedNode *curr;
+
+		st = dll_get_node_at(dll, &curr, position);
+
+		if (st != DS_OK)
+			return st;
+
+		curr->prev->next = curr->next;
+		curr->next->prev = curr->prev;
+
+		(*node) = curr;
+
+		(dll->length)--;
+
+		return DS_OK;
+	}
+}
 
 Status dll_remove_node_tail(DoublyLinkedList *dll, DoublyLinkedNode **node)
 {

@@ -69,23 +69,23 @@ extern "C" {
 	Status dll_get_length(DoublyLinkedList *dll, size_t *result);
 
 	Status dll_get_node_at(DoublyLinkedList *dll, DoublyLinkedNode **result, size_t position);
-	//Status dll_get_node_data(DoublyLinkedList *dll, size_t position, int *result);
-	//Status dll_update_node_data(DoublyLinkedList *dll, int value, size_t position);
+	Status dll_get_node_data(DoublyLinkedList *dll, size_t position, int *result);
+	Status dll_update_node_data(DoublyLinkedList *dll, int value, size_t position);
 
 	Status dll_insert_head(DoublyLinkedList *dll, int value);
-	//Status dll_insert_at(DoublyLinkedList *dll, int value, size_t position);
+	Status dll_insert_at(DoublyLinkedList *dll, int value, size_t position);
 	Status dll_insert_tail(DoublyLinkedList *dll, int value);
 
 	Status dll_insert_node_head(DoublyLinkedList *dll, DoublyLinkedNode *node);
-	//Status dll_insert_node_at(DoublyLinkedList *dll, DoublyLinkedNode *node, size_t position);
+	Status dll_insert_node_at(DoublyLinkedList *dll, DoublyLinkedNode *node, size_t position);
 	Status dll_insert_node_tail(DoublyLinkedList *dll, DoublyLinkedNode *node);
 
 	Status dll_remove_head(DoublyLinkedList *dll);
-	//Status dll_remove_at(DoublyLinkedList *dll, size_t position);
+	Status dll_remove_at(DoublyLinkedList *dll, size_t position);
 	Status dll_remove_tail(DoublyLinkedList *dll);
 
 	Status dll_remove_node_head(DoublyLinkedList *dll, DoublyLinkedNode **node);
-	//Status dll_remove_node_at(DoublyLinkedList *dll, DoublyLinkedNode **node, size_t position);
+	Status dll_remove_node_at(DoublyLinkedList *dll, DoublyLinkedNode **node, size_t position);
 	Status dll_remove_node_tail(DoublyLinkedList *dll, DoublyLinkedNode **node);
 
 	Status dll_display(DoublyLinkedList *dll);
