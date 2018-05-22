@@ -15,9 +15,11 @@
 int dev_short_cut()
 {
 
-	BinaryTreeTests();
-	BinarySearchTreeTests();
+	//BinaryTreeTests();
+	//BinarySearchTreeTests();
 
+	//DoublyLinkedListTests();
+	SinglyLinkedListTests();
 
 	printf("\nPress enter to continue...");
 	getch();

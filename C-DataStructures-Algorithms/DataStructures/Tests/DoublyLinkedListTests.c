@@ -107,5 +107,135 @@ int DoublyLinkedListTests()
 	dll_delete_list(&dll_odd);
 
 	printf("\n");
+	printf("\n ---------- ---------- ---------- Begin tests ---------- ---------- ----------");
+	printf("\n");
+
+	node = NULL;
+
+	dll_init_list(&dll);
+
+	int j, k, c, max = 100;
+	for (i = 0; i < 10000; i++)
+	{
+		j = rand();
+		k = rand();
+		c = rand() % 3;
+
+		if (j % 2 == 0) {
+			// Insert
+			if (k % 2 == 0) {
+				// Insert
+				if (c == 0) {
+					// Head
+					printf("\ndll_insert_head()");
+					dll_insert_head(dll, rand() % max);
+				}
+				else if (c == 1) {
+					// Middle
+					printf("\ndll_insert_at()");
+					dll_get_length(dll, &len);
+					if (len != 0)
+						len = rand() % len;
+					printf(" position %zu", len);
+					dll_insert_at(dll, rand() % max, len);
+				}
+				else {
+					// Tail
+					printf("\ndll_insert_tail()");
+					dll_insert_tail(dll, rand() % max);
+				}
+			}
+			else {
+				// Push
+				if (c == 0) {
+					// Head
+					printf("\ndll_insert_node_head()");
+					dll_make_node(&node, rand() % max);
+					dll_insert_node_head(dll, node);
+				}
+				else if (c == 1) {
+					// Middle
+					printf("\ndll_insert_node_at()");
+					dll_get_length(dll, &len);
+					if (len != 0)
+						len = rand() % len;
+					printf(" position %zu", len);
+					dll_make_node(&node, rand() % max);
+					dll_insert_node_at(dll, node, len);
+				}
+				else {
+					// Tail
+					printf("\ndll_insert_node_tail()");
+					dll_make_node(&node, rand() % max);
+					dll_insert_node_tail(dll, node);
+				}
+			}
+		// End
+		}
+		else {
+			// Remove
+			if (k % 2 == 0) {
+				// Slice
+				if (c == 0) {
+					// Head
+					printf("\ndll_remove_head()");
+					dll_remove_head(dll);
+				}
+				else if (c == 1) {
+					// Middle
+					printf("\ndll_remove_at()");
+					dll_get_length(dll, &len);
+					if (len != 0)
+						len = rand() % len;
+					printf(" position %zu", len);
+					dll_remove_at(dll, len);
+				}
+				else {
+					// Tail
+					printf("\ndll_remove_tail()");
+					dll_remove_tail(dll);
+				}
+			}
+			else {
+				// Pop
+				if (c == 0) {
+					// Head
+					printf("\ndll_remove_node_head()");
+					dll_remove_node_head(dll, &node);
+					free(node);
+				}
+				else if (c == 1) {
+					// Middle
+					printf("\ndll_remove_node_at()");
+					dll_get_length(dll, &len);
+					if (len != 0)
+						len = rand() % len;
+					printf(" position %zu", len);
+					dll_remove_node_at(dll, &node, len);
+					free(node);
+				}
+				else {
+					// Tail
+					printf("\ndll_remove_node_tail()");
+					dll_remove_node_tail(dll, &node);
+					free(node);
+				}
+			}
+		// End
+		}
+
+		node = NULL;
+
+		dll_display(dll);
+
+	}
+
+	dll_delete_list(&dll);
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n");
+
+	printf("\n");
 	return 0;
 }
