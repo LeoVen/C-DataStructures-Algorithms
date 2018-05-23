@@ -837,7 +837,7 @@ bool dll_exists(DoublyLinkedList *dll, int key)
 	if (dll == NULL)
 		return false;
 
-	if (sll_is_empty(dll))
+	if (dll_is_empty(dll))
 		return false;
 
 	DoublyLinkedNode *scan = dll->head;
