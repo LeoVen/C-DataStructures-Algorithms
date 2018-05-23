@@ -66,7 +66,7 @@ extern "C" {
 	Status bst_display(BinarySearchTree *bst);
 	Status bst_display_raw(BinarySearchTreeNode *root);
 
-	//Status bst_delete(BinarySearchTree **bst);
+	//Status bst_delete(BinarySearchTreeNode **bsn);
 	//Status bst_erase(BinarySearchTree **bst);
 
 	//Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);

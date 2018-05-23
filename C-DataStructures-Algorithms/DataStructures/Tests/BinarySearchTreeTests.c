@@ -48,7 +48,7 @@ int BinarySearchTreeTests()
 	printf("\n ---------- ---------- ---------- ----------\n");
 	bst_traversal_wrapper(bst, 0);
 
-	//bst_delete(&bst);
+	//bst_erase(&bst);
 
 	BinarySearchTree *b;
 	bst_init_tree(&b);

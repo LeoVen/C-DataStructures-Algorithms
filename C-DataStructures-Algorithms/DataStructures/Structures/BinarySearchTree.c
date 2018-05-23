@@ -202,10 +202,33 @@ Status bst_display_raw(BinarySearchTreeNode *node)
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
+/*
+Status bst_delete(BinarySearchTreeNode **bsn)
+{
+	if ((*bsn) != NULL)
+		bst_delete(&((*bsn)->left));
 
-//Status bst_delete(BinarySearchTree **bst)
-//Status bst_erase(BinarySearchTree **bst)
+	if ((*bsn) != NULL)
+		bst_delete(&((*bsn)->right));
 
+	free(bsn);
+
+	return DS_OK;
+}
+
+Status bst_erase(BinarySearchTree **bst)
+{
+	if ((*bst) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = bst_delete(bst);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
+*/
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
