@@ -542,25 +542,13 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 
 		if (!node)
 			return DS_ERR_ALLOC;
-		/*
+	
 		SinglyLinkedNode *curr = NULL;
 		
 		st = sll_get_node_at(sll, &curr, position - 1);
 
 		if (st != DS_OK)
 			return st;
-		*/
-		SinglyLinkedNode *curr = sll->head;
-
-		int i;
-		for (i = 1; i < position; i++) {
-
-			if (curr == NULL)
-				return DS_ERR_ITER;
-
-			curr = curr->next;
-
-		}
 
 		node->next = curr->next;
 		curr->next = node;
@@ -751,25 +739,13 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
 		return DS_OK;
 	}
 	else {
-		/*
-		SinglyLinkedList *curr = NULL;
+
+		SinglyLinkedNode *curr = NULL;
 
 		st = sll_get_node_at(sll, &curr, position - 1);
 
 		if (st != DS_OK)
 			return DS_OK;
-		*/
-		SinglyLinkedNode *curr = sll->head;
-
-		int i;
-		for (i = 1; i < position; i++) {
-
-			if (curr == NULL)
-				return DS_ERR_ITER;
-
-			curr = curr->next;
-
-		}
 
 		node->next = curr->next;
 		curr->next = node;
@@ -951,7 +927,7 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 		return DS_OK;
 	}
 	else {
-		/*
+	
 		SinglyLinkedNode *prev = NULL;
 		SinglyLinkedNode *curr = NULL;
 
@@ -964,21 +940,7 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 
 		if (st != DS_OK)
 			return st;
-		*/
-		SinglyLinkedNode *prev = NULL;
-		SinglyLinkedNode *curr = sll->head;
-
-		int i;
-		for (i = 1; i < position; i++) {
-
-			if (curr == NULL)
-				return DS_ERR_ITER;
-
-			prev = curr;
-			curr = curr->next;
-
-		}
-
+	
 		prev->next = curr->next;
 		sll_delete_node(&curr);
 		
@@ -1189,7 +1151,7 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 		return DS_OK;
 	}
 	else {
-		/*
+	
 		SinglyLinkedNode *prev = NULL;
 		SinglyLinkedNode *curr = NULL;
 
@@ -1202,22 +1164,7 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 
 		if (st != DS_OK)
 			return st;
-		*/
-		SinglyLinkedNode *prev = NULL;
-		SinglyLinkedNode *curr = sll->head;
-
-		int i;
-		for (i = 1; i < position; i++) {
-
-			if (curr == NULL)
-				return DS_ERR_ITER;
-
-			prev = curr;
-			curr = curr->next;
-
-		}
-
-		//if (prev != NULL)
+	
 		prev->next = curr->next;
 
 		(*node) = curr;

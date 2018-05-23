@@ -114,6 +114,7 @@ int DoublyLinkedListTests()
 
 	dll_init_list(&dll);
 
+	size_t length = 0, l_max = 4;
 	int j, k, c, max = 100;
 	for (i = 0; i < 10000; i++)
 	{
@@ -121,7 +122,10 @@ int DoublyLinkedListTests()
 		k = rand();
 		c = rand() % 3;
 
-		if (j % 2 == 0) {
+		dll_get_length(dll, &length);
+		len = 0;
+
+		if (j % 2 == 0 && length < l_max) {
 			// Insert
 			if (k % 2 == 0) {
 				// Insert
@@ -133,9 +137,8 @@ int DoublyLinkedListTests()
 				else if (c == 1) {
 					// Middle
 					printf("\ndll_insert_at()");
-					dll_get_length(dll, &len);
-					if (len != 0)
-						len = rand() % len;
+					if (length != 0)
+						len = rand() % length;
 					printf(" position %zu", len);
 					dll_insert_at(dll, rand() % max, len);
 				}
@@ -156,9 +159,8 @@ int DoublyLinkedListTests()
 				else if (c == 1) {
 					// Middle
 					printf("\ndll_insert_node_at()");
-					dll_get_length(dll, &len);
-					if (len != 0)
-						len = rand() % len;
+					if (length != 0)
+						len = rand() % length;
 					printf(" position %zu", len);
 					dll_make_node(&node, rand() % max);
 					dll_insert_node_at(dll, node, len);
@@ -184,9 +186,8 @@ int DoublyLinkedListTests()
 				else if (c == 1) {
 					// Middle
 					printf("\ndll_remove_at()");
-					dll_get_length(dll, &len);
-					if (len != 0)
-						len = rand() % len;
+					if (length != 0)
+						len = rand() % length;
 					printf(" position %zu", len);
 					dll_remove_at(dll, len);
 				}
@@ -207,9 +208,8 @@ int DoublyLinkedListTests()
 				else if (c == 1) {
 					// Middle
 					printf("\ndll_remove_node_at()");
-					dll_get_length(dll, &len);
-					if (len != 0)
-						len = rand() % len;
+					if (length != 0)
+						len = rand() % length;
 					printf(" position %zu", len);
 					dll_remove_node_at(dll, &node, len);
 					free(node);
@@ -229,6 +229,8 @@ int DoublyLinkedListTests()
 		dll_display(dll);
 
 	}
+
+	printf("\nFinal list size: %zu", dll->length);
 
 	dll_delete_list(&dll);
 
