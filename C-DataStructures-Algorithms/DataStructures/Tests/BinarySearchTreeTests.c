@@ -53,10 +53,23 @@ int BinarySearchTreeTests()
 	BinarySearchTree *b;
 	bst_init_tree(&b);
 
-	for (i = 0; i < 500; i++)
-		bst_insert(b, rand() % 500);
-
+	for (i = 0; i < 50; i++)
+		bst_insert(b, rand() % 50);
+	
 	bst_display(b);
+
+	bst_traversal_wrapper(b,-1); // preorder
+	printf("\n\n");
+	bst_traversal_wrapper(b, 0); // inorder
+	printf("\n\n");
+	bst_traversal_wrapper(b, 1); // postorder
+	
+	printf("\nLeaves: \n");
+	bst_traversal_leaves(b->root);
+
+	printf("\nTree depth: %zu", b->depth);
+
+	//bst_delete(&b);
 
 	printf("\n");
 	return 0;

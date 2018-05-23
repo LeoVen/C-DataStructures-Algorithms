@@ -210,6 +210,9 @@ Status bst_display_raw(BinarySearchTreeNode *node)
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
+//Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);
+//Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);
+
 bool bst_is_empty(BinarySearchTree *bst)
 {
 	return (bst->root == NULL);
@@ -250,11 +253,11 @@ Status bst_traversal_preorder(BinarySearchTreeNode *bsn)
 	if (bsn == NULL)
 		return DS_OK;
 
-	printf("%d ", bsn->data);
-
-	bst_traversal_preorder(bsn->left);
+	printf(" %d", bsn->data);
 
 	bst_traversal_preorder(bsn->right);
+
+	bst_traversal_preorder(bsn->left);
 
 	return DS_OK;
 }
@@ -264,11 +267,11 @@ Status bst_traversal_inorder(BinarySearchTreeNode *bsn)
 	if (bsn == NULL)
 		return DS_OK;
 
-	bst_traversal_inorder(bsn->left);
-
-	printf("%d ", bsn->data);
-
 	bst_traversal_inorder(bsn->right);
+
+	printf(" %d", bsn->data);
+
+	bst_traversal_inorder(bsn->left);
 
 	return DS_OK;
 }
@@ -278,11 +281,24 @@ Status bst_traversal_postorder(BinarySearchTreeNode *bsn)
 	if (bsn == NULL)
 		return DS_OK;
 
-	bst_traversal_postorder(bsn->left);
-
 	bst_traversal_postorder(bsn->right);
 
-	printf("%d ", bsn->data);
+	bst_traversal_postorder(bsn->left);
+
+	printf(" %d", bsn->data);
 
 	return DS_OK;
+}
+
+Status bst_traversal_leaves(BinarySearchTreeNode *bsn)
+{
+	if (bsn->right != NULL) {
+		bst_traversal_leaves(bsn->right);
+	}
+	if (bsn->left != NULL) {
+		bst_traversal_leaves(bsn->left);
+	}
+	if (bsn->left == NULL && bsn->right == NULL) {
+		printf(" %d", bsn->data);
+	}
 }

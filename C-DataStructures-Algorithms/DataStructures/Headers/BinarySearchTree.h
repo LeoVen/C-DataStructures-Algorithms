@@ -69,12 +69,17 @@ extern "C" {
 	//Status bst_delete(BinarySearchTree **bst);
 	//Status bst_erase(BinarySearchTree **bst);
 
+	//Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);
+	//Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);
+
 	bool bst_is_empty(BinarySearchTree *bst);
 
 	Status bst_traversal_wrapper(BinarySearchTree *bst, int traversal);
 	Status bst_traversal_preorder(BinarySearchTreeNode *bst);
 	Status bst_traversal_inorder(BinarySearchTreeNode *bst);
 	Status bst_traversal_postorder(BinarySearchTreeNode *bst);
+
+	Status bst_traversal_leaves(BinarySearchTreeNode *bsn);
 	
 #ifdef __cplusplus
 }
