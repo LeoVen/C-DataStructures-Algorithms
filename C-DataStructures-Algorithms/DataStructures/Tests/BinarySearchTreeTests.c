@@ -34,7 +34,7 @@ int BinarySearchTreeTests()
 
 	printf("\n");
 
-	bst_display(bst);
+	bst_display_wrapper(bst, 0);
 	printf("\n ---------- ---------- ---------- ----------\n");
 	bst_traversal_wrapper(bst, 0);
 
@@ -44,7 +44,7 @@ int BinarySearchTreeTests()
 		bst_insert(bst, rand() % 200);
 	}
 
-	bst_display(bst);
+	bst_display_wrapper(bst, 0);
 	printf("\n ---------- ---------- ---------- ----------\n");
 	bst_traversal_wrapper(bst, 0);
 
@@ -56,7 +56,7 @@ int BinarySearchTreeTests()
 	for (i = 0; i < 50; i++)
 		bst_insert(b, rand() % 50);
 	
-	bst_display(b);
+	bst_display_wrapper(b, 1);
 
 	bst_traversal_wrapper(b,-1); // preorder
 	printf("\n\n");
@@ -69,6 +69,15 @@ int BinarySearchTreeTests()
 
 	printf("\nTree depth: %zu", b->depth);
 
+	BinarySearchTree *b2;
+
+	bst_init_tree(&b2);
+
+	for (i = 0; i < 500; i++)
+		bst_insert(b2, rand() % 500);
+
+	bst_display_wrapper(b2, -1);
+	
 	//bst_delete(&b);
 
 	printf("\n");

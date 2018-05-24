@@ -156,6 +156,12 @@
     <ClCompile Include="DataStructures\Tests\BinarySearchTreeTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataStructures\Structures\AVLTree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Tests\AVLTreeTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\Core.h">
@@ -234,6 +240,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataStructures\Headers\BinarySearchTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Headers\AVLTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

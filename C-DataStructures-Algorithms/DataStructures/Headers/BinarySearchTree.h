@@ -48,8 +48,8 @@ extern "C" {
 		struct BinarySearchTreeNode *root;  /*!< Pointer to the very first node in the @c BinarySearchTree */
 	} BinarySearchTree;
 
-	Status bst_init_tree(BinarySearchTree **bt);
-	Status bst_init_node(BinarySearchTreeNode **node, int value);
+	Status bst_init_tree(BinarySearchTree **bst);
+	Status bst_init_node(BinarySearchTreeNode **node);
 
 	BinarySearchTree * bst_get_tree();
 	BinarySearchTreeNode * bst_get_node(int value);
@@ -63,11 +63,13 @@ extern "C" {
 	// Unlink subtree from referenced node (removes link with parent)
 	//Status bst_unlink(BinarySearchTreeNode *ref);
 
-	Status bst_display(BinarySearchTree *bst);
-	Status bst_display_raw(BinarySearchTreeNode *root);
+	Status bst_display_wrapper(BinarySearchTree *bst, int display);
+	Status bst_display_raw(BinarySearchTreeNode *node);
+	Status bst_display_interactive(BinarySearchTreeNode *node);
+	Status bst_display_clean(BinarySearchTreeNode *node);
 
-	//Status bst_delete(BinarySearchTreeNode **bsn);
-	//Status bst_erase(BinarySearchTree **bst);
+	//Status bst_delete(BinarySearchTreeNode **node);
+	//Status bst_erase(BinarySearchTree **node);
 
 	//Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);
 	//Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);
@@ -75,11 +77,11 @@ extern "C" {
 	bool bst_is_empty(BinarySearchTree *bst);
 
 	Status bst_traversal_wrapper(BinarySearchTree *bst, int traversal);
-	Status bst_traversal_preorder(BinarySearchTreeNode *bst);
-	Status bst_traversal_inorder(BinarySearchTreeNode *bst);
-	Status bst_traversal_postorder(BinarySearchTreeNode *bst);
+	Status bst_traversal_preorder(BinarySearchTreeNode *node);
+	Status bst_traversal_inorder(BinarySearchTreeNode *node);
+	Status bst_traversal_postorder(BinarySearchTreeNode *node);
 
-	Status bst_traversal_leaves(BinarySearchTreeNode *bsn);
+	Status bst_traversal_leaves(BinarySearchTreeNode *node);
 	
 #ifdef __cplusplus
 }
