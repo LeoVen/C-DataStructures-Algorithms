@@ -39,7 +39,7 @@ extern "C" {
 
 #include "..\DataStructures\Headers\String.h"
 
-	int DataStructuresMenu();
+	int DataStructuresMenu(void);
 
 #ifdef __cplusplus
 }

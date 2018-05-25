@@ -10,7 +10,7 @@
 
 #include "..\Headers\BinaryTree.h"
 
-int BinaryTreeTests()
+int BinaryTreeTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

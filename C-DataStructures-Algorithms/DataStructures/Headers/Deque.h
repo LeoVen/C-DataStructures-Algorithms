@@ -56,7 +56,7 @@ extern "C" {
 	Status deq_init_queue(Deque **deq);
 	Status deq_init_node(DequeNode **node);
 
-	Deque * deq_get_queue();
+	Deque * deq_get_queue(void);
 	DequeNode * deq_get_node(int value);
 
 	Status deq_make_node(DequeNode **node, int value);

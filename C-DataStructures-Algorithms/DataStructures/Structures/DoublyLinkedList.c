@@ -46,7 +46,7 @@ Status dll_init_node(DoublyLinkedNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-DoublyLinkedList * dll_get_list()
+DoublyLinkedList * dll_get_list(void)
 {
 	DoublyLinkedList *dll = malloc(sizeof(DoublyLinkedList));
 

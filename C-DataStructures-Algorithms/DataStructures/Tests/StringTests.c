@@ -10,7 +10,7 @@
 
 #include "..\Headers\String.h"
 
-int StringTests()
+int StringTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

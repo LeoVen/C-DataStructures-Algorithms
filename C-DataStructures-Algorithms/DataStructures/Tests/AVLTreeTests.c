@@ -10,7 +10,7 @@
 
 #include "..\Headers\AVLTree.h"
 
-int AVLTreeTests()
+int AVLTreeTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

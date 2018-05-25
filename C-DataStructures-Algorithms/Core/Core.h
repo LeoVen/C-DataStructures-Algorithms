@@ -57,7 +57,7 @@ extern "C" {
 
 	void print_status_repr(Status status);
 
-	int dev_short_cut();
+	int dev_short_cut(void);
 
 #ifdef __cplusplus
 }

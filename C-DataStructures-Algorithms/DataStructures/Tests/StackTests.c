@@ -10,7 +10,7 @@
 
 #include "..\Headers\Stack.h"
 
-int StackTests()
+int StackTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

@@ -14,13 +14,13 @@
 extern "C" {
 #endif
 
-	int CryptographyTests();
+	int CryptographyTests(void);
 
-	int GeneratorsTests();
+	int GeneratorsTests(void);
 
-	int MathematicsTests();
+	int MathematicsTests(void);
 
-	int SortingTests();
+	int SortingTests(void);
 
 #ifdef __cplusplus
 }

@@ -47,7 +47,7 @@ Status que_init_node(QueueNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Queue * que_get_queue()
+Queue * que_get_queue(void)
 {
 	Queue *que = malloc(sizeof(Queue));
 

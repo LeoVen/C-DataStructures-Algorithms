@@ -13,7 +13,7 @@
 
 #include "..\Headers\SinglyLinkedList.h"
 
-int SinglyLinkedListTests()
+int SinglyLinkedListTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

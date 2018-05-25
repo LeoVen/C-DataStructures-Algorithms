@@ -13,7 +13,7 @@
 
 #include "..\Headers\CircularLinkedList.h"
 
-int CircularLinkedListTests()
+int CircularLinkedListTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

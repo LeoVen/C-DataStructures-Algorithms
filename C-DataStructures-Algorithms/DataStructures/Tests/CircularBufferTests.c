@@ -10,7 +10,7 @@
 
 #include "..\Headers\CircularBuffer.h"
 
-int CircularBufferTests()
+int CircularBufferTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

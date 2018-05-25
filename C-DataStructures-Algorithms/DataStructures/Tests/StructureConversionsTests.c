@@ -13,7 +13,7 @@
 
 #include "..\Headers\StructureConversions.h"
 
-int StructureConversionsTests()
+int StructureConversionsTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

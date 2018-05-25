@@ -10,7 +10,7 @@
 
 #include "..\Headers\Deque.h"
 
-int DequeTests()
+int DequeTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

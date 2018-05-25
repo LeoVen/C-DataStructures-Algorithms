@@ -57,7 +57,7 @@ extern "C" {
 	Status sll_init_list(SinglyLinkedList **sll);
 	Status sll_init_node(SinglyLinkedNode **node);
 
-	SinglyLinkedList * sll_get_list();
+	SinglyLinkedList * sll_get_list(void);
 	SinglyLinkedNode * sll_get_node(int value);
 
 	Status sll_make_node(SinglyLinkedNode **node, int value);

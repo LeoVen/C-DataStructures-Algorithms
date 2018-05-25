@@ -10,7 +10,7 @@
 
 #include "..\Generators\Generators.h"
 
-int GeneratorsTests()
+int GeneratorsTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

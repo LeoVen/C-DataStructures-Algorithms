@@ -51,7 +51,7 @@ extern "C" {
 	Status bst_init_tree(BinarySearchTree **bst);
 	Status bst_init_node(BinarySearchTreeNode **node);
 
-	BinarySearchTree * bst_get_tree();
+	BinarySearchTree * bst_get_tree(void);
 	BinarySearchTreeNode * bst_get_node(int value);
 
 	Status bst_make_node(BinarySearchTreeNode **node, int value);

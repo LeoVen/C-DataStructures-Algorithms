@@ -44,7 +44,7 @@ Status stk_init_box(StackBox **box)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Stack * stk_get_stack()
+Stack * stk_get_stack(void)
 {
 	Stack *stk = malloc(sizeof(Stack));
 	

@@ -11,11 +11,11 @@
 #include "..\Core\Core.h"
 #include "..\Core\DataStructuresTests.h"
 
-int ds_all();
-int ds_print_menu();
+int ds_all(void);
+int ds_print_menu(void);
 bool ds_switch_function(int f);
 
-int DataStructuresMenu()
+int DataStructuresMenu(void)
 {
 	system(CLEAR_SCREEN);
 
@@ -88,7 +88,7 @@ int DataStructuresMenu()
 	return 0;
 }
 
-int ds_print_menu()
+int ds_print_menu(void)
 {
 	printf(" +--------------------------------------------------------------------+\n");
 	printf(" |                                                                    |\n");
@@ -179,7 +179,7 @@ bool ds_switch_function(int f)
 	return true;
 }
 
-int ds_all()
+int ds_all(void)
 {
 	SinglyLinkedListTests();
 	DoublyLinkedListTests();
@@ -196,6 +196,7 @@ int ds_all()
 	
 	BinaryTreeTests();
 	BinarySearchTreeTests();
+	AVLTreeTests();
 
 	ArrayTests();
 	DynamicArrayTests();

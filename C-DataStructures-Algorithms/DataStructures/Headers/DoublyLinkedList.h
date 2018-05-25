@@ -61,7 +61,7 @@ extern "C" {
 	Status dll_init_list(DoublyLinkedList **dll);
 	Status dll_init_node(DoublyLinkedNode **node);
 
-	DoublyLinkedList * dll_get_list();
+	DoublyLinkedList * dll_get_list(void);
 	DoublyLinkedNode * dll_get_node(int value);
 
 	Status dll_make_node(DoublyLinkedNode **node, int value);

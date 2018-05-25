@@ -51,7 +51,7 @@ Status bst_init_node(BinarySearchTreeNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+*
 
-BinarySearchTree * bst_get_tree()
+BinarySearchTree * bst_get_tree(void)
 {
 	BinarySearchTree *bst = malloc(sizeof(BinarySearchTree));
 

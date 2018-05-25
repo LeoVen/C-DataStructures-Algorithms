@@ -13,7 +13,7 @@
 
 #include "..\Headers\Array.h"
 
-int DS_SortingTests() {
+int DS_SortingTests(void) {
 
 	printf("\n");
 	printf(" +-------------------------------------+\n");

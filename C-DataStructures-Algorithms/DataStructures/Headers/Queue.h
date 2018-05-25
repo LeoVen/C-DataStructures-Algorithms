@@ -53,7 +53,7 @@ extern "C" {
 	Status que_init_queue(Queue **que);
 	Status que_init_node(QueueNode **node);
 
-	Queue * que_get_queue();
+	Queue * que_get_queue(void);
 	QueueNode * que_get_node(int value);
 
 	Status que_make_node(QueueNode **node, int value);

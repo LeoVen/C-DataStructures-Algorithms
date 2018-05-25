@@ -14,32 +14,33 @@
 extern "C" {
 #endif
 
-	int SinglyLinkedListTests();
-	int DoublyLinkedListTests();
-	int CircularLinkedListTests();
-	int SparseMatrixTests();
+	int SinglyLinkedListTests(void);
+	int DoublyLinkedListTests(void);
+	int CircularLinkedListTests(void);
+	int SparseMatrixTests(void);
 
-	int StackTests();
+	int StackTests(void);
 	//int StaticStackTests();
 
-	int QueueTests();
-	int DequeTests();
-	int PriorityQueueTests();
-	int CircularBufferTests();
+	int QueueTests(void);
+	int DequeTests(void);
+	int PriorityQueueTests(void);
+	int CircularBufferTests(void);
 
-	int BinaryTreeTests();
-	int BinarySearchTreeTests();
+	int BinaryTreeTests(void);
+	int BinarySearchTreeTests(void);
+	int AVLTreeTests(void);
 
-	int ArrayTests();
-	int DynamicArrayTests();
+	int ArrayTests(void);
+	int DynamicArrayTests(void);
 
-	int VectorTests();
+	int VectorTests(void);
 
-	int StructureConversionsTests();
+	int StructureConversionsTests(void);
 
-	int StringTests();
+	int StringTests(void);
 
-	int SortingTests();
+	int SortingTests(void);
 
 #ifdef __cplusplus
 }

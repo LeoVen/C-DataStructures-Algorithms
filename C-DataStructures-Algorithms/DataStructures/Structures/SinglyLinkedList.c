@@ -105,7 +105,7 @@ Status sll_init_node(SinglyLinkedNode **node)
  * @note Avoid using this function as it does not return a status code and
  * does not check for failures. Give preference to @c sll_init_list().
  */
-SinglyLinkedList * sll_get_list()
+SinglyLinkedList * sll_get_list(void)
 {
 	SinglyLinkedList *sll = malloc(sizeof(SinglyLinkedList));
 

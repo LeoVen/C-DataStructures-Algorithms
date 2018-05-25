@@ -10,7 +10,7 @@
 
 #include "..\Headers\Queue.h"
 
-int QueueTests()
+int QueueTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

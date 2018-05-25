@@ -13,7 +13,7 @@
 
 #include "..\Headers\DoublyLinkedList.h"
 
-int DoublyLinkedListTests()
+int DoublyLinkedListTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

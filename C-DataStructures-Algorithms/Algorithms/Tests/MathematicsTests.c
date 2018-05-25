@@ -12,7 +12,7 @@
 #include "..\..\Core\Algorithms.h"
 
 
-int MathematicsTests()
+int MathematicsTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

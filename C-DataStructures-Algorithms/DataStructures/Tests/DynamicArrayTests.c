@@ -13,7 +13,7 @@
 
 #include "..\Headers\DynamicArray.h"
 
-int DynamicArrayTests()
+int DynamicArrayTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

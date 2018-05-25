@@ -10,7 +10,7 @@
 
 #include "..\Headers\SparseMatrix.h"
 
-int SparseMatrixTests()
+int SparseMatrixTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

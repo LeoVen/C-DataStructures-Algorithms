@@ -10,7 +10,7 @@
 
 #include "..\Headers\PriorityQueue.h"
 
-int PriorityQueueTests()
+int PriorityQueueTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

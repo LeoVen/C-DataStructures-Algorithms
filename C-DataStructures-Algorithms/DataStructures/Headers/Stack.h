@@ -53,7 +53,7 @@ extern "C" {
 	Status stk_init_stack(Stack **stk);
 	Status stk_init_box(StackBox **box);
 
-	Stack * stk_get_stack();
+	Stack * stk_get_stack(void);
 	StackBox * stk_get_box(int value);
 
 	Status stk_make_box(StackBox **box, int value);

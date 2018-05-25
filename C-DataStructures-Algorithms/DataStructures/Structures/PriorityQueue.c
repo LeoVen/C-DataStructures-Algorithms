@@ -48,7 +48,7 @@ Status prq_init_node(PriorityQueueNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-PriorityQueue * prq_get_queue()
+PriorityQueue * prq_get_queue(void)
 {
 	PriorityQueue *prq = malloc(sizeof(PriorityQueue));
 

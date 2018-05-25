@@ -12,7 +12,7 @@
 #include "AlgorithmsTests.h"
 #include "DataStructuresTests.h"
 
-int dev_short_cut()
+int dev_short_cut(void)
 {
 
 	BinaryTreeTests();

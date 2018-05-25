@@ -56,7 +56,7 @@ extern "C" {
 	Status prq_init_queue(PriorityQueue **prq);
 	Status prq_init_node(PriorityQueueNode **node);
 
-	PriorityQueue * prq_get_queue();
+	PriorityQueue * prq_get_queue(void);
 	PriorityQueueNode * prq_get_node(int value, int priority);
 
 	Status prq_make_node(PriorityQueueNode **node, int value, int priority);

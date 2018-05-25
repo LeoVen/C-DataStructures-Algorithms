@@ -11,7 +11,7 @@
 #include "..\..\Core\Core.h"
 #include "..\..\Core\Algorithms.h"
 
-int CryptographyTests()
+int CryptographyTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

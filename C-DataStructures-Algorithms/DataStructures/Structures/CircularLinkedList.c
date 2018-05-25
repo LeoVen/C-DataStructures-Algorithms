@@ -44,7 +44,7 @@ Status cll_init_node(CircularLinkedNode **cln)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-CircularLinkedList * cll_get_list()
+CircularLinkedList * cll_get_list(void)
 {
 	CircularLinkedList *cll = malloc(sizeof(CircularLinkedList));
 

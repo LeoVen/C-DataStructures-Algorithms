@@ -13,7 +13,7 @@
 
 #include "..\Headers\Vector.h"
 
-int VectorTests()
+int VectorTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

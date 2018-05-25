@@ -48,7 +48,7 @@ Status deq_init_node(DequeNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Deque * deq_get_queue()
+Deque * deq_get_queue(void)
 {
 	Deque *deq = malloc(sizeof(Deque));
 

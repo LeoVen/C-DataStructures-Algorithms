@@ -22,7 +22,7 @@ extern "C" {
 #include "..\Algorithms\Mathematics\Mathematics.h"
 #include "..\Algorithms\Sorting\Sorting.h"
 
-	int AlgorithmsMenu();
+	int AlgorithmsMenu(void);
 
 #ifdef __cplusplus
 }

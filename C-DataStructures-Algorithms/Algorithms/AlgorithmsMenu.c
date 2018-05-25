@@ -11,11 +11,11 @@
 #include "..\Core\Core.h"
 #include "..\Core\AlgorithmsTests.h"
 
-int alg_all();
-int alg_print_menu();
+int alg_all(void);
+int alg_print_menu(void);
 int alg_switch_function(int f);
 
-int AlgorithmsMenu()
+int AlgorithmsMenu(void)
 {
 	system(CLEAR_SCREEN);
 
@@ -51,7 +51,7 @@ int AlgorithmsMenu()
 	return 0;
 }
 
-int alg_print_menu()
+int alg_print_menu(void)
 {
 	printf(" +--------------------------------------------------------------------+\n");
 	printf(" |                                                                    |\n");
@@ -108,7 +108,7 @@ int alg_switch_function(int f)
 	return true;
 }
 
-int alg_all()
+int alg_all(void)
 {
 	GeneratorsTests();
 

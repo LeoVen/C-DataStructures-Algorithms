@@ -13,7 +13,7 @@
 
 #include "..\Headers\Array.h"
 
-int ArrayTests()
+int ArrayTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");

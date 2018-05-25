@@ -11,7 +11,7 @@
 #include "..\..\Core\Algorithms.h"
 
 
-int SortingTests()
+int SortingTests(void)
 {
 	printf("\n");
 	printf(" +-------------------------------------+\n");
