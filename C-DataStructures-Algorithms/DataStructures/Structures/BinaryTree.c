@@ -123,7 +123,9 @@ Status bt_display_raw(BinaryTree *root)
 	bt_display_raw(root->right);
 
 	printf("\n");
-	for (int i = 0; i < root->level * BT_PRINT_SPACES; i++)
+
+	size_t i;
+	for (i = 0; i < root->level * BT_PRINT_SPACES; i++)
 		printf(" ");
 	printf("%d\n", root->data);
 

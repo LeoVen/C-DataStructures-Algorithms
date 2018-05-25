@@ -74,7 +74,7 @@ Status arr_push(Array *arr, int value)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 	int ok = 0;
 
 	for (i = 0; i < arr->size; i++) {
@@ -147,7 +147,7 @@ Status arr_display(Array *arr)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 
 	printf("\nC Array\n[ ");
 	
@@ -166,7 +166,7 @@ Status arr_display_raw(Array *arr)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 
 	printf("\n");
 
@@ -189,7 +189,7 @@ Status arr_erase(Array *arr)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 
 	for (i = 0; i < arr->size; i++) {
 	
@@ -223,7 +223,7 @@ Status arr_max(Array *arr, int *result)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 	int min = arr->buffer[0];
 
 	for (i = 1; i < arr->size; i++) {
@@ -247,7 +247,7 @@ Status arr_min(Array *arr, int *result)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 	int min = arr->buffer[0];
 
 	for (i = 1; i < arr->size; i++) {
@@ -271,7 +271,7 @@ Status arr_frequency(Array *arr, int key, int *result)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 	for (i = 0; i < arr->size; i++) {
 	
 		if (arr->buffer[i] == key)
@@ -287,7 +287,8 @@ Status arr_key_positions(Array *arr, Array **result, int key)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i, j = 0, total = 0;
+	size_t i, j = 0;
+	int total = 0;
 
 	Status st = arr_frequency(arr, key, &total);
 
@@ -334,7 +335,7 @@ Status arr_copy(Array *arr, Array **result)
 	if (!(*result))
 		return DS_ERR_ALLOC;
 
-	int i;
+	size_t i;
 	for (i = 0; i < arr->size; i++)
 		(*result)->buffer[i] = arr->buffer[i];
 
@@ -367,7 +368,7 @@ Status arr_reverse(Array *arr)
 
 	Status st;
 
-	int i;
+	size_t i;
 	for (i = 0; i < arr->size / 2; i++) {
 
 		st = arr_switch(arr, i, arr->size - i - 1);
@@ -388,7 +389,7 @@ Status arr_blend(Array *arr)
 	if (arr->size < 2)
 		return DS_ERR_INVALID_OPERATION;
 
-	int i;
+	size_t i;
 
 	size_t loop = arr->size * 100;
 	for (i = 0; i < loop; i++) {
@@ -407,7 +408,7 @@ Status arr_sort_bubble(Array *arr)
 	if (arr->size < 2)
 		return DS_ERR_INVALID_OPERATION;
 
-	int i, j;
+	size_t i, j;
 	for (i = 0; i < arr->size - 1; i++) {
 
 		for (j = 0; j < arr->size - i - 1; j++) {
@@ -431,7 +432,7 @@ Status arr_sort_selection(Array *arr)
 	if (arr->size < 2)
 		return DS_ERR_INVALID_OPERATION;
 
-	int i, j, min;
+	size_t i, j, min;
 
 	for (i = 0; i < arr->size - 1; i++) {
 
@@ -455,14 +456,15 @@ Status arr_sort_insertion(Array *arr)
 	if (arr->size < 2)
 		return DS_ERR_INVALID_OPERATION;
 
-	int i, j, num;
+	size_t i, j;
+	int num;
 	for (i = 1; i < arr->size; i++) {
 
 		num = arr->buffer[i];
 
 		j = i - 1;
 
-		while (j >= 0 && arr->buffer[j] > num)
+		while (arr->buffer[j] > num)
 		{
 			arr->buffer[j + 1] = arr->buffer[j];
 			j--;

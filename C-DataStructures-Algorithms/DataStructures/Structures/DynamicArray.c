@@ -100,7 +100,7 @@ Status darr_display(DynamicArray *darr)
 	if (darr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 
 	if (darr->size == 0) {
 
@@ -126,7 +126,7 @@ Status darr_display_raw(DynamicArray *darr)
 	if (darr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 
 	if (darr->size == 0) {
 
@@ -156,7 +156,7 @@ Status darr_erase(DynamicArray *darr)
 	if (darr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	int i;
+	size_t i;
 
 	for (i = 0; i < darr->size; i++) {
 
@@ -214,7 +214,7 @@ Status darr_shrink(DynamicArray **darr)
 	
 	DynamicArray *kill = (*darr);
 
-	int i;
+	size_t i;
 	for (i = 0; i < (*darr)->size; i++) {
 
 		nArray->buffer[i] = (*darr)->buffer[i];
@@ -248,7 +248,7 @@ Status darr_grow(DynamicArray **darr)
 
 	DynamicArray *kill = (*darr);
 
-	int i;
+	size_t i;
 	for (i = 0; i < (*darr)->size; i++) {
 
 		nArray->buffer[i] = (*darr)->buffer[i];

@@ -215,7 +215,7 @@ Status bst_display_raw(BinarySearchTreeNode *node)
 
 	bst_display_raw(node->left);
 
-	int i;
+	size_t i;
 	for (i = 0; i < node->level * BT_PRINT_SPACES; i++)
 		printf(" ");
 	printf("%d\n", node->data);
@@ -232,7 +232,7 @@ Status bst_display_interactive(BinarySearchTreeNode *node)
 
 	bst_display_interactive(node->left);
 
-	int i;
+	size_t i;
 	for (i = 0; i < node->level; i++)
 		printf("|-------");
 
@@ -254,7 +254,7 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 
 	bst_display_clean(node->left);
 
-	int i;
+	size_t i;
 	for (i = 0; i < node->level; i++)
 		printf("|       ");
 

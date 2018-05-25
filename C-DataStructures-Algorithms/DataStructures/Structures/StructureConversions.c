@@ -53,7 +53,7 @@ Status convert_sll_to_arr(SinglyLinkedList *sll, Array **arr)
 	if (!(*arr))
 		return DS_ERR_ALLOC;
 
-	int i;
+	size_t i;
 	for (i = 0; i < list_size; i++) {
 
 		if (scan == NULL)

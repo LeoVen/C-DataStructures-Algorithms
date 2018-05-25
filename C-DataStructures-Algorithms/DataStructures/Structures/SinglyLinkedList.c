@@ -333,7 +333,7 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
 	
 	SinglyLinkedNode *scanner = sll->head;
 
-	int i;
+	size_t i;
 	for (i = 0; i < position; i++) {
 
 		if (scanner == NULL)
@@ -393,7 +393,7 @@ Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value)
 
 	SinglyLinkedNode *curr = sll->head;
 
-	int i;
+	size_t i;
 	for (i = 0; i < position; i++) {
 
 		if (curr == NULL)

@@ -148,7 +148,7 @@ Status dll_get_node_data(DoublyLinkedList *dll, size_t position, int *result)
 
 	DoublyLinkedNode *scanner = dll->head;
 
-	int i;
+	size_t i;
 	for (i = 0; i < position; i++) {
 
 		if (scanner == NULL)
@@ -176,7 +176,7 @@ Status dll_update_node_data(DoublyLinkedList *dll, int value, size_t position)
 
 	DoublyLinkedNode *curr = dll->head;
 
-	int i;
+	size_t i;
 	for (i = 0; i < position; i++) {
 
 		if (curr == NULL)

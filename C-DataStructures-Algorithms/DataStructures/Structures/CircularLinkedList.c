@@ -284,7 +284,7 @@ Status cll_iter(CircularLinkedList *cll, size_t positions)
 	if (cll->length == 0 || cll->curr == NULL)
 		return DS_ERR_INVALID_OPERATION;
 
-	int i;
+	size_t i;
 	for (i = 0; i < positions; i++)
 		cll->curr = cll->curr->next;
 
@@ -463,10 +463,13 @@ Status cll_josephus(size_t n, size_t k, size_t *result)
 	if (!cll)
 		return DS_ERR_ALLOC;
 
-	int i;
+	size_t i;
+	int val = 1;
 	for (i = 1; i <= n; i++) {
 
-		cll_insert_after(cll, i);
+		cll_insert_after(cll, val);
+
+		val++;
 
 	}
 
