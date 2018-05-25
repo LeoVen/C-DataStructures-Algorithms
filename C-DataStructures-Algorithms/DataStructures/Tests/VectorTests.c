@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\Headers\Vector.h"
+#include "Vector.h"
 
 int VectorTests(void)
 {

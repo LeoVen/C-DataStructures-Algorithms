@@ -8,8 +8,8 @@
  *
  */
 
-#include "..\..\Core\Core.h"
-#include "..\..\Core\Algorithms.h"
+#include "Core.h"
+#include "Algorithms.h"
 
 
 int MathematicsTests(void)

@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\Headers\StructureConversions.h"
+#include "StructureConversions.h"
 
 int StructureConversionsTests(void)
 {

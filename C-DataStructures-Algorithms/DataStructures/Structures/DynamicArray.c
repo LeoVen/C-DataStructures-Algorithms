@@ -10,7 +10,7 @@
  *
  */
 
-#include "..\Headers\DynamicArray.h"
+#include "DynamicArray.h"
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |

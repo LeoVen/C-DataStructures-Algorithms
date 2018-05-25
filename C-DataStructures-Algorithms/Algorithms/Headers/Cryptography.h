@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Algorithms.h"
+#include "Algorithms.h"
 
 	Status caesar_cipher(char *string, char **result, int shifts);
 	Status caesar_decipher(char *string, char **result, int shifts);

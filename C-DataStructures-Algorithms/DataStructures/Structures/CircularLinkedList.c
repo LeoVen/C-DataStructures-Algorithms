@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\CircularLinkedList.h"
+#include "CircularLinkedList.h"
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |

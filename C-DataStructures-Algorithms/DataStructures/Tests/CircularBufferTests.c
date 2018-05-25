@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\CircularBuffer.h"
+#include "CircularBuffer.h"
 
 int CircularBufferTests(void)
 {

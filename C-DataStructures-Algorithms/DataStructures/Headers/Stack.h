@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	/**
 	 * A @c StackBox is just like a @c SinglyLinkedNode but it is part of the

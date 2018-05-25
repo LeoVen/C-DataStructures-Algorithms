@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\Headers\DoublyLinkedList.h"
+#include "DoublyLinkedList.h"
 
 int DoublyLinkedListTests(void)
 {

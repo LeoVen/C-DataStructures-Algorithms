@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\Headers\Array.h"
+#include "Array.h"
 
 int ArrayTests(void)
 {

@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\Headers\DynamicArray.h"
+#include "DynamicArray.h"
 
 int DynamicArrayTests(void)
 {

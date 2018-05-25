@@ -8,8 +8,8 @@
  *
  */
 
-#include "..\Core\Core.h"
-#include "..\Core\AlgorithmsTests.h"
+#include "Core.h"
+#include "AlgorithmsTests.h"
 
 int alg_all(void);
 int alg_print_menu(void);

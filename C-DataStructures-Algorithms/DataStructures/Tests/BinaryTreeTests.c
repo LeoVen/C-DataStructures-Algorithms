@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\BinaryTree.h"
+#include "BinaryTree.h"
 
 int BinaryTreeTests(void)
 {

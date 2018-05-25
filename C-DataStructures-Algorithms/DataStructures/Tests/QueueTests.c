@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\Queue.h"
+#include "Queue.h"
 
 int QueueTests(void)
 {

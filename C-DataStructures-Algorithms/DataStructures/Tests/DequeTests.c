@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\Deque.h"
+#include "Deque.h"
 
 int DequeTests(void)
 {

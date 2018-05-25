@@ -14,8 +14,8 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
-#include "..\..\Core\DataStructures.h"
+#include "Core.h"
+#include "DataStructures.h"
 
 	// +-------------------------------------+
 	// |              SLL -> X               |

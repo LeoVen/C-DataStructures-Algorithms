@@ -22,7 +22,7 @@
  *
  */
 
-#include "..\Headers\StructureConversions.h"
+#include "StructureConversions.h"
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            SLL -> X                                             |

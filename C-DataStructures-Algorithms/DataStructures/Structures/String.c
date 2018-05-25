@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\Headers\String.h"
+#include "SString.h"
 
 Status str_make(String **str, char * content)
 {

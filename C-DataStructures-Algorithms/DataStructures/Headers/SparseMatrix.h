@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	/**
 	 * Sparse Matrix using @c DoublyLinkedList.

@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	typedef struct Vector Vector;
 	typedef struct SimpleVector SimpleVector;

@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(ProjectDir)\DataStructures\Headers;$(ProjectDir)\Algorithms\Headers;$(ProjectDir)\Core\Headers;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -198,16 +199,16 @@
     <ClCompile Include="DataStructures\Tests\VectorTests.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Algorithms\Cryptography\Cryptography.h" />
-    <ClInclude Include="Algorithms\Generators\Generators.h" />
-    <ClInclude Include="Algorithms\Mathematics\Mathematics.h" />
-    <ClInclude Include="Core\Algorithms.h" />
-    <ClInclude Include="Algorithms\Sorting\Sorting.h" />
-    <ClInclude Include="Core\AlgorithmsTests.h" />
-    <ClInclude Include="Core\Core.h" />
-    <ClInclude Include="Core\Display.h" />
-    <ClInclude Include="Core\DataStructures.h" />
-    <ClInclude Include="Core\DataStructuresTests.h" />
+    <ClInclude Include="Algorithms\Headers\Cryptography.h" />
+    <ClInclude Include="Algorithms\Headers\Generators.h" />
+    <ClInclude Include="Algorithms\Headers\Mathematics.h" />
+    <ClInclude Include="Core\Headers\Algorithms.h" />
+    <ClInclude Include="Algorithms\Headers\Sorting.h" />
+    <ClInclude Include="Core\Headers\AlgorithmsTests.h" />
+    <ClInclude Include="Core\Headers\Core.h" />
+    <ClInclude Include="Core\Headers\Display.h" />
+    <ClInclude Include="Core\Headers\DataStructures.h" />
+    <ClInclude Include="Core\Headers\DataStructuresTests.h" />
     <ClInclude Include="DataStructures\Headers\Array.h" />
     <ClInclude Include="DataStructures\Headers\AVLTree.h" />
     <ClInclude Include="DataStructures\Headers\BinarySearchTree.h" />
@@ -222,7 +223,7 @@
     <ClInclude Include="DataStructures\Headers\SinglyLinkedList.h" />
     <ClInclude Include="DataStructures\Headers\SparseMatrix.h" />
     <ClInclude Include="DataStructures\Headers\Stack.h" />
-    <ClInclude Include="DataStructures\Headers\String.h" />
+    <ClInclude Include="DataStructures\Headers\SString.h" />
     <ClInclude Include="DataStructures\Headers\StructureConversions.h" />
     <ClInclude Include="DataStructures\Headers\Vector.h" />
   </ItemGroup>

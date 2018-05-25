@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	/**
 	 * A @c PriorityQueueNode is what a @c PriorityQueue is composed of. It has an

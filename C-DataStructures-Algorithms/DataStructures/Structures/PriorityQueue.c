@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\PriorityQueue.h"
+#include "PriorityQueue.h"
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |

@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	/**
 	 * A @c DequeNode is what a @c Deque is composed of. It has an integer as

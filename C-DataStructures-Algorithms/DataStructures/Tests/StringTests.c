@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\String.h"
+#include "SString.h"
 
 int StringTests(void)
 {

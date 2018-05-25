@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\..\Core\Algorithms.h"
+#include "Algorithms.h"
 
 
 int SortingTests(void)

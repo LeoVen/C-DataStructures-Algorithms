@@ -8,8 +8,8 @@
  *
  */
 
-#include "..\Core\Core.h"
-#include "..\Core\DataStructuresTests.h"
+#include "Core.h"
+#include "DataStructuresTests.h"
 
 int ds_all(void);
 int ds_print_menu(void);

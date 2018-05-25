@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	/**
 	 * A @c QueueNode is what a @c Queue is composed of. It has an integer as

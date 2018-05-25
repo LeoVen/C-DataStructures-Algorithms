@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\Headers\CircularLinkedList.h"
+#include "CircularLinkedList.h"
 
 int CircularLinkedListTests(void)
 {

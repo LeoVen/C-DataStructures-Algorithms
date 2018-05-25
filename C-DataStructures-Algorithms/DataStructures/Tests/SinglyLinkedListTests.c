@@ -11,7 +11,7 @@
  *
  */
 
-#include "..\Headers\SinglyLinkedList.h"
+#include "SinglyLinkedList.h"
 
 int SinglyLinkedListTests(void)
 {

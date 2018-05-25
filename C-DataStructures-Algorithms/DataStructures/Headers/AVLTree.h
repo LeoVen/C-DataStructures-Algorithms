@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	/**
 	 * A @c BinarySearchTreeNode is what a @c BinarySearchTree is composed of.

@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\..\Core\Algorithms.h"
+#include "Algorithms.h"
 
 Status generate_array_random(int **array, size_t size)
 {

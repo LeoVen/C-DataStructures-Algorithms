@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	/**
 	 * A @c CircularBuffer, Circular Queue, Cyclic Buffer or a Ring Buffer is a

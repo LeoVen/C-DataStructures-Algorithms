@@ -1,5 +1,5 @@
 /**
- * @file String.h
+ * @file SString.h
  *
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/04/2018
@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "..\..\Core\Core.h"
+#include "Core.h"
 
 	typedef struct String {
 		size_t length;

@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\DoublyLinkedList.h"
+#include "DoublyLinkedList.h"
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |

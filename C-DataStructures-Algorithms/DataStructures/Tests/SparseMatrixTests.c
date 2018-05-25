@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\SparseMatrix.h"
+#include "SparseMatrix.h"
 
 int SparseMatrixTests(void)
 {

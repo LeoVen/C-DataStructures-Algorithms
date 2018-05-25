@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Headers\BinarySearchTree.h"
+#include "BinarySearchTree.h"
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |

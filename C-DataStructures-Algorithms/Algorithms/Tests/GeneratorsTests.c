@@ -8,7 +8,7 @@
  *
  */
 
-#include "..\Generators\Generators.h"
+#include "Generators.h"
 
 int GeneratorsTests(void)
 {
