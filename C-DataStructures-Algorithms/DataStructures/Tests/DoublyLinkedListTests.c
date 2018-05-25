@@ -74,7 +74,8 @@ int DoublyLinkedListTests()
 	
 	dll_init_list(&dll);
 
-	size_t len, i;
+	size_t len;
+	int i;
 	for (i = 0; i < 100; i++) {
 		dll_insert_tail(dll, i);
 	}

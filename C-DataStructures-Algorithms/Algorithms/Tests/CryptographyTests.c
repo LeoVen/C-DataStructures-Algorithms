@@ -25,9 +25,6 @@ int CryptographyTests()
 
 	int shifts = 10;
 
-	if (sizeof(char) == sizeof(int))
-		printf("\nOK");
-
 	char * string = "H ello World";
 
 	printf("\nString   : %s", string);

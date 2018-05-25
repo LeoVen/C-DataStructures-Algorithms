@@ -36,7 +36,7 @@ Status deq_init_node(DequeNode **node)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->data = NULL;
+	(*node)->data = 0;
 
 	(*node)->prev = NULL;
 	(*node)->next = NULL;
@@ -57,7 +57,7 @@ Deque * deq_get_queue()
 
 	deq->length = 0;
 
-	return DS_OK;
+	return deq;
 }
 
 DequeNode * deq_get_node(int value)
@@ -69,7 +69,7 @@ DequeNode * deq_get_node(int value)
 
 	node->data = value;
 
-	return DS_OK;
+	return node;
 }
 
 Status deq_make_node(DequeNode **node, int value)

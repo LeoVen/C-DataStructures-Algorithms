@@ -60,7 +60,7 @@ extern "C" {
 	Status bt_display_raw(BinaryTree *root);
 
 	Status bt_delete(BinaryTree **bt);
-	Status bt_erase(BinaryTree **bt);
+	//Status bt_erase(BinaryTree **bt);
 
 	//Status bt_is_empty(BinaryTree *bt);
 

@@ -122,9 +122,6 @@ int SinglyLinkedListTests()
 
 	sll_display(sll);
 
-	int a = NULL;
-	printf("\nNULL: %d", (int)a); // lol
-
 	for (i = 0; i < 100; i++)
 		sll_insert_tail(sll, rand() % 10);
 

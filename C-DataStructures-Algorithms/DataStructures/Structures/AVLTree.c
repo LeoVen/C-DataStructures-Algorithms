@@ -51,7 +51,20 @@ Status avl_init_node(AVLTreeNode **node)
 
 Status avl_make_node(AVLTreeNode **node, int value)
 {
+	(*node) = malloc(sizeof(AVLTreeNode));
 
+	if (!(*node))
+		return DS_ERR_ALLOC;
+
+	(*node)->data = value;
+	(*node)->level = 0;
+
+	(*node)->left = NULL;
+	(*node)->right = NULL;
+
+	(*node)->parent = NULL;
+
+	return DS_OK;
 }
 
 // +-------------------------------------------------------------------------------------------------+

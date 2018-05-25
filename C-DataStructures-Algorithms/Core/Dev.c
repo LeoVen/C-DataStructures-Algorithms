@@ -19,7 +19,7 @@ int dev_short_cut()
 	BinarySearchTreeTests();
 
 	printf("\nPress enter to continue...");
-	getch();
+	_getch();
 	printf("\n");
 	return 0;
 }

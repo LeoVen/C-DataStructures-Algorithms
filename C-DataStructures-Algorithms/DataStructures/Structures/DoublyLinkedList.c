@@ -35,7 +35,7 @@ Status dll_init_node(DoublyLinkedNode **node)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->data = NULL;
+	(*node)->data = 0;
 	(*node)->next = NULL;
 	(*node)->prev = NULL;
 
@@ -441,7 +441,7 @@ Status dll_remove_head(DoublyLinkedList *dll)
 	dll->head = dll->head->next;
 
 	if (dll->head == NULL)
-		dll->tail == NULL;
+		dll->tail = NULL;
 	else
 		dll->head->prev = NULL;
 
@@ -530,7 +530,7 @@ Status dll_remove_tail(DoublyLinkedList *dll)
 	dll->tail = dll->tail->prev;
 
 	if (dll->tail == NULL)
-		dll->head == NULL;
+		dll->head = NULL;
 	else
 		dll->tail->next = NULL;
 
@@ -561,7 +561,7 @@ Status dll_remove_node_head(DoublyLinkedList *dll, DoublyLinkedNode **node)
 	dll->head = dll->head->next;
 
 	if (dll->head == NULL)
-		dll->tail == NULL;
+		dll->tail = NULL;
 	else
 		dll->head->prev = NULL;
 
@@ -653,7 +653,7 @@ Status dll_remove_node_tail(DoublyLinkedList *dll, DoublyLinkedNode **node)
 	dll->tail = dll->tail->prev;
 
 	if (dll->tail == NULL)
-		dll->head == NULL;
+		dll->head = NULL;
 	else
 		dll->tail->next = NULL;
 
@@ -821,7 +821,7 @@ Status dll_contains(DoublyLinkedList *dll, int key, bool *result)
 	{
 		if (scan->data == key) {
 
-			result = true;
+			*result = true;
 			break;
 
 		}

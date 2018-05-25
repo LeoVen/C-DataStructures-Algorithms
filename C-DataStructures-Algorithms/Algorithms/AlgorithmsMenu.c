@@ -42,7 +42,7 @@ int AlgorithmsMenu()
 		ok = alg_switch_function(alg);
 		
 		printf("\nPress enter to continue...");
-		getch();
+		_getch();
 
 		system(CLEAR_SCREEN);
 	}

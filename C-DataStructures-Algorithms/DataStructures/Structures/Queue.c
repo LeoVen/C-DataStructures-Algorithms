@@ -36,7 +36,7 @@ Status que_init_node(QueueNode **node)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->data = NULL;
+	(*node)->data = 0;
 
 	(*node)->before = NULL;
 

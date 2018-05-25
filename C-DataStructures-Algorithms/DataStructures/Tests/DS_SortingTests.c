@@ -48,7 +48,7 @@ int DS_SortingTests() {
 	
 	//arr_display(array);
 
-	arr_delete(array);
+	arr_delete(&array);
 
 	return 0;
 }

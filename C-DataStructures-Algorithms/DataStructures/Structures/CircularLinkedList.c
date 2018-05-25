@@ -34,7 +34,7 @@ Status cll_init_node(CircularLinkedNode **cln)
 	if (!(*cln))
 		return DS_ERR_ALLOC;
 
-	(*cln)->data = NULL;
+	(*cln)->data = 0;
 	(*cln)->next = NULL;
 
 	return DS_OK;
@@ -185,7 +185,7 @@ Status cll_remove_current(CircularLinkedList *cll)
 
 	if (cll->length == 1) {
 
-		Status st = cll_remove_last(cll);
+		st = cll_remove_last(cll);
 
 		if (st != DS_OK)
 			return st;

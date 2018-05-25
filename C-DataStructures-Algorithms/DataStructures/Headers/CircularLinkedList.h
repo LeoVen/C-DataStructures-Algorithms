@@ -63,7 +63,7 @@ extern "C" {
 	CircularLinkedList * cll_get_list();
 	CircularLinkedNode * cll_get_node(int value);
 
-	//Status cll_get_length(CircularLinkedList *cll, size_t *result);
+	Status cll_get_length(CircularLinkedList *cll, size_t *result);
 
 	Status cll_make_node(CircularLinkedNode **cln, int value);
 

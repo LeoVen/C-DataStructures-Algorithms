@@ -93,7 +93,7 @@ Status bt_remove(BinaryTree *ref, BTLeaf leaf)
 	if (leaf == Left_bt && ref->left == NULL)
 		return DS_ERR_INVALID_POSITION;
 
-
+	return DS_OK;
 }
 
 // +-------------------------------------------------------------------------------------------------+
@@ -161,10 +161,7 @@ Status bt_delete(BinaryTree **bt)
 	return DS_OK;
 }
 
-Status bt_erase(BinaryTree **bt)
-{
-	return DS_OK;
-}
+//Status bt_erase(BinaryTree **bt)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |

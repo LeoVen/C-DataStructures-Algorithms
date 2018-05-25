@@ -27,7 +27,7 @@
   * @return int Position to be at to avoid being executed
   *
   */
-int Josephus(size_t n, size_t k)
+size_t Josephus(size_t n, size_t k)
 {
 
 	if (n == 1)

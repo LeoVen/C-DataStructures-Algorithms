@@ -32,8 +32,8 @@ int ArrayTests()
 	
 	int i;
 	size_t t;
-	for (t = 0; t < array->size; t++) {
-		arr_insert(array, t, t + 1);
+	for (t = 0, i= 0; t < array->size; t++, i++) {
+		arr_insert(array, t, i + 1);
 	}
 
 	// Copy
@@ -53,9 +53,6 @@ int ArrayTests()
 	}
 	
 	arr_display_raw(array); // All 0's
-
-	print_status_repr(arr_remove(array, -1));    // DS_ERR_INVALID_POSITION
-	print_status_repr(arr_insert(array, -1, 1)); // DS_ERR_INVALID_POSITION
 
 	// Erase
 	for (i = 0; i < array->size; i++) {

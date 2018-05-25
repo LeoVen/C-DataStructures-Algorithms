@@ -31,14 +31,14 @@ Status caesar_cipher(char *string, char **result, int shifts)
 		s = string[i];
 		if (isupper(string[i]))
 		{
-			(*result)[i] = ((s + shifts - 65) % 26) + 65;
+			(*result)[i] = (char)((s + shifts - 65) % 26) + 65;
 		}
 		else if (islower(string[i]))
 		{
-			(*result)[i] = ((s + shifts - 97) % 26) + 97;
+			(*result)[i] = (char)((s + shifts - 97) % 26) + 97;
 		}
 		else
-			(*result)[i] = s;
+			(*result)[i] = (char)s;
 	}
 
 	(*result)[len] = '\0';
@@ -69,14 +69,14 @@ Status caesar_decipher(char *string, char **result, int shifts)
 		s = string[i];
 		if (isupper(string[i]))
 		{
-			(*result)[i] = ((s + shifts - 65) % 26) + 65;
+			(*result)[i] = (char)((s + shifts - 65) % 26) + 65;
 		}
 		else if (islower(string[i]))
 		{
-			(*result)[i] = ((s + shifts - 97) % 26) + 97;
+			(*result)[i] = (char)((s + shifts - 97) % 26) + 97;
 		}
 		else
-			(*result)[i] = s;
+			(*result)[i] = (char)s;
 	}
 
 	(*result)[len] = '\0';

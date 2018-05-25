@@ -20,7 +20,7 @@ int SparseMatrixTests()
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	SparseMatrix spm;
+	SparseMatrix *spm;
 
 	spm_init_matrix(&spm);
 

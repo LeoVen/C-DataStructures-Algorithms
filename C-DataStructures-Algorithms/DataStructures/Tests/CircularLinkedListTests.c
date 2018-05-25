@@ -31,9 +31,6 @@ int CircularLinkedListTests()
 
 	cll_init_node(&cln);
 
-	if (0 == NULL)
-		printf("\nTrue");
-
 	int i;
 	for (i = 0; i < 20; i++) {
 		cll_insert_after(cll, i);

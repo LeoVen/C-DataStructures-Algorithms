@@ -22,8 +22,6 @@ int PriorityQueueTests()
 
 	PriorityQueue *prq;
 
-	Status st = DS_OK;
-
 	size_t i, len = 0;
 
 	prq_init_queue(&prq);
@@ -76,8 +74,9 @@ int PriorityQueueTests()
 
 	prq_erase_queue(&prq);
 
-	for (i = 0; i < 100; i++)
-		prq_enqueue(prq, i, i % 5);
+	int f;
+	for (f = 0; f < 100; f++)
+		prq_enqueue(prq, f, f % 5);
 
 	prq_display(prq);
 

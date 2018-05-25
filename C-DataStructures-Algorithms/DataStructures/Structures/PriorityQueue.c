@@ -36,8 +36,8 @@ Status prq_init_node(PriorityQueueNode **node)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->data = NULL;
-	(*node)->priority = NULL;
+	(*node)->data = 0;
+	(*node)->priority = 0;
 	
 	(*node)->before = NULL;
 

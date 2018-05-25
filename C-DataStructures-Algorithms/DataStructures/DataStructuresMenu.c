@@ -77,7 +77,7 @@ int DataStructuresMenu()
 		ok = ds_switch_function(ds);
 		
 		printf("\nPress enter to continue...");
-		getch();
+		_getch();
 		
 		system(CLEAR_SCREEN);
 	}

@@ -35,7 +35,7 @@ Status stk_init_box(StackBox **box)
 		return DS_ERR_ALLOC;
 
 	(*box)->below = NULL;
-	(*box)->data = NULL;
+	(*box)->data = 0;
 
 	return DS_OK;
 }

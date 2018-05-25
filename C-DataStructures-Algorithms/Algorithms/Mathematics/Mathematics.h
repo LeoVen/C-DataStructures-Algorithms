@@ -16,7 +16,7 @@ extern "C" {
 
 #include "..\..\Core\Algorithms.h"
 
-	int Josephus(size_t n, size_t k);
+	size_t Josephus(size_t n, size_t k);
 
 #ifdef __cplusplus
 }

@@ -76,7 +76,7 @@ Status sll_init_node(SinglyLinkedNode **node)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->data = NULL;
+	(*node)->data = 0;
 	(*node)->next = NULL;
 
 	return DS_OK;
@@ -1410,7 +1410,7 @@ Status sll_contains(SinglyLinkedList *sll, int key, bool *result)
 	{
 		if (scan->data == key) {
 
-			result = true;
+			*result = true;
 			break;
 
 		}
@@ -1645,9 +1645,6 @@ Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t positi
 
 	if (sll_is_empty(sll1) || sll_is_empty(sll2))
 		return DS_ERR_INVALID_OPERATION;
-
-	Status st;
-
 
 	if (position == 0) {
 

@@ -55,9 +55,6 @@ BinarySearchTree * bst_get_tree()
 {
 	BinarySearchTree *bst = malloc(sizeof(BinarySearchTree));
 
-	if (!bst)
-		return DS_ERR_ALLOC;
-
 	bst->root = NULL;
 
 	bst->depth = 0;
@@ -224,6 +221,8 @@ Status bst_display_raw(BinarySearchTreeNode *node)
 	printf("%d\n", node->data);
 
 	bst_display_raw(node->right);
+
+	return DS_OK;
 }
 
 Status bst_display_interactive(BinarySearchTreeNode *node)
@@ -234,7 +233,7 @@ Status bst_display_interactive(BinarySearchTreeNode *node)
 	bst_display_interactive(node->left);
 
 	int i;
-	for (int i = 0; i < node->level; i++)
+	for (i = 0; i < node->level; i++)
 		printf("|-------");
 
 	if (node->parent != NULL)
@@ -244,6 +243,8 @@ Status bst_display_interactive(BinarySearchTreeNode *node)
 
 
 	bst_display_interactive(node->right);
+
+	return DS_OK;
 }
 
 Status bst_display_clean(BinarySearchTreeNode *node)
@@ -254,7 +255,7 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 	bst_display_clean(node->left);
 
 	int i;
-	for (int i = 0; i < node->level; i++)
+	for (i = 0; i < node->level; i++)
 		printf("|       ");
 
 	if (node->parent != NULL)
@@ -264,6 +265,8 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 
 
 	bst_display_clean(node->right);
+
+	return DS_OK;
 }
 
 // +-------------------------------------------------------------------------------------------------+
@@ -391,4 +394,6 @@ Status bst_traversal_leaves(BinarySearchTreeNode *node)
 	if (node->left == NULL && node->right == NULL) {
 		printf(" %d", node->data);
 	}
+
+	return DS_OK;
 }

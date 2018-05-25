@@ -23,6 +23,8 @@ extern "C" {
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <ctype.h>
+#include <conio.h>
 
 #define CLEAR_SCREEN "cls"
 //#define CLEAR_SCREEN "clear"
