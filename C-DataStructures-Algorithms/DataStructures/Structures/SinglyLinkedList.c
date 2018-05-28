@@ -242,6 +242,7 @@ Status sll_get_length(SinglyLinkedList *sll, size_t *result)
  *
  * @param[in] sll Reference to a @c SinglyLinkedList
  * @param[out] result Resulting node
+ * @param[in] position Valid position of desired node
  *
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if referenced list points to NULL
