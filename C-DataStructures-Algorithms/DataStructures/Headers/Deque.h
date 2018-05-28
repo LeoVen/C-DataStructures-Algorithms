@@ -85,6 +85,12 @@ extern "C" {
 
 	bool deq_is_empty(Deque *deq);
 
+	//Status deq_find_max(Deque *que, int *result);
+	//Status deq_find_min(Deque *que, int *result);
+
+	//Status deq_copy_node(DequeNode *node, DequeNode **result);
+	//Status deq_copy_queue(Deque *que, Deque **result);
+
 #ifdef __cplusplus
 }
 #endif;

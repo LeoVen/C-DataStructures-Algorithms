@@ -81,8 +81,14 @@ extern "C" {
 
 	bool prq_is_empty(PriorityQueue *prq);
 
+	//Status prq_find_max(PriorityQueue *que, int *result);
+	//Status prq_find_min(PriorityQueue *que, int *result);
+
 	Status prq_priority_highest(PriorityQueue *prq, int *result);
 	Status prq_priority_lowest(PriorityQueue *prq, int *result);
+
+	//Status prq_copy_node(PriorityQueueNode *node, PriorityQueueNode **result);
+	//Status prq_copy_queue(PriorityQueue *que, PriorityQueue **result);
 
 
 #ifdef __cplusplus

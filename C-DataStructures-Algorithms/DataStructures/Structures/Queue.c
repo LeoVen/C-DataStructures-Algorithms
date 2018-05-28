@@ -352,3 +352,13 @@ bool que_is_empty(Queue *que)
 {
 	return (que->length == 0 || que->rear == NULL);
 }
+
+//Status que_find_max(Queue *que, int *result);
+//Status que_find_min(Queue *que, int *result);
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Copy                                                |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status que_copy_node(QueueNode *node, QueueNode **result);
+//Status que_copy_queue(Queue *que, Queue **result);

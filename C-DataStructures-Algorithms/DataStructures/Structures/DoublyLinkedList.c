@@ -144,21 +144,16 @@ Status dll_get_node_data(DoublyLinkedList *dll, size_t position, int *result)
 	if (position >= dll->length)
 		return DS_ERR_INVALID_POSITION;
 
-	*result = dll->head->data;
+	*result = 0;
 
-	DoublyLinkedNode *scanner = dll->head;
+	DoublyLinkedNode *curr = NULL;
 
-	size_t i;
-	for (i = 0; i < position; i++) {
+	Status st = dll_get_node_at(dll, &curr, position);
 
-		if (scanner == NULL)
-			return DS_ERR_ITER;
-
-		scanner = scanner->next;
-
-	}
-
-	*result = scanner->data;
+	if (st != DS_OK)
+		return st;
+	
+	*result = curr->data;
 
 	return DS_OK;
 }
@@ -174,16 +169,12 @@ Status dll_update_node_data(DoublyLinkedList *dll, int value, size_t position)
 	if (position >= dll->length)
 		return DS_ERR_INVALID_POSITION;
 
-	DoublyLinkedNode *curr = dll->head;
+	DoublyLinkedNode *curr = NULL;
 
-	size_t i;
-	for (i = 0; i < position; i++) {
+	Status st = dll_get_node_at(dll, &curr, position);
 
-		if (curr == NULL)
-			return  DS_ERR_ITER;
-
-		curr = curr->next;
-	}
+	if (st != DS_OK)
+		return st;
 
 	curr->data = value;
 
@@ -858,6 +849,8 @@ bool dll_is_empty(DoublyLinkedList *dll)
 	return (dll->length == 0 || dll->head == NULL);
 }
 
+//bool dll_is_sorted(DoublyLinkedList *dll);
+
 Status dll_find_max(DoublyLinkedList *dll, int *result)
 {
 	if (dll == NULL)
@@ -908,10 +901,104 @@ Status dll_find_min(DoublyLinkedList *dll, int *result)
 	return DS_OK;
 }
 
-//Status dll_occurrance_list(DoublyLinkedList *dll, DoublyLinkedList **result, int key);
+Status dll_occurrance_list(DoublyLinkedList *dll, DoublyLinkedList **result, int key)
+{
+	if (dll == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status dll_find_occurrance_first(DoublyLinkedList *dll, int key, size_t *position);
-//Status dll_find_occurrance_last(DoublyLinkedList *dll, int key, size_t *position);
+	if (dll_is_empty(dll))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st = dll_init_list(result);
+
+	if (st != DS_OK)
+		return st;
+
+	DoublyLinkedNode *scan = dll->head;
+
+	int data, i = 0;
+
+	while (scan != NULL)
+	{
+
+		if (scan->data == key) {
+
+			st = dll_insert_tail((*result), i);
+
+			if (st != DS_OK)
+				return st;
+
+		}
+
+		scan = scan->next;
+
+		i++;
+
+	}
+
+	return DS_OK;
+}
+
+Status dll_find_occurrance_first(DoublyLinkedList *dll, int key, size_t *position)
+{
+	*position = 0;
+
+	if (dll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dll_is_empty(dll))
+		return DS_ERR_NOT_FOUND;
+
+	DoublyLinkedNode *scan = dll->head;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key)
+			return DS_OK;
+
+		(*position)++;
+
+		scan = scan->next;
+
+	}
+
+	return DS_ERR_NOT_FOUND;
+}
+
+Status dll_find_occurrance_last(DoublyLinkedList *dll, int key, size_t *position)
+{
+	*position = 0;
+
+	if (dll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dll_is_empty(dll))
+		return DS_ERR_NOT_FOUND;
+
+	DoublyLinkedNode *scan = dll->head;
+
+	bool found = false;
+
+	size_t iter = 0;
+
+	while (scan != NULL)
+	{
+		if (scan->data == key) {
+			found = true;
+			*position = iter;
+		}
+
+		iter++;
+
+		scan = scan->next;
+
+	}
+
+	if (found)
+		return DS_OK;
+
+	return DS_ERR_NOT_FOUND;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                         Slice / Link                                            |

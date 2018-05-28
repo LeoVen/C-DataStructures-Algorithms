@@ -469,3 +469,13 @@ bool deq_is_empty(Deque *deq)
 {
 	return (deq->length == 0 || deq->rear == NULL);
 }
+
+//Status deq_find_max(Deque *que, int *result);
+//Status deq_find_min(Deque *que, int *result);
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Copy                                                |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status deq_copy_node(DequeNode *node, DequeNode **result);
+//Status deq_copy_queue(Deque *que, Deque **result);

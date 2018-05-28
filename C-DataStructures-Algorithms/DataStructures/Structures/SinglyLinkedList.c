@@ -329,21 +329,13 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
 	if (position >= sll->length)
 		return DS_ERR_INVALID_POSITION;
 
-	*result = sll->head->data;
+	*result = 0;
 	
-	SinglyLinkedNode *scanner = sll->head;
+	SinglyLinkedNode *curr = NULL;
 
-	size_t i;
-	for (i = 0; i < position; i++) {
+	Status st = sll_get_node_at(sll, &curr, position);
 
-		if (scanner == NULL)
-			return DS_ERR_ITER;
-
-		scanner = scanner->next;
-
-	}
-
-	*result = scanner->data;
+	*result = curr->data;
 
 	return DS_OK;
 }
@@ -391,16 +383,12 @@ Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value)
 	if (position >= sll->length)
 		return DS_ERR_INVALID_POSITION;
 
-	SinglyLinkedNode *curr = sll->head;
+	SinglyLinkedNode *curr = NULL;
 
-	size_t i;
-	for (i = 0; i < position; i++) {
+	Status st = sll_get_node_at(sll, &curr, position);
 
-		if (curr == NULL)
-			return  DS_ERR_ITER;
-
-		curr = curr->next;
-	}
+	if (st != DS_OK)
+		return st;
 
 	curr->data = value;
 
@@ -1512,16 +1500,14 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 
 	SinglyLinkedNode *scan = sll->head;
 
-	int data;
-	size_t i = 0;
+	int data, i = 0;
 
 	while (scan != NULL)
 	{
-		sll_get_node_data(sll, i, &data);
 
-		if (data == key) {
+		if (scan->data == key) {
 
-			st = sll_insert_tail((*result), (int) i); // Issue : size_t can be bigger than int
+			st = sll_insert_tail((*result), i);
 
 			if (st != DS_OK)
 				return st;

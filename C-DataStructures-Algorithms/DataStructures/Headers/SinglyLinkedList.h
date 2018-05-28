@@ -64,7 +64,7 @@ extern "C" {
 
 	Status sll_get_length(SinglyLinkedList *sll, size_t *result);
 
-	//Status sll_get_node_at(SinglyLinkedList *sll, SinglyLinkedNode **result, size_t position);
+	Status sll_get_node_at(SinglyLinkedList *sll, SinglyLinkedNode **result, size_t position);
 	Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result);
 	Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value);
 	

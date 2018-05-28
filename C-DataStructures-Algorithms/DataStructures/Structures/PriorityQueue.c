@@ -396,6 +396,9 @@ bool prq_is_empty(PriorityQueue *prq)
 	return (prq->length == 0 || prq->rear == NULL);
 }
 
+//Status prq_find_max(PriorityQueue *que, int *result);
+//Status prq_find_min(PriorityQueue *que, int *result);
+
 Status prq_priority_highest(PriorityQueue *prq, int *result)
 {
 	if (prq == NULL)
@@ -443,3 +446,7 @@ Status prq_priority_lowest(PriorityQueue *prq, int *result)
 
 	return DS_OK;
 }
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Copy                                                |
+// +-------------------------------------------------------------------------------------------------+
