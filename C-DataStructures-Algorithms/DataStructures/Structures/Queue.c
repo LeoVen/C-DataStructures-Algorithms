@@ -38,7 +38,7 @@ Status que_init_node(QueueNode **node)
 
 	(*node)->data = 0;
 
-	(*node)->before = NULL;
+	(*node)->prev = NULL;
 
 	return DS_OK;
 }
@@ -63,7 +63,7 @@ QueueNode * que_get_node(int value)
 {
 	QueueNode *node = malloc(sizeof(QueueNode));
 
-	node->before = NULL;
+	node->prev = NULL;
 
 	node->data = value;
 
@@ -79,7 +79,7 @@ Status que_make_node(QueueNode **node, int value)
 
 	(*node)->data = value;
 
-	(*node)->before = NULL;
+	(*node)->prev = NULL;
 
 	return DS_OK;
 }
@@ -100,7 +100,7 @@ Status que_get_length(Queue *que, size_t *result)
 	{
 		(*result)++;
 
-		scan = scan->before;
+		scan = scan->prev;
 	}
 
 	if ((*result) != que->length)
@@ -133,7 +133,7 @@ Status que_enqueue(Queue *que, int value)
 	}
 	else {
 
-		que->rear->before = node;
+		que->rear->prev = node;
 		que->rear = node;
 
 	}
@@ -148,7 +148,7 @@ Status que_enqueue_node(Queue *que, QueueNode *node)
 	if (que == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	node->before = NULL;
+	node->prev = NULL;
 
 	if (que_is_empty(que)) {
 
@@ -158,7 +158,7 @@ Status que_enqueue_node(Queue *que, QueueNode *node)
 	}
 	else {
 
-		que->rear->before = node;
+		que->rear->prev = node;
 		que->rear = node;
 
 	}
@@ -182,7 +182,7 @@ Status que_dequeue(Queue *que)
 
 	QueueNode *node = que->front;
 
-	que->front = que->front->before;
+	que->front = que->front->prev;
 
 	free(node);
 
@@ -204,9 +204,9 @@ Status que_dequeue_node(Queue *que, QueueNode **result)
 
 	(*result) = que->front;
 
-	que->front = que->front->before;
+	que->front = que->front->prev;
 
-	(*result)->before = NULL;
+	(*result)->prev = NULL;
 
 	(que->length)--;
 
@@ -239,7 +239,7 @@ Status que_display(Queue *que)
 	while (scan != NULL)
 	{
 		printf(" %d <-", scan->data);
-		scan = scan->before;
+		scan = scan->prev;
 	}
 
 	printf(" rear\n");
@@ -262,7 +262,7 @@ Status que_display_raw(Queue *que)
 	while (scan != NULL)
 	{
 		printf("%d ", scan->data);
-		scan = scan->before;
+		scan = scan->prev;
 	}
 
 	printf("\n");
@@ -292,7 +292,7 @@ Status que_delete_queue(Queue **que)
 
 	while ((*que)->front != NULL)
 	{
-		(*que)->front = (*que)->front->before;
+		(*que)->front = (*que)->front->prev;
 
 		free(prev);
 
@@ -353,8 +353,53 @@ bool que_is_empty(Queue *que)
 	return (que->length == 0 || que->rear == NULL);
 }
 
-//Status que_find_max(Queue *que, int *result);
-//Status que_find_min(Queue *que, int *result);
+Status que_find_max(Queue *que, int *result)
+{
+	*result = 0;
+
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
+
+	QueueNode *scan = que->front;
+
+	*result = scan->data;
+	while (scan != NULL)
+	{
+		if (scan->data > *result)
+			*result = scan->data;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}
+
+Status que_find_min(Queue *que, int *result)
+{
+	*result = 0;
+
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
+
+	QueueNode *scan = que->front;
+
+	*result = scan->data;
+	while (scan != NULL)
+	{
+		if (scan->data < *result)
+			*result = scan->data;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |

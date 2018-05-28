@@ -39,7 +39,7 @@ Status prq_init_node(PriorityQueueNode **node)
 	(*node)->data = 0;
 	(*node)->priority = 0;
 	
-	(*node)->before = NULL;
+	(*node)->prev = NULL;
 
 	return DS_OK;
 }
@@ -64,7 +64,7 @@ PriorityQueueNode * prq_get_node(int value, int priority)
 {
 	PriorityQueueNode *node = malloc(sizeof(PriorityQueueNode));
 
-	node->before = NULL;
+	node->prev = NULL;
 
 	node->data = value;
 	node->priority = priority;
@@ -79,7 +79,7 @@ Status prq_make_node(PriorityQueueNode **node, int value, int priority)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->before = NULL;
+	(*node)->prev = NULL;
 
 	(*node)->data = value;
 	(*node)->priority = priority;
@@ -103,7 +103,7 @@ Status prq_get_length(PriorityQueue *prq, size_t *result)
 	{
 		(*result)++;
 
-		scan = scan->before;
+		scan = scan->prev;
 	}
 
 	if ((*result) != prq->length)
@@ -136,27 +136,28 @@ Status prq_enqueue(PriorityQueue *prq, int value, int priority)
 	}
 	else {
 
-		PriorityQueueNode *prev = NULL;
+		PriorityQueueNode *before = NULL;
 		PriorityQueueNode *curr = prq->front;
 
 		while (curr != NULL && curr->priority >= node->priority)
 		{
-			prev = curr;
-			curr = curr->before;
+			before = curr;
+
+			curr = curr->prev;
 		}
 
-		if (prev == NULL) {
+		if (before == NULL) {
 
-			node->before = prq->front;
+			node->prev = prq->front;
 
 			prq->front = node;
 
 		}
 		else {
 
-			node->before = curr;
+			node->prev = curr;
 
-			prev->before = node;
+			before->prev = node;
 
 		}
 
@@ -172,7 +173,7 @@ Status prq_enqueue_node(PriorityQueue *prq, PriorityQueueNode *node)
 	if (prq == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	node->before = NULL;
+	node->prev = NULL;
 
 	if (prq_is_empty(prq)) {
 
@@ -182,25 +183,27 @@ Status prq_enqueue_node(PriorityQueue *prq, PriorityQueueNode *node)
 	}
 	else {
 
-		PriorityQueueNode *prev = NULL;
+		PriorityQueueNode *before = NULL;
 		PriorityQueueNode *curr = prq->front;
 
 		while (curr != NULL && curr->priority >= node->priority)
 		{
-			prev = curr;
-			curr = curr->before;
+			before = curr;
+			curr = curr->prev;
 		}
 
-		if (prev == NULL) {
+		if (before == NULL) {
 
-			node->before = prq->front;
+			node->prev = prq->front;
+
 			prq->front = node;
 
 		}
 		else {
 
-			node->before = curr;
-			prev->before = node;
+			node->prev = curr;
+
+			before->prev = node;
 
 		}
 
@@ -225,7 +228,7 @@ Status prq_dequeue(PriorityQueue *prq)
 
 	PriorityQueueNode *node = prq->front;
 
-	prq->front = prq->front->before;
+	prq->front = prq->front->prev;
 
 	free(node);
 
@@ -247,9 +250,9 @@ Status prq_dequeue_node(PriorityQueue *prq, PriorityQueueNode **result)
 
 	(*result) = prq->front;
 
-	prq->front = prq->front->before;
+	prq->front = prq->front->prev;
 
-	(*result)->before = NULL;
+	(*result)->prev = NULL;
 
 	(prq->length)--;
 
@@ -282,7 +285,7 @@ Status prq_display(PriorityQueue *prq)
 	while (scan != NULL)
 	{
 		printf(" %d <-", scan->data);
-		scan = scan->before;
+		scan = scan->prev;
 	}
 
 	printf(" rear\n");
@@ -305,7 +308,7 @@ Status prq_display_raw(PriorityQueue *prq)
 	while (scan != NULL)
 	{
 		printf("%d ", scan->data);
-		scan = scan->before;
+		scan = scan->prev;
 	}
 
 	printf("\n");
@@ -335,7 +338,7 @@ Status prq_delete_queue(PriorityQueue **prq)
 
 	while ((*prq)->front != NULL)
 	{
-		(*prq)->front = (*prq)->front->before;
+		(*prq)->front = (*prq)->front->prev;
 		
 		free(prev);
 
@@ -396,8 +399,53 @@ bool prq_is_empty(PriorityQueue *prq)
 	return (prq->length == 0 || prq->rear == NULL);
 }
 
-//Status prq_find_max(PriorityQueue *que, int *result);
-//Status prq_find_min(PriorityQueue *que, int *result);
+Status prq_find_max(PriorityQueue *prq, int *result)
+{
+	*result = 0;
+
+	if (prq == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (prq_is_empty(prq))
+		return DS_ERR_INVALID_OPERATION;
+
+	PriorityQueueNode *scan = prq->front;
+
+	*result = scan->data;
+	while (scan != NULL)
+	{
+		if (scan->data > *result)
+			*result = scan->data;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}
+
+Status prq_find_min(PriorityQueue *prq, int *result)
+{
+	*result = 0;
+
+	if (prq == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (prq_is_empty(prq))
+		return DS_ERR_INVALID_OPERATION;
+
+	PriorityQueueNode *scan = prq->front;
+
+	*result = scan->data;
+	while (scan != NULL)
+	{
+		if (scan->data < *result)
+			*result = scan->data;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}
 
 Status prq_priority_highest(PriorityQueue *prq, int *result)
 {
@@ -416,7 +464,7 @@ Status prq_priority_highest(PriorityQueue *prq, int *result)
 		if (scan->priority > *result)
 			*result = scan->priority;
 
-		scan = scan->before;
+		scan = scan->prev;
 	}
 
 	return DS_OK;
@@ -441,7 +489,7 @@ Status prq_priority_lowest(PriorityQueue *prq, int *result)
 		if (scan->priority < *result)
 			*result = scan->priority;
 
-		scan = scan->before;
+		scan = scan->prev;
 	}
 
 	return DS_OK;
@@ -450,3 +498,6 @@ Status prq_priority_lowest(PriorityQueue *prq, int *result)
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
+
+//Status prq_copy_node(PriorityQueueNode *node, PriorityQueueNode **result)
+//Status prq_copy_queue(PriorityQueue *prq, PriorityQueue **result)

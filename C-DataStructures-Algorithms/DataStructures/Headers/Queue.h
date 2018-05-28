@@ -24,7 +24,7 @@ extern "C" {
 	 */
 	typedef struct QueueNode {
 		int data;                           /*!< Node's data */
-		struct QueueNode *before;           /*!< Pointer to the previous node in the @c Queue */
+		struct QueueNode *prev;             /*!< Pointer to the previous node in the @c Queue */
 	} QueueNode;
 
 	/**
@@ -78,8 +78,8 @@ extern "C" {
 
 	bool que_is_empty(Queue *que);
 
-	//Status que_find_max(Queue *que, int *result);
-	//Status que_find_min(Queue *que, int *result);
+	Status que_find_max(Queue *que, int *result);
+	Status que_find_min(Queue *que, int *result);
 
 	//Status que_copy_node(QueueNode *node, QueueNode **result);
 	//Status que_copy_queue(Queue *que, Queue **result);

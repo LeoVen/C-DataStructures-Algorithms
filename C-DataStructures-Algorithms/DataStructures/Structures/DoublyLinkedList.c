@@ -853,50 +853,48 @@ bool dll_is_empty(DoublyLinkedList *dll)
 
 Status dll_find_max(DoublyLinkedList *dll, int *result)
 {
+	*result = 0;
+
 	if (dll == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	if (dll_is_empty(dll))
 		return DS_ERR_INVALID_OPERATION;
 
-
 	DoublyLinkedNode *scan = dll->head;
 
-	int max = scan->data;
+	*result = scan->data;
 	while (scan != NULL)
 	{
-		if (scan->data > max)
-			max = scan->data;
+		if (scan->data > *result)
+			*result = scan->data;
 
 		scan = scan->next;
 	}
-
-	*result = max;
 
 	return DS_OK;
 }
 
 Status dll_find_min(DoublyLinkedList *dll, int *result)
 {
+	*result = 0;
+
 	if (dll == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	if (dll_is_empty(dll))
 		return DS_ERR_INVALID_OPERATION;
 
-
 	DoublyLinkedNode *scan = dll->head;
 
-	int min = scan->data;
+	*result = scan->data;
 	while (scan != NULL)
 	{
-		if (scan->data < min)
-			min = scan->data;
+		if (scan->data < *result)
+			*result = scan->data;
 
 		scan = scan->next;
 	}
-
-	*result = min;
 
 	return DS_OK;
 }

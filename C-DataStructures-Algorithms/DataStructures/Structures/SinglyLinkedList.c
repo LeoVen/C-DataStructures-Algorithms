@@ -1440,50 +1440,48 @@ bool sll_is_empty(SinglyLinkedList *sll)
 
 Status sll_find_max(SinglyLinkedList *sll, int *result)
 {
+	*result = 0;
+
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
-
 	SinglyLinkedNode *scan = sll->head;
 
-	int max = scan->data;
+	*result  = scan->data;
 	while (scan != NULL)
 	{
-		if (scan->data > max)
-			max = scan->data;
+		if (scan->data > *result)
+			*result = scan->data;
 
 		scan = scan->next;
 	}
-
-	*result = max;
 
 	return DS_OK;
 }
 
 Status sll_find_min(SinglyLinkedList *sll, int *result)
 {
+	*result = 0;
+
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
 
-
 	SinglyLinkedNode *scan = sll->head;
 
-	int min = scan->data;
+	*result = scan->data;
 	while (scan != NULL)
 	{
-		if (scan->data < min)
-			min = scan->data;
+		if (scan->data < *result)
+			*result = scan->data;
 
 		scan = scan->next;
 	}
-
-	*result = min;
 
 	return DS_OK;
 }

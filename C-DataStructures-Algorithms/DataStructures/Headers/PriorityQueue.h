@@ -26,7 +26,7 @@ extern "C" {
 	typedef struct PriorityQueueNode {
 		int data;                           /*!< Node's data */
 		int priority;                       /*!< Node's priority */
-		struct PriorityQueueNode *before;   /*!< Pointer to the previous node in the @c PriorityQueue */
+		struct PriorityQueueNode *prev;     /*!< Pointer to the previous node in the @c PriorityQueue */
 	} PriorityQueueNode;
 
 	/**
@@ -81,15 +81,14 @@ extern "C" {
 
 	bool prq_is_empty(PriorityQueue *prq);
 
-	//Status prq_find_max(PriorityQueue *que, int *result);
-	//Status prq_find_min(PriorityQueue *que, int *result);
+	Status prq_find_max(PriorityQueue *prq, int *result);
+	Status prq_find_min(PriorityQueue *prq, int *result);
 
 	Status prq_priority_highest(PriorityQueue *prq, int *result);
 	Status prq_priority_lowest(PriorityQueue *prq, int *result);
 
 	//Status prq_copy_node(PriorityQueueNode *node, PriorityQueueNode **result);
-	//Status prq_copy_queue(PriorityQueue *que, PriorityQueue **result);
-
+	//Status prq_copy_queue(PriorityQueue *prq, PriorityQueue **result);
 
 #ifdef __cplusplus
 }

@@ -470,12 +470,57 @@ bool deq_is_empty(Deque *deq)
 	return (deq->length == 0 || deq->rear == NULL);
 }
 
-//Status deq_find_max(Deque *que, int *result);
-//Status deq_find_min(Deque *que, int *result);
+Status deq_find_max(Deque *deq, int *result)
+{
+	*result = 0;
+
+	if (deq == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (deq_is_empty(deq))
+		return DS_ERR_INVALID_OPERATION;
+
+	DequeNode *scan = deq->front;
+
+	*result = scan->data;
+	while (scan != NULL)
+	{
+		if (scan->data < *result)
+			*result = scan->data;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}
+
+Status deq_find_min(Deque *deq, int *result)
+{
+	*result = 0;
+
+	if (deq == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (deq_is_empty(deq))
+		return DS_ERR_INVALID_OPERATION;
+
+	DequeNode *scan = deq->front;
+
+	*result = scan->data;
+	while (scan != NULL)
+	{
+		if (scan->data < *result)
+			*result = scan->data;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status deq_copy_node(DequeNode *node, DequeNode **result);
-//Status deq_copy_queue(Deque *que, Deque **result);
+//Status deq_copy_node(DequeNode *node, DequeNode **result)
+//Status deq_copy_queue(Deque *que, Deque **result)
