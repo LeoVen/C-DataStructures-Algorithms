@@ -916,7 +916,7 @@ Status dll_occurrance_list(DoublyLinkedList *dll, DoublyLinkedList **result, int
 
 	DoublyLinkedNode *scan = dll->head;
 
-	int data, i = 0;
+	int i = 0;
 
 	while (scan != NULL)
 	{

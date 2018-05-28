@@ -288,7 +288,7 @@ Status arr_key_positions(Array *arr, Array **result, int key)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i, j = 0;
-	int total = 0;
+	int val = 0, total = 0;
 
 	Status st = arr_frequency(arr, key, &total);
 
@@ -304,9 +304,11 @@ Status arr_key_positions(Array *arr, Array **result, int key)
 
 		if (arr->buffer[i] == key) {
 
-			(*result)->buffer[j] = i;
+			(*result)->buffer[j] = val;
 			j++;
 		}
+
+		val++;
 	}
 
 	return DS_OK;

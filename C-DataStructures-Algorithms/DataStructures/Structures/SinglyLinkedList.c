@@ -335,6 +335,9 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
 
 	Status st = sll_get_node_at(sll, &curr, position);
 
+	if (st != DS_OK)
+		return st;
+
 	*result = curr->data;
 
 	return DS_OK;
@@ -1500,7 +1503,7 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 
 	SinglyLinkedNode *scan = sll->head;
 
-	int data, i = 0;
+	int i = 0;
 
 	while (scan != NULL)
 	{
@@ -1647,13 +1650,13 @@ Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t positi
 	}
 	else {
 
-		SinglyLinkedNode *before;
+		SinglyLinkedNode *prev;
 
-		sll_get_node_at(sll1, &before, position - 1);
+		sll_get_node_at(sll1, &prev, position - 1);
 
-		sll2->tail->next = before->next;
+		sll2->tail->next = prev->next;
 
-		before->next = sll2->head;
+		prev->next = sll2->head;
 
 	}
 
@@ -1698,19 +1701,19 @@ Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t positi
 	}
 	else {
 
-		SinglyLinkedNode *before;
+		SinglyLinkedNode *prev;
 
-		st = sll_get_node_at(sll, &before, position - 1);
+		st = sll_get_node_at(sll, &prev, position - 1);
 
 		if (st != DS_OK)
 			return st;
 
-		result->head = before->next;
+		result->head = prev->next;
 		result->tail = sll->tail;
 
-		sll->tail = before;
+		sll->tail = prev;
 
-		before->next = NULL;
+		prev->next = NULL;
 
 	}
 	

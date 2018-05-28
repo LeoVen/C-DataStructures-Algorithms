@@ -41,11 +41,6 @@ Status darr_init(DynamicArray **darr, size_t size)
 
 DynamicArray * darr_get(size_t size)
 {
-	if (size < 0) {
-		printf("\nFATAL ERROR\n");
-		return NULL;
-	}
-
 	DynamicArray *newArr = malloc(sizeof(DynamicArray));
 
 	newArr->buffer = calloc(size, sizeof(int));
