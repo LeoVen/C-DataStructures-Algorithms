@@ -106,6 +106,9 @@ extern "C" {
 	Status dll_find_max(DoublyLinkedList *dll, int *result);
 	Status dll_find_min(DoublyLinkedList *dll, int *result);
 
+	Status dll_find_max_pos(DoublyLinkedList *dll, size_t *result);
+	Status dll_find_min_pos(DoublyLinkedList *dll, size_t *result);
+
 	Status dll_occurrance_list(DoublyLinkedList *dll, DoublyLinkedList **result, int key);
 
 	Status dll_find_occurrance_first(DoublyLinkedList *dll, int key, size_t *position);

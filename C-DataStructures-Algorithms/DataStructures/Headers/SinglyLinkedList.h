@@ -102,6 +102,9 @@ extern "C" {
 	Status sll_find_max(SinglyLinkedList *sll, int *result);
 	Status sll_find_min(SinglyLinkedList *sll, int *result);
 
+	Status sll_find_max_pos(SinglyLinkedList *sll, size_t *result);
+	Status sll_find_min_pos(SinglyLinkedList *sll, size_t *result);
+
 	Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int key);
 
 	Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *position);

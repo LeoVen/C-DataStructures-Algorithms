@@ -396,12 +396,14 @@ int SinglyLinkedListTests(void)
 
 	sll_init_list(&sll);
 
-	size_t length = 0, l_max = 4;
-	int j, c;
+	size_t length = 0, l_max = 6, position = 0;
+	int j, c, value = 0;
 	max = 100;
 	k = 0;
 	for (i = 0; i < 10000; i++)
 	{
+		printf("\n---------- ---------- ---------- ---------- ----------");
+
 		j = rand();
 		k = rand();
 		c = rand() % 3;
@@ -512,6 +514,15 @@ int SinglyLinkedListTests(void)
 
 		sll_display(sll);
 
+		sll_find_max(sll, &value);
+		sll_find_max_pos(sll, &position);
+		printf("\nMaximum value: %d at position %zu", value, position);
+		sll_find_min(sll, &value);
+		sll_find_min_pos(sll, &position);
+		printf("\nMinimum value: %d at position %zu", value, position);
+
+		printf("\n---------- ---------- ---------- ---------- ----------");
+
 	}
 
 	printf("\nFinal list size: %zu", sll->length);
@@ -519,7 +530,9 @@ int SinglyLinkedListTests(void)
 	sll_delete_list(&sll);
 
 	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
 	
 	printf("\n");

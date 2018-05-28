@@ -108,17 +108,21 @@ int DoublyLinkedListTests(void)
 	dll_delete_list(&dll_odd);
 
 	printf("\n");
-	printf("\n ---------- ---------- ---------- Begin tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- --------- Begin tests --------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
 
 	node = NULL;
 
 	dll_init_list(&dll);
 
-	size_t length = 0, l_max = 4;
-	int j, k, c, max = 100;
+	size_t length = 0, l_max = 6, position = 0;
+	int j, k, c, max = 100, value = 0;
 	for (i = 0; i < 10000; i++)
 	{
+		printf("\n---------- ---------- ---------- ---------- ----------");
+
 		j = rand();
 		k = rand();
 		c = rand() % 3;
@@ -229,6 +233,15 @@ int DoublyLinkedListTests(void)
 
 		dll_display(dll);
 
+		dll_find_max(dll, &value);
+		dll_find_max_pos(dll, &position);
+		printf("\nMaximum value: %d at position %zu", value, position);
+		dll_find_min(dll, &value);
+		dll_find_min_pos(dll, &position);
+		printf("\nMinimum value: %d at position %zu", value, position);
+
+		printf("\n---------- ---------- ---------- ---------- ----------");
+
 	}
 
 	printf("\nFinal list size: %zu", dll->length);
@@ -236,7 +249,9 @@ int DoublyLinkedListTests(void)
 	dll_delete_list(&dll);
 
 	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
 
 	printf("\n");

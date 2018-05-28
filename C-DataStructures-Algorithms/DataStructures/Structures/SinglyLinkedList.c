@@ -1486,6 +1486,72 @@ Status sll_find_min(SinglyLinkedList *sll, int *result)
 	return DS_OK;
 }
 
+Status sll_find_max_pos(SinglyLinkedList *sll, size_t *result)
+{
+	*result = 0;
+
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll_is_empty(sll))
+		return DS_ERR_INVALID_OPERATION;
+
+	SinglyLinkedNode *scan = sll->head;
+
+	size_t pos = 0;
+
+	int max = scan->data;
+
+	while (scan != NULL)
+	{
+		if (scan->data > max) {
+
+			(*result) = pos;
+
+			max = scan->data;
+		}
+
+		pos++;
+
+		scan = scan->next;
+	}
+
+	return DS_OK;
+}
+
+Status sll_find_min_pos(SinglyLinkedList *sll, size_t *result)
+{
+	*result = 0;
+
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll_is_empty(sll))
+		return DS_ERR_INVALID_OPERATION;
+
+	SinglyLinkedNode *scan = sll->head;
+
+	size_t pos = 0;
+
+	int min = scan->data;
+
+	while (scan != NULL)
+	{
+		if (scan->data < min) {
+
+			(*result) = pos;
+
+			min = scan->data;
+		}
+
+		pos++;
+
+		scan = scan->next;
+	}
+
+	return DS_OK;
+}
+
 Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int key)
 {
 	if (sll == NULL)

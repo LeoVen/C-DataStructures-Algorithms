@@ -899,6 +899,72 @@ Status dll_find_min(DoublyLinkedList *dll, int *result)
 	return DS_OK;
 }
 
+Status dll_find_max_pos(DoublyLinkedList *dll, size_t *result)
+{
+	*result = 0;
+
+	if (dll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dll_is_empty(dll))
+		return DS_ERR_INVALID_OPERATION;
+
+	DoublyLinkedNode *scan = dll->head;
+
+	size_t pos = 0;
+
+	int max = scan->data;
+
+	while (scan != NULL)
+	{
+		if (scan->data > max) {
+
+			(*result) = pos;
+
+			max = scan->data;
+		}
+
+		pos++;
+
+		scan = scan->next;
+	}
+
+	return DS_OK;
+}
+
+Status dll_find_min_pos(DoublyLinkedList *dll, size_t *result)
+{
+	*result = 0;
+
+	if (dll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dll_is_empty(dll))
+		return DS_ERR_INVALID_OPERATION;
+
+	DoublyLinkedNode *scan = dll->head;
+
+	size_t pos = 0;
+
+	int min = scan->data;
+
+	while (scan != NULL)
+	{
+		if (scan->data < min) {
+
+			(*result) = pos;
+
+			min = scan->data;
+		}
+
+		pos++;
+
+		scan = scan->next;
+	}
+
+	return DS_OK;
+}
+
 Status dll_occurrance_list(DoublyLinkedList *dll, DoublyLinkedList **result, int key)
 {
 	if (dll == NULL)
