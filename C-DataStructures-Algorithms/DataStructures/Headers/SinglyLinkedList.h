@@ -121,12 +121,12 @@ extern "C" {
 
 	Status sll_reverse(SinglyLinkedList *sll);
 	
-	//Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position2);
-	//Status sll_switch_head(SinglyLinkedList *sll, size_t position);
-	//Status sll_switch_tail(SinglyLinkedList *sll, size_t position);
-	//Status sll_switch_ends(SinglyLinkedList *sll);
+	Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position2);
+	Status sll_switch_head(SinglyLinkedList *sll, size_t position);
+	Status sll_switch_tail(SinglyLinkedList *sll, size_t position);
+	Status sll_switch_ends(SinglyLinkedList *sll);
 	
-	//Status sll_sort_bubble(SinglyLinkedList *sll);
+	Status sll_sort_bubble(SinglyLinkedList *sll);
 	//Status sll_sort_slection(SinglyLinkedList *sll);
 	//Status sll_sort_insertion(SinglyLinkedList *sll);
 

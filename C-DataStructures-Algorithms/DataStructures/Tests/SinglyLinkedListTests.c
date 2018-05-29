@@ -534,7 +534,100 @@ int SinglyLinkedListTests(void)
 	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
-	
+
+	sll_init_list(&sll);
+
+	for (i = 0; i < 10; i++)
+		sll_insert_tail(sll, i);
+
+	sll_get_length(sll, &len);
+
+	for (l = 0; l < len; l++) {
+		sll_display(sll);
+
+		sll_switch_ends(sll);
+
+		sll_display(sll);
+
+		sll_remove_tail(sll);
+	}
+
+	for (i = 0; i < 10; i++)
+		sll_insert_tail(sll, i);
+
+	sll_get_length(sll, &len);
+
+	sll_display(sll);
+
+	for (i = 0; i < 100; i++) {
+		
+		l = rand() % len;
+
+		printf("\nSwitch head with %zu", l);
+		sll_switch_head(sll, l);
+
+		sll_display(sll);
+	}
+
+	for (i = 0; i < 100; i++) {
+
+		l = rand() % len;
+
+		printf("\nSwitch tail with %zu", l);
+		sll_switch_tail(sll, l);
+
+		sll_display(sll);
+	}
+
+	for (i = 0; i < 1000; i++) {
+
+		l = rand() % len;
+		f = rand() % len;
+
+		if (sll_switch_nodes(sll, l, f) == DS_OK) {
+			printf("\nSwitch nodes %zu with %zu", l, f);
+			sll_display(sll);
+		}
+
+	}
+
+	sll_delete_list(&sll);
+
+	printf("\n---------- ---------- ---------- ---------- ----------");
+	printf("\n---------- ---------- Bubble Sort --------- ----------");
+	printf("\n---------- ---------- ---------- ---------- ----------");
+
+	sll_init_list(&sll);
+
+	for (i = 0; i < 10; i++) {
+		sll_insert_tail(sll, i);
+	}
+
+	sll_get_length(sll, &len);
+
+	for (k = 0; k < 10; k++) {
+
+		printf("\nScramble: ");
+
+		for (i = 0; i < 20; i++) {
+
+			l = rand() % len;
+			f = rand() % len;
+
+			sll_switch_nodes(sll, l, f);
+		}
+
+		sll_display(sll);
+
+		printf("\nSorting: ");
+
+		sll_sort_bubble(sll);
+
+		sll_display(sll);
+	}
+
+	sll_delete_list(&sll);
+
 	printf("\n");
 	return 0;
 }
