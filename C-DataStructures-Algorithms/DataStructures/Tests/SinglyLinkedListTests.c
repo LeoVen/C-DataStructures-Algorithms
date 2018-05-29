@@ -628,6 +628,19 @@ int SinglyLinkedListTests(void)
 
 	sll_delete_list(&sll);
 
+	sll_init_list(&sll);
+
+	for (i = 0; i < 1000; i++)
+		sll_insert_tail(sll, rand());
+
+	sll_display(sll);
+
+	sll_sort_bubble(sll);
+
+	sll_display(sll);
+
+	sll_delete_list(&sll);
+
 	printf("\n");
 	return 0;
 }

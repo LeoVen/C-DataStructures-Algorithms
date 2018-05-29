@@ -2092,23 +2092,29 @@ Status sll_sort_bubble(SinglyLinkedList *sll)
 
 	Status st = sll_get_length(sll, &len);
 
-	SinglyLinkedNode *node;
+	SinglyLinkedNode *before, *after;
 
 	for (i = 1; i < len; i++) {
 
-		node = sll->head;
+		for (j = 0; j < len - i; j++) {
 
-		for (j = 0; j < len - i - 1; j++) {
+			st = sll_get_node_at(sll, &before, j);
 
-			if (node->data > node->next->data) {
+			if (st != DS_OK)
+				return st;
+
+			st = sll_get_node_at(sll, &after, j + 1);
+
+			if (st != DS_OK)
+				return st;
+
+			if (before->data > after->data) {
 
 				st = sll_switch_nodes(sll, j, j + 1);
 
 				if (st != DS_OK)
 					return st;
 			}
-
-			node = node->next;
 		}
 	}
 
