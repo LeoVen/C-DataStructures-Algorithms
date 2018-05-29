@@ -663,6 +663,9 @@ Status dll_remove_node_tail(DoublyLinkedList *dll, DoublyLinkedNode **node)
 	return DS_OK;
 }
 
+//Status dll_remove_keys(DoublyLinkedList *dll, int key)
+//Status dll_remove_duplicates(DoublyLinkedList* dll)
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+

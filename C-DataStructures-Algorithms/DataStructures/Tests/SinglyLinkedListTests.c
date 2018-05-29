@@ -635,7 +635,9 @@ int SinglyLinkedListTests(void)
 
 	sll_display(sll);
 
-	sll_sort_bubble(sll);
+	Status st = sll_sort_bubble(sll);
+
+	print_status_repr(st);
 
 	sll_display(sll);
 

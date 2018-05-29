@@ -88,12 +88,15 @@ extern "C" {
 	Status dll_remove_node_at(DoublyLinkedList *dll, DoublyLinkedNode **node, size_t position);
 	Status dll_remove_node_tail(DoublyLinkedList *dll, DoublyLinkedNode **node);
 
+	//Status dll_remove_keys(DoublyLinkedList *dll, int key);
+	//Status dll_remove_duplicates(DoublyLinkedList* dll);
+
 	Status dll_display(DoublyLinkedList *dll);
 	Status dll_display_raw(DoublyLinkedList *dll);
 
 	Status dll_delete_node(DoublyLinkedNode **node);
 	Status dll_delete_list(DoublyLinkedList **dll); // Erases and sets to NULL
-	Status dll_erase_list(DoublyLinkedList **dll); // Erases and inits
+	Status dll_erase_list(DoublyLinkedList **dll);  // Erases and inits
 
 	Status dll_frequency(DoublyLinkedList *dll, int key, size_t *frequency);
 

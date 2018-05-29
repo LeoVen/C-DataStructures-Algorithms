@@ -10,12 +10,12 @@
 
 #include "Sorting.h"
 
-Status bubble_sort_array_int(int *array, size_t arr_size)
+Status sort_bubble_array_int(int *array, size_t arr_size)
 {
 	if (array == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (arr_size <= 0)
+	if (arr_size < 2)
 		return DS_ERR_INVALID_SIZE;
 
 	size_t i, j;
@@ -25,7 +25,7 @@ Status bubble_sort_array_int(int *array, size_t arr_size)
 
 			if (array[j] >array[j + 1]) {
 
-				swap(array, j, j + 1);
+				sort_swap_integer(array, j, j + 1);
 			}
 		}
 	}
@@ -33,7 +33,7 @@ Status bubble_sort_array_int(int *array, size_t arr_size)
 	return DS_OK;
 }
 
-Status swap(int *array, size_t p1, size_t p2)
+Status sort_swap_integer(int *array, size_t p1, size_t p2)
 {
 	int temp = array[p1];
 	

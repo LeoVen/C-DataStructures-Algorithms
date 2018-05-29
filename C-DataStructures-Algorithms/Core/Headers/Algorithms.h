@@ -18,7 +18,7 @@ extern "C" {
 #include "Display.h"
 
 #include "Cryptography.h"
-#include "Generators.h"
+#include "Random.h"
 #include "Mathematics.h"
 #include "Sorting.h"
 

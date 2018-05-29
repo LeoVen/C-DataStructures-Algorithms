@@ -24,13 +24,27 @@ int SortingTests(void)
 	int *array;
 	size_t size = 100;
 
-	generate_array_random(&array, size);
+	random_array_int(&array, size);
 
 	display_array_int(array, size);
 
-	bubble_sort_array_int(array, size);
+	sort_bubble_array_int(array, size);
 
 	display_array_int(array, size);
+
+	free(array);
+
+	size = 500;
+
+	random_array_int(&array, size);
+
+	display_array_int(array, size);
+
+	sort_selection_array_int(array, size);
+
+	display_array_int(array, size);
+
+	free(array);
 
 	printf("\n");
 	return 0;

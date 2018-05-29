@@ -16,11 +16,10 @@ N to M Conversion   [          ]
 
 Caesar Cipher       [######### ]
 
-#### Generators
+#### Random Generators
 
 ```
 Array Generators    [#         ]
-Random Generators   [          ]
 String Generators   [          ]
 Text Generators     [          ]
 ```
@@ -39,7 +38,7 @@ Fibonacci           [          ]
 Lucas Numbers       [          ]
 Stirling 1 and 2    [          ]
 Bell numbers        [          ]
-Josephus problem    [          ]
+Josephus problem    [##########]
 ```
 
 #### Searching Algorithms

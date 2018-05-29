@@ -1253,6 +1253,9 @@ Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node)
 	return DS_OK;
 }
 
+//Status sll_remove_keys(SinglyLinkedList *sll, int key)
+//Status sll_remove_duplicates(SinglyLinkedList *sll)
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
@@ -1439,6 +1442,34 @@ bool sll_exists(SinglyLinkedList *sll, int key)
 bool sll_is_empty(SinglyLinkedList *sll)
 {
 	return (sll->length == 0 || sll->head == NULL);
+}
+
+Status sll_is_sorted(SinglyLinkedList *sll, bool *result)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll_is_empty(sll))
+		return DS_ERR_INVALID_OPERATION;
+
+	SinglyLinkedNode *scan = sll->head;
+
+	*result = false;
+
+	while (scan != NULL)
+	{
+		if (scan->next != NULL)
+			if (scan->data > scan->next->data) {
+
+				return DS_OK;
+			}
+
+		scan = scan->next;
+	}
+
+	*result = true;
+
+	return DS_OK;
 }
 
 Status sll_find_max(SinglyLinkedList *sll, int *result)

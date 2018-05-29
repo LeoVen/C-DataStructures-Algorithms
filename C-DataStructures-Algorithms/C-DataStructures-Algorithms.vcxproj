@@ -105,6 +105,8 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\DataStructures\Headers;$(ProjectDir)\Algorithms\Headers;$(ProjectDir)\Core\Headers;</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,9 +152,10 @@
   <ItemGroup>
     <ClCompile Include="Algorithms\AlgorithmsMenu.c" />
     <ClCompile Include="Algorithms\Cryptography\CaesarCipher.c" />
-    <ClCompile Include="Algorithms\Generators\ArrayGenerator.c" />
+    <ClCompile Include="Algorithms\Utility\Random.c" />
     <ClCompile Include="Algorithms\Mathematics\Josephus.c" />
     <ClCompile Include="Algorithms\Sorting\BubbleSort.c" />
+    <ClCompile Include="Algorithms\Sorting\SelectionSort.c" />
     <ClCompile Include="Algorithms\Tests\CryptographyTests.c" />
     <ClCompile Include="Algorithms\Tests\GeneratorsTests.c" />
     <ClCompile Include="Algorithms\Tests\MathematicsTests.c" />
@@ -200,7 +203,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithms\Headers\Cryptography.h" />
-    <ClInclude Include="Algorithms\Headers\Generators.h" />
+    <ClInclude Include="Algorithms\Headers\Random.h" />
     <ClInclude Include="Algorithms\Headers\Mathematics.h" />
     <ClInclude Include="Core\Headers\Algorithms.h" />
     <ClInclude Include="Algorithms\Headers\Sorting.h" />

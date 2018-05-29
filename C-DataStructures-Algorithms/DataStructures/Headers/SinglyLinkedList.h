@@ -83,6 +83,9 @@ extern "C" {
 	Status sll_remove_node_head(SinglyLinkedList *sll, SinglyLinkedNode **node);
 	Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t position);
 	Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node);
+
+	//Status sll_remove_keys(SinglyLinkedList *sll, int key);
+	//Status sll_remove_duplicates(SinglyLinkedList *sll);
 	
 	Status sll_display(SinglyLinkedList *sll);
 	Status sll_display_raw(SinglyLinkedList *sll);
@@ -97,7 +100,7 @@ extern "C" {
 	bool sll_exists(SinglyLinkedList *sll, int key);
 	
 	bool sll_is_empty(SinglyLinkedList *sll);
-	//bool sll_is_sorted(SinglyLinkedList *sll);
+	Status sll_is_sorted(SinglyLinkedList *sll, bool *result);
 	
 	Status sll_find_max(SinglyLinkedList *sll, int *result);
 	Status sll_find_min(SinglyLinkedList *sll, int *result);
