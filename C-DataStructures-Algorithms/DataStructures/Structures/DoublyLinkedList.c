@@ -663,9 +663,6 @@ Status dll_remove_node_tail(DoublyLinkedList *dll, DoublyLinkedNode **node)
 	return DS_OK;
 }
 
-//Status dll_remove_keys(DoublyLinkedList *dll, int key)
-//Status dll_remove_duplicates(DoublyLinkedList* dll)
-
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
@@ -852,7 +849,9 @@ bool dll_is_empty(DoublyLinkedList *dll)
 	return (dll->length == 0 || dll->head == NULL);
 }
 
-//bool dll_is_sorted(DoublyLinkedList *dll);
+//Status dll_is_sorted(DoublyLinkedList *dll, bool *result)
+//Status dll_is_set(DoublyLinkedList *dll, bool *result)
+//Status dll_is_disjoint(DoublyLinkedList *dll1, DoublyLinkedList *dll2, bool *result)
 
 Status dll_find_max(DoublyLinkedList *dll, int *result)
 {
@@ -1098,3 +1097,15 @@ Status dll_find_occurrance_last(DoublyLinkedList *dll, int key, size_t *position
 //Status dll_sort_insertion(DoublyLinkedList *dll);
 
 //Status dll_merge_sorted(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Set                                                 |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status dll_remove_keys(DoublyLinkedList *dll, int key)
+
+//Status dll_set_remove_duplicates(DoublyLinkedList *dll)
+//Status dll_set_union(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)
+//Status dll_set_intersection(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)
+//Status dll_set_difference(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)
+//Status dll_set_complement(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)

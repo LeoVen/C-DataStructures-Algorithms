@@ -88,9 +88,6 @@ extern "C" {
 	Status dll_remove_node_at(DoublyLinkedList *dll, DoublyLinkedNode **node, size_t position);
 	Status dll_remove_node_tail(DoublyLinkedList *dll, DoublyLinkedNode **node);
 
-	//Status dll_remove_keys(DoublyLinkedList *dll, int key);
-	//Status dll_remove_duplicates(DoublyLinkedList* dll);
-
 	Status dll_display(DoublyLinkedList *dll);
 	Status dll_display_raw(DoublyLinkedList *dll);
 
@@ -104,7 +101,9 @@ extern "C" {
 	bool dll_exists(DoublyLinkedList *dll, int key);
 
 	bool dll_is_empty(DoublyLinkedList *dll);
-	//bool dll_is_sorted(DoublyLinkedList *dll);
+	//Status dll_is_sorted(DoublyLinkedList *dll, bool *result);
+	//Status dll_is_set(DoublyLinkedList *dll, bool *result);
+	//Status dll_is_disjoint(DoublyLinkedList *dll1, DoublyLinkedList *dll2, bool *result);
 
 	Status dll_find_max(DoublyLinkedList *dll, int *result);
 	Status dll_find_min(DoublyLinkedList *dll, int *result);
@@ -138,6 +137,14 @@ extern "C" {
 	//Status dll_sort_insertion(DoublyLinkedList *dll);
 
 	//Status dll_merge_sorted(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
+
+	//Status dll_remove_keys(DoublyLinkedList *dll, int key);
+
+	//Status dll_set_remove_duplicates(DoublyLinkedList *dll);
+	//Status dll_set_union(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
+	//Status dll_set_intersection(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
+	//Status dll_set_difference(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
+	//Status dll_set_complement(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
 
 
 #ifdef __cplusplus

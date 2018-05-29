@@ -1253,9 +1253,6 @@ Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node)
 	return DS_OK;
 }
 
-//Status sll_remove_keys(SinglyLinkedList *sll, int key)
-//Status sll_remove_duplicates(SinglyLinkedList *sll)
-
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
@@ -1471,6 +1468,9 @@ Status sll_is_sorted(SinglyLinkedList *sll, bool *result)
 
 	return DS_OK;
 }
+
+//Status sll_is_set(SinglyLinkedList *sll, bool *result)
+//Status sll_is_disjoint(SinglyLinkedList *sll1, SinglyLinkedList *sll2, bool *result)
 
 Status sll_find_max(SinglyLinkedList *sll, int *result)
 {
@@ -2156,3 +2156,15 @@ Status sll_sort_bubble(SinglyLinkedList *sll)
 //Status sll_sort_insertion(SinglyLinkedList *sll);
 
 //Status sll_merge_sorted(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Set                                                 |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status sll_remove_keys(SinglyLinkedList *sll, int key)
+
+//Status sll_set_remove_duplicates(SinglyLinkedList *sll)
+//Status sll_set_union(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
+//Status sll_set_intersection(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
+//Status sll_set_difference(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
+//Status sll_set_complement(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
