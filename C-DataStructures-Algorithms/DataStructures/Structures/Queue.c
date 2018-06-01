@@ -333,6 +333,9 @@ Status que_peek_front(Queue *que, int *result)
 	if (que == NULL)
 		return DS_ERR_NULL_POINTER;
 
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
+
 	*result = que->front->data;
 
 	return DS_OK;
@@ -342,6 +345,9 @@ Status que_peek_rear(Queue *que, int *result)
 {
 	if (que == NULL)
 		return DS_ERR_NULL_POINTER;
+
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
 
 	*result = que->rear->data;
 

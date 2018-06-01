@@ -379,6 +379,9 @@ Status prq_peek_front(PriorityQueue *prq, int *result)
 	if (prq == NULL)
 		return DS_ERR_NULL_POINTER;
 
+	if (prq_is_empty(prq))
+		return DS_ERR_INVALID_OPERATION;
+
 	*result = prq->front->data;
 
 	return DS_OK;
@@ -388,6 +391,9 @@ Status prq_peek_rear(PriorityQueue *prq, int *result)
 {
 	if (prq == NULL)
 		return DS_ERR_NULL_POINTER;
+
+	if (prq_is_empty(prq))
+		return DS_ERR_INVALID_OPERATION;
 
 	*result = prq->rear->data;
 

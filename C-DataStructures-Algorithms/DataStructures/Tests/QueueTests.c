@@ -85,6 +85,63 @@ int QueueTests(void)
 	que_delete_queue(&que_odd);
 	que_delete_queue(&que_even);
 
+	que_init_queue(&que);
+
+	int l, k, l_max = 4, front, rear;
+	len = 0;
+	for (i = 0; i < 1000; i++) {
+
+		node = NULL;
+
+		printf("\n---------- ---------- ---------- ---------- ----------");
+
+		k = rand();
+		l = rand();
+
+		que_get_length(que, &len);
+
+		if (k % 2 == 0 && len < l_max) {
+			// Enqueue
+			if (l % 2 == 0) {
+				printf("\nque_enqueue()");
+				que_enqueue(que, rand() % 100);
+			}
+			else {
+				printf("\nque_enqueue_node()");
+				que_make_node(&node, rand() % 100);
+				que_enqueue_node(que, node);
+			}
+		}
+		else {
+			// Dequeue
+			if (l % 2 == 0) {
+				printf("\nque_dequeue()");
+				que_dequeue(que);
+			}
+			else {
+				printf("\nque_dequeue_node()");
+				que_dequeue_node(que, &node);
+				free(node);
+			}
+		}
+
+		front = 0;
+		rear = 0;
+
+		que_peek_front(que, &front);
+		que_peek_rear(que, &rear);
+		que_get_length(que, &len);
+		
+		que_display(que);
+
+		printf("\nQueue length: %zu", len);
+		printf("\nFront node: %d", front);
+		printf("\nRear node: %d", rear);
+
+		printf("\n---------- ---------- ---------- ---------- ----------");
+
+	}
+
 	printf("\n");
 	return 0;
 }

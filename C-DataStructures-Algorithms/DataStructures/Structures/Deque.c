@@ -450,6 +450,9 @@ Status deq_peek_front(Deque *deq, int *result)
 	if (deq == NULL)
 		return DS_ERR_NULL_POINTER;
 
+	if (deq_is_empty(deq))
+		return DS_ERR_INVALID_OPERATION;
+
 	*result = deq->front->data;
 
 	return DS_OK;
@@ -459,6 +462,9 @@ Status deq_peek_rear(Deque *deq, int *result)
 {
 	if (deq == NULL)
 		return DS_ERR_NULL_POINTER;
+
+	if (deq_is_empty(deq))
+		return DS_ERR_INVALID_OPERATION;
 
 	*result = deq->rear->data;
 
