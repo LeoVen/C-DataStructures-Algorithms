@@ -16,104 +16,42 @@ extern "C" {
 
 #include "Core.h"
 
-	typedef struct Vector Vector;
-	typedef struct SimpleVector SimpleVector;
-	typedef struct Basis Basis;
-
-	struct Vector {
+	typedef struct Vector {
 		double x;
 		double y;
 		double z;
-		Basis *base;
-	};
+		struct Basis *base;
+	} Vector;
 	
-	struct Basis {
-		SimpleVector *i;
-		SimpleVector *j;
-		SimpleVector *k;
-	};
+	typedef struct Basis {
+		struct SimpleVector *i;
+		struct SimpleVector *j;
+		struct SimpleVector *k;
+	} Basis;
 
-	struct SimpleVector {
+	typedef struct SimpleVector {
 		double x;
 		double y;
 		double z;
-	};
+	} SimpleVector;
 
-	// +-------------------------------------+
-	// |              Builders               |
-	// +-------------------------------------+
+	Status vec_build(double x, double y, double z, Vector **vec);
+	Status vec_build_simple(double x, double y, double z, SimpleVector **vec);
 
-	int buildNormalVector(double x, double y, double z, Vector **v);
+	Status vec_display(Vector *vec);
+	
+	Status vec_mod(Vector *vec, double *result);
 
-	int buildSimpleVector(double x, double y, double z, SimpleVector **v);
+	Status vec_sum(Vector *vec1, Vector *vec2, Vector **result);
+	Status vec_subtract(Vector *vec1, Vector *vec2, Vector **result);
 
-	// +-------------------------------------+
-	// |             Operations              |
-	// +-------------------------------------+
-	/* Vector Modulus or Magnitude or Absolute Value
-	 *
-	 * @Param [ Vector *v ] Vector to calculate its modulus
-	 *
-	 * @Returns [ double ] Modulus of vector
-	 */
-	double vectorModulus(Vector *v);
+	Status vec_product_scalar(Vector *vec, double scalar);
+	Status vec_product_dot(Vector *vec1, Vector *vec2, double *result);
 
-	/* Sum two vectors
-	 *
-	 * @Param [ Vector *v1 ] First vector
-	 * @Param [ Vector *v2 ] Second vector
-	 *
-	 * @Returns [ Vector * ] Pointer to new vector that corresponds to the sum of
-	 *                       first and second vectors
-	 */
-	Vector* vectorSum(Vector *v1, Vector *v2);
-
-	/* Subtract second vector onto the first
-	 *
-	 * @Param [ Vector *v1 ] First vector
-	 * @Param [ Vector *v2 ] Second vector
-	 *
-	 * @Returns [ Vector * ] Pointer to new vector that corresponds to the
-	 *                       subtraction of the second vector onto the first
-	 */
-	Vector* vectorSubtraction(Vector *v1, Vector *v2);
-
-	/* Performs a scalar product
-	 *
-	 * @Param [ Vector *v1 ] First vector
-	 * @Param [ double scalar ] Scalar value
-	 *
-	 * @Returns [ int ] 
-	 */
-	void vectorScalarProduct(Vector *v, double scalar);
-
-	/* Performs a dot product between vectors 1 and 2
-	 *
-	 * @Param [ Vector *v1 ] First vector
-	 * @Param [ Vector *v2 ] Second vector
-	 *
-	 * @Returns [ double ] Dot product value
-	 */
-	double vectorDotProduct(Vector *v1, Vector *v2);
-
-	/* Performs a dot product between vectors 1 and 2
-	 *
-	 * @Param [ Vector *v1 ] First vector
-	 * @Param [ Vector *v2 ] Second vector
-	 *
-	 * @Returns [ double ] Dot product value
-	 */
-	double vectorAngle(Vector *v1, Vector *v2);
+	Status vec_angle(Vector *vec1, Vector *vec2, double *result);
 	// Cross Product
 
-	// +-------------------------------------+
-	// |                Misc                 |
-	// +-------------------------------------+
-
-	void displayVector(Vector *v);
-
-
-	Vector* copyVector(Vector *v);
+	Status vec_copy(Vector *vec, Vector **result);
 
 #ifdef __cplusplus
 }
