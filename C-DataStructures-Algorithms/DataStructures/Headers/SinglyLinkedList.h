@@ -134,9 +134,9 @@ extern "C" {
 
 	//Status sll_merge_sorted(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
 
-	//Status sll_remove_keys(SinglyLinkedList *sll, int key);
+	Status sll_remove_keys(SinglyLinkedList *sll, int key);
 
-	//Status sll_set_remove_duplicates(SinglyLinkedList *sll);
+	Status sll_set_make(SinglyLinkedList *sll);
 	//Status sll_set_union(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
 	//Status sll_set_intersection(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
 	//Status sll_set_difference(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);

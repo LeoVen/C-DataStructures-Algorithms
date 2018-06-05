@@ -643,6 +643,37 @@ int SinglyLinkedListTests(void)
 
 	sll_delete_list(&sll);
 
+	/**************************************************
+	 *
+	 * SET FUNCTIONS
+	 *
+	 **************************************************/
+
+	SinglyLinkedList *sll1, *sll2, *result;
+
+	sll_init_list(&sll1);
+
+	sll_init_list(&sll2);
+
+	for (i = 0; i < 8; i++) {
+		sll_insert_head(sll1, rand() % 10);
+		sll_insert_head(sll2, rand() % 10);
+	}
+
+	sll_display(sll1);
+	sll_display(sll2);
+
+	st = sll_set_make(sll1);
+	print_status_repr(st);
+	st = sll_set_make(sll2);
+	print_status_repr(st);
+
+	sll_display(sll1);
+	sll_display(sll2);
+
+	sll_delete_list(&sll1);
+	sll_delete_list(&sll2);
+
 	printf("\n");
 	return 0;
 }

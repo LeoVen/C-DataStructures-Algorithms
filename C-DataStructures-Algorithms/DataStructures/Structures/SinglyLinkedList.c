@@ -2161,9 +2161,134 @@ Status sll_sort_bubble(SinglyLinkedList *sll)
 // |                                             Set                                                 |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status sll_remove_keys(SinglyLinkedList *sll, int key)
+Status sll_remove_keys(SinglyLinkedList *sll, int key)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status sll_set_remove_duplicates(SinglyLinkedList *sll)
+	if (sll_is_empty(sll))
+		return DS_ERR_INVALID_OPERATION;
+
+	SinglyLinkedNode *prev = NULL;
+	SinglyLinkedNode *curr = sll->head;
+	
+	Status st;
+
+	while (curr != NULL)
+	{
+		if (curr->data == key) {
+
+			if (prev == NULL) {
+
+				sll->head = sll->head->next;
+
+				free(curr);
+
+				curr = sll->head;
+
+				(sll->length)--;
+
+			}
+			else {
+
+				prev->next = curr->next;
+
+				free(curr);
+
+				curr = prev->next;
+
+				(sll->length)--;
+
+			}
+
+		}
+		else {
+
+			prev = curr;
+		
+			curr = curr->next;
+		}
+
+	}
+
+	return DS_OK;
+}
+
+Status sll_set_make(SinglyLinkedList *sll)
+{
+	if (sll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (sll_is_empty(sll))
+		return DS_ERR_INVALID_OPERATION;
+
+	SinglyLinkedList *tmp;
+	SinglyLinkedNode *node;
+
+	Status st = sll_init_list(&tmp);
+
+	if (st != DS_OK)
+		return st;
+
+	size_t len;
+
+	st = sll_get_length(sll, &len);
+
+	while (len > 0)
+	{
+
+		st = sll_remove_node_head(sll, &node);
+
+		if (st != DS_OK && sll->length != 0)
+			return st;
+
+		st = sll_remove_keys(sll, node->data);
+
+		if (st != DS_OK && sll->length != 0)
+			return st;
+
+		st = sll_insert_node_tail(tmp, node);
+
+		if (st != DS_OK)
+			return st;
+
+		st = sll_get_length(sll, &len);
+
+		if (st != DS_OK)
+			return st;
+	}
+	
+	st = sll_get_length(tmp, &len);
+
+	if (st != DS_OK)
+		return st;
+
+	while (len > 0)
+	{
+		st = sll_remove_node_head(tmp, &node);
+
+		if (st != DS_OK)
+			return st;
+
+		st = sll_insert_node_tail(sll, node);
+
+		if (st != DS_OK)
+			return st;
+
+		st = sll_get_length(tmp, &len);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	st = sll_delete_list(&tmp);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
+
 //Status sll_set_union(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
 //Status sll_set_intersection(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
 //Status sll_set_difference(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
