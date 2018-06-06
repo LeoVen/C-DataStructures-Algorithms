@@ -14,8 +14,7 @@
 
 int dev_short_cut(void)
 {
-	SinglyLinkedListTests();
-	//DoublyLinkedListTests();
+	HashTableTests();
 
 	printf("\nPress enter to continue...");
 	_getch();
