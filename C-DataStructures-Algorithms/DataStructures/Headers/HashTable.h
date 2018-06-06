@@ -31,16 +31,22 @@ extern "C" {
 	Status hst_init_table(HashTable **hst, size_t size, Status(*function) (char *, size_t *));
 	Status hst_init_entry(HashTableEntry **entry, int value);
 
-	Status hst_insert(HashTable *hst, char * key, int value);
+	Status hst_make_entry(HashTableEntry **entry, int value, size_t hash);
+
+	Status hst_insert(HashTable *hst, char *key, int value);
+
+	//Status hst_remove(HashTable *hst, char *key);
 
 	Status hst_display_entry(HashTableEntry *entry);
 	Status hst_display_table(HashTable *hst);
+	Status hst_display_entry_raw(HashTableEntry *entry);
 	Status hst_display_table_raw(HashTable *hst);
 
 	Status hst_delete_table(HashTable **hst);
 	Status hst_erase_table(HashTable **hst);
 
 	Status hst_search(HashTable *hst, char *key, int *value);
+	//Status hst_search_all(HashTable *hst, char *key, int **value);
 
 	Status hash_string_java(char * key, size_t *hash);
 	Status hash_string_djb2(char * key, size_t *hash);

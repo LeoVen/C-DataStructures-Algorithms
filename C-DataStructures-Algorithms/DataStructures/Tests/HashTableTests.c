@@ -65,8 +65,8 @@ int HashTableTests(void)
 	hst_insert(hst, "Leonhard Euler", 15);
 	hst_insert(hst, "Carl Friedrich Gauss", 16);
 	hst_insert(hst, "Isaac Newton", 17);
-	hst_insert(hst, "Isaac Newton", 17); // Shouldn't insert
-	hst_insert(hst, "Isaac Newton", 17); // Shouldn't insert
+	hst_insert(hst, "Winter is Coming", 18); // Allowed
+	hst_insert(hst, "Isaac Newton", 19);     // Allowed
 
 	hst_display_table(hst);
 	

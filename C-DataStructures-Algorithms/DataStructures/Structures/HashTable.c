@@ -79,7 +79,7 @@ Status hst_make_entry(HashTableEntry **entry, int value, size_t hash)
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_insert(HashTable *hst, char * key, int value)
+Status hst_insert(HashTable *hst, char *key, int value)
 {
 	if (hst == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -100,24 +100,14 @@ Status hst_insert(HashTable *hst, char * key, int value)
 		if (st != DS_OK)
 			return st;
 	}
-	else if (((hst->buckets)[pos])->hash == hash) {
-
-		return DS_OK;
-	}
 	else {
 
 		HashTableEntry *scan = (hst->buckets)[pos];
 
 		while (scan->next != NULL)
 		{
-			if (scan->hash == hash)
-				return DS_OK;
-
 			scan = scan->next;
 		}
-
-		if (scan->hash == hash)
-			return DS_OK;
 
 		HashTableEntry *entry;
 
@@ -136,6 +126,8 @@ Status hst_insert(HashTable *hst, char * key, int value)
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
+
+//Status hst_remove(HashTable *hst, char *key)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
@@ -211,7 +203,6 @@ Status hst_display_table(HashTable *hst)
 
 	return DS_OK;
 }
-
 
 Status hst_display_table_raw(HashTable *hst)
 {
@@ -348,6 +339,8 @@ Status hst_search(HashTable *hst, char *key, int *value)
 
 	return DS_OK;
 }
+
+//Status hst_search_all(HashTable *hst, char *key, int **value)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Hash                                                |
