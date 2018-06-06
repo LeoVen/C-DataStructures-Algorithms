@@ -186,14 +186,14 @@ Status bst_display_wrapper(BinarySearchTree *bst, int display)
 	switch (display)
 	{
 	case -1:
-		printf("\n<parent_data(data)D-Depth\n\n");
+		printf("\n<PARENT(DATA)[D-DEPTH|H-HEIGHT]\n\n");
 		st = bst_display_clean(bst->root);
 		break;
 	case 0:
 		st = bst_display_raw(bst->root);
 		break;
 	case 1:
-		printf("\n<parent_data(data)D-Depth\n\n");
+		printf("\n<PARENT(DATA)[D-DEPTH|H-HEIGHT]\n\n");
 		st = bst_display_interactive(bst->root);
 		break;
 	default:
@@ -237,9 +237,9 @@ Status bst_display_interactive(BinarySearchTreeNode *node)
 		printf("|-------");
 
 	if (node->parent != NULL)
-		printf("<%d(%d)D-%zu\n", node->parent->data, node->data, node->level);
+		printf("<%d(%d)[D-%zu|H-%zu]\n", node->parent->data, node->data, node->level, bst_height(node) - 1);
 	else
-		printf("<%d(%d)D-%zu\n", 0, node->data, node->level);
+		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->data, node->level, bst_height(node) - 1);
 
 
 	bst_display_interactive(node->right);
@@ -259,9 +259,9 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 		printf("|       ");
 
 	if (node->parent != NULL)
-		printf("<%d(%d)D-%zu\n", node->parent->data, node->data, node->level);
+		printf("<%d(%d)[D-%zu|H-%zu]\n", node->parent->data, node->data, node->level, bst_height(node) - 1);
 	else
-		printf("<%d(%d)D-%zu\n", 0, node->data, node->level);
+		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->data, node->level, bst_height(node) - 1);
 
 
 	bst_display_clean(node->right);
@@ -309,6 +309,18 @@ Status bst_erase(BinarySearchTree **bst)
 bool bst_is_empty(BinarySearchTree *bst)
 {
 	return (bst->root == NULL);
+}
+
+size_t bst_height(BinarySearchTreeNode *node)
+{
+	if (node == NULL)
+		return 0;
+
+	size_t r_height = bst_height(node->right);
+
+	size_t l_height = bst_height(node->left);
+
+	return (l_height > r_height) ? l_height + 1 : r_height + 1;
 }
 
 // +-------------------------------------------------------------------------------------------------+

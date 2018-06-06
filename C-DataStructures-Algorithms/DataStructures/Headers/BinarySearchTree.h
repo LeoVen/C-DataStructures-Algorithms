@@ -76,6 +76,8 @@ extern "C" {
 
 	bool bst_is_empty(BinarySearchTree *bst);
 
+	size_t bst_height(BinarySearchTreeNode *node);
+
 	Status bst_traversal_wrapper(BinarySearchTree *bst, int traversal);
 	Status bst_traversal_preorder(BinarySearchTreeNode *node);
 	Status bst_traversal_inorder(BinarySearchTreeNode *node);
