@@ -44,6 +44,10 @@ int HashTableTests(void)
 
 	printf("\nHash: %zu", hash);
 
+	hst->hash_function("Gauss", &hash);
+
+	printf("\nHash: %zu", hash);
+
 	hst_insert(hst, "Hello World!", 1);
 	hst_insert(hst, "Hello World", 2);
 	hst_insert(hst, "Fire and Blood", 3);
@@ -61,8 +65,34 @@ int HashTableTests(void)
 	hst_insert(hst, "Leonhard Euler", 15);
 	hst_insert(hst, "Carl Friedrich Gauss", 16);
 	hst_insert(hst, "Isaac Newton", 17);
+	hst_insert(hst, "Isaac Newton", 17); // Shouldn't insert
+	hst_insert(hst, "Isaac Newton", 17); // Shouldn't insert
 
 	hst_display_table(hst);
+	
+	int value;
+
+	char *s1 = "Isaac Newton";     // Collision with 6 and 17
+	char *s2 = "Hello World!";     // Collision with Gauss
+	char *s3 = "Winter is Coming"; // Collision with 6 and 17
+	char *s4 = "Gauss";            // Collision with Hello World!
+	char *s5 = "One ring to rule them all!"; // Shouldn't find
+
+	st = hst_search(hst, s1, &value);
+	print_status_repr(st);
+	printf("\nValue for key %s is %d", s1, value);
+	st = hst_search(hst, s2, &value);
+	print_status_repr(st);
+	printf("\nValue for key %s is %d", s2, value);
+	st = hst_search(hst, s3, &value);
+	print_status_repr(st);
+	printf("\nValue for key %s is %d", s3, value);
+	st = hst_search(hst, s4, &value);
+	print_status_repr(st);
+	printf("\nValue for key %s is %d", s4, value);
+	st = hst_search(hst, s5, &value);
+	print_status_repr(st);
+	printf("\nValue for key %s is %d", s5, value);
 
 	hst_delete_table(&hst);
 

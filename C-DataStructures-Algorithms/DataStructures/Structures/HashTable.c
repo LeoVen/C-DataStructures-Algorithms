@@ -110,8 +110,14 @@ Status hst_insert(HashTable *hst, char * key, int value)
 
 		while (scan->next != NULL)
 		{
+			if (scan->hash == hash)
+				return DS_OK;
+
 			scan = scan->next;
 		}
+
+		if (scan->hash == hash)
+			return DS_OK;
 
 		HashTableEntry *entry;
 
@@ -260,6 +266,10 @@ Status hst_delete_table(HashTable **hst)
 	if ((*hst) == NULL)
 		return DS_ERR_NULL_POINTER;
 
+	size_t i;
+	for (i = 0; i < (*hst)->size; i++)
+		free(((*hst)->buckets)[i]);
+
 	free((*hst)->buckets);
 	free(*hst);
 
@@ -295,7 +305,48 @@ Status hst_erase_table(HashTable **hst)
 
 Status hst_search(HashTable *hst, char *key, int *value)
 {
+	*value = 0;
 
+	if (hst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t hash;
+
+	hst->hash_function(key, &hash);
+
+	size_t pos = hash % hst->size;
+
+	if ((hst->buckets)[pos] == NULL)
+		return DS_ERR_NOT_FOUND;
+
+	if (((hst->buckets)[pos])->next == NULL && ((hst->buckets)[pos])->hash == hash)
+		*value = ((hst->buckets)[pos])->data;
+	else {
+
+		HashTableEntry *scan = (hst->buckets)[pos];
+
+		bool found = false;
+
+		while (scan != NULL)
+		{
+			if (scan->hash == hash) {
+
+				*value = scan->data;
+
+				found = true;
+
+				break;
+			}
+
+			scan = scan->next;
+		}
+
+		if (!found)
+			return DS_ERR_NOT_FOUND;
+
+	}
+
+	return DS_OK;
 }
 
 // +-------------------------------------------------------------------------------------------------+

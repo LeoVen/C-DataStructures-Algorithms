@@ -14,7 +14,7 @@
 
 int dev_short_cut(void)
 {
-	BinarySearchTreeTests();
+	HashTableTests();
 
 	printf("\nPress enter to continue...");
 	_getch();
