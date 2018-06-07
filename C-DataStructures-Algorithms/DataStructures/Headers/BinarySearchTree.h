@@ -68,8 +68,8 @@ extern "C" {
 	Status bst_display_interactive(BinarySearchTreeNode *node);
 	Status bst_display_clean(BinarySearchTreeNode *node);
 
-	//Status bst_delete(BinarySearchTreeNode **node);
-	//Status bst_erase(BinarySearchTree **node);
+	Status bst_delete(BinarySearchTreeNode **node);
+	Status bst_erase(BinarySearchTree **bst);
 
 	//Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);
 	//Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);

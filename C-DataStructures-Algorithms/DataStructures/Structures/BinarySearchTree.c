@@ -82,6 +82,9 @@ Status bst_make_node(BinarySearchTreeNode **node, int value)
 {
 	(*node) = malloc(sizeof(BinarySearchTreeNode));
 
+	if (!(*node))
+		return DS_ERR_ALLOC;
+
 	(*node)->data = value;
 
 	(*node)->left = NULL;
@@ -241,7 +244,6 @@ Status bst_display_interactive(BinarySearchTreeNode *node)
 	else
 		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->data, node->level, bst_height(node) - 1);
 
-
 	bst_display_interactive(node->right);
 
 	return DS_OK;
@@ -263,7 +265,6 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 	else
 		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->data, node->level, bst_height(node) - 1);
 
-
 	bst_display_clean(node->right);
 
 	return DS_OK;
@@ -272,16 +273,16 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
-/*
+
 Status bst_delete(BinarySearchTreeNode **node)
 {
-	if ((*node) != NULL)
+	if ((*node)->left != NULL)
 		bst_delete(&((*node)->left));
 
-	if ((*node) != NULL)
+	if ((*node)->right != NULL)
 		bst_delete(&((*node)->right));
 
-	free(node);
+	free((*node));
 
 	return DS_OK;
 }
@@ -291,14 +292,23 @@ Status bst_erase(BinarySearchTree **bst)
 	if ((*bst) == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	Status st = bst_delete(bst);
+	Status st = bst_delete(&((*bst)->root));
+
+	if (st != DS_OK)
+		return st;
+
+	free(*bst);
+
+	(*bst) = NULL;
+
+	st = bst_init_tree(bst);
 
 	if (st != DS_OK)
 		return st;
 
 	return DS_OK;
 }
-*/
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
