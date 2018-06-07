@@ -197,6 +197,7 @@ int ds_all(void)
 	BinaryTreeTests();
 	BinarySearchTreeTests();
 	AVLTreeTests();
+	TrieTests();
 
 	ArrayTests();
 	DynamicArrayTests();

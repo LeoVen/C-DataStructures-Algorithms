@@ -182,6 +182,7 @@
     <ClCompile Include="DataStructures\Structures\Stack.c" />
     <ClCompile Include="DataStructures\Structures\String.c" />
     <ClCompile Include="DataStructures\Structures\StructureConversions.c" />
+    <ClCompile Include="DataStructures\Structures\Trie.c" />
     <ClCompile Include="DataStructures\Structures\Vector.c" />
     <ClCompile Include="DataStructures\Tests\ArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\AVLTreeTests.c" />
@@ -201,6 +202,7 @@
     <ClCompile Include="DataStructures\Tests\StackTests.c" />
     <ClCompile Include="DataStructures\Tests\StringTests.c" />
     <ClCompile Include="DataStructures\Tests\StructureConversionsTests.c" />
+    <ClCompile Include="DataStructures\Tests\TrieTests.c" />
     <ClCompile Include="DataStructures\Tests\VectorTests.c" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +233,7 @@
     <ClInclude Include="DataStructures\Headers\Stack.h" />
     <ClInclude Include="DataStructures\Headers\SString.h" />
     <ClInclude Include="DataStructures\Headers\StructureConversions.h" />
+    <ClInclude Include="DataStructures\Headers\Trie.h" />
     <ClInclude Include="DataStructures\Headers\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

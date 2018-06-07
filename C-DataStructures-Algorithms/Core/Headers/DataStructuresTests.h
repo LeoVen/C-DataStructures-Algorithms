@@ -30,6 +30,7 @@ extern "C" {
 	int BinaryTreeTests(void);
 	int BinarySearchTreeTests(void);
 	int AVLTreeTests(void);
+	int TrieTests(void);
 
 	int ArrayTests(void);
 	int DynamicArrayTests(void);
