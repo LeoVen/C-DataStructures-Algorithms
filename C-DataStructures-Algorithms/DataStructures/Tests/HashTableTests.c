@@ -22,7 +22,7 @@ int HashTableTests(void)
 
 	HashTable *hst;
 
-	size_t hash;
+	size_t hash, result;
 
 	Status st = hst_init_table(&hst, 31, hash_string_sdbm);
 
@@ -69,6 +69,16 @@ int HashTableTests(void)
 	hst_insert(hst, "Isaac Newton", 19);     // Allowed
 
 	hst_display_table(hst);
+
+	hst_count_collisions(hst, &result);
+	printf("\nTotal collisions: %zu", result);
+	hst_count_collisions_max(hst, &result);
+	printf("\nTotal max collisions: %zu", result);
+	hst_count_empty(hst, &result);
+	printf("\nTotal empty spots: %zu", result);
+	hst_count_entries(hst, &result);
+	printf("\nTotal insertions: %zu", result);
+	printf("\nTotal size: %zu", hst->size);
 	
 	int value;
 
@@ -96,7 +106,7 @@ int HashTableTests(void)
 
 	hst_delete_table(&hst);
 
-	size_t size = 109;
+	size_t size = 1200;
 
 	hst_init_table(&hst, size, hash_string_djb2);
 
@@ -123,7 +133,18 @@ int HashTableTests(void)
 
 	hst_display_table(hst);
 
+	hst_count_collisions(hst, &result);
+	printf("\nTotal collisions: %zu", result);
+	hst_count_collisions_max(hst, &result);
+	printf("\nTotal max collisions: %zu", result);
+	hst_count_empty(hst, &result);
+	printf("\nTotal empty spots: %zu", result);
+	hst_count_entries(hst, &result);
+	printf("\nTotal insertions: %zu", result);
+	printf("\nTotal size: %zu", hst->size);
+
 	hst_delete_table(&hst);
 
+	printf("\n");
 	return 0;
 }

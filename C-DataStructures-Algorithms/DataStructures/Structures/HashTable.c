@@ -342,6 +342,108 @@ Status hst_search(HashTable *hst, char *key, int *value)
 
 //Status hst_search_all(HashTable *hst, char *key, int **value)
 
+Status hst_count_entries(HashTable *hst, size_t *result)
+{
+	*result = 0;
+
+	if (hst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t i;
+	for (i = 0; i < hst->size; i++) {
+
+		if ((hst->buckets)[i] != NULL) {
+
+			if (((hst->buckets)[i])->next != NULL) {
+				
+				HashTableEntry *scan = (hst->buckets)[i];
+
+				while (scan != NULL)
+				{
+					(*result)++;
+
+					scan = scan->next;
+				}
+			}
+			else {
+
+				(*result)++;
+			}
+		}
+	}
+
+	return DS_OK;
+}
+
+Status hst_count_collisions(HashTable *hst, size_t *result)
+{
+	*result = 0;
+
+	if (hst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t i;
+	for (i = 0; i < hst->size; i++)
+		if ((hst->buckets)[i] != NULL)
+			if (((hst->buckets)[i])->next != NULL)
+				(*result)++;
+
+	return DS_OK;
+}
+
+Status hst_count_empty(HashTable *hst, size_t *result)
+{
+	*result = 0;
+
+	if (hst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t i;
+	for (i = 0; i < hst->size; i++)
+		if ((hst->buckets)[i] == NULL)
+			(*result)++;
+
+	return DS_OK;
+}
+
+Status hst_count_collisions_max(HashTable *hst, size_t *result)
+{
+	*result = 0;
+
+	if (hst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t i, total;
+	for (i = 0; i < hst->size; i++) {
+
+		if ((hst->buckets)[i] != NULL) {
+
+			if (((hst->buckets)[i])->next != NULL) {
+
+				total = 0;
+
+				HashTableEntry *scan = (hst->buckets)[i];
+
+				while (scan != NULL)
+				{
+					total++;
+
+					scan = scan->next;
+				}
+
+			}
+			else
+				total = 1;
+
+			if (total > *result)
+				*result = total;
+
+		}
+	}
+
+	return DS_OK;
+}
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Hash                                                |
 // +-------------------------------------------------------------------------------------------------+
