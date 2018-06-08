@@ -146,20 +146,21 @@ Status tri_display_subtree(TrieNode *node, size_t level)
 {
 	size_t i, j;
 
+	printf("\n");
+
+	if (level != 0)
+		for (j = 0; j < level - 1; j++)
+			printf("|   ");
+
+	printf("%c", node->letter);
+
+	if (node->is_end)
+		printf("*");
+
 	for (i = 0; i < 26; i++)
 	{
 		if (node->children[i] != NULL)
 		{
-			printf("\n");
-
-			for (j = 0; j < level; j++)
-				printf("|   ");
-
-			printf("%c", node->letter);
-
-			if (node->is_end)
-				printf("*");
-
 			tri_display_subtree(node->children[i], level + 1);
 		}
 	}
