@@ -32,7 +32,7 @@ extern "C" {
 	Status hst_init_table(HashTable **hst, size_t size, Status(*hash_function) (char *, size_t *));
 	Status hst_init_entry(HashTableEntry **entry, int value);
 
-	Status hst_make_entry(HashTableEntry **entry, int value, size_t hash);
+	Status hst_make_entry(HashTableEntry **entry, char *key, int value, size_t hash);
 
 	Status hst_insert(HashTable *hst, char *key, int value);
 
