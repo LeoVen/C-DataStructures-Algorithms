@@ -14,7 +14,7 @@
 // |                                          Initializers                                           |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_init_table(HashTable **hst, size_t size, Status(*function) (char *, size_t *))
+Status hst_init_table(HashTable **hst, size_t size, Status(*hash_function) (char *, size_t *))
 {
 	if (size == 0)
 		return DS_ERR_INVALID_SIZE;
@@ -42,7 +42,7 @@ Status hst_init_table(HashTable **hst, size_t size, Status(*function) (char *, s
 
 	(*hst)->size = size;
 
-	(*hst)->hash_function = function;
+	(*hst)->hash_function = hash_function;
 
 	return DS_OK;
 }
@@ -51,10 +51,11 @@ Status hst_init_entry(HashTableEntry **entry, int value)
 {
 	*entry = malloc(sizeof(HashTableEntry));
 
-	(*entry)->data = value;
+	(*entry)->value = value;
 	(*entry)->hash = 0;
 
 	(*entry)->next = NULL;
+	(*entry)->key = NULL;
 
 	return DS_OK;
 }
@@ -63,11 +64,12 @@ Status hst_init_entry(HashTableEntry **entry, int value)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_make_entry(HashTableEntry **entry, int value, size_t hash)
+Status hst_make_entry(HashTableEntry **entry, char *key, int value, size_t hash)
 {
 	*entry = malloc(sizeof(HashTableEntry));
 
-	(*entry)->data = value;
+	(*entry)->key = _strdup(key);
+	(*entry)->value = value;
 	(*entry)->hash = hash;
 
 	(*entry)->next = NULL;
@@ -95,7 +97,7 @@ Status hst_insert(HashTable *hst, char *key, int value)
 
 	if ((hst->buckets)[pos] == NULL) {
 
-		st = hst_make_entry(&((hst->buckets)[pos]), value, hash);
+		st = hst_make_entry(&((hst->buckets)[pos]), key, value, hash);
 
 		if (st != DS_OK)
 			return st;
@@ -111,7 +113,7 @@ Status hst_insert(HashTable *hst, char *key, int value)
 
 		HashTableEntry *entry;
 
-		st = hst_make_entry(&entry, value, hash);
+		st = hst_make_entry(&entry, key, value, hash);
 
 		if (st != DS_OK)
 			return st;
@@ -138,7 +140,7 @@ Status hst_display_entry(HashTableEntry *entry)
 	if (entry == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	printf("\n|%21zu|\t|%10d|", entry->hash, entry->data);
+	printf("\n| %21zu | %10d | %40s |", entry->hash, entry->value, entry->key);
 
 	return DS_OK;
 }
@@ -148,7 +150,7 @@ Status hst_display_entry_raw(HashTableEntry *entry)
 	if (entry == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	printf("\n%21zu\t%d", entry->hash, entry->data);
+	printf("\n%21zu\t%10d\t%40s", entry->hash, entry->value, entry->key);
 
 	return DS_OK;
 }
@@ -158,18 +160,20 @@ Status hst_display_table(HashTable *hst)
 	if (hst == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	printf("\n+---------------------+\t+----------+");
-	printf("\n|    Hash Table       |\t|          |");
+	printf("\n+-------------------------------------------------------------------------------+");
+	printf("\n|                                Hash Table                                     |");
+	printf("\n+-----------------------+------------+------------------------------------------+");
+	printf("\n|         HASH          |   VALUE    |                    KEY                   |");
 
 	Status st;
 
 	size_t i;
 	for (i = 0; i < hst->size; i++) {
 
-		printf("\n+---------------------+\t+----------+");
+		printf("\n+-----------------------+------------+------------------------------------------+");
 
 		if ((hst->buckets)[i] == NULL)
-			printf("\n|        NULL         |\t|   NULL   |");
+			printf("\n|         NULL          |    NULL    |                    NULL                  |");
 		else {
 
 			if ((hst->buckets)[i]->next != NULL) {
@@ -197,7 +201,7 @@ Status hst_display_table(HashTable *hst)
 		}
 	}
 
-	printf("\n+---------------------+\t+----------+");
+	printf("\n+-----------------------+------------+------------------------------------------+");
 
 	printf("\n");
 
@@ -311,7 +315,7 @@ Status hst_search(HashTable *hst, char *key, int *value)
 		return DS_ERR_NOT_FOUND;
 
 	if (((hst->buckets)[pos])->next == NULL && ((hst->buckets)[pos])->hash == hash)
-		*value = ((hst->buckets)[pos])->data;
+		*value = ((hst->buckets)[pos])->value;
 	else {
 
 		HashTableEntry *scan = (hst->buckets)[pos];
@@ -322,7 +326,7 @@ Status hst_search(HashTable *hst, char *key, int *value)
 		{
 			if (scan->hash == hash) {
 
-				*value = scan->data;
+				*value = scan->value;
 
 				found = true;
 
@@ -448,7 +452,7 @@ Status hst_count_collisions_max(HashTable *hst, size_t *result)
 // |                                             Hash                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hash_string_java(char *key, size_t *hash)
+Status hst_hash_string_java(char *key, size_t *hash)
 {
 	size_t len = strlen(key);
 
@@ -464,7 +468,7 @@ Status hash_string_java(char *key, size_t *hash)
 	return DS_OK;
 }
 
-Status hash_string_djb2(char *key, size_t *hash)
+Status hst_hash_string_djb2(char *key, size_t *hash)
 {
 	*hash = 5381;
 
@@ -476,7 +480,7 @@ Status hash_string_djb2(char *key, size_t *hash)
 	return DS_OK;
 }
 
-Status hash_string_sdbm(char *key, size_t *hash)
+Status hst_hash_string_sdbm(char *key, size_t *hash)
 {
 	*hash = 0;
 

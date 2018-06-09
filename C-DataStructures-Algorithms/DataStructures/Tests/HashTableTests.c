@@ -24,7 +24,7 @@ int HashTableTests(void)
 
 	size_t hash, result;
 
-	Status st = hst_init_table(&hst, 31, hash_string_sdbm);
+	Status st = hst_init_table(&hst, 31, hst_hash_string_sdbm);
 
 	print_status_repr(st);
 
@@ -108,7 +108,7 @@ int HashTableTests(void)
 
 	size_t size = 1200;
 
-	hst_init_table(&hst, size, hash_string_djb2);
+	hst_init_table(&hst, size, hst_hash_string_djb2);
 
 	size_t i, j;
 	const char charset[] = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

@@ -17,7 +17,8 @@ extern "C" {
 #include "Core.h"
 
 	typedef struct HashTableEntry {
-		int data;
+		char *key;
+		int value;
 		size_t hash;
 		struct HashTableEntry *next;
 	} HashTableEntry;
@@ -28,7 +29,7 @@ extern "C" {
 		Status(*hash_function) (char *, size_t *);
 	} HashTable;
 
-	Status hst_init_table(HashTable **hst, size_t size, Status(*function) (char *, size_t *));
+	Status hst_init_table(HashTable **hst, size_t size, Status(*hash_function) (char *, size_t *));
 	Status hst_init_entry(HashTableEntry **entry, int value);
 
 	Status hst_make_entry(HashTableEntry **entry, int value, size_t hash);
@@ -53,9 +54,9 @@ extern "C" {
 	Status hst_count_empty(HashTable *hst, size_t *result);
 	Status hst_count_collisions_max(HashTable *hst, size_t *result);
 
-	Status hash_string_java(char *key, size_t *hash);
-	Status hash_string_djb2(char *key, size_t *hash);
-	Status hash_string_sdbm(char *key, size_t *hash);
+	Status hst_hash_string_java(char *key, size_t *hash);
+	Status hst_hash_string_djb2(char *key, size_t *hash);
+	Status hst_hash_string_sdbm(char *key, size_t *hash);
 	
 	
 #ifdef __cplusplus

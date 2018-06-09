@@ -14,7 +14,7 @@
 
 int dev_short_cut(void)
 {
-	TrieTests();
+	HashTableTests();
 
 	printf("\nPress enter to continue...");
 	_getch();
