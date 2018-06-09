@@ -110,7 +110,7 @@ int HashTableTests(void)
 
 	hst_init_table(&hst, size, hash_string_djb2);
 
-	int i, j;
+	size_t i, j;
 	const char charset[] = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const size_t c_len = strlen(charset);
 	const size_t str_len = 31;

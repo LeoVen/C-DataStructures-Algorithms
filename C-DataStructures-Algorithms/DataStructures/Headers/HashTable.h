@@ -53,9 +53,9 @@ extern "C" {
 	Status hst_count_empty(HashTable *hst, size_t *result);
 	Status hst_count_collisions_max(HashTable *hst, size_t *result);
 
-	Status hash_string_java(char * key, size_t *hash);
-	Status hash_string_djb2(char * key, size_t *hash);
-	Status hash_string_sdbm(char * key, size_t *hash);
+	Status hash_string_java(char *key, size_t *hash);
+	Status hash_string_djb2(char *key, size_t *hash);
+	Status hash_string_sdbm(char *key, size_t *hash);
 	
 	
 #ifdef __cplusplus
