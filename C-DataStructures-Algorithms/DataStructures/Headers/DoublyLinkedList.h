@@ -30,7 +30,10 @@ extern "C" {
 		struct DoublyLinkedNode *prev;      /*!< Pointer to the previous node on the list */
 	} DoublyLinkedNode;
 
-	/*
+	/**
+	 * @brief A Doubly Linked List composed of Nodes that link each other in a
+	 * chain of data
+	 *
 	 * A Doubly Linked List is a linear structure like @c SinglyLinkedList
 	 * but its nodes have two pointers. One pointing forward and another
 	 * pointing backwards. The structure is composed of two pointers, one to
@@ -102,8 +105,6 @@ extern "C" {
 
 	bool dll_is_empty(DoublyLinkedList *dll);
 	//Status dll_is_sorted(DoublyLinkedList *dll, bool *result);
-	//Status dll_is_set(DoublyLinkedList *dll, bool *result);
-	//Status dll_is_disjoint(DoublyLinkedList *dll1, DoublyLinkedList *dll2, bool *result);
 
 	Status dll_find_max(DoublyLinkedList *dll, int *result);
 	Status dll_find_min(DoublyLinkedList *dll, int *result);
@@ -139,6 +140,11 @@ extern "C" {
 	//Status dll_merge_sorted(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
 
 	//Status dll_remove_keys(DoublyLinkedList *dll, int key);
+
+	//Status dll_is_set_wrapper(DoublyLinkedList *dll, bool *result);
+	//bool dll_is_set(DoublyLinkedList *dll);
+	//Status dll_is_disjoint_wrapper(DoublyLinkedList *dll1, DoublyLinkedList *dll2, bool *result);
+	//bool dll_is_disjoint(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
 
 	//Status dll_set_remove_duplicates(DoublyLinkedList *dll);
 	//Status dll_set_union(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);

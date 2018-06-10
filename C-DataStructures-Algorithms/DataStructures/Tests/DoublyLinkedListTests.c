@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 18/03/2018
  *
- * @brief Test Cases for @c DoublyLinkedLists implementations in C
+ * @brief Test Cases for @c DoublyLinkedList implementations in C
  *
  * Here all functions are tested to assure that they operate as expected. Note
  * that not all test cases are performed.

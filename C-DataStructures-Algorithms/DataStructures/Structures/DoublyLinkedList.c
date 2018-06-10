@@ -850,8 +850,6 @@ bool dll_is_empty(DoublyLinkedList *dll)
 }
 
 //Status dll_is_sorted(DoublyLinkedList *dll, bool *result)
-//Status dll_is_set(DoublyLinkedList *dll, bool *result)
-//Status dll_is_disjoint(DoublyLinkedList *dll1, DoublyLinkedList *dll2, bool *result)
 
 Status dll_find_max(DoublyLinkedList *dll, int *result)
 {
@@ -1103,6 +1101,11 @@ Status dll_find_occurrance_last(DoublyLinkedList *dll, int key, size_t *position
 // +-------------------------------------------------------------------------------------------------+
 
 //Status dll_remove_keys(DoublyLinkedList *dll, int key)
+
+//Status dll_is_set_wrapper(DoublyLinkedList *dll, bool *result)
+//bool dll_is_set(DoublyLinkedList *dll)
+//Status dll_is_disjoint_wrapper(DoublyLinkedList *dll1, DoublyLinkedList *dll2, bool *result)
+//bool dll_is_disjoint(DoublyLinkedList *dll1, DoublyLinkedList *dll2)
 
 //Status dll_set_remove_duplicates(DoublyLinkedList *dll)
 //Status dll_set_union(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)

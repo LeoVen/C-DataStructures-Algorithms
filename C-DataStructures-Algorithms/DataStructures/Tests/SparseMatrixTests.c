@@ -1,5 +1,5 @@
 /**
- * @file SparseMatrix.h
+ * @file SparseMatrixTests.c
  *
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 02/05/2018

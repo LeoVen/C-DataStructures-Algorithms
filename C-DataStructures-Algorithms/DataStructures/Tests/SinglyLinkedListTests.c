@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 14/03/2018
  *
- * @brief Test Cases for @c SinglyLinkedLists implementations in C
+ * @brief Test Cases for @c SinglyLinkedList implementations in C
  *
  * Here all functions are tested to assure that they operate as expected. Note
  * that not all test cases are performed.
@@ -641,6 +641,10 @@ int SinglyLinkedListTests(void)
 
 	sll_display(sll);
 
+	bool r;
+	sll_is_sorted(sll, &r);
+	printf("\nNow SLL %s", (r) ? "is sorted" : "not sorted");
+
 	sll_delete_list(&sll);
 
 	/**************************************************
@@ -663,13 +667,42 @@ int SinglyLinkedListTests(void)
 	sll_display(sll1);
 	sll_display(sll2);
 
+	sll_is_set(sll1, &r);
+	printf("\nSLL1 is %s", (r) ? "a set" : "not a set");
+
+	sll_is_set(sll2, &r);
+	printf("\nSLL2 is %s", (r) ? "a set" : "not a set");
+
 	st = sll_set_make(sll1);
 	print_status_repr(st);
 	st = sll_set_make(sll2);
 	print_status_repr(st);
 
+	sll_is_set(sll1, &r);
+	printf("\nNow SLL1 is %s", (r) ? "a set" : "not a set");
+
+	sll_is_set(sll2, &r);
+	printf("\nNow SLL2 is %s", (r) ? "a set" : "not a set");
+
 	sll_display(sll1);
 	sll_display(sll2);
+
+	sll_is_disjoint(sll1, sll2, &r);
+	printf("\nSLL1 and SLL2 are %s", (r) ? "disjoint" : "not disjoint");
+
+	// Union operation
+	printf("\n ---------- Union:\n");
+	sll_set_union(sll1, sll2, &sll);
+
+	sll_display(sll);
+	sll_delete_list(&sll);
+
+	// Intersection operation
+	printf("\n ---------- Intersection\n");
+	sll_set_intersection(sll1, sll2, &sll);
+
+	sll_display(sll);
+	sll_delete_list(&sll);
 
 	sll_delete_list(&sll1);
 	sll_delete_list(&sll2);

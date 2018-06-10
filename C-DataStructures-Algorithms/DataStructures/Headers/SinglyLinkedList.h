@@ -28,6 +28,9 @@ extern "C" {
 	} SinglyLinkedNode;
 
 	/**
+	 * @brief A Singly Linked List composed of Nodes that link each other in a
+	 * chain of data.
+	 *
 	 * A Singly Linked List is a linear structure that is capable of constant
 	 * insertion and removal. In this case, the structure is composed of two
 	 * pointers, one to the first @c SinglyLinkedNode and another to the last
@@ -98,8 +101,6 @@ extern "C" {
 	
 	bool sll_is_empty(SinglyLinkedList *sll);
 	Status sll_is_sorted(SinglyLinkedList *sll, bool *result);
-	//Status sll_is_set(SinglyLinkedList *sll, bool *result);
-	//Status sll_is_disjoint(SinglyLinkedList *sll1, SinglyLinkedList *sll2, bool *result);
 	
 	Status sll_find_max(SinglyLinkedList *sll, int *result);
 	Status sll_find_min(SinglyLinkedList *sll, int *result);
@@ -136,9 +137,14 @@ extern "C" {
 
 	Status sll_remove_keys(SinglyLinkedList *sll, int key);
 
+	Status sll_is_set_wrapper(SinglyLinkedList *sll, bool *result);
+	bool sll_is_set(SinglyLinkedList *sll);
+	Status sll_is_disjoint_wrapper(SinglyLinkedList *sll1, SinglyLinkedList *sll2, bool *result);
+	bool sll_is_disjoint(SinglyLinkedList *sll1, SinglyLinkedList *sll2);
+
 	Status sll_set_make(SinglyLinkedList *sll);
-	//Status sll_set_union(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
-	//Status sll_set_intersection(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
+	Status sll_set_union(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
+	Status sll_set_intersection(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
 	//Status sll_set_difference(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
 	//Status sll_set_complement(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
 

@@ -1,3 +1,5 @@
+# To Do List
+
 # Algorithms
 
 ## To-do
@@ -64,7 +66,6 @@ Merge Sort          [          ]
 About Algorithms    [          ]
 Classification      [          ]
 ```
-
 
 # Data Structures
 
