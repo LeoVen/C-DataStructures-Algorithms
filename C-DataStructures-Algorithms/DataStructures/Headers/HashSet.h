@@ -29,23 +29,27 @@ extern "C" {
 		Status(*rehash_function) (size_t *);
 	} HashSet;
 
-	Status set_init_table(HashSet **set, size_t max_size, Status(*hash_function) (int, size_t *));
+	Status set_init_table(HashSet **set, size_t max_size,
+		Status(*hash_function) (char *, size_t *),
+		Status(*rehash_function) (size_t *));
 
 	Status set_init_entry(HashSetEntry **entry, char *value);
 
 	Status set_make_entry(HashSetEntry **entry, char *key, size_t hash);
 
-	//Status set_insert(HashSet *set, char *value);
+	Status set_insert(HashSet *set, char *value);
 
 	//Status set_remove(HashSet *set, char *value);
 
-	//Status set_display_entry(HashSetEntry *entry);
-	//Status set_display_table(HashSet *set);
+	Status set_display_entry(HashSetEntry *entry);
+	Status set_display_table(HashSet *set);
 	//Status set_display_entry_raw(HashSetEntry *entry);
 	//Status set_display_table_raw(HashSet *set);
 
-	//Status set_delete_table(HashSet **set);
-	//Status set_erase_table(HashSet **set);
+	Status set_delete_table(HashSet **set);
+	Status set_erase_table(HashSet **set);
+
+	bool set_is_full(HashSet *set);
 
 	//Status set_search(HashSet *set, char *key, int *value);
 

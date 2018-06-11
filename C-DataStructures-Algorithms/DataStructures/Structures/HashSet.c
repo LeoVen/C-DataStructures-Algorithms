@@ -14,7 +14,9 @@
 // |                                          Initializers                                           |
 // +-------------------------------------------------------------------------------------------------+
 
-Status set_init_table(HashSet **set, size_t max_size, Status(*hash_function) (int, size_t *))
+Status set_init_table(HashSet **set, size_t max_size,
+	Status(*hash_function) (char *, size_t *),
+	Status(*rehash_function) (size_t *))
 {
 	if (max_size == 0)
 		return DS_ERR_INVALID_SIZE;
@@ -35,11 +37,6 @@ Status set_init_table(HashSet **set, size_t max_size, Status(*hash_function) (in
 	size_t i;
 	for (i = 0; i < max_size; i++) {
 
-		((*set)->buckets)[i] = malloc(sizeof(HashSetEntry));
-
-		if (!(((*set)->buckets)[i]))
-			return DS_ERR_ALLOC;
-
 		((*set)->buckets)[i] = NULL;
 	}
 
@@ -47,6 +44,7 @@ Status set_init_table(HashSet **set, size_t max_size, Status(*hash_function) (in
 	(*set)->max_size = max_size;
 
 	(*set)->hash_function = hash_function;
+	(*set)->rehash_function = rehash_function;
 
 	return DS_OK;
 }
@@ -54,6 +52,9 @@ Status set_init_table(HashSet **set, size_t max_size, Status(*hash_function) (in
 Status set_init_entry(HashSetEntry **entry, char *value)
 {
 	*entry = malloc(sizeof(HashSetEntry));
+
+	if (!(*entry))
+		return DS_ERR_ALLOC;
 
 	(*entry)->value = _strdup(value);
 	(*entry)->hash = 0;
@@ -69,6 +70,9 @@ Status set_make_entry(HashSetEntry **entry, char *value, size_t hash)
 {
 	*entry = malloc(sizeof(HashSetEntry));
 
+	if (!(*entry))
+		return DS_ERR_ALLOC;
+
 	(*entry)->value = _strdup(value);
 	(*entry)->hash = hash;
 
@@ -79,7 +83,94 @@ Status set_make_entry(HashSetEntry **entry, char *value, size_t hash)
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status set_insert(HashSet *set, char *value)
+Status set_insert(HashSet *set, char *value)
+{
+	if (set == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (set_is_full(set))
+		return DS_ERR_FULL;
+
+	size_t hash;
+
+	Status st = set->hash_function(value, &hash);
+
+	if (st != DS_OK)
+		return st;
+
+	size_t pos = hash % set->max_size;
+
+	if ((set->buckets)[pos] == NULL) {
+
+		st = set_make_entry(&((set->buckets)[pos]), value, hash);
+
+		if (st != DS_OK)
+			return st;
+
+		(set->size)++;
+	}
+	else {
+
+		if (((set->buckets)[pos])->hash == hash)
+			return DS_OK;
+
+		bool found = false;
+
+		size_t i, rehash = hash;
+		for (i = 1; i <= 10; i++) {
+			
+			st = set->rehash_function(&rehash);
+
+			if (st != DS_OK)
+				return st;
+
+			pos = (hash + i * rehash) % set->max_size;
+
+			if ((set->buckets)[pos] == NULL) {
+
+				st = set_make_entry(&((set->buckets)[pos]), value, hash);
+
+				if (st != DS_OK)
+					return st;
+
+				(set->size)++;
+
+				found = true;
+
+				break;
+			}
+			else if (((set->buckets)[pos])->hash == hash)
+				return DS_OK;
+
+		}
+
+		if (!found) {
+
+			while (!found)
+			{
+				pos++;
+
+				if ((set->buckets)[pos % set->max_size] == NULL) {
+
+					st = set_make_entry(&((set->buckets)[pos % set->max_size]), value, hash);
+
+					if (st != DS_OK)
+						return st;
+
+					(set->size)++;
+
+					found = true;
+				}
+				else if (((set->buckets)[pos % set->max_size])->hash == hash)
+					return DS_OK;
+
+			}
+		}
+
+	}
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
@@ -91,8 +182,51 @@ Status set_make_entry(HashSetEntry **entry, char *value, size_t hash)
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status set_display_entry(HashSetEntry *entry)
-//Status set_display_table(HashSet *set)
+Status set_display_entry(HashSetEntry *entry)
+{
+	if (entry == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	printf("\n| %21zu | %52s |", entry->hash, entry->value);
+
+	return DS_OK;
+}
+
+Status set_display_table(HashSet *set)
+{
+	if (set == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	printf("\n+------------------------------------------------------------------------------+");
+	printf("\n|                                 Hash Set                                     |");
+	printf("\n+-----------------------+------------------------------------------------------+");
+	printf("\n|         HASH          |                         VALUE                        |");
+
+	Status st;
+
+	size_t i;
+	for (i = 0; i < set->max_size; i++) {
+
+		printf("\n+-----------------------+------------------------------------------------------+");
+
+		if ((set->buckets)[i] == NULL)
+			printf("\n|         NULL          |                           NULL                       |");
+		else {
+
+			st = set_display_entry((set->buckets)[i]);
+
+			if (st != DS_OK)
+				return st;
+		}
+	}
+
+	printf("\n+-----------------------+------------------------------------------------------+");
+
+	printf("\n");
+
+	return DS_OK;
+}
+
 //Status set_display_entry_raw(HashSetEntry *entry)
 //Status set_display_table_raw(HashSet *set)
 
@@ -100,12 +234,63 @@ Status set_make_entry(HashSetEntry **entry, char *value, size_t hash)
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status set_delete_table(HashSet **set)
-//Status set_erase_table(HashSet **set)
+Status set_delete_table(HashSet **set)
+{
+	if ((*set) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t i;
+	for (i = 0; i < (*set)->max_size; i++) {
+
+		if (((*set)->buckets)[i] != NULL)
+			free((((*set)->buckets)[i])->value);
+
+		free(((*set)->buckets)[i]);
+	}
+
+	free((*set)->buckets);
+	free(*set);
+
+	*set = NULL;
+
+	return DS_OK;
+}
+
+Status set_erase_table(HashSet **set)
+{
+	if ((*set) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t size = (*set)->max_size;
+	Status(*hash_function) (char *, size_t *) = (*set)->hash_function;
+	Status(*rehash_function) (size_t*) = (*set)->rehash_function;
+
+	Status st = set_delete_table(set);
+
+	if (st != DS_OK)
+		return st;
+
+	st = set_init_table(set, size, hash_function, rehash_function);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
+
+bool set_is_full(HashSet *set)
+{
+	return (set->max_size == set->size);
+}
+
+bool set_is_empty(HashSet *set)
+{
+	return (set->size == 0);
+}
 
 //Status set_search(HashSet *set, char *key, int *value)
 
@@ -144,10 +329,12 @@ Status set_hash_string_fnv(char *key, size_t *hash)
 {
 	*hash = 2166136261;
 
-	int c = 0;
+	int c;
 
-	while (key[c]++)
+	while (c = *key++)
 		*hash = ((*hash) * 16777619) ^ key[c];
+
+	return DS_OK;
 }
 
 Status set_rehash_rj(size_t *hash)

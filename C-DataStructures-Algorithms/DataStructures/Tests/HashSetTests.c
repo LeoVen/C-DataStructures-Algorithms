@@ -21,18 +21,21 @@ int HashSetTests(void)
 	printf("\n");
 
 	HashSet *set;
+	Status st;
 
-	set_init_table(&set, 100, set_rehash_rj);
+	size_t size = 200;
 
-	size_t i, j, len, hash, size = 100;
+	set_init_table(&set, size, set_hash_string_djb2, set_rehash_rj);
+
+	size_t j, len, hash;
 	const char charset[] = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const size_t c_len = strlen(charset);
 	const size_t str_len = 31;
 
 	char *str = malloc(sizeof(char) * str_len);
 
-	for (i = 0; i < size; i++) {
-
+	while (!set_is_full(set))
+	{
 		len = rand() % (str_len + 1 - 5) + 5;
 
 		for (j = 0; j < len - 1; j++) {
@@ -41,10 +44,44 @@ int HashSetTests(void)
 
 		str[j + 1] = '\0';
 
-		set_hash_string_sdbm(str, &hash);
-
-		printf("\n| %21zu | %40s |", hash, str);
+		st = set_insert(set, str);
 	}
+
+	set_display_table(set);
+
+	printf("\nSet size: %zu", set->size);
+
+	set_delete_table(&set);
+
+	set_init_table(&set, 30, set_hash_string_sdbm, set_rehash_prime);
+
+	printf("\nSet size: %zu", set->size);
+
+	set_insert(set, "Hello World!");
+	set_insert(set, "Hello World");
+	set_insert(set, "Fire and Blood");
+	set_insert(set, "Hear me Roar");
+	set_insert(set, "Ours is the Fury");
+	set_insert(set, "Winter is Coming");
+	set_insert(set, "As High as Honor");
+	set_insert(set, "We do not Sow");
+	set_insert(set, "Unbowed, Unbent, Unbroken");
+	set_insert(set, "Growing Strong");
+	set_insert(set, "Lorem Ipsum");
+	set_insert(set, "Thomas Edson");
+	set_insert(set, "Alan Turing");
+	set_insert(set, "Bernhard Riemann");
+	set_insert(set, "Leonhard Euler");
+	set_insert(set, "Carl Friedrich Gauss");
+	set_insert(set, "Isaac Newton");
+	set_insert(set, "Winter is Coming"); // Not allowed
+	set_insert(set, "Isaac Newton");     // Not allowed
+
+	set_display_table(set);
+
+	printf("\nSet size: %zu", set->size);
+
+	set_delete_table(&set);
 
 	printf("\n");
 	return 0;

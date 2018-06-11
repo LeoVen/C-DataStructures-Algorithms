@@ -32,11 +32,6 @@ Status hst_init_table(HashTable **hst, size_t size, Status(*hash_function) (char
 	size_t i;
 	for (i = 0; i < size; i++) {
 
-		((*hst)->buckets)[i] = malloc(sizeof(HashTableEntry));
-
-		if (!(((*hst)->buckets)[i]))
-			return DS_ERR_ALLOC;
-
 		((*hst)->buckets)[i] = NULL;
 	}
 
@@ -262,8 +257,36 @@ Status hst_delete_table(HashTable **hst)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i;
-	for (i = 0; i < (*hst)->size; i++)
-		free(((*hst)->buckets)[i]);
+	for (i = 0; i < (*hst)->size; i++) {
+
+		if (((*hst)->buckets)[i] != NULL) {
+			if ((((*hst)->buckets)[i])->next != NULL) {
+
+				HashTableEntry *prev = ((*hst)->buckets)[i];
+				HashTableEntry *scan = ((*hst)->buckets)[i];
+
+				while (scan != NULL)
+				{
+					scan = scan->next;
+
+					free(prev->key);
+					free(prev);
+
+					prev = scan;
+				}
+
+			}
+			else {
+
+				free((((*hst)->buckets)[i])->key);
+				free(((*hst)->buckets)[i]);
+			}
+
+		}
+		else
+			free(((*hst)->buckets)[i]);
+
+	}
 
 	free((*hst)->buckets);
 	free(*hst);
@@ -279,14 +302,14 @@ Status hst_erase_table(HashTable **hst)
 		return DS_ERR_NULL_POINTER;
 
 	size_t size = (*hst)->size;
-	Status(*function) (char *, size_t *) = (*hst)->hash_function;
+	Status(*hash_function) (char *, size_t *) = (*hst)->hash_function;
 
 	Status st = hst_delete_table(hst);
 
 	if (st != DS_OK)
 		return st;
 
-	st = hst_init_table(hst, size, function);
+	st = hst_init_table(hst, size, hash_function);
 
 	if (st != DS_OK)
 		return st;
