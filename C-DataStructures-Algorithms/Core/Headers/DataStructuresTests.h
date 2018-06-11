@@ -44,6 +44,7 @@ extern "C" {
 	int SortingTests(void);
 
 	int HashTableTests(void);
+	int HashSetTests(void);
 
 #ifdef __cplusplus
 }

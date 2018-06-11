@@ -211,6 +211,7 @@ int ds_all(void)
 	SortingTests();
 
 	HashTableTests();
+	HashSetTests();
 
 	return 0;
 }

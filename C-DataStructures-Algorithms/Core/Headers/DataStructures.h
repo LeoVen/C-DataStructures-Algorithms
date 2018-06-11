@@ -39,6 +39,9 @@ extern "C" {
 
 #include "SString.h"
 
+#include "HashTable.h"
+#include "HashSet.h"
+
 	int DataStructuresMenu(void);
 
 #ifdef __cplusplus
