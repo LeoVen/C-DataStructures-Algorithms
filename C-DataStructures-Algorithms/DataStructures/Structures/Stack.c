@@ -358,3 +358,5 @@ Status stk_check_balanced_brackets(const char *string, bool *result)
 
 	return DS_OK;
 }
+
+//Status stk_hanoi(size_t pieces)

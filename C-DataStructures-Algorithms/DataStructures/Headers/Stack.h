@@ -79,6 +79,7 @@ extern "C" {
 	bool stk_is_empty(Stack *stk);
 
 	Status stk_check_balanced_brackets(const char *string, bool *result);
+	//Status stk_hanoi(size_t pieces);
 
 #ifdef __cplusplus
 }

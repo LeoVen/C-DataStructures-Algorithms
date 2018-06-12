@@ -2698,3 +2698,4 @@ Status sll_set_intersection(SinglyLinkedList *sll1, SinglyLinkedList *sll2, Sing
 
 //Status sll_set_difference(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
 //Status sll_set_complement(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
+//Status sll_set_sym_diff(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)

@@ -1112,3 +1112,4 @@ Status dll_find_occurrance_last(DoublyLinkedList *dll, int key, size_t *position
 //Status dll_set_intersection(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)
 //Status dll_set_difference(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)
 //Status dll_set_complement(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)
+//Status dll_set_sym_diff(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result)
