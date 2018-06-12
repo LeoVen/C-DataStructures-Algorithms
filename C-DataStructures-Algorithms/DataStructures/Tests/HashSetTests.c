@@ -27,7 +27,7 @@ int HashSetTests(void)
 
 	set_init_table(&set, size, set_hash_string_djb2, set_rehash_rj);
 
-	size_t j, len, hash;
+	size_t i, j, len, hash;
 	const char charset[] = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const size_t c_len = strlen(charset);
 	const size_t str_len = 31;
@@ -77,9 +77,40 @@ int HashSetTests(void)
 	set_insert(set, "Winter is Coming"); // Not allowed
 	set_insert(set, "Isaac Newton");     // Not allowed
 
-	set_display_table(set);
+	set_display_table_raw(set);
 
 	printf("\nSet size: %zu", set->size);
+
+	size_t r, s;
+	set_count_empty(set, &r);
+	set_count_elements(set, &s);
+
+	printf("\nThere are %zu entries and %zu empty spaces", s, r);
+
+	bool res;
+	if (set_contains(set, "Isaac Newton", &res) == DS_OK)
+		printf("\nThe set %s Isaac Newton", (res) ? "contains" : "does not contains");
+
+	if (set_contains(set, "Insertion Sort", &res) == DS_OK)
+		printf("\nThe set %s Insertion Sort", (res) ? "contains" : "does not contains");
+
+	if (set_contains(set, "Fire and Blood", &res) == DS_OK)
+		printf("\nThe set %s Fire and Blood", (res) ? "contains" : "does not contains");
+
+	if (set_contains(set, "Barack Obama", &res) == DS_OK)
+		printf("\nThe set %s Barack Obama", (res) ? "contains" : "does not contains");
+
+	char *words[8] = { "Hello World!", "Lorem Ipsum", "The Ring", "Thomas Muller",
+		"Winter is Coming", "Turing Machine", "Hear me Roar", "Ramanujan"};
+
+	for (i = 0; i < 8; i++) {
+
+		if (set_exists(set, words[i]))
+			printf("\nThe element [ %s ] exists", words[i]);
+		else
+			printf("\nThe element [ %s ] does not exists", words[i]);
+	}
+
 
 	set_delete_table(&set);
 

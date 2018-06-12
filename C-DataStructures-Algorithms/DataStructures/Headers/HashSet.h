@@ -42,19 +42,26 @@ extern "C" {
 	//Status set_remove(HashSet *set, char *value);
 
 	Status set_display_entry(HashSetEntry *entry);
+	Status set_display_entry_raw(HashSetEntry *entry);
 	Status set_display_table(HashSet *set);
-	//Status set_display_entry_raw(HashSetEntry *entry);
-	//Status set_display_table_raw(HashSet *set);
+	Status set_display_table_raw(HashSet *set);
 
 	Status set_delete_table(HashSet **set);
 	Status set_erase_table(HashSet **set);
 
 	bool set_is_full(HashSet *set);
 
-	//Status set_search(HashSet *set, char *key, int *value);
+	Status set_contains(HashSet *set, char *value, bool *result);
+	bool set_exists(HashSet *set, char *value);
 
-	//Status set_count_entries(HashSet *set, size_t *result);
-	//Status set_count_empty(HashSet *set, size_t *result);
+	Status set_count_elements(HashSet *set, size_t *result);
+	Status set_count_empty(HashSet *set, size_t *result);
+
+	//Status set_union(HashSet *set1, HashSet *set2, HashSet **result);
+	//Status set_intersection(HashSet *set1, HashSet *set2, HashSet **result);
+	//Status set_difference(HashSet *set1, HashSet *set2, HashSet **result);
+	//Status set_complement(HashSet *set1, HashSet *set2, HashSet **result);
+	//Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet **result);
 
 	Status set_hash_string_djb2(char *key, size_t *hash);
 	Status set_hash_string_sdbm(char *key, size_t *hash);

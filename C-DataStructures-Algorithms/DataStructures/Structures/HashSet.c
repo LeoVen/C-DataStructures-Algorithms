@@ -192,6 +192,16 @@ Status set_display_entry(HashSetEntry *entry)
 	return DS_OK;
 }
 
+Status set_display_entry_raw(HashSetEntry *entry)
+{
+	if (entry == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	printf("\n %21zu %52s ", entry->hash, entry->value);
+
+	return DS_OK;
+}
+
 Status set_display_table(HashSet *set)
 {
 	if (set == NULL)
@@ -227,8 +237,33 @@ Status set_display_table(HashSet *set)
 	return DS_OK;
 }
 
-//Status set_display_entry_raw(HashSetEntry *entry)
-//Status set_display_table_raw(HashSet *set)
+Status set_display_table_raw(HashSet *set)
+{
+	if (set == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	printf("\n");
+
+	Status st;
+
+	size_t i;
+	for (i = 0; i < set->max_size; i++) {
+
+		if ((set->buckets)[i] == NULL)
+			printf("\n");
+		else {
+
+			st = set_display_entry_raw((set->buckets)[i]);
+
+			if (st != DS_OK)
+				return st;
+		}
+	}
+
+	printf("\n");
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Resets                                              |
@@ -292,10 +327,189 @@ bool set_is_empty(HashSet *set)
 	return (set->size == 0);
 }
 
-//Status set_search(HashSet *set, char *key, int *value)
+Status set_contains(HashSet *set, char *value, bool *result)
+{
+	*result = false;
 
-//Status set_count_entries(HashSet *set, size_t *result)
-//Status set_count_empty(HashSet *set, size_t *result)
+	if (set == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (set_is_empty(set))
+		return DS_OK;
+
+	size_t hash;
+
+	Status st = set->hash_function(value, &hash);
+
+	if (st != DS_OK)
+		return st;
+
+	size_t pos = hash % set->max_size;
+
+	if ((set->buckets)[pos] != NULL) {
+
+		if (((set->buckets)[pos])->hash == hash)
+			*result = true;
+		else {
+
+			bool found = false;
+
+			size_t i, rehash = hash;
+
+			for (i = 0; i < 10; i++) {
+
+				st = set->rehash_function(&rehash);
+
+				if (st != DS_OK)
+					return st;
+
+				pos = (hash + i * rehash) % set->max_size;
+
+				if ((set->buckets)[pos] != NULL) {
+
+					if (((set->buckets)[pos])->hash == hash) {
+
+						*result = true;
+
+						found = true;
+
+						break;
+					}
+				}
+			}
+
+			if (!found) {
+
+				for (i = 0; i < set->max_size; i++, pos++) {
+
+					if ((set->buckets)[pos % set->max_size] != NULL) {
+
+						if (((set->buckets)[pos % set->max_size])->hash == hash) {
+
+							*result = true;
+
+							found = true;
+
+							break;
+						}
+					}
+				}
+
+			}
+		}
+	}
+	else
+		*result = false;
+
+	return DS_OK;
+}
+
+bool set_exists(HashSet *set, char *value)
+{
+	if (set == NULL)
+		return false;
+
+	if (set_is_empty(set))
+		return false;
+
+	size_t hash;
+
+	Status st = set->hash_function(value, &hash);
+
+	if (st != DS_OK)
+		return st;
+
+	size_t pos = hash % set->max_size;
+
+	if ((set->buckets)[pos] != NULL) {
+
+		if (((set->buckets)[pos])->hash == hash)
+			return true;
+		else {
+
+			size_t i, rehash = hash;
+
+			for (i = 0; i < 10; i++) {
+
+				st = set->rehash_function(&rehash);
+
+				if (st != DS_OK)
+					return st;
+
+				pos = (hash + i * rehash) % set->max_size;
+
+				if ((set->buckets)[pos] != NULL) {
+
+					if (((set->buckets)[pos])->hash == hash) {
+
+						return true;
+					}
+				}
+			}
+
+			for (i = 0; i < set->max_size; i++, pos++) {
+
+				if ((set->buckets)[pos % set->max_size] != NULL) {
+
+					if (((set->buckets)[pos % set->max_size])->hash == hash) {
+
+						return true;
+					}
+				}
+			}
+
+			
+		}
+	}
+	else
+		return false;
+
+	return false;
+}
+
+Status set_count_elements(HashSet *set, size_t *result)
+{
+	*result = 0;
+
+	if (set == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t i;
+	for (i = 0; i < set->max_size; i++) {
+
+		if ((set->buckets)[i] != NULL)
+			(*result)++;
+	}
+
+	return DS_OK;
+}
+
+Status set_count_empty(HashSet *set, size_t *result)
+{
+	*result = 0;
+
+	if (set == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t i;
+	for (i = 0; i < set->max_size; i++) {
+
+		if ((set->buckets)[i] == NULL)
+			(*result)++;
+	}
+
+	return DS_OK;
+}
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Set                                                 |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status set_union(HashSet *set1, HashSet *set2, HashSet **result)
+//Status set_intersection(HashSet *set1, HashSet *set2, HashSet **result)
+//Status set_difference(HashSet *set1, HashSet *set2, HashSet **result)
+//Status set_complement(HashSet *set1, HashSet *set2, HashSet **result)
+//Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet **result)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Hash                                                |
