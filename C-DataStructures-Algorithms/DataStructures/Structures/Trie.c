@@ -101,11 +101,11 @@ Status tri_insert(Trie *trie, char *word)
 
 	for (i = 0; i < len; i++) {
 
-		idx = tri_char_to_index(tolower(word[i]));
+		idx = tri_char_to_index((char)tolower(word[i]));
 
 		if ((scan->children)[idx] == NULL) {
 			
-			st = tri_make_node(&((scan->children)[idx]), tolower(word[i]));
+			st = tri_make_node(&((scan->children)[idx]), (char)tolower(word[i]));
 
 			if (st != DS_OK)
 				return st;

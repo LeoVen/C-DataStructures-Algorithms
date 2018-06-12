@@ -27,7 +27,7 @@ int HashSetTests(void)
 
 	set_init_table(&set, size, set_hash_string_djb2, set_rehash_rj);
 
-	size_t i, j, len, hash;
+	size_t i, j, len;
 	const char charset[] = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	const size_t c_len = strlen(charset);
 	const size_t str_len = 31;

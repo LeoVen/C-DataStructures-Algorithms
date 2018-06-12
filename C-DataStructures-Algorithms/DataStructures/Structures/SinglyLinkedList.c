@@ -2240,6 +2240,8 @@ Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position
 
 		return DS_OK;
 	}
+
+	return DS_OK;
 }
 
 Status sll_switch_head(SinglyLinkedList *sll, size_t position)
@@ -2407,8 +2409,6 @@ Status sll_remove_keys(SinglyLinkedList *sll, int key)
 
 	SinglyLinkedNode *prev = NULL;
 	SinglyLinkedNode *curr = sll->head;
-	
-	Status st;
 
 	while (curr != NULL)
 	{
@@ -2492,8 +2492,6 @@ bool sll_is_set(SinglyLinkedList *sll)
 {
 	SinglyLinkedNode *scan = sll->head;
 
-	Status st;
-
 	size_t frequency;
 
 	while (scan != NULL)
@@ -2523,8 +2521,6 @@ Status sll_is_disjoint_wrapper(SinglyLinkedList *sll1, SinglyLinkedList *sll2, b
 
 	SinglyLinkedNode *scan = sll1->head;
 
-	Status st;
-	
 	while (scan != NULL)
 	{
 		if (sll_exists(sll2, scan->data)) {
@@ -2543,8 +2539,6 @@ Status sll_is_disjoint_wrapper(SinglyLinkedList *sll1, SinglyLinkedList *sll2, b
 bool sll_is_disjoint(SinglyLinkedList *sll1, SinglyLinkedList *sll2)
 {
 	SinglyLinkedNode *scan = sll1->head;
-
-	Status st;
 
 	while (scan != NULL)
 	{

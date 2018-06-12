@@ -486,7 +486,7 @@ Status hst_hash_string_java(char *key, size_t *hash)
 
 	size_t i;
 	for (i = 0; i < len; i++)
-		(*hash) += (size_t)pow((key[i] * 31), len - i);
+		(*hash) += (size_t)pow((double)(key[i] * 31), (double)(len - i));
 
 	return DS_OK;
 }

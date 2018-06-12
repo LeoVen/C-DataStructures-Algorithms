@@ -653,7 +653,7 @@ int SinglyLinkedListTests(void)
 	 *
 	 **************************************************/
 
-	SinglyLinkedList *sll1, *sll2, *result;
+	SinglyLinkedList *sll1, *sll2;
 
 	sll_init_list(&sll1);
 
@@ -667,10 +667,10 @@ int SinglyLinkedListTests(void)
 	sll_display(sll1);
 	sll_display(sll2);
 
-	sll_is_set(sll1, &r);
+	sll_is_set_wrapper(sll1, &r);
 	printf("\nSLL1 is %s", (r) ? "a set" : "not a set");
 
-	sll_is_set(sll2, &r);
+	sll_is_set_wrapper(sll2, &r);
 	printf("\nSLL2 is %s", (r) ? "a set" : "not a set");
 
 	st = sll_set_make(sll1);
@@ -678,16 +678,16 @@ int SinglyLinkedListTests(void)
 	st = sll_set_make(sll2);
 	print_status_repr(st);
 
-	sll_is_set(sll1, &r);
+	sll_is_set_wrapper(sll1, &r);
 	printf("\nNow SLL1 is %s", (r) ? "a set" : "not a set");
 
-	sll_is_set(sll2, &r);
+	sll_is_set_wrapper(sll2, &r);
 	printf("\nNow SLL2 is %s", (r) ? "a set" : "not a set");
 
 	sll_display(sll1);
 	sll_display(sll2);
 
-	sll_is_disjoint(sll1, sll2, &r);
+	sll_is_disjoint_wrapper(sll1, sll2, &r);
 	printf("\nSLL1 and SLL2 are %s", (r) ? "disjoint" : "not disjoint");
 
 	// Union operation
