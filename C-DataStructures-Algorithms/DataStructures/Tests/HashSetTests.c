@@ -68,6 +68,7 @@ int HashSetTests(void)
 	set_insert(set, "Unbowed, Unbent, Unbroken");
 	set_insert(set, "Growing Strong");
 	set_insert(set, "Lorem Ipsum");
+	set_insert(set, "Ada Lovelace");
 	set_insert(set, "Thomas Edson");
 	set_insert(set, "Alan Turing");
 	set_insert(set, "Bernhard Riemann");
@@ -77,7 +78,7 @@ int HashSetTests(void)
 	set_insert(set, "Winter is Coming"); // Not allowed
 	set_insert(set, "Isaac Newton");     // Not allowed
 
-	set_display_table_raw(set);
+	set_display_table(set);
 
 	printf("\nSet size: %zu", set->size);
 
@@ -111,6 +112,30 @@ int HashSetTests(void)
 			printf("\nThe element [ %s ] does not exists", words[i]);
 	}
 
+	st = set_remove(set, "Winter is Coming");
+	print_status_repr(st);
+	st = set_remove(set, "Thomas Edson");
+	print_status_repr(st);
+	st = set_remove(set, "Lorem Ipsum");
+	print_status_repr(st);
+	st = set_remove(set, "As High as Honor");
+	print_status_repr(st);
+	st = set_remove(set, "Bernhard Riemann");
+	print_status_repr(st);
+	st = set_remove(set, "Unbowed, Unbent, Unbroken");
+	print_status_repr(st);
+	printf("\nShouldn't find:");
+	st = set_remove(set, "Unbowed, Unbent, Unbroken");
+	print_status_repr(st);
+
+	set_display_table(set);
+
+	printf("\nSet size: %zu", set->size);
+
+	set_count_empty(set, &r);
+	set_count_elements(set, &s);
+
+	printf("\nThere are %zu entries and %zu empty spaces", s, r);
 
 	set_delete_table(&set);
 

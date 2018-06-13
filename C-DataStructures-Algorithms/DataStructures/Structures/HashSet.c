@@ -174,7 +174,77 @@ Status set_insert(HashSet *set, char *value)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status set_remove(HashSet *set, char *value)
+Status set_remove(HashSet *set, char *value)
+{
+	if (set_is_empty(set))
+		return DS_ERR_INVALID_OPERATION;
+
+	if (!set_exists(set, value))
+		return DS_ERR_NOT_FOUND;
+
+	size_t hash;
+
+	Status st = set->hash_function(value, &hash);
+
+	if (st != DS_OK)
+		return st;
+
+	size_t pos = hash % set->max_size;
+
+	if ((set->buckets)[pos] != NULL) {
+
+		if (((set->buckets)[pos])->hash == hash) {
+
+			free((set->buckets)[pos]);
+			(set->buckets)[pos] = NULL;
+		}
+		else {
+
+			bool found = false;
+
+			size_t i, rehash = hash;
+
+			for (i = 0; i < 10; i++) {
+
+				st = set->rehash_function(&rehash);
+
+				if (st != DS_OK)
+					return st;
+
+				pos = (hash + i * rehash) % set->max_size;
+
+				if ((set->buckets)[pos] != NULL) {
+
+					if (((set->buckets)[pos])->hash == hash) {
+
+						free((set->buckets)[pos]);
+						(set->buckets)[pos] = NULL;
+					}
+				}
+			}
+
+			if (!found) {
+
+				for (i = 0; i < set->max_size; i++, pos++) {
+
+					if ((set->buckets)[pos % set->max_size] != NULL) {
+
+						if (((set->buckets)[pos % set->max_size])->hash == hash) {
+
+							free((set->buckets)[pos]);
+							(set->buckets)[pos] = NULL;
+						}
+					}
+				}
+
+			}
+		}
+	}
+	else
+		return DS_ERR_NOT_FOUND;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |

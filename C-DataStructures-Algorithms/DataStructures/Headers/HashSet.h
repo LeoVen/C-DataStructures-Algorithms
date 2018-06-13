@@ -47,7 +47,7 @@ extern "C" {
 
 	Status set_insert(HashSet *set, char *value);
 
-	//Status set_remove(HashSet *set, char *value);
+	Status set_remove(HashSet *set, char *value);
 
 	Status set_display_entry(HashSetEntry *entry);
 	Status set_display_entry_raw(HashSetEntry *entry);
@@ -58,6 +58,7 @@ extern "C" {
 	Status set_erase_table(HashSet **set);
 
 	bool set_is_full(HashSet *set);
+	bool set_is_empty(HashSet *set);
 
 	Status set_contains(HashSet *set, char *value, bool *result);
 	bool set_exists(HashSet *set, char *value);
