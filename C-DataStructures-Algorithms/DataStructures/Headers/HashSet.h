@@ -16,6 +16,16 @@ extern "C" {
 
 #include "Core.h"
 
+#ifndef HASH_FUNCTION_TYPE
+#define HASH_FUNCTION_TYPE
+	typedef Status(*hash_function_t)(char *, size_t *);
+#endif
+
+#ifndef REHASH_FUNCTION_TYPE
+#define REHASH_FUNTION_TYPE
+	typedef Status(*rehash_function_t)(size_t *);
+#endif
+
 	typedef struct HashSetEntry {
 		char *value;
 		size_t hash;
@@ -29,9 +39,7 @@ extern "C" {
 		Status(*rehash_function) (size_t *);
 	} HashSet;
 
-	Status set_init_table(HashSet **set, size_t max_size,
-		Status(*hash_function) (char *, size_t *),
-		Status(*rehash_function) (size_t *));
+	Status set_init_table(HashSet **set, size_t max_size, hash_function_t hash_function, rehash_function_t rehash_function);
 
 	Status set_init_entry(HashSetEntry **entry, char *value);
 

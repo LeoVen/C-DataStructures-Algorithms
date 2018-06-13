@@ -14,6 +14,7 @@
 
 int dev_short_cut(void)
 {
+	HashTableTests();
 	HashSetTests();
 
 	printf("\nPress enter to continue...");

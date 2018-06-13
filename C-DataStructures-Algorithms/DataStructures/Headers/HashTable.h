@@ -16,6 +16,11 @@ extern "C" {
 
 #include "Core.h"
 
+#ifndef HASH_FUNCTION_TYPE
+#define HASH_FUNCTION_TYPE
+	typedef Status(*hash_function_t)(char *, size_t *);
+#endif
+
 	typedef struct HashTableEntry {
 		char *key;
 		int value;
@@ -29,7 +34,7 @@ extern "C" {
 		Status(*hash_function) (char *, size_t *);
 	} HashTable;
 
-	Status hst_init_table(HashTable **hst, size_t size, Status(*hash_function) (char *, size_t *));
+	Status hst_init_table(HashTable **hst, size_t size, hash_function_t hash_function);
 	Status hst_init_entry(HashTableEntry **entry, int value);
 
 	Status hst_make_entry(HashTableEntry **entry, char *key, int value, size_t hash);

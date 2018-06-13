@@ -14,7 +14,7 @@
 // |                                          Initializers                                           |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_init_table(HashTable **hst, size_t size, Status(*hash_function) (char *, size_t *))
+Status hst_init_table(HashTable **hst, size_t size, hash_function_t hash_function)
 {
 	if (size == 0)
 		return DS_ERR_INVALID_SIZE;

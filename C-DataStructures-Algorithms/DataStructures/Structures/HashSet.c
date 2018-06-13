@@ -14,9 +14,7 @@
 // |                                          Initializers                                           |
 // +-------------------------------------------------------------------------------------------------+
 
-Status set_init_table(HashSet **set, size_t max_size,
-	Status(*hash_function) (char *, size_t *),
-	Status(*rehash_function) (size_t *))
+Status set_init_table(HashSet **set, size_t max_size, hash_function_t hash_function, rehash_function_t rehash_function)
 {
 	if (max_size == 0)
 		return DS_ERR_INVALID_SIZE;
