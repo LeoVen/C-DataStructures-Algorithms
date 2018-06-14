@@ -14,7 +14,7 @@
 // |                                          Initializers                                           |
 // +-------------------------------------------------------------------------------------------------+
 
-Status set_init_table(HashSet **set, size_t max_size, hash_function_t hash_function, rehash_function_t rehash_function)
+Status set_init_set(HashSet **set, size_t max_size, hash_function_t hash_function, rehash_function_t rehash_function)
 {
 	if (max_size == 0)
 		return DS_ERR_INVALID_SIZE;
@@ -197,6 +197,8 @@ Status set_remove(HashSet *set, char *value)
 
 			free((set->buckets)[pos]);
 			(set->buckets)[pos] = NULL;
+
+			(set->size)--;
 		}
 		else {
 
@@ -219,6 +221,8 @@ Status set_remove(HashSet *set, char *value)
 
 						free((set->buckets)[pos]);
 						(set->buckets)[pos] = NULL;
+
+						(set->size)--;
 					}
 				}
 			}
@@ -231,8 +235,10 @@ Status set_remove(HashSet *set, char *value)
 
 						if (((set->buckets)[pos % set->max_size])->hash == hash) {
 
-							free((set->buckets)[pos]);
-							(set->buckets)[pos] = NULL;
+							free((set->buckets)[pos % set->max_size]);
+							(set->buckets)[pos % set->max_size] = NULL;
+
+							(set->size)--;
 						}
 					}
 				}
@@ -270,7 +276,7 @@ Status set_display_entry_raw(HashSetEntry *entry)
 	return DS_OK;
 }
 
-Status set_display_table(HashSet *set)
+Status set_display_set(HashSet *set)
 {
 	if (set == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -305,7 +311,7 @@ Status set_display_table(HashSet *set)
 	return DS_OK;
 }
 
-Status set_display_table_raw(HashSet *set)
+Status set_display_set_raw(HashSet *set)
 {
 	if (set == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -333,11 +339,37 @@ Status set_display_table_raw(HashSet *set)
 	return DS_OK;
 }
 
+Status set_display_elements(HashSet *set)
+{
+	if (set == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	printf("\nHash Set\n");
+
+	if (set_is_empty(set))
+		printf("[ empty ]\n");
+	else {
+
+		printf("( ");
+
+		size_t i;
+		for (i = 0; i < set->max_size; i++) {
+
+			if ((set->buckets)[i] != NULL)
+				printf("< %s > ", ((set->buckets)[i])->value);
+		}
+
+		printf(")");
+	}
+
+	return DS_OK;
+}
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status set_delete_table(HashSet **set)
+Status set_delete_set(HashSet **set)
 {
 	if ((*set) == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -359,7 +391,7 @@ Status set_delete_table(HashSet **set)
 	return DS_OK;
 }
 
-Status set_erase_table(HashSet **set)
+Status set_erase_set(HashSet **set)
 {
 	if ((*set) == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -368,12 +400,12 @@ Status set_erase_table(HashSet **set)
 	Status(*hash_function) (char *, size_t *) = (*set)->hash_function;
 	Status(*rehash_function) (size_t*) = (*set)->rehash_function;
 
-	Status st = set_delete_table(set);
+	Status st = set_delete_set(set);
 
 	if (st != DS_OK)
 		return st;
 
-	st = set_init_table(set, size, hash_function, rehash_function);
+	st = set_init_set(set, size, hash_function, rehash_function);
 
 	if (st != DS_OK)
 		return st;
@@ -573,11 +605,189 @@ Status set_count_empty(HashSet *set, size_t *result)
 // |                                             Set                                                 |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status set_union(HashSet *set1, HashSet *set2, HashSet **result)
-//Status set_intersection(HashSet *set1, HashSet *set2, HashSet **result)
-//Status set_difference(HashSet *set1, HashSet *set2, HashSet **result)
-//Status set_complement(HashSet *set1, HashSet *set2, HashSet **result)
-//Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet **result)
+Status set_union(HashSet *set1, HashSet *set2, HashSet *result)
+{
+	if (set1 == NULL || set2 == NULL || result == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (!set_is_empty(result))
+		return DS_ERR_INVALID_ARGUMENT;
+
+	if (set1->size + set2->size > result->max_size)
+		return DS_ERR_INVALID_ARGUMENT;
+
+	Status st;
+
+	size_t i;
+	for (i = 0; i < set1->max_size; i++) {
+
+		if ((set1->buckets)[i] != NULL) {
+
+
+			st = set_insert(result, ((set1->buckets)[i])->value);
+
+			if (st != DS_OK)
+				return st;
+		}
+	}
+
+	for (i = 0; i < set2->max_size; i++) {
+
+		if ((set2->buckets)[i] != NULL) {
+
+
+			st = set_insert(result, ((set2->buckets)[i])->value);
+
+			if (st != DS_OK)
+				return st;
+		}
+	}
+
+	return DS_OK;
+}
+
+Status set_intersection(HashSet *set1, HashSet *set2, HashSet *result)
+{
+	if (set1 == NULL || set2 == NULL || result == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (!set_is_empty(result))
+		return DS_ERR_INVALID_ARGUMENT;
+
+	if (set1->size > result->max_size || set2->size > result->max_size)
+		return DS_ERR_INVALID_ARGUMENT;
+
+	Status st;
+
+	bool exists;
+
+	size_t i;
+	for (i = 0; i < set1->max_size; i++) {
+
+		if ((set1->buckets)[i] != NULL) {
+
+			st = set_contains(set2, ((set1->buckets)[i])->value, &exists);
+
+			if (st != DS_OK)
+				return st;
+
+			if (exists) {
+
+				st = set_insert(result, ((set1->buckets)[i])->value);
+
+				if (st != DS_OK)
+					return st;
+			}
+		}
+	}
+
+	return DS_OK;
+}
+
+Status set_difference(HashSet *set1, HashSet *set2, HashSet *result)
+{
+	if (set1 == NULL || set2 == NULL || result == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (!set_is_empty(result))
+		return DS_ERR_INVALID_ARGUMENT;
+
+	if (set_is_empty(set1))
+		return DS_OK;
+
+	Status st;
+
+	bool exists;
+
+	size_t i;
+	for (i = 0; i < set1->max_size; i++) {
+
+		if ((set1->buckets)[i] != NULL) {
+
+			st = set_contains(set2, ((set1->buckets)[i])->value, &exists);
+
+			if (st != DS_OK)
+				return st;
+
+			if (!exists) {
+
+				st = set_insert(result, ((set1->buckets)[i])->value);
+
+				if (st != DS_OK)
+					return st;
+			}
+		}
+	}
+
+	return DS_OK;
+}
+
+Status set_complement(HashSet *set1, HashSet *set2, HashSet *result)
+{
+	Status st = set_difference(set2, set1, result);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
+
+Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet *result)
+{
+	if (set1 == NULL || set2 == NULL || result == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (!set_is_empty(result))
+		return DS_ERR_INVALID_ARGUMENT;
+
+	if (set1->size + set2->size > result->max_size)
+		return DS_ERR_INVALID_ARGUMENT;
+
+	Status st;
+
+	bool exists;
+
+	size_t i;
+	for (i = 0; i < set1->max_size; i++) {
+
+		if ((set1->buckets)[i] != NULL) {
+
+			st = set_contains(set2, ((set1->buckets)[i])->value, &exists);
+
+			if (st != DS_OK)
+				return st;
+
+			if (!exists) {
+
+				st = set_insert(result, ((set1->buckets)[i])->value);
+
+				if (st != DS_OK)
+					return st;
+			}
+		}
+	}
+
+	for (i = 0; i < set2->max_size; i++) {
+
+		if ((set2->buckets)[i] != NULL) {
+
+			st = set_contains(set1, ((set2->buckets)[i])->value, &exists);
+
+			if (st != DS_OK)
+				return st;
+
+			if (!exists) {
+
+				st = set_insert(result, ((set2->buckets)[i])->value);
+
+				if (st != DS_OK)
+					return st;
+			}
+		}
+	}
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Hash                                                |
@@ -589,7 +799,7 @@ Status set_hash_string_djb2(char *key, size_t *hash)
 
 	int c;
 
-	while (c = *key++)
+	while ((c = *key++) != 0)
 		(*hash) = (((*hash) << 5) + (*hash)) + c;
 
 	return DS_OK;
@@ -601,20 +811,22 @@ Status set_hash_string_sdbm(char *key, size_t *hash)
 
 	int c;
 
-	while (c = *key++)
+	while ((c = *key++) != 0)
 		(*hash) = c + (((*hash) << 6) + ((*hash) << 16)) - (*hash);
 
 	return DS_OK;
 }
 
-Status set_hash_string_fnv(char *key, size_t *hash)
+Status set_hash_string_prime(char *key, size_t *hash)
 {
-	*hash = 2166136261;
+	*hash = 1279307;
+
+	size_t prime = 37;
 
 	int c;
 
-	while (c = *key++)
-		*hash = ((*hash) * 16777619) ^ key[c];
+	while ((c = *key++) != 0)
+		*hash = ((*hash) * prime) + c * (*hash);
 
 	return DS_OK;
 }

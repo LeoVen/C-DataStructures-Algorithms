@@ -39,7 +39,7 @@ extern "C" {
 		Status(*rehash_function) (size_t *);
 	} HashSet;
 
-	Status set_init_table(HashSet **set, size_t max_size, hash_function_t hash_function, rehash_function_t rehash_function);
+	Status set_init_set(HashSet **set, size_t max_size, hash_function_t hash_function, rehash_function_t rehash_function);
 
 	Status set_init_entry(HashSetEntry **entry, char *value);
 
@@ -51,11 +51,12 @@ extern "C" {
 
 	Status set_display_entry(HashSetEntry *entry);
 	Status set_display_entry_raw(HashSetEntry *entry);
-	Status set_display_table(HashSet *set);
-	Status set_display_table_raw(HashSet *set);
+	Status set_display_set(HashSet *set);
+	Status set_display_set_raw(HashSet *set);
+	Status set_display_elements(HashSet *set);
 
-	Status set_delete_table(HashSet **set);
-	Status set_erase_table(HashSet **set);
+	Status set_delete_set(HashSet **set);
+	Status set_erase_set(HashSet **set);
 
 	bool set_is_full(HashSet *set);
 	bool set_is_empty(HashSet *set);
@@ -66,15 +67,15 @@ extern "C" {
 	Status set_count_elements(HashSet *set, size_t *result);
 	Status set_count_empty(HashSet *set, size_t *result);
 
-	//Status set_union(HashSet *set1, HashSet *set2, HashSet **result);
-	//Status set_intersection(HashSet *set1, HashSet *set2, HashSet **result);
-	//Status set_difference(HashSet *set1, HashSet *set2, HashSet **result);
-	//Status set_complement(HashSet *set1, HashSet *set2, HashSet **result);
-	//Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet **result);
+	Status set_union(HashSet *set1, HashSet *set2, HashSet *result);
+	Status set_intersection(HashSet *set1, HashSet *set2, HashSet *result);
+	Status set_difference(HashSet *set1, HashSet *set2, HashSet *result);
+	Status set_complement(HashSet *set1, HashSet *set2, HashSet *result);
+	Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet *result);
 
 	Status set_hash_string_djb2(char *key, size_t *hash);
 	Status set_hash_string_sdbm(char *key, size_t *hash);
-	Status set_hash_string_fnv(char *key, size_t *hash);
+	Status set_hash_string_prime(char *key, size_t *hash);
 
 	Status set_rehash_rj(size_t *hash);
 	Status set_rehash_prime(size_t *hash);

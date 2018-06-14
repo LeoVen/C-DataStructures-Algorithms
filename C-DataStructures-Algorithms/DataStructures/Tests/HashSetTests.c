@@ -25,7 +25,7 @@ int HashSetTests(void)
 
 	size_t size = 200;
 
-	set_init_table(&set, size, set_hash_string_djb2, set_rehash_rj);
+	set_init_set(&set, size, set_hash_string_djb2, set_rehash_rj);
 
 	size_t i, j, len;
 	const char charset[] = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -47,13 +47,13 @@ int HashSetTests(void)
 		st = set_insert(set, str);
 	}
 
-	set_display_table(set);
+	set_display_set(set);
 
 	printf("\nSet size: %zu", set->size);
 
-	set_delete_table(&set);
+	set_delete_set(&set);
 
-	set_init_table(&set, 30, set_hash_string_sdbm, set_rehash_prime);
+	set_init_set(&set, 30, set_hash_string_sdbm, set_rehash_prime);
 
 	printf("\nSet size: %zu", set->size);
 
@@ -78,7 +78,7 @@ int HashSetTests(void)
 	set_insert(set, "Winter is Coming"); // Not allowed
 	set_insert(set, "Isaac Newton");     // Not allowed
 
-	set_display_table(set);
+	set_display_set(set);
 
 	printf("\nSet size: %zu", set->size);
 
@@ -128,7 +128,7 @@ int HashSetTests(void)
 	st = set_remove(set, "Unbowed, Unbent, Unbroken");
 	print_status_repr(st);
 
-	set_display_table(set);
+	set_display_set(set);
 
 	printf("\nSet size: %zu", set->size);
 
@@ -137,7 +137,92 @@ int HashSetTests(void)
 
 	printf("\nThere are %zu entries and %zu empty spaces", s, r);
 
-	set_delete_table(&set);
+	set_delete_set(&set);
+
+	/* **********************************************************************
+	 *
+	 * SETS
+	 *
+	 ********************************************************************** */
+
+	const char *letters[26] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
+								"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+	len = 26;
+
+	HashSet *set_a, *set_b, *set_c;
+
+	size = 12;
+
+	set_init_set(&set_a, size, set_hash_string_prime, set_rehash_prime);
+	set_init_set(&set_b, size, set_hash_string_djb2, set_rehash_rj);
+	set_init_set(&set_c, size * 2, set_hash_string_prime, set_rehash_rj);
+
+	for (i = 0; i < size; i++)
+		set_insert(set_a, letters[rand() % len]);
+
+	for (i = 0; i < size; i++)
+		set_insert(set_b, letters[rand() % len]);
+
+	printf("\n\n +--------------------------------------------------+");
+	printf("\n |                     Set A                        |");
+	printf("\n +--------------------------------------------------+");
+	set_display_elements(set_a);
+
+	printf("\n\n +--------------------------------------------------+");
+	printf("\n |                     Set B                        |");
+	printf("\n +--------------------------------------------------+");
+	set_display_elements(set_b);
+
+	printf("\n");
+
+	printf("\n +--------------------------------------------------+");
+	printf("\n |                   UNION SET                      |");
+	printf("\n +--------------------------------------------------+");
+	st = set_union(set_a, set_b, set_c);
+	print_status_repr(st);
+	set_display_elements(set_c);
+
+	set_erase_set(&set_c);
+
+	printf("\n +--------------------------------------------------+");
+	printf("\n |                   INTER SET                      |");
+	printf("\n +--------------------------------------------------+");
+	st = set_intersection(set_a, set_b, set_c);
+	print_status_repr(st);
+	set_display_elements(set_c);
+
+	set_erase_set(&set_c);
+
+	printf("\n +--------------------------------------------------+");
+	printf("\n |                     A - B                        |");
+	printf("\n +--------------------------------------------------+");
+	st = set_difference(set_a, set_b, set_c);
+	print_status_repr(st);
+	set_display_elements(set_c);
+
+	set_erase_set(&set_c);
+
+	printf("\n +--------------------------------------------------+");
+	printf("\n |                     B - A                        |");
+	printf("\n +--------------------------------------------------+");
+	st = set_difference(set_b, set_a, set_c);
+	print_status_repr(st);
+	set_display_elements(set_c);
+
+	set_erase_set(&set_c);
+
+	printf("\n +--------------------------------------------------+");
+	printf("\n |               (A \\ B) U (B \\ A)                  |");
+	printf("\n +--------------------------------------------------+");
+	st = set_sym_diff(set_b, set_a, set_c);
+	print_status_repr(st);
+	set_display_elements(set_c);
+
+	set_erase_set(&set_c);
+
+	set_delete_set(&set_a);
+	set_delete_set(&set_b);
+	set_delete_set(&set_c);
 
 	printf("\n");
 	return 0;
