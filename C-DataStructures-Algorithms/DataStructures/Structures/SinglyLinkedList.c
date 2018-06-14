@@ -2066,6 +2066,8 @@ Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t positi
 
 Status sll_copy_list(SinglyLinkedList *sll, SinglyLinkedList **result)
 {
+	*result = NULL;
+
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
@@ -2101,6 +2103,8 @@ Status sll_copy_list(SinglyLinkedList *sll, SinglyLinkedList **result)
 
 Status sll_copy_node(SinglyLinkedNode *node, SinglyLinkedNode **result)
 {
+	*result = NULL;
+
 	if (node == NULL)
 		return DS_ERR_NULL_POINTER;
 
@@ -2630,6 +2634,8 @@ Status sll_set_make(SinglyLinkedList *sll)
 
 Status sll_set_union(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
 {
+	*result = NULL;
+
 	if (sll1 == NULL || sll2 == NULL)
 		return DS_ERR_NULL_POINTER;
 
@@ -2669,6 +2675,8 @@ Status sll_set_union(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinke
 
 Status sll_set_intersection(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result)
 {
+	*result = NULL;
+
 	if (sll1 == NULL || sll2 == NULL)
 		return DS_ERR_NULL_POINTER;
 
