@@ -81,8 +81,8 @@ extern "C" {
 	Status que_find_max(Queue *que, int *result);
 	Status que_find_min(Queue *que, int *result);
 
-	//Status que_copy_node(QueueNode *node, QueueNode **result);
-	//Status que_copy_queue(Queue *que, Queue **result);
+	Status que_copy_node(QueueNode *node, QueueNode **result);
+	Status que_copy_queue(Queue *que, Queue **result);
 
 #ifdef __cplusplus
 }

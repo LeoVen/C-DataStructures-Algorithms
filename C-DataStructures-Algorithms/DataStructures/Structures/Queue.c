@@ -411,5 +411,53 @@ Status que_find_min(Queue *que, int *result)
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status que_copy_node(QueueNode *node, QueueNode **result);
-//Status que_copy_queue(Queue *que, Queue **result);
+Status que_copy_node(QueueNode *node, QueueNode **result)
+{
+	*result = NULL;
+
+	if (node == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = que_make_node(result, node->data);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
+
+Status que_copy_queue(Queue *que, Queue **result)
+{
+	*result = NULL;
+
+	if (que == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (que_is_empty(que))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st = que_init_queue(result);
+
+	if (st != DS_OK)
+		return st;
+
+	QueueNode *scan = que->front;
+	QueueNode *copy;
+
+	while (scan != NULL)
+	{
+		st = que_copy_node(scan, &copy);
+
+		if (st != DS_OK)
+			return st;
+
+		st = que_enqueue_node(*result, copy);
+
+		if (st != DS_OK)
+			return st;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}

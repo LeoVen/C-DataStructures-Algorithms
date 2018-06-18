@@ -81,6 +81,10 @@ int QueueTests(void)
 	que_display(que_odd);
 	que_display(que_even);
 
+	Queue *copy_queue;
+
+	que_copy_queue(que_even, &copy_queue);
+
 	que_delete_queue(&que);
 	que_delete_queue(&que_odd);
 	que_delete_queue(&que_even);
@@ -141,6 +145,14 @@ int QueueTests(void)
 		printf("\n---------- ---------- ---------- ---------- ----------");
 
 	}
+
+	que_delete_queue(&que);
+
+	printf("\n\nCopied Queue:\n\n");
+
+	que_display(copy_queue);
+
+	que_delete_queue(&copy_queue);
 
 	printf("\n");
 	return 0;

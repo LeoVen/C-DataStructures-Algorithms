@@ -15,7 +15,7 @@
 int dev_short_cut(void)
 {
 
-	HashSetTests();
+	QueueTests();
 
 	printf("\nPress enter to continue...");
 	_getch();
