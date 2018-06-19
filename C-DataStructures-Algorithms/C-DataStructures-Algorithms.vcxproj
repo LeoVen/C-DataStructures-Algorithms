@@ -153,6 +153,7 @@
   <ItemGroup>
     <ClCompile Include="Algorithms\AlgorithmsMenu.c" />
     <ClCompile Include="Algorithms\Cryptography\CaesarCipher.c" />
+    <ClCompile Include="Algorithms\Utility\UserInput.c" />
     <ClCompile Include="Algorithms\Utility\Random.c" />
     <ClCompile Include="Algorithms\Mathematics\Josephus.c" />
     <ClCompile Include="Algorithms\Sorting\BubbleSort.c" />
@@ -167,6 +168,7 @@
     <ClCompile Include="Core\Display.c" />
     <ClCompile Include="DataStructures\DataStructuresMenu.c" />
     <ClCompile Include="DataStructures\Headers\HashSet.h" />
+    <ClCompile Include="DataStructures\Interactive\SinglyLinkedListInteractive.c" />
     <ClCompile Include="DataStructures\Structures\Array.c" />
     <ClCompile Include="DataStructures\Structures\AVLTree.c" />
     <ClCompile Include="DataStructures\Structures\BinarySearchTree.c" />
@@ -213,10 +215,12 @@
     <ClInclude Include="Algorithms\Headers\Cryptography.h" />
     <ClInclude Include="Algorithms\Headers\Random.h" />
     <ClInclude Include="Algorithms\Headers\Mathematics.h" />
+    <ClInclude Include="Algorithms\Headers\UserInput.h" />
     <ClInclude Include="Core\Headers\Algorithms.h" />
     <ClInclude Include="Algorithms\Headers\Sorting.h" />
     <ClInclude Include="Core\Headers\AlgorithmsTests.h" />
     <ClInclude Include="Core\Headers\Core.h" />
+    <ClInclude Include="Core\Headers\DataStructuresInteractive.h" />
     <ClInclude Include="Core\Headers\Display.h" />
     <ClInclude Include="Core\Headers\DataStructures.h" />
     <ClInclude Include="Core\Headers\DataStructuresTests.h" />

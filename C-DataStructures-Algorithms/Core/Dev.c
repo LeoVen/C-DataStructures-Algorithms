@@ -11,11 +11,12 @@
 #include "Core.h"
 #include "AlgorithmsTests.h"
 #include "DataStructuresTests.h"
+#include "DataStructuresInteractive.h"
 
 int dev_short_cut(void)
 {
 
-	QueueTests();
+	SinglyLinkedListInteractive();
 
 	printf("\nPress enter to continue...");
 	_getch();

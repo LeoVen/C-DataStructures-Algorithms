@@ -186,6 +186,12 @@
     <ClCompile Include="DataStructures\Tests\HashSetTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Algorithms\Utility\UserInput.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Interactive\SinglyLinkedListInteractive.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructures\Headers\Array.h">
@@ -273,6 +279,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataStructures\Headers\Trie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Headers\UserInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Headers\DataStructuresInteractive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
