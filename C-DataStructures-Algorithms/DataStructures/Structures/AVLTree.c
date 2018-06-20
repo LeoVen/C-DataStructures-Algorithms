@@ -105,6 +105,7 @@ Status avl_make_node(AVLTreeNode **node, int value)
 //Status avl_find_max(AVLTree *avl, AVLTreeNode **result)
 //Status avl_find_min(AVLTree *avl, AVLTreeNode **result)
 
+//Status avl_is_balanced(AVLTree *avl, bool *result)
 //bool avl_is_empty(AVLTree *avl)
 
 // +-------------------------------------------------------------------------------------------------+
@@ -124,5 +125,5 @@ Status avl_make_node(AVLTreeNode **node, int value)
 
 //Status avl_balance(AVLTreeNode *node)
 
-//Status avl_shift_right(AVLTreeNode *node)
-// Status avl_shift_left(AVLTreeNode *node)
+//Status avl_rotate_right(AVLTreeNode *node)
+// Status avl_rotate_left(AVLTreeNode *node)
