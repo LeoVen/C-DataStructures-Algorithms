@@ -210,7 +210,7 @@ int ds_all(void)
 
 	SortingTests();
 
-	HashTableTests();
+	HashMapTests();
 	HashSetTests();
 
 	return 0;

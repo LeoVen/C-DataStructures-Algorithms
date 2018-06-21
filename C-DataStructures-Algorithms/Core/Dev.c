@@ -16,7 +16,9 @@
 int dev_short_cut(void)
 {
 
-	SinglyLinkedListInteractive();
+	//SinglyLinkedListInteractive();
+	HashMapTests();
+	HashSetTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

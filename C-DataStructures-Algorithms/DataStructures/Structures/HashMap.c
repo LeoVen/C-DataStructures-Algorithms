@@ -1,50 +1,50 @@
 /**
- * @file HashTable.c
+ * @file HashMap.c
  *
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 05/06/2018
  *
- * @brief Source file for @c HashTable implementations in C
+ * @brief Source file for @c HashMap implementations in C
  *
  */
 
-#include "HashTable.h"
+#include "HashMap.h"
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                          Initializers                                           |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_init_table(HashTable **hst, size_t size, hash_function_t hash_function)
+Status map_init_map(HashMap **map, size_t size, hash_function_t hash_function)
 {
 	if (size == 0)
 		return DS_ERR_INVALID_SIZE;
 
-	*hst = malloc(sizeof(HashTable));
+	*map = malloc(sizeof(HashMap));
 
-	if (!(*hst))
+	if (!(*map))
 		return DS_ERR_ALLOC;
 
-	(*hst)->buckets = malloc(sizeof(HashTableEntry *) * size);
+	(*map)->hash_table = malloc(sizeof(HashMapEntry *) * size);
 
-	if (!((*hst)->buckets))
+	if (!((*map)->hash_table))
 		return DS_ERR_ALLOC;
 
 	size_t i;
 	for (i = 0; i < size; i++) {
 
-		((*hst)->buckets)[i] = NULL;
+		((*map)->hash_table)[i] = NULL;
 	}
 
-	(*hst)->size = size;
+	(*map)->size = size;
 
-	(*hst)->hash_function = hash_function;
+	(*map)->hash_function = hash_function;
 
 	return DS_OK;
 }
 
-Status hst_init_entry(HashTableEntry **entry, int value)
+Status map_init_entry(HashMapEntry **entry, int value)
 {
-	*entry = malloc(sizeof(HashTableEntry));
+	*entry = malloc(sizeof(HashMapEntry));
 
 	(*entry)->value = value;
 	(*entry)->hash = 0;
@@ -59,9 +59,9 @@ Status hst_init_entry(HashTableEntry **entry, int value)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_make_entry(HashTableEntry **entry, char *key, int value, size_t hash)
+Status map_make_entry(HashMapEntry **entry, char *key, int value, size_t hash)
 {
-	*entry = malloc(sizeof(HashTableEntry));
+	*entry = malloc(sizeof(HashMapEntry));
 
 	(*entry)->key = _strdup(key);
 	(*entry)->value = value;
@@ -76,39 +76,39 @@ Status hst_make_entry(HashTableEntry **entry, char *key, int value, size_t hash)
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_insert(HashTable *hst, char *key, int value)
+Status map_insert(HashMap *map, char *key, int value)
 {
-	if (hst == NULL)
+	if (map == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	size_t hash;
 
-	Status st = hst->hash_function(key, &hash);
+	Status st = map->hash_function(key, &hash);
 
 	if (st != DS_OK)
 		return st;
 
-	size_t pos = hash % hst->size;
+	size_t pos = hash % map->size;
 
-	if ((hst->buckets)[pos] == NULL) {
+	if ((map->hash_table)[pos] == NULL) {
 
-		st = hst_make_entry(&((hst->buckets)[pos]), key, value, hash);
+		st = map_make_entry(&((map->hash_table)[pos]), key, value, hash);
 
 		if (st != DS_OK)
 			return st;
 	}
 	else {
 
-		HashTableEntry *scan = (hst->buckets)[pos];
+		HashMapEntry *scan = (map->hash_table)[pos];
 
 		while (scan->next != NULL)
 		{
 			scan = scan->next;
 		}
 
-		HashTableEntry *entry;
+		HashMapEntry *entry;
 
-		st = hst_make_entry(&entry, key, value, hash);
+		st = map_make_entry(&entry, key, value, hash);
 
 		if (st != DS_OK)
 			return st;
@@ -124,13 +124,13 @@ Status hst_insert(HashTable *hst, char *key, int value)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status hst_remove(HashTable *hst, char *key)
+//Status map_remove(HashMap *map, char *key)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_display_entry(HashTableEntry *entry)
+Status map_display_entry(HashMapEntry *entry)
 {
 	if (entry == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -140,7 +140,7 @@ Status hst_display_entry(HashTableEntry *entry)
 	return DS_OK;
 }
 
-Status hst_display_entry_raw(HashTableEntry *entry)
+Status map_display_entry_raw(HashMapEntry *entry)
 {
 	if (entry == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -150,34 +150,34 @@ Status hst_display_entry_raw(HashTableEntry *entry)
 	return DS_OK;
 }
 
-Status hst_display_table(HashTable *hst)
+Status map_display_map(HashMap *map)
 {
-	if (hst == NULL)
+	if (map == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	printf("\n+-------------------------------------------------------------------------------+");
-	printf("\n|                                Hash Table                                     |");
+	printf("\n|                                Hash map                                     |");
 	printf("\n+-----------------------+------------+------------------------------------------+");
 	printf("\n|         HASH          |   VALUE    |                    KEY                   |");
 
 	Status st;
 
 	size_t i;
-	for (i = 0; i < hst->size; i++) {
+	for (i = 0; i < map->size; i++) {
 
 		printf("\n+-----------------------+------------+------------------------------------------+");
 
-		if ((hst->buckets)[i] == NULL)
+		if ((map->hash_table)[i] == NULL)
 			printf("\n|         NULL          |    NULL    |                    NULL                  |");
 		else {
 
-			if ((hst->buckets)[i]->next != NULL) {
+			if ((map->hash_table)[i]->next != NULL) {
 
-				HashTableEntry *scan = (hst->buckets)[i];
+				HashMapEntry *scan = (map->hash_table)[i];
 
 				while (scan != NULL)
 				{
-					st = hst_display_entry(scan);
+					st = map_display_entry(scan);
 
 					if (st != DS_OK)
 						return st;
@@ -188,7 +188,7 @@ Status hst_display_table(HashTable *hst)
 			}
 			else {
 
-				st = hst_display_entry((hst->buckets)[i]);
+				st = map_display_entry((map->hash_table)[i]);
 
 				if (st != DS_OK)
 					return st;
@@ -203,27 +203,27 @@ Status hst_display_table(HashTable *hst)
 	return DS_OK;
 }
 
-Status hst_display_table_raw(HashTable *hst)
+Status map_display_map_raw(HashMap *map)
 {
-	if (hst == NULL)
+	if (map == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	Status st;
 
 	size_t i;
-	for (i = 0; i < hst->size; i++) {
+	for (i = 0; i < map->size; i++) {
 
-		if ((hst->buckets)[i] == NULL)
+		if ((map->hash_table)[i] == NULL)
 			printf("\n");
 		else {
 
-			if ((hst->buckets)[i]->next != NULL) {
+			if ((map->hash_table)[i]->next != NULL) {
 
-				HashTableEntry *scan = (hst->buckets)[i];
+				HashMapEntry *scan = (map->hash_table)[i];
 
 				while (scan != NULL)
 				{
-					st = hst_display_entry_raw(scan);
+					st = map_display_entry_raw(scan);
 
 					if (st != DS_OK)
 						return st;
@@ -234,7 +234,7 @@ Status hst_display_table_raw(HashTable *hst)
 			}
 			else {
 
-				st = hst_display_entry_raw((hst->buckets)[i]);
+				st = map_display_entry_raw((map->hash_table)[i]);
 
 				if (st != DS_OK)
 					return st;
@@ -251,19 +251,19 @@ Status hst_display_table_raw(HashTable *hst)
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_delete_table(HashTable **hst)
+Status map_delete_map(HashMap **map)
 {
-	if ((*hst) == NULL)
+	if ((*map) == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i;
-	for (i = 0; i < (*hst)->size; i++) {
+	for (i = 0; i < (*map)->size; i++) {
 
-		if (((*hst)->buckets)[i] != NULL) {
-			if ((((*hst)->buckets)[i])->next != NULL) {
+		if (((*map)->hash_table)[i] != NULL) {
+			if ((((*map)->hash_table)[i])->next != NULL) {
 
-				HashTableEntry *prev = ((*hst)->buckets)[i];
-				HashTableEntry *scan = ((*hst)->buckets)[i];
+				HashMapEntry *prev = ((*map)->hash_table)[i];
+				HashMapEntry *scan = ((*map)->hash_table)[i];
 
 				while (scan != NULL)
 				{
@@ -278,38 +278,38 @@ Status hst_delete_table(HashTable **hst)
 			}
 			else {
 
-				free((((*hst)->buckets)[i])->key);
-				free(((*hst)->buckets)[i]);
+				free((((*map)->hash_table)[i])->key);
+				free(((*map)->hash_table)[i]);
 			}
 
 		}
 		else
-			free(((*hst)->buckets)[i]);
+			free(((*map)->hash_table)[i]);
 
 	}
 
-	free((*hst)->buckets);
-	free(*hst);
+	free((*map)->hash_table);
+	free(*map);
 
-	*hst = NULL;
+	*map = NULL;
 
 	return DS_OK;
 }
 
-Status hst_erase_table(HashTable **hst)
+Status map_erase_map(HashMap **map)
 {
-	if ((*hst) == NULL)
+	if ((*map) == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	size_t size = (*hst)->size;
-	Status(*hash_function) (char *, size_t *) = (*hst)->hash_function;
+	size_t size = (*map)->size;
+	Status(*hash_function) (char *, size_t *) = (*map)->hash_function;
 
-	Status st = hst_delete_table(hst);
+	Status st = map_delete_map(map);
 
 	if (st != DS_OK)
 		return st;
 
-	st = hst_init_table(hst, size, hash_function);
+	st = map_init_map(map, size, hash_function);
 
 	if (st != DS_OK)
 		return st;
@@ -321,27 +321,27 @@ Status hst_erase_table(HashTable **hst)
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_search(HashTable *hst, char *key, int *value)
+Status map_search(HashMap *map, char *key, int *value)
 {
 	*value = 0;
 
-	if (hst == NULL)
+	if (map == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	size_t hash;
 
-	hst->hash_function(key, &hash);
+	map->hash_function(key, &hash);
 
-	size_t pos = hash % hst->size;
+	size_t pos = hash % map->size;
 
-	if ((hst->buckets)[pos] == NULL)
+	if ((map->hash_table)[pos] == NULL)
 		return DS_ERR_NOT_FOUND;
 
-	if (((hst->buckets)[pos])->next == NULL && ((hst->buckets)[pos])->hash == hash)
-		*value = ((hst->buckets)[pos])->value;
+	if (((map->hash_table)[pos])->next == NULL && ((map->hash_table)[pos])->hash == hash)
+		*value = ((map->hash_table)[pos])->value;
 	else {
 
-		HashTableEntry *scan = (hst->buckets)[pos];
+		HashMapEntry *scan = (map->hash_table)[pos];
 
 		bool found = false;
 
@@ -367,23 +367,23 @@ Status hst_search(HashTable *hst, char *key, int *value)
 	return DS_OK;
 }
 
-//Status hst_search_all(HashTable *hst, char *key, int **value)
+//Status map_search_all(HashMap *map, char *key, int **value)
 
-Status hst_count_entries(HashTable *hst, size_t *result)
+Status map_count_entries(HashMap *map, size_t *result)
 {
 	*result = 0;
 
-	if (hst == NULL)
+	if (map == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i;
-	for (i = 0; i < hst->size; i++) {
+	for (i = 0; i < map->size; i++) {
 
-		if ((hst->buckets)[i] != NULL) {
+		if ((map->hash_table)[i] != NULL) {
 
-			if (((hst->buckets)[i])->next != NULL) {
+			if (((map->hash_table)[i])->next != NULL) {
 				
-				HashTableEntry *scan = (hst->buckets)[i];
+				HashMapEntry *scan = (map->hash_table)[i];
 
 				while (scan != NULL)
 				{
@@ -402,54 +402,54 @@ Status hst_count_entries(HashTable *hst, size_t *result)
 	return DS_OK;
 }
 
-Status hst_count_collisions(HashTable *hst, size_t *result)
+Status map_count_collisions(HashMap *map, size_t *result)
 {
 	*result = 0;
 
-	if (hst == NULL)
+	if (map == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i;
-	for (i = 0; i < hst->size; i++)
-		if ((hst->buckets)[i] != NULL)
-			if (((hst->buckets)[i])->next != NULL)
+	for (i = 0; i < map->size; i++)
+		if ((map->hash_table)[i] != NULL)
+			if (((map->hash_table)[i])->next != NULL)
 				(*result)++;
 
 	return DS_OK;
 }
 
-Status hst_count_empty(HashTable *hst, size_t *result)
+Status map_count_empty(HashMap *map, size_t *result)
 {
 	*result = 0;
 
-	if (hst == NULL)
+	if (map == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i;
-	for (i = 0; i < hst->size; i++)
-		if ((hst->buckets)[i] == NULL)
+	for (i = 0; i < map->size; i++)
+		if ((map->hash_table)[i] == NULL)
 			(*result)++;
 
 	return DS_OK;
 }
 
-Status hst_count_collisions_max(HashTable *hst, size_t *result)
+Status map_count_collisions_max(HashMap *map, size_t *result)
 {
 	*result = 0;
 
-	if (hst == NULL)
+	if (map == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i, total;
-	for (i = 0; i < hst->size; i++) {
+	for (i = 0; i < map->size; i++) {
 
-		if ((hst->buckets)[i] != NULL) {
+		if ((map->hash_table)[i] != NULL) {
 
-			if (((hst->buckets)[i])->next != NULL) {
+			if (((map->hash_table)[i])->next != NULL) {
 
 				total = 0;
 
-				HashTableEntry *scan = (hst->buckets)[i];
+				HashMapEntry *scan = (map->hash_table)[i];
 
 				while (scan != NULL)
 				{
@@ -475,7 +475,7 @@ Status hst_count_collisions_max(HashTable *hst, size_t *result)
 // |                                             Hash                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-Status hst_hash_string_java(char *key, size_t *hash)
+Status map_hash_string_java(char *key, size_t *hash)
 {
 	size_t len = strlen(key);
 
@@ -491,7 +491,7 @@ Status hst_hash_string_java(char *key, size_t *hash)
 	return DS_OK;
 }
 
-Status hst_hash_string_djb2(char *key, size_t *hash)
+Status map_hash_string_djb2(char *key, size_t *hash)
 {
 	*hash = 5381;
 
@@ -503,7 +503,7 @@ Status hst_hash_string_djb2(char *key, size_t *hash)
 	return DS_OK;
 }
 
-Status hst_hash_string_sdbm(char *key, size_t *hash)
+Status map_hash_string_sdbm(char *key, size_t *hash)
 {
 	*hash = 0;
 

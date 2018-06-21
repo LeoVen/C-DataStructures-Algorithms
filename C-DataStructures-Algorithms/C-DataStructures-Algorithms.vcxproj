@@ -179,7 +179,7 @@
     <ClCompile Include="DataStructures\Structures\DoublyLinkedList.c" />
     <ClCompile Include="DataStructures\Structures\DynamicArray.c" />
     <ClCompile Include="DataStructures\Structures\HashSet.c" />
-    <ClCompile Include="DataStructures\Structures\HashTable.c" />
+    <ClCompile Include="DataStructures\Structures\HashMap.c" />
     <ClCompile Include="DataStructures\Structures\PriorityQueue.c" />
     <ClCompile Include="DataStructures\Structures\Queue.c" />
     <ClCompile Include="DataStructures\Structures\SinglyLinkedList.c" />
@@ -199,7 +199,7 @@
     <ClCompile Include="DataStructures\Tests\DoublyLinkedListTests.c" />
     <ClCompile Include="DataStructures\Tests\DynamicArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\HashSetTests.c" />
-    <ClCompile Include="DataStructures\Tests\HashTableTests.c" />
+    <ClCompile Include="DataStructures\Tests\HashMapTests.c" />
     <ClCompile Include="DataStructures\Tests\PriorityQueueTests.c" />
     <ClCompile Include="DataStructures\Tests\QueueTests.c" />
     <ClCompile Include="DataStructures\Tests\SinglyLinkedListTests.c" />
@@ -233,7 +233,7 @@
     <ClInclude Include="DataStructures\Headers\Deque.h" />
     <ClInclude Include="DataStructures\Headers\DoublyLinkedList.h" />
     <ClInclude Include="DataStructures\Headers\DynamicArray.h" />
-    <ClInclude Include="DataStructures\Headers\HashTable.h" />
+    <ClInclude Include="DataStructures\Headers\HashMap.h" />
     <ClInclude Include="DataStructures\Headers\PriorityQueue.h" />
     <ClInclude Include="DataStructures\Headers\Queue.h" />
     <ClInclude Include="DataStructures\Headers\SinglyLinkedList.h" />

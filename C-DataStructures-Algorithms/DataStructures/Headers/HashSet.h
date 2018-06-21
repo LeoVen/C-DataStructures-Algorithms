@@ -22,7 +22,7 @@ extern "C" {
 #endif
 
 #ifndef REHASH_FUNCTION_TYPE
-#define REHASH_FUNTION_TYPE
+#define REHASH_FUNCTION_TYPE
 	typedef Status(*rehash_function_t)(size_t *);
 #endif
 
@@ -32,7 +32,7 @@ extern "C" {
 	} HashSetEntry;
 
 	typedef struct HashSet {
-		struct HashSetEntry **buckets;
+		struct HashSetEntry **hash_table;
 		size_t size;
 		size_t max_size;
 		Status(*hash_function) (char *, size_t *);

@@ -39,7 +39,7 @@ extern "C" {
 
 #include "SString.h"
 
-#include "HashTable.h"
+#include "HashMap.h"
 #include "HashSet.h"
 
 	int DataStructuresMenu(void);

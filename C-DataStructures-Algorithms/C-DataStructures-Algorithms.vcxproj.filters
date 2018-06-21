@@ -165,12 +165,6 @@
     <ClCompile Include="Algorithms\Utility\Random.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Structures\HashTable.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataStructures\Tests\HashTableTests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DataStructures\Structures\Trie.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -190,6 +184,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DataStructures\Interactive\SinglyLinkedListInteractive.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Structures\HashMap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Tests\HashMapTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -275,9 +275,6 @@
     <ClInclude Include="Algorithms\Headers\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DataStructures\Headers\HashTable.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DataStructures\Headers\Trie.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -285,6 +282,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Headers\DataStructuresInteractive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Headers\HashMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
