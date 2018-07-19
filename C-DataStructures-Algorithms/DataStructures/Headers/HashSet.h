@@ -35,8 +35,8 @@ extern "C" {
 		struct HashSetEntry **hash_table;
 		size_t size;
 		size_t max_size;
-		Status(*hash_function) (char *, size_t *);
-		Status(*rehash_function) (size_t *);
+		hash_function_t hash_function;
+		rehash_function_t rehash_function;
 	} HashSet;
 
 	Status set_init_set(HashSet **set, size_t max_size, hash_function_t hash_function, rehash_function_t rehash_function);
@@ -73,9 +73,9 @@ extern "C" {
 	Status set_complement(HashSet *set1, HashSet *set2, HashSet *result);
 	Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet *result);
 
-	Status set_hash_string_djb2(char *key, size_t *hash);
-	Status set_hash_string_sdbm(char *key, size_t *hash);
-	Status set_hash_string_prime(char *key, size_t *hash);
+	Status set_hash_djb2(char *key, size_t *hash);
+	Status set_hash_sdbm(char *key, size_t *hash);
+	Status set_hash_prime(char *key, size_t *hash);
 
 	Status set_rehash_rj(size_t *hash);
 	Status set_rehash_prime(size_t *hash);

@@ -24,7 +24,7 @@ int HashMapTests(void)
 
 	size_t hash, result;
 
-	Status st = map_init_map(&map, 31, map_hash_string_sdbm);
+	Status st = map_init_map(&map, 31, map_hash_sdbm);
 
 	print_status_repr(st);
 
@@ -108,7 +108,7 @@ int HashMapTests(void)
 
 	size_t size = 1200;
 
-	map_init_map(&map, size, map_hash_string_djb2);
+	map_init_map(&map, size, map_hash_djb2);
 
 	size_t i, j;
 	const char charset[] = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";

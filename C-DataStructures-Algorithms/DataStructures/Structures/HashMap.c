@@ -156,7 +156,7 @@ Status map_display_map(HashMap *map)
 		return DS_ERR_NULL_POINTER;
 
 	printf("\n+-------------------------------------------------------------------------------+");
-	printf("\n|                                Hash map                                     |");
+	printf("\n|                                 Hash map                                      |");
 	printf("\n+-----------------------+------------+------------------------------------------+");
 	printf("\n|         HASH          |   VALUE    |                    KEY                   |");
 
@@ -475,7 +475,7 @@ Status map_count_collisions_max(HashMap *map, size_t *result)
 // |                                             Hash                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-Status map_hash_string_java(char *key, size_t *hash)
+Status map_hash_java(char *key, size_t *hash)
 {
 	size_t len = strlen(key);
 
@@ -491,7 +491,7 @@ Status map_hash_string_java(char *key, size_t *hash)
 	return DS_OK;
 }
 
-Status map_hash_string_djb2(char *key, size_t *hash)
+Status map_hash_djb2(char *key, size_t *hash)
 {
 	*hash = 5381;
 
@@ -503,7 +503,7 @@ Status map_hash_string_djb2(char *key, size_t *hash)
 	return DS_OK;
 }
 
-Status map_hash_string_sdbm(char *key, size_t *hash)
+Status map_hash_sdbm(char *key, size_t *hash)
 {
 	*hash = 0;
 

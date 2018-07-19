@@ -31,7 +31,7 @@ extern "C" {
 	typedef struct HashMap {
 		struct HashMapEntry **hash_table;
 		size_t size;
-		Status(*hash_function) (char *, size_t *);
+		hash_function_t hash_function;
 	} HashMap;
 
 	Status map_init_map(HashMap **map, size_t size, hash_function_t hash_function);
@@ -59,9 +59,9 @@ extern "C" {
 	Status map_count_empty(HashMap *map, size_t *result);
 	Status map_count_collisions_max(HashMap *map, size_t *result);
 
-	Status map_hash_string_java(char *key, size_t *hash);
-	Status map_hash_string_djb2(char *key, size_t *hash);
-	Status map_hash_string_sdbm(char *key, size_t *hash);
+	Status map_hash_java(char *key, size_t *hash);
+	Status map_hash_djb2(char *key, size_t *hash);
+	Status map_hash_sdbm(char *key, size_t *hash);
 	
 	
 #ifdef __cplusplus

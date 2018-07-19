@@ -25,7 +25,7 @@ int HashSetTests(void)
 
 	size_t size = 200;
 
-	set_init_set(&set, size, set_hash_string_djb2, set_rehash_rj);
+	set_init_set(&set, size, set_hash_djb2, set_rehash_rj);
 
 	size_t i, j, len;
 	const char charset[] = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -53,7 +53,7 @@ int HashSetTests(void)
 
 	set_delete_set(&set);
 
-	set_init_set(&set, 30, set_hash_string_sdbm, set_rehash_prime);
+	set_init_set(&set, 30, set_hash_sdbm, set_rehash_prime);
 
 	printf("\nSet size: %zu", set->size);
 
@@ -153,9 +153,9 @@ int HashSetTests(void)
 
 	size = 12;
 
-	set_init_set(&set_a, size, set_hash_string_prime, set_rehash_prime);
-	set_init_set(&set_b, size, set_hash_string_djb2, set_rehash_rj);
-	set_init_set(&set_c, size * 2, set_hash_string_prime, set_rehash_rj);
+	set_init_set(&set_a, size, set_hash_prime, set_rehash_prime);
+	set_init_set(&set_b, size, set_hash_djb2, set_rehash_rj);
+	set_init_set(&set_c, size * 2, set_hash_prime, set_rehash_rj);
 
 	for (i = 0; i < size; i++)
 		set_insert(set_a, letters[rand() % len]);

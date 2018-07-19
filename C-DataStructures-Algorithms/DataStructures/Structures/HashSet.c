@@ -793,7 +793,7 @@ Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet *result)
 // |                                             Hash                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-Status set_hash_string_djb2(char *key, size_t *hash)
+Status set_hash_djb2(char *key, size_t *hash)
 {
 	*hash = 5381;
 
@@ -805,7 +805,7 @@ Status set_hash_string_djb2(char *key, size_t *hash)
 	return DS_OK;
 }
 
-Status set_hash_string_sdbm(char *key, size_t *hash)
+Status set_hash_sdbm(char *key, size_t *hash)
 {
 	*hash = 0;
 
@@ -817,7 +817,7 @@ Status set_hash_string_sdbm(char *key, size_t *hash)
 	return DS_OK;
 }
 
-Status set_hash_string_prime(char *key, size_t *hash)
+Status set_hash_prime(char *key, size_t *hash)
 {
 	*hash = 1279307;
 
