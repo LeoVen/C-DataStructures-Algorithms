@@ -13,6 +13,8 @@
 
 #include "DoublyLinkedList.h"
 
+int DLL_IO_TESTS();
+
 int DoublyLinkedListTests(void)
 {
 	printf("\n");
@@ -22,6 +24,8 @@ int DoublyLinkedListTests(void)
 	printf(" |                                     |\n");
 	printf(" +-------------------------------------+\n");
 	printf("\n");
+
+	//DLL_IO_TESTS();
 
 	DoublyLinkedList *dll;
 
@@ -107,18 +111,67 @@ int DoublyLinkedListTests(void)
 	dll_delete_list(&dll_even);
 	dll_delete_list(&dll_odd);
 
+	DoublyLinkedList *my_list;
+
+	dll_init_list(&my_list);
+
+	for (i = 0; i < 5; i++)
+		dll_insert_tail(my_list, i);
+
+	dll_display(my_list);
+
+	printf("\nReversing list:");
+
+	dll_reverse(my_list);
+
+	dll_display(my_list);
+
+	DoublyLinkedList *d_list;
+
+	dll_copy_list(my_list, &d_list);
+
+	dll_reverse(my_list);
+
+	printf("\nList reversed again:");
+	dll_display(my_list);
+	printf("\nCopy of list before re-reversing:");
+	dll_display(d_list);
+
+	if (!dll_equals(my_list, d_list))
+		printf("\nBoth lists are not the same");
+
+	dll_reverse(d_list);
+
+	if (!dll_equals(my_list, d_list))
+		printf("\nBoth lists are not the same");
+	else
+		printf("\nBoth lists are the same");
+
+	dll_display(my_list);
+	dll_display(d_list);
+
+	dll_delete_list(&my_list);
+	dll_delete_list(&d_list);
+
+	printf("\n");
+	return 0;
+}
+
+int DLL_IO_TESTS()
+{
 	printf("\n");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n ---------- ---------- --------- Begin tests --------- ---------- ----------");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
 
-	node = NULL;
+	DoublyLinkedNode *node = NULL;
+	DoublyLinkedList *dll;
 
 	dll_init_list(&dll);
 
-	size_t length = 0, l_max = 6, position = 0;
-	int j, k, c, max = 100, value = 0;
+	size_t len, length = 0, l_max = 6, position = 0;
+	int i, j, k, c, max = 100, value = 0;
 	for (i = 0; i < 10000; i++)
 	{
 		printf("\n---------- ---------- ---------- ---------- ----------");
@@ -177,7 +230,7 @@ int DoublyLinkedListTests(void)
 					dll_insert_node_tail(dll, node);
 				}
 			}
-		// End
+			// End
 		}
 		else {
 			// Remove
@@ -226,7 +279,7 @@ int DoublyLinkedListTests(void)
 					free(node);
 				}
 			}
-		// End
+			// End
 		}
 
 		node = NULL;
@@ -253,7 +306,4 @@ int DoublyLinkedListTests(void)
 	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
-
-	printf("\n");
-	return 0;
 }

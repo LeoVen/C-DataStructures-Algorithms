@@ -13,6 +13,8 @@
 
 #include "SinglyLinkedList.h"
 
+int SLL_IO_TESTS();
+
 int SinglyLinkedListTests(void)
 {
 	printf("\n");
@@ -22,6 +24,8 @@ int SinglyLinkedListTests(void)
 	printf(" |                                     |\n");
 	printf(" +-------------------------------------+\n");
 	printf("\n");
+
+	//SLL_IO_TESTS();
 
 	SinglyLinkedList *sll;
 	if (sll_init_list(&sll) != DS_OK)
@@ -388,153 +392,6 @@ int SinglyLinkedListTests(void)
 	sll_delete_list(&sll_odd);
 	sll_delete_list(&sll_result);
 
-	printf("\n");
-	printf("\n ---------- ---------- ---------- Begin tests ---------- ---------- ----------");
-	printf("\n");
-
-	node = NULL;
-
-	sll_init_list(&sll);
-
-	size_t length = 0, l_max = 6, position = 0;
-	int j, c, value = 0;
-	max = 100;
-	k = 0;
-	for (i = 0; i < 10000; i++)
-	{
-		printf("\n---------- ---------- ---------- ---------- ----------");
-
-		j = rand();
-		k = rand();
-		c = rand() % 3;
-
-		sll_get_length(sll, &length);
-		len = 0;
-
-		if (j % 2 == 0 && length < l_max) {
-			// Insert
-			if (k % 2 == 0) {
-				// Insert
-				if (c == 0) {
-					// Head
-					printf("\nsll_insert_head()");
-					sll_insert_head(sll, rand() % max);
-				}
-				else if (c == 1) {
-					// Middle
-					printf("\nsll_insert_at()");
-					if (length != 0)
-						len = rand() % length;
-					printf(" position %zu", len);
-					sll_insert_at(sll, rand() % max, len);
-				}
-				else {
-					// Tail
-					printf("\nsll_insert_tail()");
-					sll_insert_tail(sll, rand() % max);
-				}
-			}
-			else {
-				// Push
-				if (c == 0) {
-					// Head
-					printf("\nsll_insert_node_head()");
-					sll_make_node(&node, rand() % max);
-					sll_insert_node_head(sll, node);
-				}
-				else if (c == 1) {
-					// Middle
-					printf("\nsll_insert_node_at()");
-					if (length != 0)
-						len = rand() % length;
-					printf(" position %zu", len);
-					sll_make_node(&node, rand() % max);
-					sll_insert_node_at(sll, node, len);
-				}
-				else {
-					// Tail
-					printf("\nsll_insert_node_tail()");
-					sll_make_node(&node, rand() % max);
-					sll_insert_node_tail(sll, node);
-				}
-			}
-			// End
-		}
-		else {
-			// Remove
-			if (k % 2 == 0) {
-				// Slice
-				if (c == 0) {
-					// Head
-					printf("\nsll_remove_head()");
-					sll_remove_head(sll);
-				}
-				else if (c == 1) {
-					// Middle
-					printf("\nsll_remove_at()");
-					if (length != 0)
-						len = rand() % length;
-					printf(" position %zu", len);
-					sll_remove_at(sll, len);
-				}
-				else {
-					// Tail
-					printf("\nsll_remove_tail()");
-					sll_remove_tail(sll);
-				}
-			}
-			else {
-				// Pop
-				if (c == 0) {
-					// Head
-					printf("\nsll_remove_node_head()");
-					sll_remove_node_head(sll, &node);
-					free(node);
-				}
-				else if (c == 1) {
-					// Middle
-					printf("\nsll_remove_node_at()");
-					if (length != 0)
-						len = rand() % length;
-					printf(" position %zu", len);
-					sll_remove_node_at(sll, &node, len);
-					free(node);
-				}
-				else {
-					// Tail
-					printf("\nsll_remove_node_tail()");
-					sll_remove_node_tail(sll, &node);
-					free(node);
-				}
-			}
-			// End
-		}
-
-		node = NULL;
-
-		sll_display(sll);
-
-		sll_find_max(sll, &value);
-		sll_find_max_pos(sll, &position);
-		printf("\nMaximum value: %d at position %zu", value, position);
-		sll_find_min(sll, &value);
-		sll_find_min_pos(sll, &position);
-		printf("\nMinimum value: %d at position %zu", value, position);
-
-		printf("\n---------- ---------- ---------- ---------- ----------");
-
-	}
-
-	printf("\nFinal list size: %zu", sll->length);
-
-	sll_delete_list(&sll);
-
-	printf("\n");
-	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
-	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
-	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
-	printf("\n");
-
 	sll_init_list(&sll);
 
 	for (i = 0; i < 10; i++)
@@ -709,4 +566,157 @@ int SinglyLinkedListTests(void)
 
 	printf("\n");
 	return 0;
+}
+
+int SLL_IO_TESTS()
+{
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- --------- Begin tests --------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
+	SinglyLinkedNode *node = NULL;
+	SinglyLinkedList *sll;
+
+	sll_init_list(&sll);
+
+	size_t len, length = 0, l_max = 6, position = 0;
+	int i, j, k, c, max, value = 0;
+	max = 100;
+	k = 0;
+	for (i = 0; i < 10000; i++)
+	{
+		printf("\n---------- ---------- ---------- ---------- ----------");
+
+		j = rand();
+		k = rand();
+		c = rand() % 3;
+
+		sll_get_length(sll, &length);
+		len = 0;
+
+		if (j % 2 == 0 && length < l_max) {
+			// Insert
+			if (k % 2 == 0) {
+				// Insert
+				if (c == 0) {
+					// Head
+					printf("\nsll_insert_head()");
+					sll_insert_head(sll, rand() % max);
+				}
+				else if (c == 1) {
+					// Middle
+					printf("\nsll_insert_at()");
+					if (length != 0)
+						len = rand() % length;
+					printf(" position %zu", len);
+					sll_insert_at(sll, rand() % max, len);
+				}
+				else {
+					// Tail
+					printf("\nsll_insert_tail()");
+					sll_insert_tail(sll, rand() % max);
+				}
+			}
+			else {
+				// Push
+				if (c == 0) {
+					// Head
+					printf("\nsll_insert_node_head()");
+					sll_make_node(&node, rand() % max);
+					sll_insert_node_head(sll, node);
+				}
+				else if (c == 1) {
+					// Middle
+					printf("\nsll_insert_node_at()");
+					if (length != 0)
+						len = rand() % length;
+					printf(" position %zu", len);
+					sll_make_node(&node, rand() % max);
+					sll_insert_node_at(sll, node, len);
+				}
+				else {
+					// Tail
+					printf("\nsll_insert_node_tail()");
+					sll_make_node(&node, rand() % max);
+					sll_insert_node_tail(sll, node);
+				}
+			}
+			// End
+		}
+		else {
+			// Remove
+			if (k % 2 == 0) {
+				// Slice
+				if (c == 0) {
+					// Head
+					printf("\nsll_remove_head()");
+					sll_remove_head(sll);
+				}
+				else if (c == 1) {
+					// Middle
+					printf("\nsll_remove_at()");
+					if (length != 0)
+						len = rand() % length;
+					printf(" position %zu", len);
+					sll_remove_at(sll, len);
+				}
+				else {
+					// Tail
+					printf("\nsll_remove_tail()");
+					sll_remove_tail(sll);
+				}
+			}
+			else {
+				// Pop
+				if (c == 0) {
+					// Head
+					printf("\nsll_remove_node_head()");
+					sll_remove_node_head(sll, &node);
+					free(node);
+				}
+				else if (c == 1) {
+					// Middle
+					printf("\nsll_remove_node_at()");
+					if (length != 0)
+						len = rand() % length;
+					printf(" position %zu", len);
+					sll_remove_node_at(sll, &node, len);
+					free(node);
+				}
+				else {
+					// Tail
+					printf("\nsll_remove_node_tail()");
+					sll_remove_node_tail(sll, &node);
+					free(node);
+				}
+			}
+			// End
+		}
+
+		node = NULL;
+
+		sll_display(sll);
+
+		sll_find_max(sll, &value);
+		sll_find_max_pos(sll, &position);
+		printf("\nMaximum value: %d at position %zu", value, position);
+		sll_find_min(sll, &value);
+		sll_find_min_pos(sll, &position);
+		printf("\nMinimum value: %d at position %zu", value, position);
+
+		printf("\n---------- ---------- ---------- ---------- ----------");
+
+	}
+
+	printf("\nFinal list size: %zu", sll->length);
+
+	sll_delete_list(&sll);
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
 }

@@ -17,8 +17,10 @@ int dev_short_cut(void)
 {
 
 	//SinglyLinkedListInteractive();
-	HashMapTests();
-	HashSetTests();
+	//HashMapTests();
+	//HashSetTests();
+
+	DoublyLinkedListTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

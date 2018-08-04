@@ -106,6 +106,8 @@ extern "C" {
 	bool dll_is_empty(DoublyLinkedList *dll);
 	//Status dll_is_sorted(DoublyLinkedList *dll, bool *result);
 
+	bool dll_equals(DoublyLinkedList *dll1, DoublyLinkedList *dll2);
+
 	Status dll_find_max(DoublyLinkedList *dll, int *result);
 	Status dll_find_min(DoublyLinkedList *dll, int *result);
 
@@ -123,10 +125,10 @@ extern "C" {
 	//Status dll_unlink(DoublyLinkedList *dll, DoublyLinkedList *result, size_t position);
 	//Status dll_unlink_at(DoublyLinkedList *dll, DoublyLinkedList *result, size_t position1, size_t position2);
 	
-	//Status dll_copy_list(DoublyLinkedList *dll, DoublyLinkedList **result);
-	//Status dll_copy_node(DoublyLinkedList *node, DoublyLinkedList **result);
+	Status dll_copy_list(DoublyLinkedList *dll, DoublyLinkedList **result);
+	Status dll_copy_node(DoublyLinkedNode *node, DoublyLinkedNode **result);
 
-	//Status dll_reverse(DoublyLinkedList *dll);
+	Status dll_reverse(DoublyLinkedList *dll);
 
 	//Status dll_switch_nodes(DoublyLinkedList *dll, size_t position1, size_t position2);
 	//Status dll_switch_head(DoublyLinkedList *dll, size_t position);

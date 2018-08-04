@@ -122,7 +122,7 @@ Status sll_init_node(SinglyLinkedNode **node)
  * @note Avoid using this function as it does not return a status code and
  * does not check for failures. Give preference to @c sll_init_list().
  */
-SinglyLinkedList * sll_get_list(void)
+SinglyLinkedList *sll_get_list(void)
 {
 	SinglyLinkedList *sll = malloc(sizeof(SinglyLinkedList));
 
@@ -156,7 +156,7 @@ SinglyLinkedList * sll_get_list(void)
  * does not check for failures. Give preference to @c sll_init_node() or
  * @c sll_make_node().
 */
-SinglyLinkedNode * sll_get_node(int value)
+SinglyLinkedNode *sll_get_node(int value)
 {
 	SinglyLinkedNode *node = malloc(sizeof(SinglyLinkedNode));
 
@@ -172,7 +172,7 @@ SinglyLinkedNode * sll_get_node(int value)
  * This function allows you to make a @c SinglyLinkedNode by passing
  * its value as a parameter
  *
- * @param[out] node Pointer to new Node 
+ * @param[out] node Pointer to new Node
  * @param[in] value New Node value
  *
  * @return @c DS_OK if all operations were successful
@@ -265,7 +265,7 @@ Status sll_get_length(SinglyLinkedList *sll, size_t *result)
  * @return @c DS_ERR_NULL_POINTER if referenced list points to NULL
  * @return @c DS_ERR_ITER if a variable points to NULL during iteration
  *
- * @warning 
+ * @warning
  *
  * @b Usage
  * @code{.c}
@@ -293,13 +293,13 @@ Status sll_get_node_at(SinglyLinkedList *sll, SinglyLinkedNode **result, size_t 
 	(*result) = sll->head;
 
 	size_t i;
-	for (i = 0; i < position; i++) {
+	for (i = 0; i < position; i++)
+	{
 
 		if ((*result) == NULL)
 			return DS_ERR_ITER;
 
 		(*result) = (*result)->next;
-
 	}
 
 	return DS_OK;
@@ -348,7 +348,7 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
 		return DS_ERR_INVALID_POSITION;
 
 	*result = 0;
-	
+
 	SinglyLinkedNode *curr = NULL;
 
 	Status st = sll_get_node_at(sll, &curr, position);
@@ -376,7 +376,7 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
  * to NULL
  * @return @c DS_ERR_INVALID_OPERATION if list length is 0
  * @return @c DS_ERR_ITER if a variable points to NULL during iteration
- * @return @c DS_ERR_INVALID_POSITION if position is higher than 
+ * @return @c DS_ERR_INVALID_POSITION if position is higher than
  *
  * @b Usage
  * @code{.c}
@@ -422,7 +422,7 @@ Status sll_update_node_data(SinglyLinkedList *sll, size_t position, int value)
 
 /**
  * @brief Inserts new @c SinglyLinkedNode at the first position.
- * 
+ *
  * This function inserts a @c SinglyLinkedNode that is initialized inside the
  * function. Its value is assigned and then he is added to the list. Its
  * @c *next pointer points to the first element of the list and then the
@@ -461,17 +461,17 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 	if (!node)
 		return DS_ERR_ALLOC;
 
-	if (sll_is_empty(sll)) {
+	if (sll_is_empty(sll))
+	{
 
 		sll->head = node;
 		sll->tail = node;
-
 	}
-	else {
+	else
+	{
 
 		node->next = sll->head;
 		sll->head = node;
-
 	}
 
 	(sll->length)++;
@@ -522,7 +522,8 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 
 	Status st;
 
-	if (position == 0) {
+	if (position == 0)
+	{
 
 		st = sll_insert_head(sll, value);
 
@@ -531,7 +532,8 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 
 		return DS_OK;
 	}
-	else if (position == sll->length) {
+	else if (position == sll->length)
+	{
 
 		st = sll_insert_tail(sll, value);
 
@@ -540,7 +542,8 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 
 		return DS_OK;
 	}
-	else {
+	else
+	{
 
 		SinglyLinkedNode *node = NULL;
 
@@ -551,9 +554,9 @@ Status sll_insert_at(SinglyLinkedList *sll, int value, size_t position)
 
 		if (!node)
 			return DS_ERR_ALLOC;
-	
+
 		SinglyLinkedNode *curr = NULL;
-		
+
 		st = sll_get_node_at(sll, &curr, position - 1);
 
 		if (st != DS_OK)
@@ -609,17 +612,17 @@ Status sll_insert_tail(SinglyLinkedList *sll, int value)
 	if (!node)
 		return DS_ERR_ALLOC;
 
-	if (sll_is_empty(sll)) {
+	if (sll_is_empty(sll))
+	{
 
 		sll->head = node;
 		sll->tail = node;
-
 	}
-	else {
+	else
+	{
 
 		sll->tail->next = node;
 		sll->tail = node;
-
 	}
 
 	(sll->length)++;
@@ -662,20 +665,20 @@ Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node)
 	if (sll == NULL || node == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll_is_empty(sll)) {
+	if (sll_is_empty(sll))
+	{
 
 		sll->head = node;
 		sll->tail = node;
 
 		node->next = NULL;
-
 	}
-	else {
+	else
+	{
 
 		node->next = sll->head;
 
 		sll->head = node;
-
 	}
 
 	(sll->length)++;
@@ -728,7 +731,8 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
 
 	Status st;
 
-	if (position == 0) {
+	if (position == 0)
+	{
 
 		st = sll_insert_node_head(sll, node);
 
@@ -737,7 +741,8 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
 
 		return DS_OK;
 	}
-	else if (position == sll->length) {
+	else if (position == sll->length)
+	{
 
 		st = sll_insert_node_tail(sll, node);
 
@@ -746,7 +751,8 @@ Status sll_insert_node_at(SinglyLinkedList *sll, SinglyLinkedNode *node, size_t 
 
 		return DS_OK;
 	}
-	else {
+	else
+	{
 
 		SinglyLinkedNode *curr = NULL;
 
@@ -800,17 +806,17 @@ Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
 	if (sll == NULL || node == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll_is_empty(sll)) {
+	if (sll_is_empty(sll))
+	{
 
 		sll->head = node;
 		sll->tail = node;
-
 	}
-	else {
+	else
+	{
 
 		sll->tail->next = node;
 		sll->tail = node;
-
 	}
 
 	(sll->length)++;
@@ -822,7 +828,7 @@ Status sll_insert_node_tail(SinglyLinkedList *sll, SinglyLinkedNode *node)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
- /**
+/**
   * @brief Removes first @c SinglyLinkedNode from the list.
   *
   * This function removes the first @c SinglyLinkedNode from the list and frees
@@ -856,20 +862,20 @@ Status sll_remove_head(SinglyLinkedList *sll)
 		return DS_ERR_INVALID_OPERATION;
 
 	SinglyLinkedNode *node = sll->head;
-	
+
 	sll->head = sll->head->next;
 
 	sll_delete_node(&node);
 
 	(sll->length)--;
 
-	if (sll_is_empty(sll)) {
-		
+	if (sll_is_empty(sll))
+	{
+
 		sll->head = NULL;
 		sll->tail = NULL;
-
 	}
-	
+
 	return DS_OK;
 }
 
@@ -916,7 +922,8 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 
 	Status st;
 
-	if (position == 0) {
+	if (position == 0)
+	{
 
 		st = sll_remove_head(sll);
 
@@ -925,7 +932,8 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 
 		return DS_OK;
 	}
-	else if (position == sll->length - 1) {
+	else if (position == sll->length - 1)
+	{
 
 		st = sll_remove_tail(sll);
 
@@ -934,8 +942,9 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 
 		return DS_OK;
 	}
-	else {
-	
+	else
+	{
+
 		SinglyLinkedNode *prev = NULL;
 		SinglyLinkedNode *curr = NULL;
 
@@ -948,17 +957,17 @@ Status sll_remove_at(SinglyLinkedList *sll, size_t position)
 
 		if (st != DS_OK)
 			return st;
-	
+
 		prev->next = curr->next;
 		sll_delete_node(&curr);
-		
+
 		(sll->length)--;
 
-		if (sll_is_empty(sll)) {
+		if (sll_is_empty(sll))
+		{
 
 			sll->head = NULL;
 			sll->tail = NULL;
-
 		}
 
 		return DS_OK;
@@ -1007,31 +1016,31 @@ Status sll_remove_tail(SinglyLinkedList *sll)
 		prev = curr;
 		curr = curr->next;
 	}
-	
-	if (prev == NULL) {
+
+	if (prev == NULL)
+	{
 
 		sll_delete_node(&curr);
 
 		sll->head = NULL;
 		sll->tail = NULL;
-
 	}
-	else {
+	else
+	{
 
 		prev->next = NULL;
 		sll->tail = prev;
 
 		sll_delete_node(&curr);
-
 	}
 
 	(sll->length)--;
 
-	if (sll_is_empty(sll)) {
+	if (sll_is_empty(sll))
+	{
 
 		sll->head = NULL;
 		sll->tail = NULL;
-
 	}
 
 	return DS_OK;
@@ -1083,11 +1092,11 @@ Status sll_remove_node_head(SinglyLinkedList *sll, SinglyLinkedNode **node)
 
 	(sll->length)--;
 
-	if (sll_is_empty(sll)) {
+	if (sll_is_empty(sll))
+	{
 
 		sll->head = NULL;
 		sll->tail = NULL;
-
 	}
 
 	return DS_OK;
@@ -1140,7 +1149,8 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 
 	Status st;
 
-	if (position == 0) {
+	if (position == 0)
+	{
 
 		st = sll_remove_node_head(sll, node);
 
@@ -1149,7 +1159,8 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 
 		return DS_OK;
 	}
-	else if (position == sll->length - 1) {
+	else if (position == sll->length - 1)
+	{
 
 		st = sll_remove_node_tail(sll, node);
 
@@ -1158,8 +1169,9 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 
 		return DS_OK;
 	}
-	else {
-	
+	else
+	{
+
 		SinglyLinkedNode *prev = NULL;
 		SinglyLinkedNode *curr = NULL;
 
@@ -1172,7 +1184,7 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 
 		if (st != DS_OK)
 			return st;
-	
+
 		prev->next = curr->next;
 
 		(*node) = curr;
@@ -1180,11 +1192,11 @@ Status sll_remove_node_at(SinglyLinkedList *sll, SinglyLinkedNode **node, size_t
 
 		(sll->length)--;
 
-		if (sll_is_empty(sll)) {
+		if (sll_is_empty(sll))
+		{
 
 			sll->head = NULL;
 			sll->tail = NULL;
-
 		}
 
 		return DS_OK;
@@ -1238,32 +1250,32 @@ Status sll_remove_node_tail(SinglyLinkedList *sll, SinglyLinkedNode **node)
 		curr = curr->next;
 	}
 
-	if (prev == NULL) {
+	if (prev == NULL)
+	{
 
 		(*node) = curr;
 
 		sll->head = NULL;
 		sll->tail = NULL;
-
 	}
-	else {
+	else
+	{
 
 		prev->next = NULL;
 		sll->tail = prev;
 
 		(*node) = curr;
-
 	}
 
 	(*node)->next = NULL;
 
 	(sll->length)--;
 
-	if (sll_is_empty(sll)) {
+	if (sll_is_empty(sll))
+	{
 
 		sll->head = NULL;
 		sll->tail = NULL;
-
 	}
 
 	return DS_OK;
@@ -1306,11 +1318,11 @@ Status sll_display(SinglyLinkedList *sll)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (sll_is_empty(sll)) {
+	if (sll_is_empty(sll))
+	{
 
 		printf("\nSingly Linked List\n[ empty ]\n");
 		return DS_OK;
-
 	}
 
 	SinglyLinkedNode *scan = sll->head;
@@ -1327,7 +1339,6 @@ Status sll_display(SinglyLinkedList *sll)
 
 	return DS_OK;
 }
-
 
 /**
  * @brief Displays only the values of a Singly Linked List
@@ -1402,7 +1413,7 @@ Status sll_display_raw(SinglyLinkedList *sll)
  * // Do operations with that node
  *
  * sll_delete_node(&node);
- * 
+ *
  * @endcode
  *
  * @note Avoid using this function as you may loose track of tha node. If it is
@@ -1415,7 +1426,7 @@ Status sll_delete_node(SinglyLinkedNode **node)
 		return DS_ERR_NULL_POINTER;
 
 	free(*node);
-	
+
 	(*node) = NULL;
 
 	return DS_OK;
@@ -1447,7 +1458,7 @@ Status sll_delete_list(SinglyLinkedList **sll)
 {
 	if ((*sll) == NULL)
 		return DS_ERR_NULL_POINTER;
-	
+
 	SinglyLinkedNode *prev = (*sll)->head;
 
 	Status st;
@@ -1500,7 +1511,7 @@ Status sll_erase_list(SinglyLinkedList **sll)
 		return DS_ERR_NULL_POINTER;
 
 	Status st = sll_delete_list(sll);
-	
+
 	if (st != DS_OK)
 		return st;
 
@@ -1542,7 +1553,7 @@ Status sll_erase_list(SinglyLinkedList **sll)
  *
  * sll_frequency(sll, 5, &freq);
  * // freq variable now holds the frequency of number 5 in the lists
- * 
+ *
  * @endcode
  */
 Status sll_frequency(SinglyLinkedList *sll, int key, size_t *frequency)
@@ -1554,7 +1565,7 @@ Status sll_frequency(SinglyLinkedList *sll, int key, size_t *frequency)
 
 	if (sll_is_empty(sll))
 		return DS_ERR_INVALID_OPERATION;
-	
+
 	SinglyLinkedNode *scan = sll->head;
 
 	while (scan != NULL)
@@ -1564,7 +1575,7 @@ Status sll_frequency(SinglyLinkedList *sll, int key, size_t *frequency)
 
 		scan = scan->next;
 	}
-	
+
 	return DS_OK;
 }
 
@@ -1598,7 +1609,7 @@ Status sll_frequency(SinglyLinkedList *sll, int key, size_t *frequency)
  * sll_contains(sll, 5, &exists);
  * // exists variable now holds true if 5 is present in the list or false if
  * // not present
- * 
+ *
  * @endcode
  */
 Status sll_contains(SinglyLinkedList *sll, int key, bool *result)
@@ -1615,16 +1626,16 @@ Status sll_contains(SinglyLinkedList *sll, int key, bool *result)
 
 	while (scan != NULL)
 	{
-		if (scan->data == key) {
+		if (scan->data == key)
+		{
 
 			*result = true;
 			break;
-
 		}
 
 		scan = scan->next;
 	}
-	
+
 	return DS_OK;
 }
 
@@ -1695,7 +1706,8 @@ Status sll_is_sorted(SinglyLinkedList *sll, bool *result)
 	while (scan != NULL)
 	{
 		if (scan->next != NULL)
-			if (scan->data > scan->next->data) {
+			if (scan->data > scan->next->data)
+			{
 
 				return DS_OK;
 			}
@@ -1720,7 +1732,7 @@ Status sll_find_max(SinglyLinkedList *sll, int *result)
 
 	SinglyLinkedNode *scan = sll->head;
 
-	*result  = scan->data;
+	*result = scan->data;
 	while (scan != NULL)
 	{
 		if (scan->data > *result)
@@ -1774,7 +1786,8 @@ Status sll_find_max_pos(SinglyLinkedList *sll, size_t *result)
 
 	while (scan != NULL)
 	{
-		if (scan->data > max) {
+		if (scan->data > max)
+		{
 
 			(*result) = pos;
 
@@ -1807,7 +1820,8 @@ Status sll_find_min_pos(SinglyLinkedList *sll, size_t *result)
 
 	while (scan != NULL)
 	{
-		if (scan->data < min) {
+		if (scan->data < min)
+		{
 
 			(*result) = pos;
 
@@ -1831,7 +1845,7 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 		return DS_ERR_INVALID_OPERATION;
 
 	Status st = sll_init_list(result);
-	
+
 	if (st != DS_OK)
 		return st;
 
@@ -1842,19 +1856,18 @@ Status sll_occurrance_list(SinglyLinkedList *sll, SinglyLinkedList **result, int
 	while (scan != NULL)
 	{
 
-		if (scan->data == key) {
+		if (scan->data == key)
+		{
 
 			st = sll_insert_tail((*result), i);
 
 			if (st != DS_OK)
 				return st;
-
 		}
 
 		scan = scan->next;
 
 		i++;
-
 	}
 
 	return DS_OK;
@@ -1880,7 +1893,6 @@ Status sll_find_occurrance_first(SinglyLinkedList *sll, int key, size_t *positio
 		(*position)++;
 
 		scan = scan->next;
-
 	}
 
 	return DS_ERR_NOT_FOUND;
@@ -1904,15 +1916,15 @@ Status sll_find_occurrance_last(SinglyLinkedList *sll, int key, size_t *position
 
 	while (scan != NULL)
 	{
-		if (scan->data == key) {
+		if (scan->data == key)
+		{
 			found = true;
 			*position = iter;
 		}
-		
+
 		iter++;
 
 		scan = scan->next;
-
 	}
 
 	if (found)
@@ -1933,21 +1945,21 @@ Status sll_link(SinglyLinkedList *sll1, SinglyLinkedList *sll2)
 	if (sll_is_empty(sll2))
 		return DS_ERR_INVALID_OPERATION;
 
-	if (sll_is_empty(sll1)) {
+	if (sll_is_empty(sll1))
+	{
 
 		sll1->head = sll2->head;
 		sll1->tail = sll2->tail;
 
 		sll1->length = sll2->length;
-
 	}
-	else {
+	else
+	{
 
 		sll1->tail->next = sll2->head;
 		sll1->tail = sll2->tail;
 
 		sll1->length += sll2->length;
-
 	}
 
 	sll2->head = NULL;
@@ -1969,20 +1981,21 @@ Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t positi
 	if (sll_is_empty(sll1) || sll_is_empty(sll2))
 		return DS_ERR_INVALID_OPERATION;
 
-	if (position == 0) {
+	if (position == 0)
+	{
 
 		sll2->tail->next = sll1->head;
 
 		sll1->head = sll2->head;
-
 	}
-	else if (position == sll1->length) {
+	else if (position == sll1->length)
+	{
 
 		sll1->tail->next = sll2->head;
 		sll1->tail = sll2->tail;
-
 	}
-	else {
+	else
+	{
 
 		SinglyLinkedNode *prev;
 
@@ -1991,7 +2004,6 @@ Status sll_link_at(SinglyLinkedList *sll1, SinglyLinkedList *sll2, size_t positi
 		sll2->tail->next = prev->next;
 
 		prev->next = sll2->head;
-
 	}
 
 	sll2->head = NULL;
@@ -2022,7 +2034,8 @@ Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t positi
 	if (st != DS_OK)
 		return st;
 
-	if (position == 0) {
+	if (position == 0)
+	{
 
 		result->head = sll->head;
 		result->tail = sll->tail;
@@ -2031,9 +2044,9 @@ Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t positi
 
 		result->tail = NULL;
 		result->head = NULL;
-
 	}
-	else {
+	else
+	{
 
 		SinglyLinkedNode *prev;
 
@@ -2048,9 +2061,8 @@ Status sll_unlink(SinglyLinkedList *sll, SinglyLinkedList *result, size_t positi
 		sll->tail = prev;
 
 		prev->next = NULL;
-
 	}
-	
+
 	sll->length = position;
 
 	result->length = len - position;
@@ -2086,7 +2098,7 @@ Status sll_copy_list(SinglyLinkedList *sll, SinglyLinkedList **result)
 	{
 
 		st = sll_copy_node(scan, &copy);
-		
+
 		if (st != DS_OK)
 			return st;
 
@@ -2127,14 +2139,15 @@ Status sll_reverse(SinglyLinkedList *sll)
 
 	if (sll->length < 2)
 		return DS_ERR_INVALID_OPERATION;
-	
+
 	SinglyLinkedNode *prev = NULL;
 	SinglyLinkedNode *curr = sll->head;
-	SinglyLinkedNode * next = NULL;
+	SinglyLinkedNode *next = NULL;
+
+	sll->tail = sll->head;
 
 	while (curr != NULL)
 	{
-
 		next = curr->next;
 
 		curr->next = prev;
@@ -2142,7 +2155,6 @@ Status sll_reverse(SinglyLinkedList *sll)
 		prev = curr;
 
 		curr = next;
-
 	}
 
 	sll->head = prev;
@@ -2168,34 +2180,37 @@ Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position
 	if (position1 == position2)
 		return DS_ERR_INVALID_ARGUMENT;
 
-	if ((position1 == 0 && position2 == len - 1) || (position2 == 0 && position1 == len - 1)) {
+	if ((position1 == 0 && position2 == len - 1) || (position2 == 0 && position1 == len - 1))
+	{
 
 		st = sll_switch_ends(sll);
 
 		if (st != DS_OK)
 			return st;
 	}
-	else if (position1 == 0 || position2 == 0) {
+	else if (position1 == 0 || position2 == 0)
+	{
 
 		st = sll_switch_head(sll, (position1 == 0) ? position2 : position1);
 
 		if (st != DS_OK)
 			return st;
-
 	}
-	else if (position1 == len - 1 || position2 == len - 1) {
+	else if (position1 == len - 1 || position2 == len - 1)
+	{
 
 		st = sll_switch_tail(sll, (position1 == len - 1) ? position2 : position1);
 
 		if (st != DS_OK)
 			return st;
-
 	}
-	else {
+	else
+	{
 
 		SinglyLinkedNode *node1, *node2;
 
-		if (position1 > position2) {
+		if (position1 > position2)
+		{
 
 			st = sll_remove_node_at(sll, &node1, position1);
 
@@ -2216,9 +2231,9 @@ Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position
 
 			if (st != DS_OK)
 				return st;
-
 		}
-		else {
+		else
+		{
 
 			st = sll_remove_node_at(sll, &node2, position2);
 
@@ -2239,7 +2254,6 @@ Status sll_switch_nodes(SinglyLinkedList *sll, size_t position1, size_t position
 
 			if (st != DS_OK)
 				return st;
-
 		}
 
 		return DS_OK;
@@ -2367,9 +2381,11 @@ Status sll_sort_bubble(SinglyLinkedList *sll)
 
 	SinglyLinkedNode *before, *after;
 
-	for (i = 1; i < len; i++) {
+	for (i = 1; i < len; i++)
+	{
 
-		for (j = 0; j < len - i; j++) {
+		for (j = 0; j < len - i; j++)
+		{
 
 			st = sll_get_node_at(sll, &before, j);
 
@@ -2381,7 +2397,8 @@ Status sll_sort_bubble(SinglyLinkedList *sll)
 			if (st != DS_OK)
 				return st;
 
-			if (before->data > after->data) {
+			if (before->data > after->data)
+			{
 
 				st = sll_switch_nodes(sll, j, j + 1);
 
@@ -2416,9 +2433,11 @@ Status sll_remove_keys(SinglyLinkedList *sll, int key)
 
 	while (curr != NULL)
 	{
-		if (curr->data == key) {
+		if (curr->data == key)
+		{
 
-			if (prev == NULL) {
+			if (prev == NULL)
+			{
 
 				sll->head = sll->head->next;
 
@@ -2427,9 +2446,9 @@ Status sll_remove_keys(SinglyLinkedList *sll, int key)
 				curr = sll->head;
 
 				(sll->length)--;
-
 			}
-			else {
+			else
+			{
 
 				prev->next = curr->next;
 
@@ -2438,17 +2457,15 @@ Status sll_remove_keys(SinglyLinkedList *sll, int key)
 				curr = prev->next;
 
 				(sll->length)--;
-
 			}
-
 		}
-		else {
+		else
+		{
 
 			prev = curr;
-		
+
 			curr = curr->next;
 		}
-
 	}
 
 	return DS_OK;
@@ -2479,7 +2496,8 @@ Status sll_is_set_wrapper(SinglyLinkedList *sll, bool *result)
 		if (st != DS_OK)
 			return st;
 
-		if (frequency > 1) {
+		if (frequency > 1)
+		{
 
 			*result = false;
 
@@ -2502,7 +2520,8 @@ bool sll_is_set(SinglyLinkedList *sll)
 	{
 		sll_frequency(sll, scan->data, &frequency);
 
-		if (frequency > 1) {
+		if (frequency > 1)
+		{
 
 			return false;
 		}
@@ -2527,7 +2546,8 @@ Status sll_is_disjoint_wrapper(SinglyLinkedList *sll1, SinglyLinkedList *sll2, b
 
 	while (scan != NULL)
 	{
-		if (sll_exists(sll2, scan->data)) {
+		if (sll_exists(sll2, scan->data))
+		{
 
 			*result = false;
 
@@ -2546,7 +2566,8 @@ bool sll_is_disjoint(SinglyLinkedList *sll1, SinglyLinkedList *sll2)
 
 	while (scan != NULL)
 	{
-		if (sll_exists(sll2, scan->data)) {
+		if (sll_exists(sll2, scan->data))
+		{
 
 			return false;
 		}
@@ -2600,7 +2621,7 @@ Status sll_set_make(SinglyLinkedList *sll)
 		if (st != DS_OK)
 			return st;
 	}
-	
+
 	st = sll_get_length(tmp, &len);
 
 	if (st != DS_OK)
