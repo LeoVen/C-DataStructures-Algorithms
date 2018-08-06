@@ -51,9 +51,6 @@
     <ClCompile Include="DataStructures\Structures\Stack.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Structures\String.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DataStructures\Structures\StructureConversions.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -82,9 +79,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DataStructures\Tests\StackTests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DataStructures\Tests\StringTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DataStructures\Tests\StructureConversionsTests.c">
@@ -205,6 +199,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DataStructures\Tests\QueueArrayTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Structures\SString.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Tests\SStringTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

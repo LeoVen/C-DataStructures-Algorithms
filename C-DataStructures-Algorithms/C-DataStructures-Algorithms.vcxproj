@@ -188,7 +188,7 @@
     <ClCompile Include="DataStructures\Structures\SparseMatrix.c" />
     <ClCompile Include="DataStructures\Structures\Stack.c" />
     <ClCompile Include="DataStructures\Structures\StackArray.c" />
-    <ClCompile Include="DataStructures\Structures\String.c" />
+    <ClCompile Include="DataStructures\Structures\SString.c" />
     <ClCompile Include="DataStructures\Structures\StructureConversions.c" />
     <ClCompile Include="DataStructures\Structures\Trie.c" />
     <ClCompile Include="DataStructures\Structures\Vector.c" />
@@ -211,7 +211,7 @@
     <ClCompile Include="DataStructures\Tests\SparseMatrixTests.c" />
     <ClCompile Include="DataStructures\Tests\StackArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\StackTests.c" />
-    <ClCompile Include="DataStructures\Tests\StringTests.c" />
+    <ClCompile Include="DataStructures\Tests\SStringTests.c" />
     <ClCompile Include="DataStructures\Tests\StructureConversionsTests.c" />
     <ClCompile Include="DataStructures\Tests\TrieTests.c" />
     <ClCompile Include="DataStructures\Tests\VectorTests.c" />

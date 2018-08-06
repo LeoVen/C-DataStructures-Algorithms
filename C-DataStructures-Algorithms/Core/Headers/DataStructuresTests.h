@@ -40,7 +40,7 @@ extern "C" {
 
 	int StructureConversionsTests(void);
 
-	int StringTests(void);
+	int SStringTests(void);
 
 	int SortingTests(void);
 

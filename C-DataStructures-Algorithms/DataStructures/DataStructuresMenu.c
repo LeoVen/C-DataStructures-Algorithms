@@ -166,7 +166,7 @@ bool ds_switch_function(int f)
 		VectorTests();
 		break;
 	case 120:
-		StringTests();
+		SStringTests();
 		break;
 	case 130:
 		StructureConversionsTests();
@@ -187,9 +187,10 @@ int ds_all(void)
 	SparseMatrixTests();
 
 	StackTests();
-	//StaticStackTests();
+	StackArrayTests();
 
 	QueueTests();
+	QueueArrayTests();
 	DequeTests();
 	PriorityQueueTests();
 	CircularBufferTests();
@@ -206,7 +207,7 @@ int ds_all(void)
 
 	StructureConversionsTests();
 
-	StringTests();
+	SStringTests();
 
 	SortingTests();
 

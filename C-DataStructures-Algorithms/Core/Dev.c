@@ -16,12 +16,7 @@
 int dev_short_cut(void)
 {
 
-	//SinglyLinkedListInteractive();
-	//HashMapTests();
-	//HashSetTests();
-
-	StackArrayTests();
-	QueueArrayTests();
+	SStringTests();
 
 	printf("\nPress enter to continue...");
 	_getch();
