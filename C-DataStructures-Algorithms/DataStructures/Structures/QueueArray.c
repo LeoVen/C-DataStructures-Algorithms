@@ -253,7 +253,7 @@ bool qua_is_full(QueueArray *qua)
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status qua_copy(QueueArray *qua)
+//Status qua_copy(QueueArray *qua, QueueArray **result)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |
@@ -268,7 +268,7 @@ Status qua_realloc(QueueArray *qua)
 
 	qua->buffer = realloc(qua->buffer, sizeof(int) * qua->capacity);
 
-	if (!qua->buffer)
+	if (!(qua->buffer))
 		return DS_ERR_ALLOC;
 
 	return DS_OK;

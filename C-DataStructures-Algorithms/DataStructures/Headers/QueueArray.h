@@ -71,7 +71,7 @@ extern "C" {
 	bool qua_is_empty(QueueArray *qua);
 	bool qua_is_full(QueueArray *qua);
 
-	//Status qua_copy(QueueArray *qua);
+	//Status qua_copy(QueueArray *qua, QueueArray **result);
 
 	Status qua_realloc(QueueArray *qua);
 

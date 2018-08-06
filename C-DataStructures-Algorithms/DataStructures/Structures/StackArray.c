@@ -233,7 +233,7 @@ bool sta_is_full(StackArray *sta)
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status sta_copy(StackArray *sta);
+//Status sta_copy(StackArray *sta, StackArray **result)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |
@@ -248,7 +248,7 @@ Status sta_realloc(StackArray *sta)
 
 	sta->buffer = realloc(sta->buffer, sizeof(int) * sta->capacity);
 
-	if (!sta->buffer)
+	if (!(sta->buffer))
 		return DS_ERR_ALLOC;
 
 	return DS_OK;
