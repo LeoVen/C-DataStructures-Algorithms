@@ -168,6 +168,7 @@
     <ClCompile Include="Core\Display.c" />
     <ClCompile Include="DataStructures\DataStructuresMenu.c" />
     <ClCompile Include="DataStructures\Headers\HashSet.h" />
+    <ClCompile Include="DataStructures\Headers\StackArray.h" />
     <ClCompile Include="DataStructures\Interactive\SinglyLinkedListInteractive.c" />
     <ClCompile Include="DataStructures\Structures\Array.c" />
     <ClCompile Include="DataStructures\Structures\AVLTree.c" />
@@ -182,9 +183,11 @@
     <ClCompile Include="DataStructures\Structures\HashMap.c" />
     <ClCompile Include="DataStructures\Structures\PriorityQueue.c" />
     <ClCompile Include="DataStructures\Structures\Queue.c" />
+    <ClCompile Include="DataStructures\Structures\QueueArray.c" />
     <ClCompile Include="DataStructures\Structures\SinglyLinkedList.c" />
     <ClCompile Include="DataStructures\Structures\SparseMatrix.c" />
     <ClCompile Include="DataStructures\Structures\Stack.c" />
+    <ClCompile Include="DataStructures\Structures\StackArray.c" />
     <ClCompile Include="DataStructures\Structures\String.c" />
     <ClCompile Include="DataStructures\Structures\StructureConversions.c" />
     <ClCompile Include="DataStructures\Structures\Trie.c" />
@@ -201,10 +204,12 @@
     <ClCompile Include="DataStructures\Tests\HashSetTests.c" />
     <ClCompile Include="DataStructures\Tests\HashMapTests.c" />
     <ClCompile Include="DataStructures\Tests\PriorityQueueTests.c" />
+    <ClCompile Include="DataStructures\Tests\QueueArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\QueueTests.c" />
     <ClCompile Include="DataStructures\Tests\SinglyLinkedListTests.c" />
     <ClCompile Include="DataStructures\Tests\DS_SortingTests.c" />
     <ClCompile Include="DataStructures\Tests\SparseMatrixTests.c" />
+    <ClCompile Include="DataStructures\Tests\StackArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\StackTests.c" />
     <ClCompile Include="DataStructures\Tests\StringTests.c" />
     <ClCompile Include="DataStructures\Tests\StructureConversionsTests.c" />
@@ -236,6 +241,7 @@
     <ClInclude Include="DataStructures\Headers\HashMap.h" />
     <ClInclude Include="DataStructures\Headers\PriorityQueue.h" />
     <ClInclude Include="DataStructures\Headers\Queue.h" />
+    <ClInclude Include="DataStructures\Headers\QueueArray.h" />
     <ClInclude Include="DataStructures\Headers\SinglyLinkedList.h" />
     <ClInclude Include="DataStructures\Headers\SparseMatrix.h" />
     <ClInclude Include="DataStructures\Headers\Stack.h" />

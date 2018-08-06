@@ -369,12 +369,12 @@ Status deq_display_raw(Deque *deq)
 	if (deq == NULL)
 		return DS_ERR_NULL_POINTER;
 
+	printf("\n");
+
 	if (deq_is_empty(deq))
 		return DS_ERR_INVALID_OPERATION;
 
 	DequeNode *scan = deq->front;
-
-	printf("\n");
 
 	while (scan != NULL)
 	{

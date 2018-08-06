@@ -252,12 +252,12 @@ Status que_display_raw(Queue *que)
 	if (que == NULL)
 		return DS_ERR_NULL_POINTER;
 
+	printf("\n");
+
 	if (que_is_empty(que))
 		return DS_ERR_INVALID_OPERATION;
 
 	QueueNode *scan = que->front;
-
-	printf("\n");
 
 	while (scan != NULL)
 	{

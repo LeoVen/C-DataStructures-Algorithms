@@ -20,7 +20,8 @@ int dev_short_cut(void)
 	//HashMapTests();
 	//HashSetTests();
 
-	DoublyLinkedListTests();
+	StackArrayTests();
+	QueueArrayTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

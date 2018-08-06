@@ -298,12 +298,12 @@ Status prq_display_raw(PriorityQueue *prq)
 	if (prq == NULL)
 		return DS_ERR_NULL_POINTER;
 
+	printf("\n");
+
 	if (prq_is_empty(prq))
 		return DS_ERR_INVALID_OPERATION;
 
 	PriorityQueueNode *scan = prq->front;
-
-	printf("\n");
 
 	while (scan != NULL)
 	{

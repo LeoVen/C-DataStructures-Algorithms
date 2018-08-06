@@ -20,9 +20,10 @@ extern "C" {
 	int SparseMatrixTests(void);
 
 	int StackTests(void);
-	//int StaticStackTests();
+	int StackArrayTests(void);
 
 	int QueueTests(void);
+	int QueueArrayTests(void);
 	int DequeTests(void);
 	int PriorityQueueTests(void);
 	int CircularBufferTests(void);
