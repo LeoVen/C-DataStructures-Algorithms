@@ -58,6 +58,9 @@ extern "C" {
 	Status str_delete(String **str);
 	Status str_erase(String **str);
 
+	Status str_end(String *str, char *result);
+	Status str_front(String *str, char *result);
+
 	Status str_length(String *str, size_t *result);
 	size_t str_len(String *str);
 

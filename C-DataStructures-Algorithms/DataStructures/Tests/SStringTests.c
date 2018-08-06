@@ -59,7 +59,7 @@ In the Land of Mordor where the Shadows lie.");
 	size_t i, len;
 	for (i = 0; i < lotr->len; i++)
 	{
-		st = str_push_back(str0, lotr->buffer[i]);
+		st = str_push_char_back(str0, lotr->buffer[i]);
 
 		if (st != DS_OK)
 		{
@@ -103,6 +103,13 @@ In the Land of Mordor where the Shadows lie.");
 	str_push_char_at(str0, ' ', 4);
 
 	str_display(str0);
+
+	char f, e; // Front, end
+
+	str_front(str0, &f);
+	str_end(str0, &e);
+
+	printf("\nFrist character: %c\nLast character: %c", f, e);
 
 	str_delete(&str0);
 

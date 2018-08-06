@@ -135,14 +135,14 @@ Status str_push_char_at(String *str, const char ch, size_t index)
 
 	if (index == 0)
 	{
-		st = str_push_front(str, ch);
+		st = str_push_char_front(str, ch);
 
 		if (st != DS_OK)
 			return st;
 	}
 	else if (index == str->len)
 	{
-		st = str_push_front(str, ch);
+		st = str_push_char_front(str, ch);
 
 		if (st != DS_OK)
 			return st;
@@ -230,10 +230,12 @@ Status str_display(String *str)
 	if (str == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (str_buffer_empty(str))
-		return DS_ERR_INVALID_OPERATION;
+	printf("\n");
 
-	printf("\nString\n%s\n", str->buffer);
+	if (str_buffer_empty(str))
+		return DS_OK;
+
+	printf("String\n%s\n", str->buffer);
 
 	return DS_OK;
 }
@@ -243,10 +245,12 @@ Status str_display_raw(String *str)
 	if (str == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (str_buffer_empty(str))
-		return DS_ERR_INVALID_OPERATION;
+	printf("\n");
 
-	printf("\n%s\n", str->buffer);
+	if (str_buffer_empty(str))
+		return DS_OK;
+
+	printf("%s\n", str->buffer);
 
 	return DS_OK;
 }
@@ -303,6 +307,32 @@ Status str_clear(String *str)
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
+
+Status str_front(String *str, char *result)
+{
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str))
+		return DS_ERR_INVALID_OPERATION;
+
+	*result = str->buffer[0];
+
+	return DS_OK;
+}
+
+Status str_end(String *str, char *result)
+{
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str))
+		return DS_ERR_INVALID_OPERATION;
+
+	*result = str->buffer[str->len - 1];
+
+	return DS_OK;
+}
 
 Status str_length(String *str, size_t *result)
 {
