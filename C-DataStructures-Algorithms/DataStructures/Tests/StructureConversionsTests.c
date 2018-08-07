@@ -40,9 +40,9 @@ int StructureConversionsTests(void)
 	convert_sll_to_darr(sll, &darray);
 
 	for (i = 0; i < 20; i++)
-		darr_push(&darray, 99);
+		dar_insert_back(&darray, 99);
 	
-	darr_display(darray);
+	dar_display(darray);
 
 	sll_delete_list(&sll);
 
@@ -54,14 +54,14 @@ int StructureConversionsTests(void)
 
 	convert_sll_to_arr(sll, &array);
 
-	darr_delete(&darray);
+	dar_delete(&darray);
 
 	convert_arr_to_darr(array, &darray);
 
 	for (i = 0; i < 5; i++)
-		darr_push(&darray, 12);
+		dar_insert_back(&darray, 12);
 
-	darr_display(darray);
+	dar_display(darray);
 
 	sll_delete_list(&sll);
 

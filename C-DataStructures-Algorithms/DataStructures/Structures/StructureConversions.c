@@ -87,7 +87,7 @@ Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **darr)
 	if (st != DS_OK)
 		return st;
 
-	st = darr_init(darr, list_size);
+	st = dar_init(darr, list_size);
 
 	if (st != DS_OK)
 		return st;
@@ -101,7 +101,7 @@ Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **darr)
 		if (scan == NULL)
 			return DS_ERR_ITER;
 
-		darr_push(darr, scan->data);
+		dar_insert_back(darr, scan->data);
 
 		scan = scan->next;
 	}
@@ -201,7 +201,7 @@ Status convert_arr_to_darr(Array *arr, DynamicArray **darr)
 	if (arr->size <= 0)
 		return DS_ERR_INVALID_OPERATION;
 
-	Status st = darr_init(darr, arr->size);
+	Status st = dar_init(darr, arr->size);
 
 	if (st != DS_OK)
 		return st;
@@ -212,7 +212,7 @@ Status convert_arr_to_darr(Array *arr, DynamicArray **darr)
 	size_t i;
 	for (i = 0; i < arr->size; i++) {
 
-		st = darr_push(darr, arr->buffer[i]);
+		st = dar_insert_back(darr, arr->buffer[i]);
 
 		if (st != DS_OK)
 			return st;
