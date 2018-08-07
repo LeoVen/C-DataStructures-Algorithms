@@ -45,7 +45,7 @@ extern "C" {
 		int *buffer;                        /*!< @c StackArray data buffer */
 		size_t height;                      /*!< @c StackArray height */
 		size_t capacity;                    /*!< @c StackArray total capacity */
-		size_t growth_rate;                 /*!< @c StackArray growth rate */
+		size_t growth_rate;                 /*!< @c StackArray buffer growth rate */
 	} StackArray;
 
 	Status sta_init(StackArray **sta);

@@ -230,6 +230,8 @@ Status dar_remove_back(DynamicArray *dar)
 	return DS_OK;
 }
 
+//Status dar_remove_keys(DynamicArray *dar, int value)
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
@@ -443,11 +445,33 @@ Status dar_find_min_pos(DynamicArray *dar, size_t *result)
 	return DS_OK;
 }
 
+//Status dar_frequency(DynamicArray *dar, int value, size_t *frequency)
+//Status dar_contains(DynamicArray *dar, int value, bool *result)
+
+Status dar_find_occurrance_first(DynamicArray *dar, int value, size_t *position);
+Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position);
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
 //Status dar_copy(DynamicArray *dar, DynamicArray **result)
+
+//Status dar_merge_sorted(DynamicArray *dar1, DynamicArray *dar2, DynamicArray **result);
+
+//Status dar_append(DynamicArray *dar1, DynamicArray *dar2)
+//Status dar_prepend(DynamicArray *dar1, DynamicArray *dar2)
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                           Sorting                                               |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status dar_is_sorted(DynamicArray *dar, bool *result)
+//Status dar_reverse(DynamicArray *dar)
+//Status dar_sort_bubble(DynamicArray *dar)
+//Status dar_sort_selection(DynamicArray *dar)
+//Status dar_sort_insertion(DynamicArray *dar)
+
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |

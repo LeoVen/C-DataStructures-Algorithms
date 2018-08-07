@@ -46,7 +46,7 @@ extern "C" {
 		int *buffer;                        /*!< @c QueueArray data buffer */
 		size_t length;                      /*!< @c QueueArray length */
 		size_t capacity;                    /*!< @c QueueArray total capacity */
-		size_t growth_rate;                 /*!< @c QueueArray growth rate */
+		size_t growth_rate;                 /*!< @c QueueArray buffer growth rate */
 	} QueueArray;
 
 	Status qua_init(QueueArray **qua);

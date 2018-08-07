@@ -16,32 +16,69 @@ extern "C" {
 
 #include "Core.h"
 
+#ifndef _DYNAMIC_ARRAY_SPEC
+#define _DYNAMIC_ARRAY_SPEC
+
+#define _DYNAMIC_ARRAY_INIT_SIZE 8
+#define _DYNAMIC_ARRAY_GROW_RATE 2
+
+#endif
+
 	typedef struct DynamicArray {
-		int *buffer;       // Array of integers
-		size_t size;       // Actual Size
-		size_t maxSize;    // Maximum size.
-		bool threshold;    // maxSize / 2
+		int *buffer;                        /*!< @c DynamicArray data buffer */
+		size_t size;                        /*!< @c DynamicArray size */
+		size_t capacity;                    /*!< @c DynamicArray total capacity */
+		size_t growth_rate;                 /*!< @c DynamicArray buffer growth rate */
 	} DynamicArray;
 
-	Status darr_init(DynamicArray **darr, size_t size);
+	Status dar_init(DynamicArray **dar);
+	Status dar_make(DynamicArray **dar, int *array, size_t arr_size);
 
-	DynamicArray * darr_get(size_t size);
+	Status dar_get(DynamicArray *dar, size_t index, int *result);
 
-	// Status darr_insert(DynamicArray **arr, size_t position, int value);
-	Status darr_push(DynamicArray **darr, int value);
+	Status dar_insert_front(DynamicArray *dar, int value);
+	Status dar_insert_at(DynamicArray *dar, int value, size_t index);
+	Status dar_insert_back(DynamicArray *dar, int value);
 
-	// Status darr_remove(DynamicArray **darr, size_t position);
-	Status darr_pop(DynamicArray **darr);
+	Status dar_remove_front(DynamicArray *dar);
+	Status dar_remove_at(DynamicArray *dar, size_t index);
+	Status dar_remove_back(DynamicArray *dar);
 
-	Status darr_display(DynamicArray *darr);
-	Status darr_display_raw(DynamicArray *darr);
+	//Status dar_remove_keys(DynamicArray *dar, int value)
 
-	Status darr_erase(DynamicArray *darr);
-	Status darr_delete(DynamicArray **darr);
+	Status dar_display(DynamicArray *darr);
+	Status dar_display_raw(DynamicArray *darr);
 
-	Status darr_resize(DynamicArray **darr);
-	Status darr_shrink(DynamicArray **darr);
-	Status darr_grow(DynamicArray **darr);
+	Status dar_delete(DynamicArray **darr);
+	Status dar_erase(DynamicArray **dar);
+
+	size_t dar_cap(DynamicArray *dar);
+	size_t dar_size(DynamicArray *dar);
+
+	bool dar_is_empty(DynamicArray *dar);
+	bool dar_is_full(DynamicArray *dar);
+
+	Status dar_find_max(DynamicArray *dar, int *result);
+	Status dar_find_min(DynamicArray *dar, int *result);
+	Status dar_find_max_pos(DynamicArray *dar, size_t *result);
+	Status dar_find_min_pos(DynamicArray *dar, size_t *result);
+
+	//Status dar_frequency(DynamicArray *dar, int value, size_t *frequency);
+	//Status dar_contains(DynamicArray *dar, int value, bool *result);
+
+	//Status dar_copy(DynamicArray *dar, DynamicArray **result);
+	//Status dar_merge_sorted(DynamicArray *dar1, DynamicArray *dar2, DynamicArray **result);
+
+	//Status dar_append(DynamicArray *dar1, DynamicArray *dar2);
+	//Status dar_prepend(DynamicArray *dar1, DynamicArray *dar2);
+
+	//Status dar_is_sorted(DynamicArray *dar, bool *result);
+	//Status dar_reverse(DynamicArray *dar);
+	//Status dar_sort_bubble(DynamicArray *dar);
+	//Status dar_sort_selection(DynamicArray *dar);
+	//Status dar_sort_insertion(DynamicArray *dar);
+
+	Status dar_realloc(DynamicArray *dar);
 
 #ifdef __cplusplus
 }

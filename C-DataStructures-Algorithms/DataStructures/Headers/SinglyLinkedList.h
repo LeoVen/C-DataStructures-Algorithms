@@ -130,7 +130,7 @@ extern "C" {
 	Status sll_switch_ends(SinglyLinkedList *sll);
 	
 	Status sll_sort_bubble(SinglyLinkedList *sll);
-	//Status sll_sort_slection(SinglyLinkedList *sll);
+	//Status sll_sort_selection(SinglyLinkedList *sll);
 	//Status sll_sort_insertion(SinglyLinkedList *sll);
 
 	//Status sll_merge_sorted(SinglyLinkedList *sll1, SinglyLinkedList *sll2, SinglyLinkedList **result);
