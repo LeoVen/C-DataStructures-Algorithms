@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 11/04/2018
  *
- * @brief Bubble sorting function
+ * @brief Bubble sorting functions
  *
  */
 
@@ -19,13 +19,17 @@ Status sort_bubble_array_int(int *array, size_t arr_size)
 		return DS_ERR_INVALID_SIZE;
 
 	size_t i, j;
+	int tmp;
+
 	for (i = 0; i < arr_size - 1; i++) {
 
 		for (j = 0; j < arr_size - i - 1; j++) {
 
 			if (array[j] >array[j + 1]) {
 
-				sort_swap_integer(array, j, j + 1);
+				tmp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = tmp;
 			}
 		}
 	}

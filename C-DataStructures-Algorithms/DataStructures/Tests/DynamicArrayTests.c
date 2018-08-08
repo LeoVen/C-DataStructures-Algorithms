@@ -10,10 +10,12 @@
 
 #include "DynamicArray.h"
 
-Status DAR_IO_TESTS(void);
+int DAR_IO_TESTS(void);
 
 int DynamicArrayTests(void)
 {
+	//DAR_IO_TESTS();
+
 	printf("\n");
 	printf(" +-------------------------------------+\n");
 	printf(" |                                     |\n");
@@ -26,6 +28,7 @@ int DynamicArrayTests(void)
 
 	dar_init(&array);
 
+	size_t f;
 	int i;
 	for (i = 0; i < 100; i++) {
 		dar_insert_back(array, i);
@@ -47,8 +50,6 @@ int DynamicArrayTests(void)
 
 	dar_display(array);
 
-	//DAR_IO_TESTS();
-
 	dar_delete(&array);
 	
 	int vector[100];
@@ -68,6 +69,35 @@ int DynamicArrayTests(void)
 	dar_make(&array, vector, 100);
 
 	dar_display(array);
+
+	dar_delete(&array);
+
+	dar_init(&array);
+
+	for (i = 0; i < 100; i++)
+		dar_insert_back(array, rand() % 10);
+
+	dar_display(array);
+
+	for (i = 0; i < 10; i++)
+	{
+		dar_frequency(array, i, &f);
+		printf("\nThe number %d appears %zu times", i, f);
+	}
+
+	printf("\n\nRemoving keys 1, 2 and 3:");
+
+	dar_remove_keys(array, 1);
+	dar_remove_keys(array, 2);
+	dar_remove_keys(array, 3);
+
+	dar_display(array);
+
+	for (i = 0; i < 10; i++)
+	{
+		dar_frequency(array, i, &f);
+		printf("\nThe number %d appears %zu times", i, f);
+	}
 
 	dar_delete(&array);
 

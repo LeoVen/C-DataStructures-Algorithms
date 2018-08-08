@@ -207,6 +207,9 @@
     <ClCompile Include="DataStructures\Tests\SStringTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Algorithms\Sorting\InsertionSort.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructures\Headers\Array.h">

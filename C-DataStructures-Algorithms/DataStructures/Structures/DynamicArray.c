@@ -153,6 +153,22 @@ Status dar_insert_back(DynamicArray *dar, int value)
 	return DS_OK;
 }
 
+Status dar_update(DynamicArray *dar, int value, size_t index)
+{
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar))
+		return DS_ERR_INVALID_OPERATION;
+
+	if (index >= dar->size)
+		return DS_ERR_INVALID_POSITION;
+
+	dar->buffer[index] = value;
+
+	return DS_OK;
+}
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
@@ -230,7 +246,33 @@ Status dar_remove_back(DynamicArray *dar)
 	return DS_OK;
 }
 
-//Status dar_remove_keys(DynamicArray *dar, int value)
+Status dar_remove_keys(DynamicArray *dar, int value)
+{
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st;
+
+	size_t i;
+	for (i = 0; i < dar->size; i++)
+	{
+		if (dar->buffer[i] == value)
+		{
+			st = dar_remove_at(dar, i);
+
+			if (st != DS_OK)
+				return st;
+
+			i--;
+		}
+
+	}
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
@@ -327,6 +369,8 @@ Status dar_erase(DynamicArray **dar)
 
 Status dar_get(DynamicArray *dar, size_t index, int *result)
 {
+	*result = 0;
+
 	if (dar == NULL)
 		return DS_ERR_NULL_POINTER;
 
@@ -445,11 +489,120 @@ Status dar_find_min_pos(DynamicArray *dar, size_t *result)
 	return DS_OK;
 }
 
-//Status dar_frequency(DynamicArray *dar, int value, size_t *frequency)
-//Status dar_contains(DynamicArray *dar, int value, bool *result)
+Status dar_frequency(DynamicArray *dar, int value, size_t *frequency)
+{
+	*frequency = 0;
 
-Status dar_find_occurrance_first(DynamicArray *dar, int value, size_t *position);
-Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position);
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar))
+		return DS_ERR_INVALID_OPERATION;
+
+	size_t i;
+	for (i = 0; i < dar->size; i++)
+	{
+		if (dar->buffer[i] == value)
+			(*frequency)++;
+	}
+
+	return DS_OK;
+}
+
+Status dar_contains(DynamicArray *dar, int value, bool *result)
+{
+	*result = false;
+
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar))
+		return DS_ERR_INVALID_OPERATION;
+
+	size_t i;
+	for (i = 0; i < dar->size; i++)
+	{
+		if (dar->buffer[i] == value)
+		{
+			*result = true;
+
+			return DS_OK;
+		}
+	}
+
+	return DS_OK;
+}
+
+bool dar_exists(DynamicArray *dar, int value)
+{
+	if (dar == NULL)
+		return false;
+
+	if (dar_is_empty(dar))
+		return false;
+
+	size_t i;
+	for (i = 0; i < dar->size; i++)
+	{
+		if (dar->buffer[i] == value)
+			return true;
+	}
+
+	return false;
+}
+
+Status dar_find_occurrance_first(DynamicArray *dar, int value, size_t *position)
+{
+	*position = 0;
+
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar))
+		return DS_ERR_INVALID_OPERATION;
+
+	size_t i;
+	for (i = 0; i < dar->size; i++)
+	{
+		if (dar->buffer[i] == value)
+		{
+			*position = i;
+
+			return DS_OK;
+		}
+	}
+
+	return DS_ERR_NOT_FOUND;
+}
+
+Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position)
+{
+	*position = 0;
+
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar))
+		return DS_ERR_INVALID_OPERATION;
+
+	bool found = false;
+
+	size_t i;
+	for (i = 0; i < dar->size; i++)
+	{
+		if (dar->buffer[i] == value)
+		{
+			*position = i;
+
+			found = true;
+		}
+	}
+
+	if (found)
+		return DS_OK;
+
+	return DS_ERR_NOT_FOUND;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
@@ -472,10 +625,30 @@ Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position);
 //Status dar_sort_selection(DynamicArray *dar)
 //Status dar_sort_insertion(DynamicArray *dar)
 
-
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |
 // +-------------------------------------------------------------------------------------------------+
+
+Status dar_grow(DynamicArray *dar, size_t size)
+{
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar->capacity >= size)
+		return DS_OK;
+
+	while (dar->capacity < size)
+	{
+		dar->capacity *= dar->growth_rate;
+	}
+
+	dar->buffer = realloc(dar->buffer, sizeof(int) * dar->capacity);
+
+	if (!(dar->buffer))
+		return DS_ERR_ALLOC;
+
+	return DS_OK;
+}
 
 Status dar_realloc(DynamicArray *dar)
 {

@@ -4,7 +4,7 @@
  * @author Leonardo Vencovsky (https://github.com/LeoVen)
  * @date 29/05/2018
  *
- * @brief Selection Sorting functions
+ * @brief Selection sorting functions
  *
  */
 
@@ -19,6 +19,7 @@ Status sort_selection_array_int(int *array, size_t arr_size)
 		return DS_ERR_INVALID_SIZE;
 
 	size_t i, j, min;
+	int tmp;
 
 	for (i = 0; i < arr_size - 1; i++) {
 
@@ -28,7 +29,9 @@ Status sort_selection_array_int(int *array, size_t arr_size)
 			if (array[j] < array[min])
 				min = j;
 
-		sort_swap_integer(array, min, i);
+		tmp = array[min];
+		array[min] = array[i];
+		array[i] = tmp;
 
 	}
 	

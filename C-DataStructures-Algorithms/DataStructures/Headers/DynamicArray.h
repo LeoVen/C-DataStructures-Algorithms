@@ -40,11 +40,13 @@ extern "C" {
 	Status dar_insert_at(DynamicArray *dar, int value, size_t index);
 	Status dar_insert_back(DynamicArray *dar, int value);
 
+	Status dar_update(DynamicArray *dar, int value, size_t index);
+
 	Status dar_remove_front(DynamicArray *dar);
 	Status dar_remove_at(DynamicArray *dar, size_t index);
 	Status dar_remove_back(DynamicArray *dar);
 
-	//Status dar_remove_keys(DynamicArray *dar, int value)
+	Status dar_remove_keys(DynamicArray *dar, int value);
 
 	Status dar_display(DynamicArray *darr);
 	Status dar_display_raw(DynamicArray *darr);
@@ -63,8 +65,13 @@ extern "C" {
 	Status dar_find_max_pos(DynamicArray *dar, size_t *result);
 	Status dar_find_min_pos(DynamicArray *dar, size_t *result);
 
-	//Status dar_frequency(DynamicArray *dar, int value, size_t *frequency);
-	//Status dar_contains(DynamicArray *dar, int value, bool *result);
+	Status dar_frequency(DynamicArray *dar, int value, size_t *frequency);
+	
+	Status dar_contains(DynamicArray *dar, int value, bool *result);
+	bool dar_exists(DynamicArray *dar, int value);
+
+	Status dar_find_occurrance_first(DynamicArray *dar, int value, size_t *position);
+	Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position);
 
 	//Status dar_copy(DynamicArray *dar, DynamicArray **result);
 	//Status dar_merge_sorted(DynamicArray *dar1, DynamicArray *dar2, DynamicArray **result);
@@ -78,6 +85,7 @@ extern "C" {
 	//Status dar_sort_selection(DynamicArray *dar);
 	//Status dar_sort_insertion(DynamicArray *dar);
 
+	Status dar_grow(DynamicArray *dar, size_t size);
 	Status dar_realloc(DynamicArray *dar);
 
 #ifdef __cplusplus

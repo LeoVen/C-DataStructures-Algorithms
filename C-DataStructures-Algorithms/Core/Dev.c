@@ -18,6 +18,7 @@ int dev_short_cut(void)
 
 	//SStringTests();
 	DynamicArrayTests();
+	//SortingTests();
 
 	printf("\nPress enter to continue...");
 	_getch();
