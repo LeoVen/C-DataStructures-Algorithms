@@ -16,6 +16,9 @@
 
 Status arr_init(Array **arr, size_t size)
 {
+	if (size == 0)
+		return DS_ERR_INVALID_ARGUMENT;
+
 	(*arr) = malloc(sizeof(Array));
 
 	if (!(*arr))
@@ -63,10 +66,9 @@ Status arr_insert(Array *arr, size_t position, int value)
 		arr->buffer[position] = value;
 
 		return DS_OK;
-
 	}
 
-	return DS_ERR_INVALID_OPERATION;
+	return DS_ERR_INVALID_POSITION;
 }
 
 Status arr_push(Array *arr, int value)
@@ -74,21 +76,22 @@ Status arr_push(Array *arr, int value)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	size_t i;
-	int ok = 0;
+	bool ok = false;
 
+	size_t i;
 	for (i = 0; i < arr->size; i++) {
 	
 		if (arr->buffer[i] == 0) {
 		
 			arr->buffer[i] = value;
 			
-			ok = 1;
+			ok = true;
+
 			break;
 		}
 	}
 
-	if (ok == 1)
+	if (ok)
 		return DS_OK;
 
 	return DS_ERR_FULL;
@@ -111,10 +114,9 @@ Status arr_update(Array *arr, size_t position, int value)
 		arr->buffer[position] = value;
 
 		return DS_OK;
-
 	}
 	
-	return DS_ERR_INVALID_OPERATION;
+	return DS_ERR_INVALID_POSITION;
 }
 
 // +-------------------------------------------------------------------------------------------------+
@@ -132,10 +134,11 @@ Status arr_remove(Array *arr, size_t position)
 	if (arr->buffer[position] != 0) {
 		
 		arr->buffer[position] = 0;
-	
+
+		return DS_OK;
 	}
 	
-	return DS_ERR_INVALID_OPERATION;
+	return DS_ERR_INVALID_POSITION;
 }
 
 // +-------------------------------------------------------------------------------------------------+
@@ -147,16 +150,15 @@ Status arr_display(Array *arr)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	size_t i;
-
-	printf("\nC Array\n[ ");
+	printf("\nArray\n[ ");
 	
-	for (i = 0; i < arr->size; i++) {
+	size_t i;
+	for (i = 0; i < arr->size - 1; i++) {
 	
 		printf("%d, ", arr->buffer[i]);
 	}
 
-	printf("nil ]\n");
+	printf("%d ]\n", arr->buffer[arr->size - 1]);
 	
 	return DS_OK;
 }
@@ -166,10 +168,9 @@ Status arr_display_raw(Array *arr)
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	size_t i;
-
 	printf("\n");
 
+	size_t i;
 	for (i = 0; i < arr->size; i++) {
 
 		printf("%d ", arr->buffer[i]);
@@ -184,6 +185,19 @@ Status arr_display_raw(Array *arr)
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
+Status arr_delete(Array **arr)
+{
+	if (*arr == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	free((*arr)->buffer);
+	free((*arr));
+
+	(*arr) = NULL;
+
+	return DS_OK;
+}
+
 Status arr_erase(Array *arr)
 {
 	if (arr == NULL)
@@ -195,19 +209,6 @@ Status arr_erase(Array *arr)
 	
 		arr->buffer[i] = 0;
 	}
-
-	return DS_OK;
-}
-
-Status arr_delete(Array **arr)
-{
-	if (*arr == NULL)
-		return DS_ERR_NULL_POINTER;
-
-	free((*arr)->buffer);
-	free((*arr));
-
-	(*arr) = NULL;
 
 	return DS_OK;
 }
@@ -314,14 +315,15 @@ Status arr_key_positions(Array *arr, Array **result, int key)
 	return DS_OK;
 }
 
-// bool arr_is_empty(Array *arr);
+bool arr_is_empty(Array *arr)
+{
+	size_t i;
+	for (i = 0; i < arr->size; i++)
+		if (arr->buffer[i] != 0)
+			return false;
 
-// +-------------------------------------------------------------------------------------------------+
-// |                                   Slice / Link / Trim / Grow                                    |
-// +-------------------------------------------------------------------------------------------------+
-
-// Status arr_grow(Array **arr);
-// Status arr_shrink(Array **arr);
+	return true;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |

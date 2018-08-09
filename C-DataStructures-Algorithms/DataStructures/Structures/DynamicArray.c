@@ -59,6 +59,8 @@ Status dar_make(DynamicArray **dar, int *array, size_t arr_size)
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
+//Status dar_insert(DynamicArray *dar, int *array, size_t arr_size, size_t index)
+
 Status dar_insert_front(DynamicArray *dar, int value)
 {
 	if (dar == NULL)
@@ -172,6 +174,8 @@ Status dar_update(DynamicArray *dar, int value, size_t index)
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
+
+//Status dar_remove(DynamicArray *dar, size_t from, size_t to)
 
 Status dar_remove_front(DynamicArray *dar)
 {
@@ -291,7 +295,7 @@ Status dar_display(DynamicArray *dar)
 		return DS_OK;
 	}
 
-	printf("\nDynamic Array\n[ ");
+	printf("\nDynamicArray\n[ ");
 
 	size_t i;
 	for (i = 0; i < dar->size - 1; i++) {

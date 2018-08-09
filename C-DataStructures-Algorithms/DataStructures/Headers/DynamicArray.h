@@ -24,6 +24,25 @@ extern "C" {
 
 #endif
 
+	/**
+	 * @brief A DynamicArray that increases in size as needed
+	 *
+	 * A @c DynamicArray is a wrapper for a dynamic array that grows its buffer
+	 * when needed along with many utility functions that are useful for
+	 * abstracting its dynamism and avoid direct buffer calls.
+	 *
+	 * @b Advantages over @c Array
+	 * - Dynamic size
+	 * - Easy insertion/removal
+	 *
+	 * @b Drawbacks
+	 * - As the array increases in size, shifting elements becomes more
+	 * time-consuming
+	 *
+	 * @b Functions
+	 *
+	 * @c DynamicArray.c
+	 */
 	typedef struct DynamicArray {
 		int *buffer;                        /*!< @c DynamicArray data buffer */
 		size_t size;                        /*!< @c DynamicArray size */
@@ -36,12 +55,14 @@ extern "C" {
 
 	Status dar_get(DynamicArray *dar, size_t index, int *result);
 
+	//Status dar_insert(DynamicArray *dar, int *array, size_t arr_size, size_t index);
 	Status dar_insert_front(DynamicArray *dar, int value);
 	Status dar_insert_at(DynamicArray *dar, int value, size_t index);
 	Status dar_insert_back(DynamicArray *dar, int value);
 
 	Status dar_update(DynamicArray *dar, int value, size_t index);
 
+	//Status dar_remove(DynamicArray *dar, size_t from, size_t to);
 	Status dar_remove_front(DynamicArray *dar);
 	Status dar_remove_at(DynamicArray *dar, size_t index);
 	Status dar_remove_back(DynamicArray *dar);

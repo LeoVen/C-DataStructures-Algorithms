@@ -6,9 +6,6 @@
  *
  * @brief Source file for @c String implementations in C
  *
- * In this source file, a string will be implemented to support most operations
- * that a String class has in a higher level language.
- *
  */
 
 #include "SString.h"

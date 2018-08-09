@@ -62,6 +62,8 @@ int ArrayTests(void)
 	arr_erase(array);
 
 	arr_display_raw(array); // Should give all 0s
+
+	printf("Array is empty? %s\n", (arr_is_empty(array) ? "true" : "false"));
 	
 	// ---------- ---------- Bubble Sort
 	// ---------- ----------

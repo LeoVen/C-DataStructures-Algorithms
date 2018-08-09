@@ -16,6 +16,22 @@ extern "C" {
 
 #include "Core.h"
 
+	/**
+	 * The @c Array structure is a wrapper for an array of integers that has a
+	 * fixed size. It has a few rules for inserting, pushing, updating and
+	 * removing values. They are:
+	 * - @b The @b zero-value: any zeroes in the array are considered empty
+	 * spaces.
+	 * - @b Insert: Inserts an integer in a given zero-value position. Returns
+	 * @c DS_ERR_INVALID_POSITION if that position is not a zero-value.
+	 * - @b Push: Same as Insert but this time an integer is added to the first
+	 * available zero-value position. Returns @ DS_ERR_FULL if there are no
+	 * zero-value positions.
+	 * - @b Update: Updates a non-zero-value position with a new integer. If
+	 * the position is a zero-value @c DS_ERR_INVALID_POSITION is returned.
+	 * - @b Remove: Sets to zero-value a given position. If the position is
+	 * already a zero-value @c DS_ERR_INVALID_POSITION is returned.
+	 */
 	typedef struct Array {
 		int *buffer;
 		size_t size;
@@ -35,18 +51,15 @@ extern "C" {
 	Status arr_display(Array *arr);
 	Status arr_display_raw(Array *arr);
 
-	Status arr_erase(Array *array);
 	Status arr_delete(Array **arr);
+	Status arr_erase(Array *array);
 
 	Status arr_max(Array *arr, int *result);
 	Status arr_min(Array *arr, int *result);
 	Status arr_frequency(Array *arr, int key, int *result);
 	Status arr_key_positions(Array *arr, Array **result, int key);
 
-	// bool arr_is_empty(Array *arr);
-
-	// Status arr_grow(Array **arr);
-	// Status arr_shrink(Array **arr);
+	bool arr_is_empty(Array *arr);
 
 	Status arr_copy(Array *arr, Array **result);
 	

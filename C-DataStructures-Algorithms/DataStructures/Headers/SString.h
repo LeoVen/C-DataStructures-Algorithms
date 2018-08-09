@@ -23,12 +23,29 @@ extern "C" {
 #define _STRING_GROW_RATE 2
 
 #endif
-
+	/**
+	 * @brief A wrapper for an array of characters
+	 *
+	 * A @c String is an array of characters. The purpose of this structure is
+	 * to make an abstraction on top of this array. It is a very useful
+	 * abstraction and makes dealing with strings much easier.
+	 *
+	 * @b Advantages over <code> char* </code>
+	 * - Dynamic size
+	 * - Easy insertion/removal
+	 *
+	 * @b Drawbacks
+	 * - None
+	 *
+	 * @b Functions
+	 *
+	 * @c SString.c
+	 */
 	typedef struct String {
-		char *buffer;
-		size_t len;
-		size_t capacity;
-		size_t growth_rate;
+		char *buffer;                       /*!< Character buffer */
+		size_t len;                         /*!< Word length */
+		size_t capacity;                    /*!< Buffer capacity */
+		size_t growth_rate;                 /*!< Buffer capacity growth rate */
 	} String;
 
 	Status str_init(String **str);
