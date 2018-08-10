@@ -237,11 +237,84 @@ Status str_push_char_back(String *str, const char ch)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status str_pop_front(String *str)
+Status str_pop_char_front(String *str)
+{
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status str_pop_at(String *str, size_t index)
+	if (str_buffer_empty(str))
+		return DS_ERR_INVALID_OPERATION;
 
-//Status str_pop_back(String *str)
+	size_t i;
+	for (i = 0; i < str->len; i++)
+	{
+		str->buffer[i] = str->buffer[i + 1];
+	}
+
+	(str->len)--;
+
+	str->buffer[str->len] = '\0';
+
+	return DS_OK;
+}
+
+Status str_pop_char_at(String *str, size_t index)
+{
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str))
+		return DS_ERR_INVALID_OPERATION;
+
+	if (index >= str->len)
+		return DS_ERR_INVALID_POSITION;
+
+	Status st;
+
+	if (index == 0)
+	{
+		st = str_pop_char_front(str);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else if (index == str->len - 1)
+	{
+		st = str_pop_char_back(str);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else
+	{
+		size_t i;
+		for (i = index; i < str->len; i++)
+		{
+			str->buffer[i] = str->buffer[i + 1];
+		}
+
+		(str->len)--;
+
+		str->buffer[str->len] = '\0';
+	}
+
+	return DS_OK;
+}
+
+Status str_pop_char_back(String *str)
+{
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str))
+		return DS_ERR_INVALID_OPERATION;
+
+	(str->len)--;
+
+	str->buffer[str->len] = '\0';
+
+	return DS_OK;
+}
 
 //Status str_remove(String *str, size_t from, size_t to)
 
@@ -276,7 +349,7 @@ Status str_display_raw(String *str)
 	if (str_buffer_empty(str))
 		return DS_OK;
 
-	printf("%s\n", str->buffer);
+	printf("%s", str->buffer);
 
 	return DS_OK;
 }
@@ -317,7 +390,7 @@ Status str_erase(String **str)
 	return DS_OK;
 }
 
-// "clears" the buffer
+// "clears" the buffer but doesn't shrinks
 Status str_clear(String *str)
 {
 	if (str == NULL)
@@ -347,7 +420,7 @@ Status str_front(String *str, char *result)
 	return DS_OK;
 }
 
-Status str_end(String *str, char *result)
+Status str_back(String *str, char *result)
 {
 	if (str == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -377,7 +450,21 @@ size_t str_len(String *str)
 
 //Status str_compare(String *str1, String *str2, int *result)
 
-//bool str_equals(String *str1, String *str2, bool case_sensitive)
+bool str_equals(String *str1, String *str2)
+{
+	if (str1 == NULL || str2 == NULL)
+		return false;
+
+	if (str1->len != str2->len)
+		return false;
+
+	size_t i;
+	for (i = 0; i < str1->len; i++)
+		if (str1->buffer[i] != str2->buffer[i])
+			return false;
+
+	return true;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |

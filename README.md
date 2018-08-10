@@ -55,7 +55,7 @@ RedBlackTree                 not started      Docs     not started
 SinglyLinkedList             [######### ]     Docs     [########  ]
 SkipList                     not started      Docs     not started
 SparseMatrix                 [#         ]     Docs     [          ]
-String                       [###       ]     Docs     [          ]
+String                       [#####     ]     Docs     [          ]
 Stack                        [######### ]     Docs     [          ]
 StackArray                   [######### ]     Docs     [          ]
 Trie                         [##        ]     Docs     [          ]

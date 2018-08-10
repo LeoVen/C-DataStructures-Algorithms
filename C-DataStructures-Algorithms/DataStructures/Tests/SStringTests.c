@@ -10,6 +10,8 @@
 
 #include "SString.h"
 
+int STR_IO_TESTS(void);
+
 int SStringTests(void)
 {
 	printf("\n");
@@ -104,10 +106,13 @@ In the Land of Mordor where the Shadows lie.");
 
 	str_display(str0);
 
+	str_pop_char_at(str0, 6);
+	str_push_char_at(str0, 'o', 6);
+
 	char f, e; // Front, end
 
 	str_front(str0, &f);
-	str_end(str0, &e);
+	str_back(str0, &e);
 
 	printf("\nFrist character: %c\nLast character: %c", f, e);
 
@@ -120,6 +125,132 @@ In the Land of Mordor where the Shadows lie.");
 
 	str_delete(&str0);
 
+	STR_IO_TESTS();
+
 	printf("\n");
+	return 0;
+}
+
+int STR_IO_TESTS(void)
+{
+	const char *text = " ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 ";
+
+	String *str;
+	char ch;
+
+	Status st = str_init(&str);
+
+	if (st != DS_OK)
+		return st;
+
+	size_t max_len = 8, iter = 1000, pos, i, j, k, text_len = strlen(text);
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- --------- Begin tests --------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
+	printf("\n---------- ---------- ---------- ---------- ----------");
+
+	for (k = 0; k < iter; k++)
+	{
+		i = rand();
+		j = rand() % 3;
+
+		if (i % 2 == 0 && str->len < max_len)
+		{
+			// Push char
+			ch = text[rand() % text_len];
+
+			if (j == 0)
+			{
+				// Push front
+				printf("\nstr_push_char_front()");
+				st = str_push_char_front(str, ch);
+			}
+			else if (j == 1)
+			{
+				// Push at
+				printf("\nstr_push_char_at()");
+				printf(" position");
+				if (str->len != 0)
+				{
+					pos = rand() % str->len;
+					printf(" %zu", pos);
+					st = str_push_char_at(str, ch, pos);
+				}
+				else
+				{
+					st = str_push_char_at(str, ch, 0);
+					printf(" 0");
+				}
+			}
+			else
+			{
+				// Push back
+				printf("\nstr_push_char_back()");
+				st = str_push_char_back(str, ch);
+			}
+		}
+		else
+		{
+			// Pop char
+			if (j == 0)
+			{
+				// Pop front
+				printf("\nstr_pop_char_front()");
+				st = str_pop_char_front(str);
+			}
+			else if (j == 1)
+			{
+				// Pop at
+				printf("\nstr_pop_char_at()");
+				printf(" position");
+				if (str->len != 0)
+				{
+					pos = rand() % str->len;
+					printf(" %zu", pos);
+					st = str_pop_char_at(str, pos);
+				}
+				else
+				{
+					st = str_pop_char_at(str, 0);
+					printf(" 0");
+				}
+			}
+			else
+			{
+				// Pop back
+				printf("\nstr_pop_char_back()");
+				st = str_pop_char_back(str);
+			}
+		}
+
+		str_display_raw(str);
+		printf("\nString Lenght: %zu", str->len);
+		print_status_repr(st);
+		if (!str_buffer_empty(str))
+		{
+			str_front(str, &ch);
+			printf("\nFront char: %c", ch);
+			str_back(str, &ch);
+			printf("\nBack  char: %c", ch);
+		}
+		else
+		{
+			printf("\nFront char: ");
+			printf("\nBack  char: ");
+		}
+
+		printf("\n---------- ---------- ---------- ---------- ----------");
+	}
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
 	return 0;
 }

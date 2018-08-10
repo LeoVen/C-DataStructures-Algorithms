@@ -65,9 +65,9 @@ extern "C" {
 	//Status str_add(String *str1, String *str2, size_t index);
 	//Status str_prepend(String *str1, String *str2);
 
-	//Status str_pop_front(String *str);
-	//Status str_pop_at(String *str, size_t index);
-	//Status str_pop_back(String *str);
+	Status str_pop_char_front(String *str);
+	Status str_pop_char_at(String *str, size_t index);
+	Status str_pop_char_back(String *str);
 
 	//Status str_remove(String *str, size_t from, size_t to);
 	//Status str_slice(String *str, size_t from, size_t to, const char *result);
@@ -78,7 +78,7 @@ extern "C" {
 	Status str_delete(String **str);
 	Status str_erase(String **str);
 
-	Status str_end(String *str, char *result);
+	Status str_back(String *str, char *result);
 	Status str_front(String *str, char *result);
 
 	Status str_length(String *str, size_t *result);
@@ -86,7 +86,7 @@ extern "C" {
 
 	//Status str_compare(String *str1, String *str2, int *result);
 
-	//bool str_equals(String *str1, String *str2, bool case_sensitive);
+	bool str_equals(String *str1, String *str2);
 
 	bool str_buffer_full(String *str);
 	bool str_buffer_empty(String *str);
