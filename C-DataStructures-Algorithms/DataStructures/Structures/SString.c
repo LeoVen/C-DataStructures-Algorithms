@@ -87,6 +87,33 @@ Status str_make(String **str, char *content)
 }
 
 // +-------------------------------------------------------------------------------------------------+
+// |                                            Getters                                              |
+// +-------------------------------------------------------------------------------------------------+
+
+Status str_get_string(String *str, const char **result)
+{
+	(*result) = NULL;
+
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str))
+		return DS_ERR_INVALID_OPERATION;
+
+	char *string = malloc(sizeof(char) * (str->len + 1));
+	
+	size_t i;
+	for (i = 0; i < str->len; i++)
+		string[i] = str->buffer[i];
+
+	string[str->len] = '\0';
+
+	(*result) = string;
+
+	return DS_OK;
+}
+
+// +-------------------------------------------------------------------------------------------------+
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
@@ -215,6 +242,8 @@ Status str_push_char_back(String *str, const char ch)
 //Status str_pop_at(String *str, size_t index)
 
 //Status str_pop_back(String *str)
+
+//Status str_remove(String *str, size_t from, size_t to)
 
 //Status str_slice(String *str, size_t from, size_t to, const char *result)
 

@@ -111,6 +111,13 @@ In the Land of Mordor where the Shadows lie.");
 
 	printf("\nFrist character: %c\nLast character: %c", f, e);
 
+	const char *string;
+
+	str_get_string(str0, &string);
+
+	printf("\n\nReturned string: %s", string);
+	free(string);
+
 	str_delete(&str0);
 
 	printf("\n");

@@ -31,6 +31,10 @@ extern "C" {
 	 * the position is a zero-value @c DS_ERR_INVALID_POSITION is returned.
 	 * - @b Remove: Sets to zero-value a given position. If the position is
 	 * already a zero-value @c DS_ERR_INVALID_POSITION is returned.
+	 *
+	 * @b Functions
+	 *
+	 * @c Array.c
 	 */
 	typedef struct Array {
 		int *buffer;
@@ -39,14 +43,12 @@ extern "C" {
 
 	Status arr_init(Array **arr, size_t size);
 
-	Array * arr_get(size_t size);
-
-	Status arr_insert(Array *arr, size_t position, int value);
+	Status arr_insert(Array *arr, size_t index, int value);
 	Status arr_push(Array *arr, int value);
 
-	Status arr_update(Array *arr, size_t position, int value);
+	Status arr_update(Array *arr, size_t index, int value);
 
-	Status arr_remove(Array *arr, size_t position);
+	Status arr_remove(Array *arr, size_t index);
 
 	Status arr_display(Array *arr);
 	Status arr_display_raw(Array *arr);

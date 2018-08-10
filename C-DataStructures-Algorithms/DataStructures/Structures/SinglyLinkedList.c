@@ -264,6 +264,7 @@ Status sll_get_length(SinglyLinkedList *sll, size_t *result)
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if referenced list points to NULL
  * @return @c DS_ERR_ITER if a variable points to NULL during iteration
+ * @return @c DS_ERR_INVALID_POSITION if position is greater than the list size
  *
  * @warning
  *
@@ -316,10 +317,10 @@ Status sll_get_node_at(SinglyLinkedList *sll, SinglyLinkedNode **result, size_t 
  * @param[out] result Node value
  *
  * @return @c DS_OK if all operations were successful
- * @return @c DS_ERR_NULL_POINTER if referenced list points
- * to NULL
+ * @return @c DS_ERR_NULL_POINTER if referenced list points to @c NULL
  * @return @c DS_ERR_INVALID_OPERATION if list length is 0
  * @return @c DS_ERR_ITER if a variable points to NULL during iteration
+ * @return @c DS_ERR_INVALID_POSITION if position is greater than the list size
  *
  * @b Usage
  * @code{.c}
@@ -372,11 +373,10 @@ Status sll_get_node_data(SinglyLinkedList *sll, size_t position, int *result)
  * @param[in] value New value for Node at specified position
  *
  * @return @c DS_OK if all operations were successful
- * @return @c DS_ERR_NULL_POINTER if referenced list points
- * to NULL
+ * @return @c DS_ERR_NULL_POINTER if referenced list points to @c NULL
  * @return @c DS_ERR_INVALID_OPERATION if list length is 0
  * @return @c DS_ERR_ITER if a variable points to NULL during iteration
- * @return @c DS_ERR_INVALID_POSITION if position is higher than
+ * @return @c DS_ERR_INVALID_POSITION if position is greater than the list size
  *
  * @b Usage
  * @code{.c}
@@ -495,7 +495,7 @@ Status sll_insert_head(SinglyLinkedList *sll, int value)
 *
 * @return @c DS_OK if all operations were successful
 * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
-* @return @c DS_ERR_INVALID_POSITION if position is out of range
+* @return @c DS_ERR_INVALID_POSITION if position is greater than the list size
 * @return @c DS_ERR_ALLOC if allocation failed
 *
 * @b Usage
@@ -703,7 +703,7 @@ Status sll_insert_node_head(SinglyLinkedList *sll, SinglyLinkedNode *node)
  *
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if any parameter is @c NULL
- * @return @c DS_ERR_INVALID_POSITION if position is out of range
+ * @return @c DS_ERR_INVALID_POSITION if position is greater than the list size
  *
  * @b Usage
  * @code{.c}
@@ -892,7 +892,7 @@ Status sll_remove_head(SinglyLinkedList *sll)
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if list reference is @c NULL
  * @return @c DS_ERR_INVALID_OPERATION if list is empty
- * @return @c DS_ERR_INVALID_POSITION if position is out of range
+ * @return @c DS_ERR_INVALID_POSITION if position is greater than the list size
  *
  * @b Usage
  * @code{.c}
@@ -1118,7 +1118,7 @@ Status sll_remove_node_head(SinglyLinkedList *sll, SinglyLinkedNode **node)
  * @return @c DS_OK if all operations were successful
  * @return @c DS_ERR_NULL_POINTER if list parameter is @c NULL
  * @return @c DS_ERR_INVALID_OPERATION if list is empty
- * @return @c DS_ERR_INVALID_POSITION if position is out of range
+ * @return @c DS_ERR_INVALID_POSITION if position is greater than the list size
  *
  * @b Usage
  * @code{.c}

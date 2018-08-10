@@ -51,6 +51,8 @@ extern "C" {
 	Status str_init(String **str);
 	Status str_make(String **str, char * content);
 
+	Status str_get_string(String *str, const char **result);
+
 	Status str_push_char_front(String *str, const char ch);
 	Status str_push_char_at(String *str, const char ch, size_t index);
 	Status str_push_char_back(String *str, const char ch);
@@ -67,6 +69,7 @@ extern "C" {
 	//Status str_pop_at(String *str, size_t index);
 	//Status str_pop_back(String *str);
 
+	//Status str_remove(String *str, size_t from, size_t to);
 	//Status str_slice(String *str, size_t from, size_t to, const char *result);
 
 	Status str_display(String *str);

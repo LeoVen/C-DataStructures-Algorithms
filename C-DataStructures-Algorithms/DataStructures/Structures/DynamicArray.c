@@ -6,8 +6,6 @@
  *
  * @brief Source file for @c DynamicArray implementations in C
  *
- * Dynamic Array grows and shrinks as you add and remove values
- *
  */
 
 #include "DynamicArray.h"

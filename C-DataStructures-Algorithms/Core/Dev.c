@@ -17,7 +17,6 @@ int dev_short_cut(void)
 {
 
 	SStringTests();
-	ArrayTests();
 	//DynamicArrayTests();
 	//SortingTests();
 
