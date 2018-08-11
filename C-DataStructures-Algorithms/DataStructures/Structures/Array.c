@@ -221,7 +221,7 @@ Status arr_update(Array *arr, size_t index, int value)
 // +-------------------------------------------------------------------------------------------------+
 
 /**
- * @brief removes a non-empty position in the buffer
+ * @brief Removes a non-empty position in the buffer
  *
  * This functions sets to 0 a given position in the buffer. If that position is
  * already 0 then @c DS_ERR_INVALID_POSITION is returned.

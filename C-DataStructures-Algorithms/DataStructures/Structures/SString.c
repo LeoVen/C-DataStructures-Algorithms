@@ -44,9 +44,9 @@ Status str_init(String **str)
  *
  *
  */
-Status str_make(String **str, char *content)
+Status str_make(String **str, char *string)
 {
-	size_t length = strlen(content);
+	size_t length = strlen(string);
 
 	if (length == 0)
 		return DS_ERR_INVALID_ARGUMENT;
@@ -78,7 +78,7 @@ Status str_make(String **str, char *content)
 	size_t i;
 	for (i = 0; i < length; i++)
 	{
-		(*str)->buffer[i] = content[i];
+		(*str)->buffer[i] = string[i];
 	}
 
 	(*str)->buffer[length] = '\0';
@@ -227,11 +227,74 @@ Status str_push_char_back(String *str, const char ch)
 
 //Status str_push_back(String *str, const char *ch)
 
-//Status str_append(String *str1, String *str2)
+Status str_prepend(String *str1, String *str2)
+{
+	if (str1 == NULL || str2 == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str2))
+		return DS_OK;
+
+	Status st;
+
+	while (!str_buffer_fits(str1, str2->len))
+	{
+		st = str_realloc(str1);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	size_t i;
+	for (i = str1->len; i > 0; i--)
+	{
+		str1->buffer[i + str2->len - 1] = str1->buffer[i - 1];
+	}
+
+	for (i = 0; i < str2->len; i++)
+	{
+		str1->buffer[i] = str2->buffer[i];
+	}
+
+	str1->len += str2->len;
+
+	str1->buffer[str1->len] = '\0';
+
+	return DS_OK;
+}
 
 //Status str_add(String *str1, String *str2, size_t index)
 
-//Status str_prepend(String *str1, String *str2)
+Status str_append(String *str1, String *str2)
+{
+	if (str1 == NULL || str2 == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str2))
+		return DS_OK;
+
+	Status st;
+
+	while (!str_buffer_fits(str1, str2->len))
+	{
+		st = str_realloc(str1);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	size_t i, j;
+	for (i = str1->len, j = 0; i < str1->len + str2->len; i++, j++)
+	{
+		str1->buffer[i] = str2->buffer[j];
+	}
+
+	str1->len += str2->len;
+
+	str1->buffer[str1->len] = '\0';
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Removal                                             |
@@ -465,6 +528,13 @@ bool str_equals(String *str1, String *str2)
 
 	return true;
 }
+
+// +-------------------------------------------------------------------------------------------------+
+// |                                             Copy                                                |
+// +-------------------------------------------------------------------------------------------------+
+
+//Status str_copy(String *str, String **result)
+//Status str_swap(String *str1, String *str2)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |

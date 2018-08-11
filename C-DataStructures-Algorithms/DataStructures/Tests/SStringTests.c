@@ -10,7 +10,8 @@
 
 #include "SString.h"
 
-int STR_IO_TESTS(void);
+int STR_IO_TESTS_0(void);
+int STR_IO_TESTS_1(void);
 
 int SStringTests(void)
 {
@@ -22,7 +23,9 @@ int SStringTests(void)
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	String *str0, *str1, *str2;
+	//STR_IO_TESTS();
+
+	String *str0, *str1, *str2, *str3;
 	Status st;
 
 	str_make(&str0, "Hello World!");
@@ -125,13 +128,51 @@ In the Land of Mordor where the Shadows lie.");
 
 	str_delete(&str0);
 
-	STR_IO_TESTS();
+	printf("\n");
+
+	// The resulting string is always stored in the first string
+	// Append
+	str_make(&str0, "Alan");
+	str_make(&str1, "Turin");
+
+	str_append(str0, str1);
+	str_push_char_at(str0, ' ', 4);
+	str_push_char_back(str0, 'g');
+
+	str_display(str0);
+
+	str_delete(&str0);
+	str_delete(&str1);
+
+	// Prepend
+	str_make(&str0, "them all");
+	str_make(&str1, "One ring");
+	str_make(&str2, " to rule ");
+
+	// Prepend str2 to str0
+	str_prepend(str0, str2);
+	// Append str0 to str1
+	str_append(str1, str0);
+	
+	str_display(str1);
+
+	str_make(&str3, "Lord of the Rings: ");
+
+	str_prepend(str1, str3);
+
+	str_display(str1);
+
+	str_delete(&str0);
+	str_delete(&str1);
+	str_delete(&str2);
+	str_delete(&str3);
 
 	printf("\n");
 	return 0;
 }
 
-int STR_IO_TESTS(void)
+// Push/Pop char
+int STR_IO_TESTS_0(void)
 {
 	const char *text = " ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 ";
 
@@ -253,4 +294,10 @@ int STR_IO_TESTS(void)
 	printf("\n");
 
 	return 0;
+}
+
+// Push/Pop
+int STR_IO_TESTS_1(void)
+{
+
 }
