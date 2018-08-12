@@ -41,7 +41,7 @@ Status convert_sll_to_arr(SinglyLinkedList *sll, Array **arr)
 	size_t list_size = 0;
 
 	Status st = sll_get_length(sll, &list_size);
-	
+
 	if (st != DS_OK)
 		return st;
 
@@ -54,13 +54,14 @@ Status convert_sll_to_arr(SinglyLinkedList *sll, Array **arr)
 		return DS_ERR_ALLOC;
 
 	size_t i;
-	for (i = 0; i < list_size; i++) {
+	for (i = 0; i < list_size; i++)
+	{
 
 		if (scan == NULL)
 			return DS_ERR_ITER;
-		
+
 		(*arr)->buffer[i] = scan->data;
-		
+
 		scan = scan->next;
 	}
 
@@ -96,7 +97,8 @@ Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **darr)
 		return DS_ERR_ALLOC;
 
 	size_t i;
-	for (i = 0; i < list_size; i++) {
+	for (i = 0; i < list_size; i++)
+	{
 
 		if (scan == NULL)
 			return DS_ERR_ITER;
@@ -138,7 +140,8 @@ Status convert_sll_to_dll(SinglyLinkedList *sll, DoublyLinkedList **dll)
 		return DS_ERR_ALLOC;
 
 	size_t i;
-	for (i = 0; i < list_size; i++) {
+	for (i = 0; i < list_size; i++)
+	{
 
 		st = dll_insert_tail(*dll, scan->data);
 
@@ -175,7 +178,8 @@ Status convert_darr_to_sll(DynamicArray **darr, SinglyLinkedList **sll)
 		return DS_ERR_ALLOC;
 
 	size_t i;
-	for (i = 0; i < (*darr)->size; i++) {
+	for (i = 0; i < (*darr)->size; i++)
+	{
 
 		st = sll_insert_tail((*sll), (*darr)->buffer[i]);
 
@@ -193,7 +197,7 @@ Status convert_darr_to_sll(DynamicArray **darr, SinglyLinkedList **sll)
 // |                                            AAR -> X                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status convert_arr_to_darr(Array *arr, DynamicArray **darr)
+Status convert_arr_to_dar(Array *arr, DynamicArray **darr)
 {
 	if (arr == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -210,7 +214,8 @@ Status convert_arr_to_darr(Array *arr, DynamicArray **darr)
 		return DS_ERR_ALLOC;
 
 	size_t i;
-	for (i = 0; i < arr->size; i++) {
+	for (i = 0; i < arr->size; i++)
+	{
 
 		st = dar_insert_back(darr, arr->buffer[i]);
 

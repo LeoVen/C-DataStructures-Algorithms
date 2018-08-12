@@ -11,20 +11,27 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
 
+#ifndef ALPHABET_SIZE
+
 #define ALPHABET_SIZE 26
 
-	typedef struct TrieNode {
+#endif
+
+	typedef struct TrieNode
+	{
 		char letter;
 		struct TrieNode *children[ALPHABET_SIZE];
 		bool is_end;
 	} TrieNode;
 
-	typedef struct Trie {
+	typedef struct Trie
+	{
 		size_t depth;
 		size_t size;
 		struct TrieNode *root;
@@ -61,7 +68,7 @@ extern "C" {
 	//Status tri_traversal_leaves(TrieNode *node);
 
 	size_t tri_char_to_index(char c);
-	
+
 #ifdef __cplusplus
 }
 #endif;

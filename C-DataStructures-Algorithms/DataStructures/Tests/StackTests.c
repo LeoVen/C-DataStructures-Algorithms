@@ -24,19 +24,22 @@ int StackTests(void)
 	stk_init_stack(&stack);
 
 	int i;
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 10; i++)
+	{
 		stk_put(stack, i);
 	}
 	stk_display(stack);
 
-	for (i = 0; i < 5; i++) {
+	for (i = 0; i < 5; i++)
+	{
 		stk_slice(stack);
 	}
 	stk_display_raw(stack);
 
 	stk_erase_stack(&stack);
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		stk_put(stack, i);
 	}
 
@@ -48,13 +51,17 @@ int StackTests(void)
 	Stack *stk_even = NULL, *stk_odd = NULL;
 	if (stk_init_stack(&stk_even) == DS_OK && stk_init_stack(&stk_odd) == DS_OK)
 		if (stk_get_height(stack, &height) == DS_OK)
-			for (i = 0; i < height; i++) {
-				if (stk_look(stack, &data) == DS_OK) {
-					if (data % 2 == 0) {
+			for (i = 0; i < height; i++)
+			{
+				if (stk_look(stack, &data) == DS_OK)
+				{
+					if (data % 2 == 0)
+					{
 						stk_pop(stack, &aux);
 						stk_push(stk_even, aux);
 					}
-					else {
+					else
+					{
 						stk_pop(stack, &aux);
 						stk_push(stk_odd, aux);
 					}

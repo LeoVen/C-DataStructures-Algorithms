@@ -130,7 +130,6 @@ Status sta_display(StackArray *sta)
 	}
 
 	size_t i;
-
 	for (i = 0; i < sta->height; i++)
 	{
 		printf("\n|%10d |", sta->buffer[i]);
@@ -151,8 +150,7 @@ Status sta_display_raw(StackArray *sta)
 	if (sta_is_empty(sta))
 		return DS_OK;
 
-	int i;
-
+	size_t i;
 	for (i = 0; i < sta->height; i++)
 		printf(" %d", sta->buffer[i]);
 

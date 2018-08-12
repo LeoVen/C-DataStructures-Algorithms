@@ -25,7 +25,8 @@ int QueueTests(void)
 	que_init_queue(&que);
 
 	int i;
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 6; i++)
+	{
 		que_enqueue(que, i);
 		que_display(que);
 	}
@@ -37,14 +38,15 @@ int QueueTests(void)
 	que_peek_rear(que, &result);
 	printf("\nrear: %d\n", result);
 
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 6; i++)
+	{
 		que_dequeue(que);
 		que_display(que);
 	}
 
 	for (i = 0; i < 10; i++)
 		que_enqueue(que, i);
-	
+
 	size_t size;
 
 	que_get_length(que, &size);
@@ -62,15 +64,19 @@ int QueueTests(void)
 	QueueNode *node;
 	int data;
 	size_t len, j;
-	if (que_init_queue(&que_odd) == DS_OK && que_init_queue(&que_even) == DS_OK) {
+	if (que_init_queue(&que_odd) == DS_OK && que_init_queue(&que_even) == DS_OK)
+	{
 		que_get_length(que, &len);
-		for (j = 0; j < len; j++) {
+		for (j = 0; j < len; j++)
+		{
 			que_peek_front(que, &data);
-			if (data % 2 == 0) {
+			if (data % 2 == 0)
+			{
 				que_dequeue_node(que, &node);
 				que_enqueue_node(que_even, node);
 			}
-			else {
+			else
+			{
 				que_dequeue_node(que, &node);
 				que_enqueue_node(que_odd, node);
 			}
@@ -93,7 +99,8 @@ int QueueTests(void)
 
 	int l, k, l_max = 4, front, rear;
 	len = 0;
-	for (i = 0; i < 1000; i++) {
+	for (i = 0; i < 1000; i++)
+	{
 
 		node = NULL;
 
@@ -104,25 +111,31 @@ int QueueTests(void)
 
 		que_get_length(que, &len);
 
-		if (k % 2 == 0 && len < l_max) {
+		if (k % 2 == 0 && len < l_max)
+		{
 			// Enqueue
-			if (l % 2 == 0) {
+			if (l % 2 == 0)
+			{
 				printf("\nque_enqueue()");
 				que_enqueue(que, rand() % 100);
 			}
-			else {
+			else
+			{
 				printf("\nque_enqueue_node()");
 				que_make_node(&node, rand() % 100);
 				que_enqueue_node(que, node);
 			}
 		}
-		else {
+		else
+		{
 			// Dequeue
-			if (l % 2 == 0) {
+			if (l % 2 == 0)
+			{
 				printf("\nque_dequeue()");
 				que_dequeue(que);
 			}
-			else {
+			else
+			{
 				printf("\nque_dequeue_node()");
 				que_dequeue_node(que, &node);
 				free(node);
@@ -135,7 +148,7 @@ int QueueTests(void)
 		que_peek_front(que, &front);
 		que_peek_rear(que, &rear);
 		que_get_length(que, &len);
-		
+
 		que_display(que);
 
 		printf("\nQueue length: %zu", len);
@@ -143,7 +156,6 @@ int QueueTests(void)
 		printf("\nRear node: %d", rear);
 
 		printf("\n---------- ---------- ---------- ---------- ----------");
-
 	}
 
 	que_delete_queue(&que);

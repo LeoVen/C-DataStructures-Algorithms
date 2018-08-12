@@ -270,7 +270,6 @@ Status dar_remove_keys(DynamicArray *dar, int value)
 
 			i--;
 		}
-
 	}
 
 	return DS_OK;
@@ -285,8 +284,8 @@ Status dar_display(DynamicArray *dar)
 	if (dar == NULL)
 		return DS_ERR_NULL_POINTER;
 
-
-	if (dar->size == 0) {
+	if (dar->size == 0)
+	{
 
 		printf("\n[ Empty ] \n");
 
@@ -296,7 +295,8 @@ Status dar_display(DynamicArray *dar)
 	printf("\nDynamicArray\n[ ");
 
 	size_t i;
-	for (i = 0; i < dar->size - 1; i++) {
+	for (i = 0; i < dar->size - 1; i++)
+	{
 
 		printf("%d, ", dar->buffer[i]);
 	}
@@ -319,13 +319,14 @@ Status dar_display_raw(DynamicArray *dar)
 		return DS_OK;
 
 	size_t i;
-	for (i = 0; i < dar->size; i++) {
+	for (i = 0; i < dar->size; i++)
+	{
 
 		printf("%d ", dar->buffer[i]);
 	}
 
 	printf("\n");
-	
+
 	return DS_OK;
 }
 
@@ -363,7 +364,6 @@ Status dar_erase(DynamicArray **dar)
 
 	return DS_OK;
 }
-
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |

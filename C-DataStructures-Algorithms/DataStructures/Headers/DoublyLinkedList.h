@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -24,10 +25,11 @@ extern "C" {
 	 * pointer pointing to @c NULL symbolizing the end of the list.
 	 *
 	 */
-	typedef struct DoublyLinkedNode {
-		int data;                           /*!< Node's data */
-		struct DoublyLinkedNode *next;      /*!< Pointer to the next node on the list */
-		struct DoublyLinkedNode *prev;      /*!< Pointer to the previous node on the list */
+	typedef struct DoublyLinkedNode
+	{
+		int data;					   /*!< Node's data */
+		struct DoublyLinkedNode *next; /*!< Pointer to the next node on the list */
+		struct DoublyLinkedNode *prev; /*!< Pointer to the previous node on the list */
 	} DoublyLinkedNode;
 
 	/**
@@ -55,17 +57,18 @@ extern "C" {
 	 * 
 	 * @c DoublyLinkedList.c
 	 */
-	typedef struct DoublyLinkedList {
-		size_t length;                      /*!< List length */
-		struct DoublyLinkedNode *head;      /*!< Pointer to the first Node on the list */
-		struct DoublyLinkedNode *tail;      /*!< Pointer to the last Node on the list */
+	typedef struct DoublyLinkedList
+	{
+		size_t length;				   /*!< List length */
+		struct DoublyLinkedNode *head; /*!< Pointer to the first Node on the list */
+		struct DoublyLinkedNode *tail; /*!< Pointer to the last Node on the list */
 	} DoublyLinkedList;
 
 	Status dll_init_list(DoublyLinkedList **dll);
 	Status dll_init_node(DoublyLinkedNode **node);
 
-	DoublyLinkedList * dll_get_list(void);
-	DoublyLinkedNode * dll_get_node(int value);
+	DoublyLinkedList *dll_get_list(void);
+	DoublyLinkedNode *dll_get_node(int value);
 
 	Status dll_make_node(DoublyLinkedNode **node, int value);
 
@@ -124,7 +127,7 @@ extern "C" {
 
 	//Status dll_unlink(DoublyLinkedList *dll, DoublyLinkedList *result, size_t position);
 	//Status dll_unlink_at(DoublyLinkedList *dll, DoublyLinkedList *result, size_t position1, size_t position2);
-	
+
 	Status dll_copy_list(DoublyLinkedList *dll, DoublyLinkedList **result);
 	Status dll_copy_node(DoublyLinkedNode *node, DoublyLinkedNode **result);
 
@@ -155,8 +158,6 @@ extern "C" {
 	//Status dll_set_complement(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
 	//Status dll_set_sym_diff(DoublyLinkedList *dll1, DoublyLinkedList *dll2, DoublyLinkedList **result);
 
-
 #ifdef __cplusplus
 }
 #endif
-

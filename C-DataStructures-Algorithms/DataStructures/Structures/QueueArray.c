@@ -132,7 +132,8 @@ Status qua_display(QueueArray *qua)
 	if (qua == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (qua_is_empty(qua)) {
+	if (qua_is_empty(qua))
+	{
 
 		printf("\nQueueArray\n[ empty ]\n");
 

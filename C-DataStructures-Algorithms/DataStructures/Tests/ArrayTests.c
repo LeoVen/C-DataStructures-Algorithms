@@ -23,16 +23,16 @@ int ArrayTests(void)
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	
 	Array *array;
 
 	size_t size = 100;
 
 	arr_init(&array, size);
-	
+
 	int i;
 	size_t t;
-	for (t = 0, i= 0; t < array->size; t++, i++) {
+	for (t = 0, i = 0; t < array->size; t++, i++)
+	{
 		arr_insert(array, t, i + 1);
 	}
 
@@ -43,19 +43,21 @@ int ArrayTests(void)
 	// Reverse copy
 	arr_reverse(arr);
 
-	arr_display_raw(array);  // Original
-	arr_display_raw(arr);    // Reversed
+	arr_display_raw(array); // Original
+	arr_display_raw(arr);   // Reversed
 
 	print_status_repr(arr_push(array, 11)); // DS_ERR_FULL
 
-	for (i = 0; i < array->size; i++) {
+	for (i = 0; i < array->size; i++)
+	{
 		arr_remove(array, i);
 	}
-	
+
 	arr_display_raw(array); // All 0's
 
 	// Erase
-	for (i = 0; i < array->size; i++) {
+	for (i = 0; i < array->size; i++)
+	{
 		arr_insert(array, i, i + 1);
 	}
 
@@ -64,10 +66,11 @@ int ArrayTests(void)
 	arr_display_raw(array); // Should give all 0s
 
 	printf("Array is empty? %s\n", (arr_is_empty(array) ? "true" : "false"));
-	
+
 	// ---------- ---------- Bubble Sort
 	// ---------- ----------
-	for (i = 0; i < array->size; i++) {
+	for (i = 0; i < array->size; i++)
+	{
 		arr_insert(array, i, rand());
 	}
 
@@ -88,7 +91,8 @@ int ArrayTests(void)
 
 	// ---------- ---------- Selection Sort
 	// ---------- ----------
-	for (i = 0; i < array->size; i++) {
+	for (i = 0; i < array->size; i++)
+	{
 		arr_insert(array, i, rand());
 	}
 
@@ -102,28 +106,29 @@ int ArrayTests(void)
 
 	clock_t end2 = clock();
 	double time_spent2 = (double)(end2 - begin2) / CLOCKS_PER_SEC;
-	
+
 	arr_display_raw(array);
 
 	arr_erase(array);
 
 	// ---------- ---------- Insertion Sort
 	// ---------- ----------
-	for (i = 0; i < array->size; i++) {
+	for (i = 0; i < array->size; i++)
+	{
 		arr_insert(array, i, rand());
 	}
 
 	arr_display_raw(array); // Not sorted array
-	
+
 	printf("\nInsertion Sort:");
 	clock_t begin3 = clock();
 
 	// Timing insertion sort
 	arr_sort_insertion(array);
-	
+
 	clock_t end3 = clock();
 	double time_spent3 = (double)(end3 - begin3) / CLOCKS_PER_SEC;
-	
+
 	arr_display_raw(array);
 
 	printf("\nBlender:");
@@ -140,7 +145,8 @@ int ArrayTests(void)
 
 	arr_init(&sArray, 1000);
 
-	for (i = 0; i < sArray->size; i++) {
+	for (i = 0; i < sArray->size; i++)
+	{
 		arr_insert(sArray, i, rand() % 100);
 	}
 
@@ -149,20 +155,20 @@ int ArrayTests(void)
 	arr_frequency(sArray, j, &freq); // Frequency
 
 	printf("\nOccurrences of the number %d in the array: %d", j, freq);
-	
+
 	arr_key_positions(sArray, &result, j); // Positions of key value (j)
-	
+
 	printf("\nAnd its positions:\n");
-	
+
 	arr_display(result); // Result array of positions for key value (j)
 
 	// This should all give value of j
 	printf("\nAll %d s", j);
-	for (i = 0; i < result->size; i++) {
+	for (i = 0; i < result->size; i++)
+	{
 
-		printf("\nPosition %d has a value of %d", 
-			result->buffer[i], sArray->buffer[result->buffer[i]]);
-
+		printf("\nPosition %d has a value of %d",
+			   result->buffer[i], sArray->buffer[result->buffer[i]]);
 	}
 
 	// Min and Max
@@ -176,9 +182,10 @@ int ArrayTests(void)
 	arr_sort_insertion(array);
 
 	arr_display(array);
-	
+
 	printf("\n\nUpdate at specific location:\n");
-	for (t = 5; t < 15; t++) {
+	for (t = 5; t < 15; t++)
+	{
 		arr_update(array, t, 0);
 	}
 

@@ -11,25 +11,29 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
 
-	typedef struct Vector {
+	typedef struct Vector
+	{
 		double x;
 		double y;
 		double z;
 		struct Basis *base;
 	} Vector;
-	
-	typedef struct Basis {
+
+	typedef struct Basis
+	{
 		struct SimpleVector *i;
 		struct SimpleVector *j;
 		struct SimpleVector *k;
 	} Basis;
 
-	typedef struct SimpleVector {
+	typedef struct SimpleVector
+	{
 		double x;
 		double y;
 		double z;
@@ -39,7 +43,7 @@ extern "C" {
 	Status vec_build_simple(double x, double y, double z, SimpleVector **vec);
 
 	Status vec_display(Vector *vec);
-	
+
 	Status vec_mod(Vector *vec, double *result);
 
 	Status vec_sum(Vector *vec1, Vector *vec2, Vector **result);

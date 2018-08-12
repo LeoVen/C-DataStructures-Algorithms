@@ -21,7 +21,8 @@ Status sort_selection_array_int(int *array, size_t arr_size)
 	size_t i, j, min;
 	int tmp;
 
-	for (i = 0; i < arr_size - 1; i++) {
+	for (i = 0; i < arr_size - 1; i++)
+	{
 
 		min = i;
 
@@ -32,8 +33,7 @@ Status sort_selection_array_int(int *array, size_t arr_size)
 		tmp = array[min];
 		array[min] = array[i];
 		array[i] = tmp;
-
 	}
-	
+
 	return DS_OK;
 }

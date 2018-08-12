@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -41,15 +42,16 @@ extern "C" {
 	 *
 	 * @c SString.c
 	 */
-	typedef struct String {
-		char *buffer;                       /*!< Character buffer */
-		size_t len;                         /*!< Word length */
-		size_t capacity;                    /*!< Buffer capacity */
-		size_t growth_rate;                 /*!< Buffer capacity growth rate */
+	typedef struct String
+	{
+		char *buffer;		/*!< Character buffer */
+		size_t len;			/*!< Word length */
+		size_t capacity;	/*!< Buffer capacity */
+		size_t growth_rate; /*!< Buffer capacity growth rate */
 	} String;
 
 	Status str_init(String **str);
-	Status str_make(String **str, char * content);
+	Status str_make(String **str, char *content);
 
 	Status str_get_string(String *str, const char **result);
 

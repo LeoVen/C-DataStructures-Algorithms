@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -42,11 +43,12 @@ extern "C" {
 	* @c QueueArray.c
 	*
 	*/
-	typedef struct QueueArray {
-		int *buffer;                        /*!< @c QueueArray data buffer */
-		size_t length;                      /*!< @c QueueArray length */
-		size_t capacity;                    /*!< @c QueueArray total capacity */
-		size_t growth_rate;                 /*!< @c QueueArray buffer growth rate */
+	typedef struct QueueArray
+	{
+		int *buffer;		/*!< @c QueueArray data buffer */
+		size_t length;		/*!< @c QueueArray length */
+		size_t capacity;	/*!< @c QueueArray total capacity */
+		size_t growth_rate; /*!< @c QueueArray buffer growth rate */
 	} QueueArray;
 
 	Status qua_init(QueueArray **qua);

@@ -11,27 +11,34 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
 
 #ifndef HASH_FUNCTION_TYPE
 #define HASH_FUNCTION_TYPE
-	typedef Status(*hash_function_t)(char *, size_t *);
+
+	typedef Status (*hash_function_t)(char *, size_t *);
+
 #endif
 
 #ifndef REHASH_FUNCTION_TYPE
 #define REHASH_FUNCTION_TYPE
-	typedef Status(*rehash_function_t)(size_t *);
+
+	typedef Status (*rehash_function_t)(size_t *);
+
 #endif
 
-	typedef struct HashSetEntry {
+	typedef struct HashSetEntry
+	{
 		char *value;
 		size_t hash;
 	} HashSetEntry;
 
-	typedef struct HashSet {
+	typedef struct HashSet
+	{
 		struct HashSetEntry **hash_table;
 		size_t size;
 		size_t max_size;
@@ -79,7 +86,7 @@ extern "C" {
 
 	Status set_rehash_rj(size_t *hash);
 	Status set_rehash_prime(size_t *hash);
-	
+
 #ifdef __cplusplus
 }
 #endif

@@ -11,10 +11,17 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
+
+#ifndef BT_PRINT_SPACES
+
+#define BT_PRINT_SPACES 4
+
+#endif
 
 	/**
 	 * A @c BinarySearchTreeNode is what a @c BinarySearchTree is composed of.
@@ -22,12 +29,13 @@ extern "C" {
 	 * child, one to its right child and another to its parent, being NULL if
 	 * that Node is the @c root.
 	 */
-	typedef struct AVLTreeNode {
-		int data;                           /*!< Node's data */
-		size_t level;                       /*!< On what level the Node is in */
-		struct AVLTreeNode *right;          /*!< Pointer to right child */
-		struct AVLTreeNode *left;           /*!< Pointer to left child */
-		struct AVLTreeNode *parent;         /*!< Pointer to parent Node */
+	typedef struct AVLTreeNode
+	{
+		int data;					/*!< Node's data */
+		size_t level;				/*!< On what level the Node is in */
+		struct AVLTreeNode *right;  /*!< Pointer to right child */
+		struct AVLTreeNode *left;   /*!< Pointer to left child */
+		struct AVLTreeNode *parent; /*!< Pointer to parent Node */
 	} AVLTreeNode;
 
 	/**
@@ -42,10 +50,11 @@ extern "C" {
 	 *
 	 * @note For simplicity the keys of each node are actually its data.
 	 */
-	typedef struct AVLTree {
-		size_t depth;                       /*!< @c AVLTree depth */
-		size_t size;                        /*!< Total @c AVLTree elements */
-		struct AVLTreeNode *root;           /*!< Pointer to the very first node in the @c AVLTree */
+	typedef struct AVLTree
+	{
+		size_t depth;			  /*!< @c AVLTree depth */
+		size_t size;			  /*!< Total @c AVLTree elements */
+		struct AVLTreeNode *root; /*!< Pointer to the very first node in the @c AVLTree */
 	} AVLTree;
 
 	Status avl_init_tree(AVLTree **avl);
@@ -85,10 +94,10 @@ extern "C" {
 	//Status avl_traversal_leaves(AVLTreeNode *node);
 
 	//Status avl_balance(AVLTreeNode *node);
-	
+
 	//Status avl_rotate_right(AVLTreeNode *node);
 	// Status avl_rotate_left(AVLTreeNode *node);
-	
+
 #ifdef __cplusplus
 }
 #endif;

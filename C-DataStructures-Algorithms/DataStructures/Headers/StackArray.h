@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -41,11 +42,12 @@ extern "C" {
 	* @c StackArray.c
 	*
 	*/
-	typedef struct StackArray {
-		int *buffer;                        /*!< @c StackArray data buffer */
-		size_t height;                      /*!< @c StackArray height */
-		size_t capacity;                    /*!< @c StackArray total capacity */
-		size_t growth_rate;                 /*!< @c StackArray buffer growth rate */
+	typedef struct StackArray
+	{
+		int *buffer;		/*!< @c StackArray data buffer */
+		size_t height;		/*!< @c StackArray height */
+		size_t capacity;	/*!< @c StackArray total capacity */
+		size_t growth_rate; /*!< @c StackArray buffer growth rate */
 	} StackArray;
 
 	Status sta_init(StackArray **sta);
@@ -62,7 +64,7 @@ extern "C" {
 	Status sta_display_raw(StackArray *sta);
 
 	Status sta_delete(StackArray **sta); // Erases and sets to NULL
-	Status sta_erase(StackArray **sta); // Erases and inits
+	Status sta_erase(StackArray **sta);  // Erases and inits
 
 	Status sta_look(StackArray *sta, int *result);
 	int sta_peek(StackArray *sta);

@@ -23,7 +23,8 @@ int GeneratorsTests(void)
 	printf("\nGenerating random numbers between 0 and 9 (inclusive)\n");
 
 	int i, res;
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 
 		random_int_between(&res, 0, 9);
 		printf("%d ", res);

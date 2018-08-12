@@ -35,7 +35,7 @@ int HashMapTests(void)
 	map->hash_function("Hello World!", &hash);
 
 	printf("\nHash: %zu", hash);
-	
+
 	map->hash_function("One ring to rule them all, one ring to find them and in the darkness bind them", &hash);
 
 	printf("\nHash: %zu", hash);
@@ -66,7 +66,7 @@ int HashMapTests(void)
 	map_insert(map, "Carl Friedrich Gauss", 16);
 	map_insert(map, "Isaac Newton", 17);
 	map_insert(map, "Winter is Coming", 18); // Allowed
-	map_insert(map, "Isaac Newton", 19);     // Allowed
+	map_insert(map, "Isaac Newton", 19);	 // Allowed
 
 	map_display_map(map);
 
@@ -79,13 +79,13 @@ int HashMapTests(void)
 	map_count_entries(map, &result);
 	printf("\nTotal insertions: %zu", result);
 	printf("\nTotal size: %zu", map->size);
-	
+
 	int value;
 
-	char *s1 = "Isaac Newton";     // Collision with 6 and 17
-	char *s2 = "Hello World!";     // Collision with Gauss
-	char *s3 = "Winter is Coming"; // Collision with 6 and 17
-	char *s4 = "Gauss";            // Collision with Hello World!
+	char *s1 = "Isaac Newton";				 // Collision with 6 and 17
+	char *s2 = "Hello World!";				 // Collision with Gauss
+	char *s3 = "Winter is Coming";			 // Collision with 6 and 17
+	char *s4 = "Gauss";						 // Collision with Hello World!
 	char *s5 = "One ring to rule them all!"; // Shouldn't find
 
 	st = map_search(map, s1, &value);
@@ -118,11 +118,13 @@ int HashMapTests(void)
 
 	char *str = malloc(sizeof(char) * str_len);
 
-	for (i = 0; i < size; i++) {
+	for (i = 0; i < size; i++)
+	{
 
 		len = rand() % (str_len + 1 - 5) + 5;
 
-		for (j = 0; j < len - 1; j++) {
+		for (j = 0; j < len - 1; j++)
+		{
 			str[j] = charset[rand() % c_len];
 		}
 

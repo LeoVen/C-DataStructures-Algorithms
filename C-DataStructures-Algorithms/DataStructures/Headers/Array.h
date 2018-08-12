@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -36,7 +37,8 @@ extern "C" {
 	 *
 	 * @c Array.c
 	 */
-	typedef struct Array {
+	typedef struct Array
+	{
 		int *buffer;
 		size_t size;
 	} Array;
@@ -64,7 +66,7 @@ extern "C" {
 	bool arr_is_empty(Array *arr);
 
 	Status arr_copy(Array *arr, Array **result);
-	
+
 	Status arr_switch(Array *arr, size_t pos1, size_t pos2);
 	Status arr_reverse(Array *arr);
 	Status arr_blend(Array *arr);
@@ -72,8 +74,7 @@ extern "C" {
 	Status arr_sort_bubble(Array *arr);
 	Status arr_sort_selection(Array *arr);
 	Status arr_sort_insertion(Array *arr);
-	
-	
+
 #ifdef __cplusplus
 }
 #endif

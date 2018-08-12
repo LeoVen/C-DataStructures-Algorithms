@@ -101,7 +101,7 @@ Status str_get_string(String *str, const char **result)
 		return DS_ERR_INVALID_OPERATION;
 
 	char *string = malloc(sizeof(char) * (str->len + 1));
-	
+
 	size_t i;
 	for (i = 0; i < str->len; i++)
 		string[i] = str->buffer[i];
@@ -449,7 +449,7 @@ Status str_erase(String **str)
 
 	if (st != DS_OK)
 		return st;
-	
+
 	return DS_OK;
 }
 

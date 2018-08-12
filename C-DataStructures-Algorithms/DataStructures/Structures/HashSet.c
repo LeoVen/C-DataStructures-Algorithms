@@ -33,7 +33,8 @@ Status set_init_set(HashSet **set, size_t max_size, hash_function_t hash_functio
 		return DS_ERR_ALLOC;
 
 	size_t i;
-	for (i = 0; i < max_size; i++) {
+	for (i = 0; i < max_size; i++)
+	{
 
 		((*set)->hash_table)[i] = NULL;
 	}
@@ -98,7 +99,8 @@ Status set_insert(HashSet *set, char *value)
 
 	size_t pos = hash % set->max_size;
 
-	if ((set->hash_table)[pos] == NULL) {
+	if ((set->hash_table)[pos] == NULL)
+	{
 
 		st = set_make_entry(&((set->hash_table)[pos]), value, hash);
 
@@ -107,7 +109,8 @@ Status set_insert(HashSet *set, char *value)
 
 		(set->size)++;
 	}
-	else {
+	else
+	{
 
 		if (((set->hash_table)[pos])->hash == hash)
 			return DS_OK;
@@ -115,8 +118,9 @@ Status set_insert(HashSet *set, char *value)
 		bool found = false;
 
 		size_t i, rehash = hash;
-		for (i = 1; i <= 10; i++) {
-			
+		for (i = 1; i <= 10; i++)
+		{
+
 			st = set->rehash_function(&rehash);
 
 			if (st != DS_OK)
@@ -124,7 +128,8 @@ Status set_insert(HashSet *set, char *value)
 
 			pos = (hash + i * rehash) % set->max_size;
 
-			if ((set->hash_table)[pos] == NULL) {
+			if ((set->hash_table)[pos] == NULL)
+			{
 
 				st = set_make_entry(&((set->hash_table)[pos]), value, hash);
 
@@ -139,16 +144,17 @@ Status set_insert(HashSet *set, char *value)
 			}
 			else if (((set->hash_table)[pos])->hash == hash)
 				return DS_OK;
-
 		}
 
-		if (!found) {
+		if (!found)
+		{
 
 			while (!found)
 			{
 				pos++;
 
-				if ((set->hash_table)[pos % set->max_size] == NULL) {
+				if ((set->hash_table)[pos % set->max_size] == NULL)
+				{
 
 					st = set_make_entry(&((set->hash_table)[pos % set->max_size]), value, hash);
 
@@ -161,10 +167,8 @@ Status set_insert(HashSet *set, char *value)
 				}
 				else if (((set->hash_table)[pos % set->max_size])->hash == hash)
 					return DS_OK;
-
 			}
 		}
-
 	}
 
 	return DS_OK;
@@ -191,22 +195,26 @@ Status set_remove(HashSet *set, char *value)
 
 	size_t pos = hash % set->max_size;
 
-	if ((set->hash_table)[pos] != NULL) {
+	if ((set->hash_table)[pos] != NULL)
+	{
 
-		if (((set->hash_table)[pos])->hash == hash) {
+		if (((set->hash_table)[pos])->hash == hash)
+		{
 
 			free((set->hash_table)[pos]);
 			(set->hash_table)[pos] = NULL;
 
 			(set->size)--;
 		}
-		else {
+		else
+		{
 
 			bool found = false;
 
 			size_t i, rehash = hash;
 
-			for (i = 0; i < 10; i++) {
+			for (i = 0; i < 10; i++)
+			{
 
 				st = set->rehash_function(&rehash);
 
@@ -215,9 +223,11 @@ Status set_remove(HashSet *set, char *value)
 
 				pos = (hash + i * rehash) % set->max_size;
 
-				if ((set->hash_table)[pos] != NULL) {
+				if ((set->hash_table)[pos] != NULL)
+				{
 
-					if (((set->hash_table)[pos])->hash == hash) {
+					if (((set->hash_table)[pos])->hash == hash)
+					{
 
 						free((set->hash_table)[pos]);
 						(set->hash_table)[pos] = NULL;
@@ -227,13 +237,17 @@ Status set_remove(HashSet *set, char *value)
 				}
 			}
 
-			if (!found) {
+			if (!found)
+			{
 
-				for (i = 0; i < set->max_size; i++, pos++) {
+				for (i = 0; i < set->max_size; i++, pos++)
+				{
 
-					if ((set->hash_table)[pos % set->max_size] != NULL) {
+					if ((set->hash_table)[pos % set->max_size] != NULL)
+					{
 
-						if (((set->hash_table)[pos % set->max_size])->hash == hash) {
+						if (((set->hash_table)[pos % set->max_size])->hash == hash)
+						{
 
 							free((set->hash_table)[pos % set->max_size]);
 							(set->hash_table)[pos % set->max_size] = NULL;
@@ -242,7 +256,6 @@ Status set_remove(HashSet *set, char *value)
 						}
 					}
 				}
-
 			}
 		}
 	}
@@ -289,13 +302,15 @@ Status set_display_set(HashSet *set)
 	Status st;
 
 	size_t i;
-	for (i = 0; i < set->max_size; i++) {
+	for (i = 0; i < set->max_size; i++)
+	{
 
 		printf("\n+-----------------------+------------------------------------------------------+");
 
 		if ((set->hash_table)[i] == NULL)
 			printf("\n|         NULL          |                           NULL                       |");
-		else {
+		else
+		{
 
 			st = set_display_entry((set->hash_table)[i]);
 
@@ -321,11 +336,13 @@ Status set_display_set_raw(HashSet *set)
 	Status st;
 
 	size_t i;
-	for (i = 0; i < set->max_size; i++) {
+	for (i = 0; i < set->max_size; i++)
+	{
 
 		if ((set->hash_table)[i] == NULL)
 			printf("\n");
-		else {
+		else
+		{
 
 			st = set_display_entry_raw((set->hash_table)[i]);
 
@@ -348,12 +365,14 @@ Status set_display_elements(HashSet *set)
 
 	if (set_is_empty(set))
 		printf("[ empty ]\n");
-	else {
+	else
+	{
 
 		printf("( ");
 
 		size_t i;
-		for (i = 0; i < set->max_size; i++) {
+		for (i = 0; i < set->max_size; i++)
+		{
 
 			if ((set->hash_table)[i] != NULL)
 				printf("< %s > ", ((set->hash_table)[i])->value);
@@ -375,7 +394,8 @@ Status set_delete_set(HashSet **set)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i;
-	for (i = 0; i < (*set)->max_size; i++) {
+	for (i = 0; i < (*set)->max_size; i++)
+	{
 
 		if (((*set)->hash_table)[i] != NULL)
 			free((((*set)->hash_table)[i])->value);
@@ -397,8 +417,8 @@ Status set_erase_set(HashSet **set)
 		return DS_ERR_NULL_POINTER;
 
 	size_t size = (*set)->max_size;
-	Status(*hash_function) (char *, size_t *) = (*set)->hash_function;
-	Status(*rehash_function) (size_t*) = (*set)->rehash_function;
+	Status (*hash_function)(char *, size_t *) = (*set)->hash_function;
+	Status (*rehash_function)(size_t *) = (*set)->rehash_function;
 
 	Status st = set_delete_set(set);
 
@@ -446,17 +466,20 @@ Status set_contains(HashSet *set, char *value, bool *result)
 
 	size_t pos = hash % set->max_size;
 
-	if ((set->hash_table)[pos] != NULL) {
+	if ((set->hash_table)[pos] != NULL)
+	{
 
 		if (((set->hash_table)[pos])->hash == hash)
 			*result = true;
-		else {
+		else
+		{
 
 			bool found = false;
 
 			size_t i, rehash = hash;
 
-			for (i = 0; i < 10; i++) {
+			for (i = 0; i < 10; i++)
+			{
 
 				st = set->rehash_function(&rehash);
 
@@ -465,9 +488,11 @@ Status set_contains(HashSet *set, char *value, bool *result)
 
 				pos = (hash + i * rehash) % set->max_size;
 
-				if ((set->hash_table)[pos] != NULL) {
+				if ((set->hash_table)[pos] != NULL)
+				{
 
-					if (((set->hash_table)[pos])->hash == hash) {
+					if (((set->hash_table)[pos])->hash == hash)
+					{
 
 						*result = true;
 
@@ -478,13 +503,17 @@ Status set_contains(HashSet *set, char *value, bool *result)
 				}
 			}
 
-			if (!found) {
+			if (!found)
+			{
 
-				for (i = 0; i < set->max_size; i++, pos++) {
+				for (i = 0; i < set->max_size; i++, pos++)
+				{
 
-					if ((set->hash_table)[pos % set->max_size] != NULL) {
+					if ((set->hash_table)[pos % set->max_size] != NULL)
+					{
 
-						if (((set->hash_table)[pos % set->max_size])->hash == hash) {
+						if (((set->hash_table)[pos % set->max_size])->hash == hash)
+						{
 
 							*result = true;
 
@@ -494,7 +523,6 @@ Status set_contains(HashSet *set, char *value, bool *result)
 						}
 					}
 				}
-
 			}
 		}
 	}
@@ -521,15 +549,18 @@ bool set_exists(HashSet *set, char *value)
 
 	size_t pos = hash % set->max_size;
 
-	if ((set->hash_table)[pos] != NULL) {
+	if ((set->hash_table)[pos] != NULL)
+	{
 
 		if (((set->hash_table)[pos])->hash == hash)
 			return true;
-		else {
+		else
+		{
 
 			size_t i, rehash = hash;
 
-			for (i = 0; i < 10; i++) {
+			for (i = 0; i < 10; i++)
+			{
 
 				st = set->rehash_function(&rehash);
 
@@ -538,27 +569,30 @@ bool set_exists(HashSet *set, char *value)
 
 				pos = (hash + i * rehash) % set->max_size;
 
-				if ((set->hash_table)[pos] != NULL) {
+				if ((set->hash_table)[pos] != NULL)
+				{
 
-					if (((set->hash_table)[pos])->hash == hash) {
-
-						return true;
-					}
-				}
-			}
-
-			for (i = 0; i < set->max_size; i++, pos++) {
-
-				if ((set->hash_table)[pos % set->max_size] != NULL) {
-
-					if (((set->hash_table)[pos % set->max_size])->hash == hash) {
+					if (((set->hash_table)[pos])->hash == hash)
+					{
 
 						return true;
 					}
 				}
 			}
 
-			
+			for (i = 0; i < set->max_size; i++, pos++)
+			{
+
+				if ((set->hash_table)[pos % set->max_size] != NULL)
+				{
+
+					if (((set->hash_table)[pos % set->max_size])->hash == hash)
+					{
+
+						return true;
+					}
+				}
+			}
 		}
 	}
 	else
@@ -575,7 +609,8 @@ Status set_count_elements(HashSet *set, size_t *result)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i;
-	for (i = 0; i < set->max_size; i++) {
+	for (i = 0; i < set->max_size; i++)
+	{
 
 		if ((set->hash_table)[i] != NULL)
 			(*result)++;
@@ -592,7 +627,8 @@ Status set_count_empty(HashSet *set, size_t *result)
 		return DS_ERR_NULL_POINTER;
 
 	size_t i;
-	for (i = 0; i < set->max_size; i++) {
+	for (i = 0; i < set->max_size; i++)
+	{
 
 		if ((set->hash_table)[i] == NULL)
 			(*result)++;
@@ -619,10 +655,11 @@ Status set_union(HashSet *set1, HashSet *set2, HashSet *result)
 	Status st;
 
 	size_t i;
-	for (i = 0; i < set1->max_size; i++) {
+	for (i = 0; i < set1->max_size; i++)
+	{
 
-		if ((set1->hash_table)[i] != NULL) {
-
+		if ((set1->hash_table)[i] != NULL)
+		{
 
 			st = set_insert(result, ((set1->hash_table)[i])->value);
 
@@ -631,10 +668,11 @@ Status set_union(HashSet *set1, HashSet *set2, HashSet *result)
 		}
 	}
 
-	for (i = 0; i < set2->max_size; i++) {
+	for (i = 0; i < set2->max_size; i++)
+	{
 
-		if ((set2->hash_table)[i] != NULL) {
-
+		if ((set2->hash_table)[i] != NULL)
+		{
 
 			st = set_insert(result, ((set2->hash_table)[i])->value);
 
@@ -662,16 +700,19 @@ Status set_intersection(HashSet *set1, HashSet *set2, HashSet *result)
 	bool exists;
 
 	size_t i;
-	for (i = 0; i < set1->max_size; i++) {
+	for (i = 0; i < set1->max_size; i++)
+	{
 
-		if ((set1->hash_table)[i] != NULL) {
+		if ((set1->hash_table)[i] != NULL)
+		{
 
 			st = set_contains(set2, ((set1->hash_table)[i])->value, &exists);
 
 			if (st != DS_OK)
 				return st;
 
-			if (exists) {
+			if (exists)
+			{
 
 				st = set_insert(result, ((set1->hash_table)[i])->value);
 
@@ -700,16 +741,19 @@ Status set_difference(HashSet *set1, HashSet *set2, HashSet *result)
 	bool exists;
 
 	size_t i;
-	for (i = 0; i < set1->max_size; i++) {
+	for (i = 0; i < set1->max_size; i++)
+	{
 
-		if ((set1->hash_table)[i] != NULL) {
+		if ((set1->hash_table)[i] != NULL)
+		{
 
 			st = set_contains(set2, ((set1->hash_table)[i])->value, &exists);
 
 			if (st != DS_OK)
 				return st;
 
-			if (!exists) {
+			if (!exists)
+			{
 
 				st = set_insert(result, ((set1->hash_table)[i])->value);
 
@@ -748,16 +792,19 @@ Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet *result)
 	bool exists;
 
 	size_t i;
-	for (i = 0; i < set1->max_size; i++) {
+	for (i = 0; i < set1->max_size; i++)
+	{
 
-		if ((set1->hash_table)[i] != NULL) {
+		if ((set1->hash_table)[i] != NULL)
+		{
 
 			st = set_contains(set2, ((set1->hash_table)[i])->value, &exists);
 
 			if (st != DS_OK)
 				return st;
 
-			if (!exists) {
+			if (!exists)
+			{
 
 				st = set_insert(result, ((set1->hash_table)[i])->value);
 
@@ -767,16 +814,19 @@ Status set_sym_diff(HashSet *set1, HashSet *set2, HashSet *result)
 		}
 	}
 
-	for (i = 0; i < set2->max_size; i++) {
+	for (i = 0; i < set2->max_size; i++)
+	{
 
-		if ((set2->hash_table)[i] != NULL) {
+		if ((set2->hash_table)[i] != NULL)
+		{
 
 			st = set_contains(set1, ((set2->hash_table)[i])->value, &exists);
 
 			if (st != DS_OK)
 				return st;
 
-			if (!exists) {
+			if (!exists)
+			{
 
 				st = set_insert(result, ((set2->hash_table)[i])->value);
 

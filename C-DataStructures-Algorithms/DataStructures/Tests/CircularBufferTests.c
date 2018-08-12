@@ -26,7 +26,8 @@ int CircularBufferTests(void)
 
 	// Testing wrap
 	int i, j;
-	for (i = 0; i < 12; i++) {
+	for (i = 0; i < 12; i++)
+	{
 		cbf_display(cbf);
 		if (i % 2 == 0)
 			cbf_add(cbf, i);
@@ -36,12 +37,14 @@ int CircularBufferTests(void)
 
 	cbf_display(cbf);
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		cbf_add(cbf, 0); // Adding 0's that don't count as empty
 	}
 
 	// Should print DS_OK in a total of the buffer length
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 10; i++)
+	{
 		if (cbf_remove(cbf, &j) == DS_OK)
 			printf("\nBuffer Length: %zu, Value removed: %d", cbf->length, j);
 	}

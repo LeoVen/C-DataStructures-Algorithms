@@ -44,17 +44,17 @@ Status stk_init_box(StackBox **box)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Stack * stk_get_stack(void)
+Stack *stk_get_stack(void)
 {
 	Stack *stk = malloc(sizeof(Stack));
-	
+
 	stk->height = 0;
 	stk->top = NULL;
 
 	return stk;
 }
 
-StackBox * stk_get_box(int value)
+StackBox *stk_get_box(int value)
 {
 	StackBox *box = malloc(sizeof(StackBox));
 
@@ -83,7 +83,7 @@ Status stk_get_height(Stack *stk, size_t *result)
 		return DS_ERR_NULL_POINTER;
 
 	StackBox *scan = stk->top;
-	
+
 	*result = 0;
 
 	while (scan != NULL)
@@ -180,7 +180,8 @@ Status stk_display(Stack *stk)
 	if (stk == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (stk->height == 0 || stk->top == NULL) {
+	if (stk->height == 0 || stk->top == NULL)
+	{
 
 		printf("\nC Stack\n[ empty]\n");
 
@@ -308,7 +309,7 @@ Status stk_check_balanced_brackets(const char *string, bool *result)
 	size_t i, height, str_len = strlen(string);
 
 	*result = false;
-	
+
 	if (str_len == 0)
 		return DS_ERR_INVALID_ARGUMENT;
 
@@ -338,17 +339,13 @@ Status stk_check_balanced_brackets(const char *string, bool *result)
 
 			stk_pop(stk, &box);
 
-			
-
 			if ((box->data == '(' && string[i] == ')') ||
 				(box->data == '{' && string[i] == '}') ||
 				(box->data == '[' && string[i] == ']'))
 				continue;
 			else
 				return DS_OK;
-
 		}
-
 	}
 
 	stk_get_height(stk, &height);

@@ -20,7 +20,8 @@ Status sort_insertion_array_int(int *array, size_t arr_size)
 
 	size_t i, j;
 	int num;
-	for (i = 1; i < arr_size; i++) {
+	for (i = 1; i < arr_size; i++)
+	{
 
 		num = array[i];
 

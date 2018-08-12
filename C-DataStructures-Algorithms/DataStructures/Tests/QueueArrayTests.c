@@ -23,7 +23,7 @@ int QueueArrayTests(void)
 	QueueArray *q;
 
 	qua_init(&q);
-	
+
 	int i, val;
 	size_t s;
 
@@ -43,7 +43,6 @@ int QueueArrayTests(void)
 	qua_display(q);
 
 	qua_erase(&q);
-
 
 	// TIMING INSERTION AND REMOVAL
 	clock_t begin;

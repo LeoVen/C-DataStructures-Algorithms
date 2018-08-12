@@ -11,7 +11,6 @@
 #include "Core.h"
 #include "Algorithms.h"
 
-
 int MathematicsTests(void)
 {
 	printf("\n");

@@ -49,7 +49,7 @@ char input_char(const char *message)
 	return i;
 }
 
-char * input_string(size_t max_size, const char *message)
+char *input_string(size_t max_size, const char *message)
 {
 	fflush(stdin);
 

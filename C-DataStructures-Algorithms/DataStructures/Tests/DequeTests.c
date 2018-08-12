@@ -25,19 +25,22 @@ int DequeTests(void)
 	deq_init_queue(&deq);
 
 	int i;
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 6; i++)
+	{
 		deq_enqueue_front(deq, i);
 		deq_display(deq);
 	}
 
 	deq_erase_queue(&deq);
 
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 6; i++)
+	{
 		deq_enqueue_rear(deq, i);
 		deq_display(deq);
 	}
 
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 6; i++)
+	{
 		deq_enqueue_front(deq, i);
 		deq_display(deq);
 	}
@@ -51,14 +54,15 @@ int DequeTests(void)
 	deq_peek_rear(deq, &result);
 	printf("\nrear: %d\n", result);
 
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 6; i++)
+	{
 		deq_dequeue_rear(deq);
 		deq_display(deq);
 	}
 
 	for (i = 0; i < 10; i++)
 		deq_enqueue_rear(deq, i);
-	
+
 	size_t size;
 
 	deq_get_length(deq, &size);
@@ -70,7 +74,8 @@ int DequeTests(void)
 	deq_get_length(deq, &size);
 
 	size_t j;
-	for (j = 0; j < size; j++) {
+	for (j = 0; j < size; j++)
+	{
 		deq_dequeue_front(deq);
 		deq_display_raw(deq);
 	}
@@ -82,15 +87,19 @@ int DequeTests(void)
 	DequeNode *node;
 	int data;
 	size_t len;
-	if (deq_init_queue(&deq_odd) == DS_OK && deq_init_queue(&deq_even) == DS_OK) {
+	if (deq_init_queue(&deq_odd) == DS_OK && deq_init_queue(&deq_even) == DS_OK)
+	{
 		deq_get_length(deq, &len);
-		for (j = 0; j < len; j++) {
+		for (j = 0; j < len; j++)
+		{
 			deq_peek_front(deq, &data);
-			if (data % 2 == 0) {
+			if (data % 2 == 0)
+			{
 				deq_dequeue_front_node(deq, &node);
 				deq_enqueue_rear_node(deq_even, node);
 			}
-			else {
+			else
+			{
 				deq_dequeue_front_node(deq, &node);
 				deq_enqueue_rear_node(deq_odd, node);
 			}

@@ -25,7 +25,7 @@ int CryptographyTests(void)
 
 	int shifts = 10;
 
-	char * string = "H ello World";
+	char *string = "H ello World";
 
 	printf("\nString   : %s", string);
 
@@ -45,7 +45,7 @@ int CryptographyTests(void)
 	cipher = NULL;
 	decipher = NULL;
 
-	char * str = "One Ring to Rule them All";
+	char *str = "One Ring to Rule them All";
 
 	printf("\nString   : %s", str);
 

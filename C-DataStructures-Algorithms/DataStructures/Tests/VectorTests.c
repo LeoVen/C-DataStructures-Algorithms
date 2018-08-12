@@ -90,7 +90,6 @@ int VectorTests(void)
 	vec_display(v9);
 	vec_angle(v8, v9, &a);
 	printf("\nAngle between the two: %.4lf radians", a);
-	
 
 	free(v1);
 	free(v2);

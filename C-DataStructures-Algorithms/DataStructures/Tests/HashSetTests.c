@@ -38,7 +38,8 @@ int HashSetTests(void)
 	{
 		len = rand() % (str_len + 1 - 5) + 5;
 
-		for (j = 0; j < len - 1; j++) {
+		for (j = 0; j < len - 1; j++)
+		{
 			str[j] = charset[rand() % c_len];
 		}
 
@@ -76,7 +77,7 @@ int HashSetTests(void)
 	set_insert(set, "Carl Friedrich Gauss");
 	set_insert(set, "Isaac Newton");
 	set_insert(set, "Winter is Coming"); // Not allowed
-	set_insert(set, "Isaac Newton");     // Not allowed
+	set_insert(set, "Isaac Newton");	 // Not allowed
 
 	set_display_set(set);
 
@@ -101,10 +102,11 @@ int HashSetTests(void)
 	if (set_contains(set, "Barack Obama", &res) == DS_OK)
 		printf("\nThe set %s Barack Obama", (res) ? "contains" : "does not contains");
 
-	char *words[8] = { "Hello World!", "Lorem Ipsum", "The Ring", "Thomas Muller",
-		"Winter is Coming", "Turing Machine", "Hear me Roar", "Ramanujan"};
+	char *words[8] = {"Hello World!", "Lorem Ipsum", "The Ring", "Thomas Muller",
+					  "Winter is Coming", "Turing Machine", "Hear me Roar", "Ramanujan"};
 
-	for (i = 0; i < 8; i++) {
+	for (i = 0; i < 8; i++)
+	{
 
 		if (set_exists(set, words[i]))
 			printf("\nThe element [ %s ] exists", words[i]);
@@ -145,8 +147,8 @@ int HashSetTests(void)
 	 *
 	 ********************************************************************** */
 
-	const char *letters[26] = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-								"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+	const char *letters[26] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+							   "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
 	len = 26;
 
 	HashSet *set_a, *set_b, *set_c;

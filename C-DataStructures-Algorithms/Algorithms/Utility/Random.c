@@ -18,7 +18,8 @@ Status random_array_int(int **array, size_t size)
 		return DS_ERR_ALLOC;
 
 	size_t i;
-	for (i = 0; i < size; i++) {
+	for (i = 0; i < size; i++)
+	{
 
 		(*array)[i] = rand();
 	}

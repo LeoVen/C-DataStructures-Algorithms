@@ -55,15 +55,15 @@ int BinarySearchTreeTests(void)
 
 	for (i = 0; i < 50; i++)
 		bst_insert(b, rand() % 50);
-	
+
 	bst_display_wrapper(b, 1);
 
-	bst_traversal_wrapper(b,-1); // preorder
+	bst_traversal_wrapper(b, -1); // preorder
 	printf("\n\n");
 	bst_traversal_wrapper(b, 0); // inorder
 	printf("\n\n");
 	bst_traversal_wrapper(b, 1); // postorder
-	
+
 	printf("\nLeaves: \n");
 	bst_traversal_leaves(b->root);
 
@@ -77,7 +77,7 @@ int BinarySearchTreeTests(void)
 		bst_insert(b2, rand() % 500);
 
 	bst_display_wrapper(b2, -1);
-	
+
 	bst_erase(&b);
 	bst_erase(&b2);
 

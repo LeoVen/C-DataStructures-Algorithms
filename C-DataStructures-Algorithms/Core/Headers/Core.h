@@ -29,8 +29,6 @@ extern "C" {
 #define CLEAR_SCREEN "cls"
 //#define CLEAR_SCREEN "clear"
 
-#define BT_PRINT_SPACES 4
-
 	/**
 	 * @brief Status code returned by functions
 	 *

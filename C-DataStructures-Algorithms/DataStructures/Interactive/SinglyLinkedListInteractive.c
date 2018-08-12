@@ -23,7 +23,8 @@ int SinglyLinkedListInteractive(void)
 
 	int i, oper, value;
 
-	for (i = 0; i < MAX_LIST_SIZE; i++) {
+	for (i = 0; i < MAX_LIST_SIZE; i++)
+	{
 		lists[i] = NULL;
 		nodes[i] = NULL;
 	}
@@ -59,7 +60,8 @@ int SinglyLinkedListInteractive(void)
 		printf("| Lists                                                                                              |\n");
 		printf("+----------------------------------------------------------------------------------------------------+\n");
 
-		for (i = 0; i < MAX_LIST_SIZE; i++) {
+		for (i = 0; i < MAX_LIST_SIZE; i++)
+		{
 
 			printf("\n[ %d ]", i);
 			if (lists[i] == NULL)
@@ -76,11 +78,12 @@ int SinglyLinkedListInteractive(void)
 
 		printf("\n");
 
-		for (i = 0; i < MAX_LIST_SIZE; i++) {
+		for (i = 0; i < MAX_LIST_SIZE; i++)
+		{
 
 			printf("   <%d>[ %10d ]", i, (nodes[i] == NULL) ? 0 : nodes[i]->data);
 		}
-		
+
 		printf("\n");
 		printf("+----------------------------------------------------------------------------------------------------+\n");
 
@@ -94,7 +97,8 @@ int SinglyLinkedListInteractive(void)
 		case 1:
 			pos = input_size_t("Select List > ");
 
-			if (pos > MAX_LIST_SIZE) {
+			if (pos > MAX_LIST_SIZE)
+			{
 				print_status_repr(DS_ERR_INVALID_OPERATION);
 				break;
 			}
@@ -104,7 +108,8 @@ int SinglyLinkedListInteractive(void)
 		case 2:
 			pos = input_size_t("Select List > ");
 
-			if (pos > MAX_LIST_SIZE) {
+			if (pos > MAX_LIST_SIZE)
+			{
 				print_status_repr(DS_ERR_INVALID_OPERATION);
 				break;
 			}
@@ -114,7 +119,8 @@ int SinglyLinkedListInteractive(void)
 		case 3:
 			pos = input_size_t("Select Node > ");
 
-			if (pos > MAX_LIST_SIZE) {
+			if (pos > MAX_LIST_SIZE)
+			{
 				print_status_repr(DS_ERR_INVALID_OPERATION);
 				break;
 			}
@@ -126,7 +132,8 @@ int SinglyLinkedListInteractive(void)
 		case 4:
 			pos = input_size_t("Select Node > ");
 
-			if (pos > MAX_LIST_SIZE) {
+			if (pos > MAX_LIST_SIZE)
+			{
 				print_status_repr(DS_ERR_INVALID_OPERATION);
 				break;
 			}
@@ -136,7 +143,8 @@ int SinglyLinkedListInteractive(void)
 		case 11:
 			pos = input_size_t("Select List > ");
 
-			if (pos > MAX_LIST_SIZE) {
+			if (pos > MAX_LIST_SIZE)
+			{
 				print_status_repr(DS_ERR_INVALID_OPERATION);
 				break;
 			}
@@ -148,7 +156,8 @@ int SinglyLinkedListInteractive(void)
 		case 12:
 			pos = input_size_t("Select List > ");
 
-			if (pos > MAX_LIST_SIZE) {
+			if (pos > MAX_LIST_SIZE)
+			{
 				print_status_repr(DS_ERR_INVALID_OPERATION);
 				break;
 			}
@@ -161,7 +170,8 @@ int SinglyLinkedListInteractive(void)
 		case 13:
 			pos = input_size_t("Select List > ");
 
-			if (pos > MAX_LIST_SIZE) {
+			if (pos > MAX_LIST_SIZE)
+			{
 				print_status_repr(DS_ERR_INVALID_OPERATION);
 				break;
 			}
@@ -175,13 +185,15 @@ int SinglyLinkedListInteractive(void)
 			break;
 		}
 
-		if (!exit) {
+		if (!exit)
+		{
 			printf("\nPress enter to continue ... ");
 			_getch();
 		}
 	}
 
-	for (i = 0; i < MAX_LIST_SIZE; i++) {
+	for (i = 0; i < MAX_LIST_SIZE; i++)
+	{
 		sll_delete_list(&(lists[i]));
 		sll_delete_node(&(nodes[i]));
 	}

@@ -32,13 +32,15 @@ int CircularLinkedListTests(void)
 	cll_init_node(&cln);
 
 	int i;
-	for (i = 0; i < 20; i++) {
+	for (i = 0; i < 20; i++)
+	{
 		cll_insert_after(cll, i);
 	}
 
 	cll_display(cll);
 
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 10; i++)
+	{
 		cll_remove_after(cll);
 	}
 
@@ -61,7 +63,8 @@ int CircularLinkedListTests(void)
 
 	cll_get_length(cll, &cll_len);
 
-	for (i = 0; i < cll_len; i++) {
+	for (i = 0; i < cll_len; i++)
+	{
 		print_status_repr(cll_remove_current(cll));
 		cll_display(cll);
 	}

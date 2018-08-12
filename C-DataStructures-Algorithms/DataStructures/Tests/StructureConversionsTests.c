@@ -26,13 +26,13 @@ int StructureConversionsTests(void)
 	int i;
 	SinglyLinkedList *sll;
 	sll_init_list(&sll);
-	
+
 	for (i = 0; i < 10; i++)
 		sll_insert_tail(sll, i);
 
 	Array *array;
 	status_repr(convert_sll_to_arr(sll, &array));
-	
+
 	arr_display(array);
 
 	DynamicArray *darray;
@@ -41,7 +41,7 @@ int StructureConversionsTests(void)
 
 	for (i = 0; i < 20; i++)
 		dar_insert_back(&darray, 99);
-	
+
 	dar_display(darray);
 
 	sll_delete_list(&sll);
@@ -56,7 +56,7 @@ int StructureConversionsTests(void)
 
 	dar_delete(&darray);
 
-	convert_arr_to_darr(array, &darray);
+	convert_arr_to_dar(array, &darray);
 
 	for (i = 0; i < 5; i++)
 		dar_insert_back(&darray, 12);

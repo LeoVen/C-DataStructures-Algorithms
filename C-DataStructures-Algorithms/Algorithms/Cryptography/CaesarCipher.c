@@ -21,7 +21,7 @@ Status caesar_cipher(char *string, char **result, int shifts)
 		return DS_ERR_INVALID_ARGUMENT;
 
 	(*result) = malloc(sizeof(char) * len + 1);
-	
+
 	if (!(*result))
 		return DS_ERR_ALLOC;
 

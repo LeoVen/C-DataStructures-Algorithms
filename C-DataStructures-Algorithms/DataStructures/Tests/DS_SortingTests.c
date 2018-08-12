@@ -13,7 +13,8 @@
 
 #include "Array.h"
 
-int DS_SortingTests(void) {
+int DS_SortingTests(void)
+{
 
 	printf("\n");
 	printf(" +-------------------------------------+\n");
@@ -23,15 +24,15 @@ int DS_SortingTests(void) {
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	
 	int i;
 
 	// Testing limits of Insertion Sort
 	Array *array;
-	
+
 	arr_init(&array, 100000);
 
-	for (i = 0; i < array->size; i++) {
+	for (i = 0; i < array->size; i++)
+	{
 		arr_insert(array, i, rand());
 	}
 
@@ -45,7 +46,7 @@ int DS_SortingTests(void) {
 	double time_spent4 = (double)(end - begin) / CLOCKS_PER_SEC;
 
 	printf("\nTotal time spent for insertion sort: %lf seconds", time_spent4);
-	
+
 	//arr_display(array);
 
 	arr_delete(&array);

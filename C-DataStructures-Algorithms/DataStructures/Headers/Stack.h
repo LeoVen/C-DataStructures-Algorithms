@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -23,12 +24,13 @@ extern "C" {
 	 * points to the box underneath it, pointing to @c NULL if it is the very
 	 * first box above the ground.
 	 */
-	typedef struct StackBox {
-		int data;                           /*!< Node's data */
-		struct StackBox *below;             /*!< Pointer to the box underneath it */
+	typedef struct StackBox
+	{
+		int data;				/*!< Node's data */
+		struct StackBox *below; /*!< Pointer to the box underneath it */
 	} StackBox;
-	
-	 /**
+
+	/**
 	  * A @c Stack is much like a @c SinglyLinkedList but with LIFO operations,
 	  * that is, Last-in First-out, so the last item added is the first one to
 	  * be removed. This way, only one pointer to the top of the @c Stack is
@@ -45,16 +47,17 @@ extern "C" {
 	  * @c Stack.c
 	  *
 	  */
-	typedef struct Stack {
-		size_t height;                      /*!< @c Stack Height */
-		StackBox *top;                      /*!< @c StackBox on top */
+	typedef struct Stack
+	{
+		size_t height; /*!< @c Stack Height */
+		StackBox *top; /*!< @c StackBox on top */
 	} Stack;
-	
+
 	Status stk_init_stack(Stack **stk);
 	Status stk_init_box(StackBox **box);
 
-	Stack * stk_get_stack(void);
-	StackBox * stk_get_box(int value);
+	Stack *stk_get_stack(void);
+	StackBox *stk_get_box(int value);
 
 	Status stk_make_box(StackBox **box, int value);
 
@@ -65,13 +68,13 @@ extern "C" {
 
 	Status stk_slice(Stack *stk);
 	Status stk_pop(Stack *stk, StackBox **box);
-	
+
 	Status stk_display(Stack *stk);
 	Status stk_display_raw(Stack *stk);
 
 	Status stk_delete_box(StackBox **box);
 	Status stk_delete_stack(Stack **stk); // Erases and sets to NULL
-	Status stk_erase_stack(Stack **stk); // Erases and inits
+	Status stk_erase_stack(Stack **stk);  // Erases and inits
 
 	Status stk_look(Stack *stk, int *result);
 	int stk_peek(Stack *stk);

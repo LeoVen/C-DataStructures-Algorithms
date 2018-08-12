@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -22,9 +23,10 @@ extern "C" {
 	 * NULL when it is the last inserted element in the @c Queue.
 	 *
 	 */
-	typedef struct QueueNode {
-		int data;                           /*!< Node's data */
-		struct QueueNode *prev;             /*!< Pointer to the previous node in the @c Queue */
+	typedef struct QueueNode
+	{
+		int data;				/*!< Node's data */
+		struct QueueNode *prev; /*!< Pointer to the previous node in the @c Queue */
 	} QueueNode;
 
 	/**
@@ -44,17 +46,18 @@ extern "C" {
 	 * @c Queue.c
 	 *
 	 */
-	typedef struct Queue {
-		size_t length;                      /*!< Total @c Queue length */
-		struct QueueNode *front;            /*!< Where @c QueueNode are removed */
-		struct QueueNode *rear;             /*!< Where @c QueueNode are inserted */
+	typedef struct Queue
+	{
+		size_t length;			 /*!< Total @c Queue length */
+		struct QueueNode *front; /*!< Where @c QueueNode are removed */
+		struct QueueNode *rear;  /*!< Where @c QueueNode are inserted */
 	} Queue;
 
 	Status que_init_queue(Queue **que);
 	Status que_init_node(QueueNode **node);
 
-	Queue * que_get_queue(void);
-	QueueNode * que_get_node(int value);
+	Queue *que_get_queue(void);
+	QueueNode *que_get_node(int value);
 
 	Status que_make_node(QueueNode **node, int value);
 
@@ -62,7 +65,7 @@ extern "C" {
 
 	Status que_enqueue(Queue *que, int value);
 	Status que_enqueue_node(Queue *que, QueueNode *node);
-   
+
 	Status que_dequeue(Queue *que);
 	Status que_dequeue_node(Queue *que, QueueNode **result);
 

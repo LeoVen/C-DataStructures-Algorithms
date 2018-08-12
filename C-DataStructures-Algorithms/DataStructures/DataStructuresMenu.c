@@ -69,16 +69,17 @@ int DataStructuresMenu(void)
 	int ds;
 	bool ok = true;
 
-	while (ok) {
+	while (ok)
+	{
 
 		ds_print_menu();
-		
+
 		scanf_s("%d", &ds);
 		ok = ds_switch_function(ds);
-		
+
 		printf("\nPress enter to continue...");
 		_getch();
-		
+
 		system(CLEAR_SCREEN);
 	}
 
@@ -194,7 +195,7 @@ int ds_all(void)
 	DequeTests();
 	PriorityQueueTests();
 	CircularBufferTests();
-	
+
 	BinaryTreeTests();
 	BinarySearchTreeTests();
 	AVLTreeTests();

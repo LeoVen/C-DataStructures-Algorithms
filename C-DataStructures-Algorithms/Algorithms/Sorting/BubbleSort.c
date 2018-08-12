@@ -21,11 +21,14 @@ Status sort_bubble_array_int(int *array, size_t arr_size)
 	size_t i, j;
 	int tmp;
 
-	for (i = 0; i < arr_size - 1; i++) {
+	for (i = 0; i < arr_size - 1; i++)
+	{
 
-		for (j = 0; j < arr_size - i - 1; j++) {
+		for (j = 0; j < arr_size - i - 1; j++)
+		{
 
-			if (array[j] >array[j + 1]) {
+			if (array[j] > array[j + 1])
+			{
 
 				tmp = array[j];
 				array[j] = array[j + 1];
@@ -40,9 +43,9 @@ Status sort_bubble_array_int(int *array, size_t arr_size)
 Status sort_swap_integer(int *array, size_t p1, size_t p2)
 {
 	int temp = array[p1];
-	
+
 	array[p1] = array[p2];
-	
+
 	array[p2] = temp;
 
 	return DS_OK;

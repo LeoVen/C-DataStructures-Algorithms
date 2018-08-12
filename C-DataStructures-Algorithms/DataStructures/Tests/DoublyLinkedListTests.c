@@ -33,38 +33,38 @@ int DoublyLinkedListTests(void)
 
 	// Test cases
 
-	print_status_repr(dll_insert_head(dll, 1));  //DS_OK
-	print_status_repr(dll_remove_head(dll));     //DS_OK
+	print_status_repr(dll_insert_head(dll, 1)); //DS_OK
+	print_status_repr(dll_remove_head(dll));	//DS_OK
 
-	print_status_repr(dll_insert_head(dll, 1));  //DS_OK
-	print_status_repr(dll_remove_tail(dll));     //DS_OK
+	print_status_repr(dll_insert_head(dll, 1)); //DS_OK
+	print_status_repr(dll_remove_tail(dll));	//DS_OK
 
-	print_status_repr(dll_insert_head(dll, 1));  //DS_OK
-	print_status_repr(dll_remove_at(dll, 0));    //DS_OK
+	print_status_repr(dll_insert_head(dll, 1)); //DS_OK
+	print_status_repr(dll_remove_at(dll, 0));   //DS_OK
 
-	print_status_repr(dll_insert_tail(dll, 1));  //DS_OK
-	print_status_repr(dll_remove_head(dll));     //DS_OK
+	print_status_repr(dll_insert_tail(dll, 1)); //DS_OK
+	print_status_repr(dll_remove_head(dll));	//DS_OK
 
-	print_status_repr(dll_insert_tail(dll, 1));  //DS_OK
-	print_status_repr(dll_remove_tail(dll));     //DS_OK
+	print_status_repr(dll_insert_tail(dll, 1)); //DS_OK
+	print_status_repr(dll_remove_tail(dll));	//DS_OK
 
-	print_status_repr(dll_insert_tail(dll, 1));  //DS_OK
-	print_status_repr(dll_remove_at(dll, 0));    //DS_OK
-
-	print_status_repr(dll_insert_at(dll, 1, 0)); //DS_OK
-	print_status_repr(dll_remove_head(dll));     //DS_OK
+	print_status_repr(dll_insert_tail(dll, 1)); //DS_OK
+	print_status_repr(dll_remove_at(dll, 0));   //DS_OK
 
 	print_status_repr(dll_insert_at(dll, 1, 0)); //DS_OK
-	print_status_repr(dll_remove_tail(dll));     //DS_OK
+	print_status_repr(dll_remove_head(dll));	 //DS_OK
 
 	print_status_repr(dll_insert_at(dll, 1, 0)); //DS_OK
-	print_status_repr(dll_remove_at(dll, 0));    //DS_OK
+	print_status_repr(dll_remove_tail(dll));	 //DS_OK
 
-	print_status_repr(dll_remove_head(dll));     // DS_ERR_INVALID_OPERATION
-	print_status_repr(dll_remove_tail(dll));     // DS_ERR_INVALID_OPERATION
-	print_status_repr(dll_remove_at(dll, 0));    // DS_ERR_INVALID_OPERATION
+	print_status_repr(dll_insert_at(dll, 1, 0)); //DS_OK
+	print_status_repr(dll_remove_at(dll, 0));	//DS_OK
 
-	dll_display(dll);                            // Empty
+	print_status_repr(dll_remove_head(dll));  // DS_ERR_INVALID_OPERATION
+	print_status_repr(dll_remove_tail(dll));  // DS_ERR_INVALID_OPERATION
+	print_status_repr(dll_remove_at(dll, 0)); // DS_ERR_INVALID_OPERATION
+
+	dll_display(dll); // Empty
 
 	dll_delete_list(&dll);
 
@@ -72,30 +72,35 @@ int DoublyLinkedListTests(void)
 	print_status_repr(dll_insert_at(dll, 1, 0)); //DS_ERR_NULL_POINTER
 	print_status_repr(dll_insert_tail(dll, 1));  //DS_ERR_NULL_POINTER
 
-	print_status_repr(dll_remove_head(dll));     //DS_ERR_NULL_POINTER
-	print_status_repr(dll_remove_at(dll, 0));    //DS_ERR_NULL_POINTER
-	print_status_repr(dll_remove_tail(dll));     //DS_ERR_NULL_POINTER
-	
+	print_status_repr(dll_remove_head(dll));  //DS_ERR_NULL_POINTER
+	print_status_repr(dll_remove_at(dll, 0)); //DS_ERR_NULL_POINTER
+	print_status_repr(dll_remove_tail(dll));  //DS_ERR_NULL_POINTER
+
 	dll_init_list(&dll);
 
 	size_t len;
 	int i;
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		dll_insert_tail(dll, i);
 	}
 
 	DoublyLinkedList *dll_even = NULL, *dll_odd = NULL;
 	DoublyLinkedNode *node;
 	int data;
-	if (dll_init_list(&dll_odd) == DS_OK && dll_init_list(&dll_even) == DS_OK) {
+	if (dll_init_list(&dll_odd) == DS_OK && dll_init_list(&dll_even) == DS_OK)
+	{
 		dll_get_length(dll, &len);
-		for (i = 0; i < len; i++) {
+		for (i = 0; i < len; i++)
+		{
 			dll_get_node_data(dll, 0, &data);
-			if (data % 2 == 0) {
+			if (data % 2 == 0)
+			{
 				dll_remove_node_head(dll, &node);
 				dll_insert_node_tail(dll_even, node);
 			}
-			else {
+			else
+			{
 				dll_remove_node_head(dll, &node);
 				dll_insert_node_tail(dll_odd, node);
 			}
@@ -106,7 +111,7 @@ int DoublyLinkedListTests(void)
 	dll_display(dll);
 	dll_display(dll_even);
 	dll_display(dll_odd);
-	
+
 	dll_delete_list(&dll);
 	dll_delete_list(&dll_even);
 	dll_delete_list(&dll_odd);
@@ -183,16 +188,20 @@ int DLL_IO_TESTS()
 		dll_get_length(dll, &length);
 		len = 0;
 
-		if (j % 2 == 0 && length < l_max) {
+		if (j % 2 == 0 && length < l_max)
+		{
 			// Insert
-			if (k % 2 == 0) {
+			if (k % 2 == 0)
+			{
 				// Insert
-				if (c == 0) {
+				if (c == 0)
+				{
 					// Head
 					printf("\ndll_insert_head()");
 					dll_insert_head(dll, rand() % max);
 				}
-				else if (c == 1) {
+				else if (c == 1)
+				{
 					// Middle
 					printf("\ndll_insert_at()");
 					if (length != 0)
@@ -200,21 +209,25 @@ int DLL_IO_TESTS()
 					printf(" position %zu", len);
 					dll_insert_at(dll, rand() % max, len);
 				}
-				else {
+				else
+				{
 					// Tail
 					printf("\ndll_insert_tail()");
 					dll_insert_tail(dll, rand() % max);
 				}
 			}
-			else {
+			else
+			{
 				// Push
-				if (c == 0) {
+				if (c == 0)
+				{
 					// Head
 					printf("\ndll_insert_node_head()");
 					dll_make_node(&node, rand() % max);
 					dll_insert_node_head(dll, node);
 				}
-				else if (c == 1) {
+				else if (c == 1)
+				{
 					// Middle
 					printf("\ndll_insert_node_at()");
 					if (length != 0)
@@ -223,7 +236,8 @@ int DLL_IO_TESTS()
 					dll_make_node(&node, rand() % max);
 					dll_insert_node_at(dll, node, len);
 				}
-				else {
+				else
+				{
 					// Tail
 					printf("\ndll_insert_node_tail()");
 					dll_make_node(&node, rand() % max);
@@ -232,16 +246,20 @@ int DLL_IO_TESTS()
 			}
 			// End
 		}
-		else {
+		else
+		{
 			// Remove
-			if (k % 2 == 0) {
+			if (k % 2 == 0)
+			{
 				// Slice
-				if (c == 0) {
+				if (c == 0)
+				{
 					// Head
 					printf("\ndll_remove_head()");
 					dll_remove_head(dll);
 				}
-				else if (c == 1) {
+				else if (c == 1)
+				{
 					// Middle
 					printf("\ndll_remove_at()");
 					if (length != 0)
@@ -249,21 +267,25 @@ int DLL_IO_TESTS()
 					printf(" position %zu", len);
 					dll_remove_at(dll, len);
 				}
-				else {
+				else
+				{
 					// Tail
 					printf("\ndll_remove_tail()");
 					dll_remove_tail(dll);
 				}
 			}
-			else {
+			else
+			{
 				// Pop
-				if (c == 0) {
+				if (c == 0)
+				{
 					// Head
 					printf("\ndll_remove_node_head()");
 					dll_remove_node_head(dll, &node);
 					free(node);
 				}
-				else if (c == 1) {
+				else if (c == 1)
+				{
 					// Middle
 					printf("\ndll_remove_node_at()");
 					if (length != 0)
@@ -272,7 +294,8 @@ int DLL_IO_TESTS()
 					dll_remove_node_at(dll, &node, len);
 					free(node);
 				}
-				else {
+				else
+				{
 					// Tail
 					printf("\ndll_remove_node_tail()");
 					dll_remove_node_tail(dll, &node);
@@ -294,7 +317,6 @@ int DLL_IO_TESTS()
 		printf("\nMinimum value: %d at position %zu", value, position);
 
 		printf("\n---------- ---------- ---------- ---------- ----------");
-
 	}
 
 	printf("\nFinal list size: %zu", dll->length);

@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -36,7 +37,7 @@ extern "C" {
 	// |              AAR -> X               |
 	// +-------------------------------------+
 
-	Status convert_arr_to_darr(Array *arr, DynamicArray **darr);
+	Status convert_arr_to_dar(Array *arr, DynamicArray **darr);
 
 #ifdef __cplusplus
 }

@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -23,10 +24,11 @@ extern "C" {
 	 * when it is the last inserted  element in the @c PriorityQueue.
 	 *
 	 */
-	typedef struct PriorityQueueNode {
-		int data;                           /*!< Node's data */
-		int priority;                       /*!< Node's priority */
-		struct PriorityQueueNode *prev;     /*!< Pointer to the previous node in the @c PriorityQueue */
+	typedef struct PriorityQueueNode
+	{
+		int data;						/*!< Node's data */
+		int priority;					/*!< Node's priority */
+		struct PriorityQueueNode *prev; /*!< Pointer to the previous node in the @c PriorityQueue */
 	} PriorityQueueNode;
 
 	/**
@@ -47,17 +49,18 @@ extern "C" {
 	 * @c PriorityQueue.c
 	 *
 	 */
-	typedef struct PriorityQueue {
-		size_t length;                      /*!< Total @c Queue length */
-		struct PriorityQueueNode *front;    /*!< Where @c PriorityQueueNode are removed */
-		struct PriorityQueueNode *rear;     /*!< Where @c PriorityQueueNode are inserted */
+	typedef struct PriorityQueue
+	{
+		size_t length;					 /*!< Total @c Queue length */
+		struct PriorityQueueNode *front; /*!< Where @c PriorityQueueNode are removed */
+		struct PriorityQueueNode *rear;  /*!< Where @c PriorityQueueNode are inserted */
 	} PriorityQueue;
 
 	Status prq_init_queue(PriorityQueue **prq);
 	Status prq_init_node(PriorityQueueNode **node);
 
-	PriorityQueue * prq_get_queue(void);
-	PriorityQueueNode * prq_get_node(int value, int priority);
+	PriorityQueue *prq_get_queue(void);
+	PriorityQueueNode *prq_get_node(int value, int priority);
 
 	Status prq_make_node(PriorityQueueNode **node, int value, int priority);
 

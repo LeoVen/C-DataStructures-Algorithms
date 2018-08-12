@@ -99,12 +99,14 @@ Status tri_insert(Trie *trie, char *word)
 
 	TrieNode *scan = trie->root;
 
-	for (i = 0; i < len; i++) {
+	for (i = 0; i < len; i++)
+	{
 
 		idx = tri_char_to_index((char)tolower(word[i]));
 
-		if ((scan->children)[idx] == NULL) {
-			
+		if ((scan->children)[idx] == NULL)
+		{
+
 			st = tri_make_node(&((scan->children)[idx]), (char)tolower(word[i]));
 
 			if (st != DS_OK)

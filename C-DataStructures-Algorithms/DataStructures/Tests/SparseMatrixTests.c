@@ -24,8 +24,6 @@ int SparseMatrixTests(void)
 
 	spm_init_matrix(&spm);
 
-
-
 	printf("\n");
 	return 0;
 }

@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -22,10 +23,11 @@ extern "C" {
 	 * one, or simply NULL when it is an element at the edges of the @c Deque.
 	 *
 	 */
-	typedef struct DequeNode {
-		int data;                           /*!< Node's data */
-		struct DequeNode *next;             /*!< Pointer to the next node in the @c Deque */
-		struct DequeNode *prev;             /*!< Pointer to the previous node in the @c Deque */
+	typedef struct DequeNode
+	{
+		int data;				/*!< Node's data */
+		struct DequeNode *next; /*!< Pointer to the next node in the @c Deque */
+		struct DequeNode *prev; /*!< Pointer to the previous node in the @c Deque */
 	} DequeNode;
 
 	/**
@@ -47,17 +49,18 @@ extern "C" {
 	 * @c Deque.c
 	 *
 	 */
-	typedef struct Deque {
-		size_t length;                      /*!< Total @c Deque length */
-		struct DequeNode *front;            /*!< Where @c QueueNode are removed */
-		struct DequeNode *rear;             /*!< Where @c QueueNode are inserted */
+	typedef struct Deque
+	{
+		size_t length;			 /*!< Total @c Deque length */
+		struct DequeNode *front; /*!< Where @c QueueNode are removed */
+		struct DequeNode *rear;  /*!< Where @c QueueNode are inserted */
 	} Deque;
 
 	Status deq_init_queue(Deque **deq);
 	Status deq_init_node(DequeNode **node);
 
-	Deque * deq_get_queue(void);
-	DequeNode * deq_get_node(int value);
+	Deque *deq_get_queue(void);
+	DequeNode *deq_get_node(int value);
 
 	Status deq_make_node(DequeNode **node, int value);
 

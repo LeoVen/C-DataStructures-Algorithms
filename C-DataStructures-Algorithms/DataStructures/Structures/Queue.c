@@ -47,7 +47,7 @@ Status que_init_node(QueueNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Queue * que_get_queue(void)
+Queue *que_get_queue(void)
 {
 	Queue *que = malloc(sizeof(Queue));
 
@@ -59,7 +59,7 @@ Queue * que_get_queue(void)
 	return que;
 }
 
-QueueNode * que_get_node(int value)
+QueueNode *que_get_node(int value)
 {
 	QueueNode *node = malloc(sizeof(QueueNode));
 
@@ -125,17 +125,17 @@ Status que_enqueue(Queue *que, int value)
 	if (!node)
 		return DS_ERR_ALLOC;
 
-	if (que_is_empty(que)) {
+	if (que_is_empty(que))
+	{
 
 		que->rear = node;
 		que->front = node;
-
 	}
-	else {
+	else
+	{
 
 		que->rear->prev = node;
 		que->rear = node;
-
 	}
 
 	(que->length)++;
@@ -150,17 +150,17 @@ Status que_enqueue_node(Queue *que, QueueNode *node)
 
 	node->prev = NULL;
 
-	if (que_is_empty(que)) {
+	if (que_is_empty(que))
+	{
 
 		que->rear = node;
 		que->front = node;
-
 	}
-	else {
+	else
+	{
 
 		que->rear->prev = node;
 		que->rear = node;
-
 	}
 
 	(que->length)++;
@@ -225,11 +225,11 @@ Status que_display(Queue *que)
 	if (que == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (que_is_empty(que)) {
+	if (que_is_empty(que))
+	{
 
 		printf("\nQueue\n[ empty ]\n");
 		return DS_OK;
-
 	}
 
 	QueueNode *scan = que->front;

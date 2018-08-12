@@ -11,24 +11,29 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
 
 #ifndef HASH_FUNCTION_TYPE
 #define HASH_FUNCTION_TYPE
-	typedef Status(*hash_function_t)(char *, size_t *);
+
+	typedef Status (*hash_function_t)(char *, size_t *);
+
 #endif
 
-	typedef struct HashMapEntry {
+	typedef struct HashMapEntry
+	{
 		char *key;
 		int value;
 		size_t hash;
 		struct HashMapEntry *next;
 	} HashMapEntry;
 
-	typedef struct HashMap {
+	typedef struct HashMap
+	{
 		struct HashMapEntry **hash_table;
 		size_t size;
 		hash_function_t hash_function;
@@ -62,8 +67,7 @@ extern "C" {
 	Status map_hash_java(char *key, size_t *hash);
 	Status map_hash_djb2(char *key, size_t *hash);
 	Status map_hash_sdbm(char *key, size_t *hash);
-	
-	
+
 #ifdef __cplusplus
 }
 #endif

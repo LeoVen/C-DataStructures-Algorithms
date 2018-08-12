@@ -66,7 +66,8 @@ int PriorityQueueTests(void)
 
 	prq_get_length(prq, &len);
 
-	for (i = 0; i < len; i++) {
+	for (i = 0; i < len; i++)
+	{
 		prq_dequeue(prq);
 	}
 
@@ -84,15 +85,19 @@ int PriorityQueueTests(void)
 	PriorityQueueNode *node;
 	int data;
 	size_t j;
-	if (prq_init_queue(&prq_odd) == DS_OK && prq_init_queue(&prq_even) == DS_OK) {
+	if (prq_init_queue(&prq_odd) == DS_OK && prq_init_queue(&prq_even) == DS_OK)
+	{
 		prq_get_length(prq, &len);
-		for (j = 0; j < len; j++) {
+		for (j = 0; j < len; j++)
+		{
 			prq_peek_front(prq, &data);
-			if (data % 2 == 0) {
+			if (data % 2 == 0)
+			{
 				prq_dequeue_node(prq, &node);
 				prq_enqueue_node(prq_even, node);
 			}
-			else {
+			else
+			{
 				prq_dequeue_node(prq, &node);
 				prq_enqueue_node(prq_odd, node);
 			}

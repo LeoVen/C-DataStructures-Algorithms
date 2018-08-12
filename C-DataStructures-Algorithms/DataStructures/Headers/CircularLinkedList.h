@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -21,11 +22,11 @@ extern "C" {
 	 * They are exactly the same as @c SinglyLinkedNode. The differentiation of
 	 * both was made so that no structure depends on another.
 	 */
-	typedef struct CircularLinkedNode {
-		int data;                           /*!< Pointer to node's content */
-		struct CircularLinkedNode *next;    /*!< Pointer to the next node on the list */
+	typedef struct CircularLinkedNode
+	{
+		int data;						 /*!< Pointer to node's content */
+		struct CircularLinkedNode *next; /*!< Pointer to the next node on the list */
 	} CircularLinkedNode;
-
 
 	/**
 	 * A @c CircularLinkedList is a structure much like a @c SinglyLinkedList
@@ -51,17 +52,17 @@ extern "C" {
 	 * @c CircularLinkedList.c
 	 *
 	 */
-	typedef struct CircularLinkedList {
-		int length;                         /*!< List length */
-		struct CircularLinkedNode *curr;    /*!< Pointer to current node. Functions operate relative to this node */
+	typedef struct CircularLinkedList
+	{
+		int length;						 /*!< List length */
+		struct CircularLinkedNode *curr; /*!< Pointer to current node. Functions operate relative to this node */
 	} CircularLinkedList;
-
 
 	Status cll_init_list(CircularLinkedList **cli);
 	Status cll_init_node(CircularLinkedNode **cln);
 
-	CircularLinkedList * cll_get_list(void);
-	CircularLinkedNode * cll_get_node(int value);
+	CircularLinkedList *cll_get_list(void);
+	CircularLinkedNode *cll_get_node(int value);
 
 	Status cll_get_length(CircularLinkedList *cll, size_t *result);
 

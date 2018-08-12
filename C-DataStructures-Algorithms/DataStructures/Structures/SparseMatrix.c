@@ -29,7 +29,7 @@ Status spm_init_matrix(SparseMatrix **spm)
 		return st;
 
 	(*spm)->center = center;
-	
+
 	(*spm)->x_pos = center;
 	(*spm)->x_neg = center;
 	(*spm)->y_pos = center;
@@ -103,7 +103,6 @@ Status spm_init_node(SparseMatrixNode **node, int x, int y, int data)
 
 //Status spm_find_max_y(SparseMatrix *spm, int *result);
 //Status spm_find_min_y(SparseMatrix *spm, int *result);
-
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Utility                                              |

@@ -48,7 +48,7 @@ Status deq_init_node(DequeNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Deque * deq_get_queue(void)
+Deque *deq_get_queue(void)
 {
 	Deque *deq = malloc(sizeof(Deque));
 
@@ -60,7 +60,7 @@ Deque * deq_get_queue(void)
 	return deq;
 }
 
-DequeNode * deq_get_node(int value)
+DequeNode *deq_get_node(int value)
 {
 	DequeNode *node = malloc(sizeof(DequeNode));
 
@@ -128,19 +128,19 @@ Status deq_enqueue_front(Deque *deq, int value)
 	if (!node)
 		return DS_ERR_ALLOC;
 
-	if (deq_is_empty(deq)) {
+	if (deq_is_empty(deq))
+	{
 
 		deq->front = node;
 		deq->rear = node;
-
 	}
-	else {
+	else
+	{
 
 		node->prev = deq->front;
 
 		deq->front->next = node;
 		deq->front = node;
-
 	}
 
 	(deq->length)++;
@@ -161,19 +161,19 @@ Status deq_enqueue_rear(Deque *deq, int value)
 	if (!node)
 		return DS_ERR_ALLOC;
 
-	if (deq_is_empty(deq)) {
+	if (deq_is_empty(deq))
+	{
 
 		deq->front = node;
 		deq->rear = node;
-
 	}
-	else {
+	else
+	{
 
 		node->next = deq->rear;
 
 		deq->rear->prev = node;
 		deq->rear = node;
-
 	}
 
 	(deq->length)++;
@@ -186,19 +186,19 @@ Status deq_enqueue_front_node(Deque *deq, DequeNode *node)
 	if (deq == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (deq_is_empty(deq)) {
+	if (deq_is_empty(deq))
+	{
 
 		deq->front = node;
 		deq->rear = node;
-
 	}
-	else {
+	else
+	{
 
 		node->prev = deq->front;
 
 		deq->front->next = node;
 		deq->front = node;
-
 	}
 
 	(deq->length)++;
@@ -211,19 +211,19 @@ Status deq_enqueue_rear_node(Deque *deq, DequeNode *node)
 	if (deq == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (deq_is_empty(deq)) {
+	if (deq_is_empty(deq))
+	{
 
 		deq->front = node;
 		deq->rear = node;
-
 	}
-	else {
+	else
+	{
 
 		node->next = deq->rear;
 
 		deq->rear->prev = node;
 		deq->rear = node;
-
 	}
 
 	(deq->length)++;
@@ -246,7 +246,7 @@ Status deq_dequeue_front(Deque *deq)
 	DequeNode *node = deq->front;
 
 	deq->front = deq->front->prev;
-	
+
 	if (deq->front == NULL)
 		deq->rear = NULL;
 	else
@@ -270,7 +270,7 @@ Status deq_dequeue_rear(Deque *deq)
 	DequeNode *node = deq->rear;
 
 	deq->rear = deq->rear->next;
-	
+
 	if (deq->rear == NULL)
 		deq->front = NULL;
 	else
@@ -294,7 +294,7 @@ Status deq_dequeue_front_node(Deque *deq, DequeNode **result)
 	(*result) = deq->front;
 
 	deq->front = deq->front->prev;
-	
+
 	if (deq->front == NULL)
 		deq->rear = NULL;
 	else
@@ -319,7 +319,7 @@ Status deq_dequeue_rear_node(Deque *deq, DequeNode **result)
 	(*result) = deq->rear;
 
 	deq->rear = deq->rear->next;
-	
+
 	if (deq->rear == NULL)
 		deq->front = NULL;
 	else
@@ -342,11 +342,11 @@ Status deq_display(Deque *deq)
 	if (deq == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (deq_is_empty(deq)) {
+	if (deq_is_empty(deq))
+	{
 
 		printf("\nDeque\n[ empty ]\n");
 		return DS_OK;
-
 	}
 
 	DequeNode *scan = deq->front;
@@ -412,7 +412,7 @@ Status deq_delete_queue(Deque **deq)
 		(*deq)->front = (*deq)->front->prev;
 
 		free(prev);
-		
+
 		prev = (*deq)->front;
 	}
 

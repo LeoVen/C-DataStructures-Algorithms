@@ -30,13 +30,15 @@ int DynamicArrayTests(void)
 
 	size_t f;
 	int i;
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		dar_insert_back(array, i);
 	}
 
 	dar_display(array);
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		dar_insert_front(array, i);
 	}
 
@@ -51,16 +53,18 @@ int DynamicArrayTests(void)
 	dar_display(array);
 
 	dar_delete(&array);
-	
+
 	int vector[100];
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		vector[i] = rand();
 	}
 
 	printf("\nNormal Array:\n");
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		printf("%d ", vector[i]);
 	}
 
@@ -132,14 +136,17 @@ int DAR_IO_TESTS(void)
 
 		size = dar_size(array);
 
-		if (a % 2 == 0 && size < l_max) {
+		if (a % 2 == 0 && size < l_max)
+		{
 			// Insert
-			if (b == 0) {
+			if (b == 0)
+			{
 				// Insert front
 				printf("\ndar_insert_front()");
 				st = dar_insert_front(array, rand() % max);
 			}
-			else if (b == 1) {
+			else if (b == 1)
+			{
 				// Insert at
 				printf("\ndar_insert_at()");
 				if (size != 0)
@@ -147,21 +154,25 @@ int DAR_IO_TESTS(void)
 				printf(" position %zu", pos);
 				st = dar_insert_at(array, rand() % max, pos);
 			}
-			else {
+			else
+			{
 				// Insert back
 				printf("\ndar_insert_back()");
 				st = dar_insert_back(array, rand() % max);
 			}
 			// End Insert
 		}
-		else {
+		else
+		{
 			// Remove
-			if (b == 0) {
+			if (b == 0)
+			{
 				// Remove front
 				printf("\ndar_remove_front()");
 				st = dar_remove_front(array);
 			}
-			else if (b == 1) {
+			else if (b == 1)
+			{
 				// Remove at
 				printf("\ndar_remove_at()");
 				if (size != 0)
@@ -169,7 +180,8 @@ int DAR_IO_TESTS(void)
 				printf(" position %zu", pos);
 				st = dar_remove_at(array, pos);
 			}
-			else {
+			else
+			{
 				// Remove back
 				printf("\ndar_remove_back()");
 				st = dar_remove_back(array);
@@ -190,7 +202,6 @@ int DAR_IO_TESTS(void)
 		print_status_repr(st);
 
 		printf("\n---------- ---------- ---------- ---------- ----------");
-
 	}
 
 	printf("\n---------- ---------- ---------- ---------- ----------");

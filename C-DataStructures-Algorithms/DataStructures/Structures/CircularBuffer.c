@@ -41,7 +41,7 @@ Status cbf_init(CircularBuffer **cbf, size_t length)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-CircularBuffer * cbf_get(size_t length)
+CircularBuffer *cbf_get(size_t length)
 {
 	CircularBuffer *cbf = malloc(sizeof(CircularBuffer));
 
@@ -224,6 +224,6 @@ Status cbf_wrap(CircularBuffer *cbf)
 
 	if (cbf->end >= cbf->max_length)
 		cbf->end = 0;
-	
+
 	return DS_OK;
 }

@@ -153,7 +153,7 @@ In the Land of Mordor where the Shadows lie.");
 	str_prepend(str0, str2);
 	// Append str0 to str1
 	str_append(str1, str0);
-	
+
 	str_display(str1);
 
 	str_make(&str3, "Lord of the Rings: ");
@@ -299,5 +299,4 @@ int STR_IO_TESTS_0(void)
 // Push/Pop
 int STR_IO_TESTS_1(void)
 {
-
 }

@@ -11,7 +11,8 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
@@ -43,11 +44,12 @@ extern "C" {
 	 *
 	 * @c DynamicArray.c
 	 */
-	typedef struct DynamicArray {
-		int *buffer;                        /*!< @c DynamicArray data buffer */
-		size_t size;                        /*!< @c DynamicArray size */
-		size_t capacity;                    /*!< @c DynamicArray total capacity */
-		size_t growth_rate;                 /*!< @c DynamicArray buffer growth rate */
+	typedef struct DynamicArray
+	{
+		int *buffer;		/*!< @c DynamicArray data buffer */
+		size_t size;		/*!< @c DynamicArray size */
+		size_t capacity;	/*!< @c DynamicArray total capacity */
+		size_t growth_rate; /*!< @c DynamicArray buffer growth rate */
 	} DynamicArray;
 
 	Status dar_init(DynamicArray **dar);
@@ -87,7 +89,7 @@ extern "C" {
 	Status dar_find_min_pos(DynamicArray *dar, size_t *result);
 
 	Status dar_frequency(DynamicArray *dar, int value, size_t *frequency);
-	
+
 	Status dar_contains(DynamicArray *dar, int value, bool *result);
 	bool dar_exists(DynamicArray *dar, int value);
 

@@ -51,7 +51,7 @@ Status bst_init_node(BinarySearchTreeNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+*
 
-BinarySearchTree * bst_get_tree(void)
+BinarySearchTree *bst_get_tree(void)
 {
 	BinarySearchTree *bst = malloc(sizeof(BinarySearchTree));
 
@@ -63,7 +63,7 @@ BinarySearchTree * bst_get_tree(void)
 	return bst;
 }
 
-BinarySearchTreeNode * bst_get_node(int value)
+BinarySearchTreeNode *bst_get_node(int value)
 {
 	BinarySearchTreeNode *node = malloc(sizeof(BinarySearchTreeNode));
 
@@ -74,7 +74,7 @@ BinarySearchTreeNode * bst_get_node(int value)
 
 	node->level = 0;
 	node->data = value;
-	
+
 	return node;
 }
 
@@ -124,16 +124,17 @@ Status bst_insert(BinarySearchTree *bst, int value)
 			scan = scan->left;
 		else if (scan->data > value)
 			scan = scan->right;
-		else {
+		else
+		{
 
 			free(node);
 
 			return DS_OK;
 		}
-
 	}
 
-	if (before == NULL) {
+	if (before == NULL)
+	{
 
 		node->parent = NULL;
 
@@ -143,7 +144,7 @@ Status bst_insert(BinarySearchTree *bst, int value)
 
 		return DS_OK;
 	}
-	
+
 	node->parent = before;
 	node->level = before->level + 1;
 
@@ -407,13 +408,16 @@ Status bst_traversal_postorder(BinarySearchTreeNode *node)
 
 Status bst_traversal_leaves(BinarySearchTreeNode *node)
 {
-	if (node->right != NULL) {
+	if (node->right != NULL)
+	{
 		bst_traversal_leaves(node->right);
 	}
-	if (node->left != NULL) {
+	if (node->left != NULL)
+	{
 		bst_traversal_leaves(node->left);
 	}
-	if (node->left == NULL && node->right == NULL) {
+	if (node->left == NULL && node->right == NULL)
+	{
 		printf(" %d", node->data);
 	}
 

@@ -10,9 +10,9 @@
 
 #include "Vector.h"
 
- // +-------------------------------------------------------------------------------------------------+
- // |                                          Initializers                                           |
- // +-------------------------------------------------------------------------------------------------+
+// +-------------------------------------------------------------------------------------------------+
+// |                                          Initializers                                           |
+// +-------------------------------------------------------------------------------------------------+
 
 Status vec_build(double x, double y, double z, Vector **vec)
 {
@@ -24,7 +24,7 @@ Status vec_build(double x, double y, double z, Vector **vec)
 	(*vec)->x = x;
 	(*vec)->y = y;
 	(*vec)->z = z;
-	
+
 	(*vec)->base = malloc(sizeof(Basis));
 
 	if (!((*vec)->base))
@@ -70,9 +70,9 @@ Status vec_display(Vector *v)
 {
 	printf("\nVector\n[%8.2lf i ]\n[%8.2lf j ]\n[%8.2lf k ]", v->x, v->y, v->z);
 	printf("\nBase\n[%4.2lf, %4.2lf, %4.2lf], [%4.2lf, %4.2lf, %4.2lf], [%4.2lf, %4.2lf, %4.2lf]\n",
-		v->base->i->x, v->base->i->y, v->base->i->z,
-		v->base->j->x, v->base->j->y, v->base->j->z,
-		v->base->k->x, v->base->k->y, v->base->k->z);
+		   v->base->i->x, v->base->i->y, v->base->i->z,
+		   v->base->j->x, v->base->j->y, v->base->j->z,
+		   v->base->k->x, v->base->k->y, v->base->k->z);
 
 	return DS_OK;
 }
@@ -119,7 +119,7 @@ Status vec_sum(Vector *vec1, Vector *vec2, Vector **result)
 		return DS_ERR_NULL_POINTER;
 
 	Status st = vec_build(vec1->x + vec2->x, vec1->y + vec2->y, vec1->z + vec2->z, result);
-	
+
 	if (st != DS_OK)
 		return st;
 
@@ -248,6 +248,6 @@ Status vec_copy(Vector *vec, Vector **result)
 
 	if (st != DS_OK)
 		return st;
-	
+
 	return DS_OK;
 }

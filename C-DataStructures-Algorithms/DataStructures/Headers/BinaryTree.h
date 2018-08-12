@@ -11,17 +11,25 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
+
+#ifndef BT_PRINT_SPACES
+
+#define BT_PRINT_SPACES 4
+
+#endif
 
 	/**
 	 * This enum is used to determine weather a Node will be inserted as the
 	 * @c Right child or the @c Left child of a referenced node. Only used with
 	 * @c BinaryTree.
 	 */
-	typedef enum BTLeaf {
+	typedef enum BTLeaf
+	{
 		Left_bt = 0,
 		Right_bt = 1
 	} BTLeaf;
@@ -37,17 +45,18 @@ extern "C" {
 	 * one pointer to its left child, one to is right child and another to its
 	 * parent, being NULL if that node is the @c root.
 	 */
-	typedef struct BinaryTree {
-		int data;                           /*!< Node's data */
-		size_t level;                       /*!< On what level the Node is in */
-		struct BinaryTree *right;           /*!< Pointer to right child */
-		struct BinaryTree *left;            /*!< Pointer to left child */
-		struct BinaryTree *parent;          /*!< Pointer to parent Node */
+	typedef struct BinaryTree
+	{
+		int data;				   /*!< Node's data */
+		size_t level;			   /*!< On what level the Node is in */
+		struct BinaryTree *right;  /*!< Pointer to right child */
+		struct BinaryTree *left;   /*!< Pointer to left child */
+		struct BinaryTree *parent; /*!< Pointer to parent Node */
 	} BinaryTree;
 
 	Status bt_init_node(BinaryTree **leaf, int value);
 
-	BinaryTree * bt_get_node(int value);
+	BinaryTree *bt_get_node(int value);
 
 	Status bt_insert(BinaryTree *ref, BinaryTree *new, BTLeaf leaf);
 
@@ -67,7 +76,7 @@ extern "C" {
 	Status bt_traversal_preorder(BinaryTree *bt);
 	Status bt_traversal_inorder(BinaryTree *bt);
 	Status bt_traversal_postorder(BinaryTree *bt);
-	
+
 #ifdef __cplusplus
 }
 #endif;

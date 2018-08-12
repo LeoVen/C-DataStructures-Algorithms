@@ -55,8 +55,10 @@ int SinglyLinkedListTests(void)
 
 	int i;
 	size_t z;
-	if (sll_get_length(sll, &z) == DS_OK) {
-		for (i = 0; i < z; i++) {
+	if (sll_get_length(sll, &z) == DS_OK)
+	{
+		for (i = 0; i < z; i++)
+		{
 			sll_get_node_data(sll, i, &res);
 			printf("\nData of node at position %d = %d", i, res);
 		}
@@ -65,7 +67,7 @@ int SinglyLinkedListTests(void)
 	print_status_repr(sll_insert_tail(sll, 3));
 	print_status_repr(sll_insert_tail(sll, 4));
 	print_status_repr(sll_insert_tail(sll, 5));
-	
+
 	print_status_repr(sll_insert_head(sll, 5));
 
 	sll_display(sll);
@@ -77,7 +79,8 @@ int SinglyLinkedListTests(void)
 	sll_display_raw(sll);
 
 	int k;
-	do {
+	do
+	{
 		sll_get_node_data(sll, 0, &k);
 		sll_remove_head(sll);
 	} while (k != 1);
@@ -94,7 +97,8 @@ int SinglyLinkedListTests(void)
 
 	sll_display(sll);
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		sll_insert_tail(sll, i);
 	}
 
@@ -130,35 +134,43 @@ int SinglyLinkedListTests(void)
 		sll_insert_tail(sll, rand() % 10);
 
 	size_t f;
-	for (i = -10; i < 20; i++) {
-		if (sll_exists(sll, i)) {
+	for (i = -10; i < 20; i++)
+	{
+		if (sll_exists(sll, i))
+		{
 			sll_frequency(sll, i, &f);
 			printf("\nData %d frequency : %zu", i, f);
 		}
-		else {
+		else
+		{
 			printf("\nData %d is not in the list", i);
 		}
 	}
 
 	sll_erase_list(&sll);
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 		sll_insert_tail(sll, i);
 	}
 
 	SinglyLinkedList *sll_even = NULL, *sll_odd = NULL;
-	
+
 	int data;
 
-	if (sll_init_list(&sll_odd) == DS_OK && sll_init_list(&sll_even) == DS_OK) {
+	if (sll_init_list(&sll_odd) == DS_OK && sll_init_list(&sll_even) == DS_OK)
+	{
 		sll_get_length(sll, &len);
-		for (i = 0; i < len; i++) {
+		for (i = 0; i < len; i++)
+		{
 			sll_get_node_data(sll, 0, &data);
-			if (data % 2 == 0) {
+			if (data % 2 == 0)
+			{
 				sll_remove_node_head(sll, &node);
 				sll_insert_node_tail(sll_even, node);
 			}
-			else {
+			else
+			{
 				sll_remove_node_head(sll, &node);
 				sll_insert_node_tail(sll_odd, node);
 			}
@@ -199,7 +211,8 @@ int SinglyLinkedListTests(void)
 
 	sll_get_length(sll_result, &f);
 
-	for (l = 0; l < f; l++) {
+	for (l = 0; l < f; l++)
+	{
 		sll_get_node_data(sll_result, l, &i);
 		sll_get_node_data(sll, (size_t)i, &data); // Not cool
 		printf("\nNode at position %d has a value of %d", i, data);
@@ -219,38 +232,38 @@ int SinglyLinkedListTests(void)
 
 	// Test cases
 
-	print_status_repr(sll_insert_head(sll, 1));  //DS_OK
-	print_status_repr(sll_remove_head(sll));     //DS_OK
+	print_status_repr(sll_insert_head(sll, 1)); //DS_OK
+	print_status_repr(sll_remove_head(sll));	//DS_OK
 
-	print_status_repr(sll_insert_head(sll, 1));  //DS_OK
-	print_status_repr(sll_remove_tail(sll));     //DS_OK
+	print_status_repr(sll_insert_head(sll, 1)); //DS_OK
+	print_status_repr(sll_remove_tail(sll));	//DS_OK
 
-	print_status_repr(sll_insert_head(sll, 1));  //DS_OK
-	print_status_repr(sll_remove_at(sll, 0));    //DS_OK
+	print_status_repr(sll_insert_head(sll, 1)); //DS_OK
+	print_status_repr(sll_remove_at(sll, 0));   //DS_OK
 
-	print_status_repr(sll_insert_tail(sll, 1));  //DS_OK
-	print_status_repr(sll_remove_head(sll));     //DS_OK
+	print_status_repr(sll_insert_tail(sll, 1)); //DS_OK
+	print_status_repr(sll_remove_head(sll));	//DS_OK
 
-	print_status_repr(sll_insert_tail(sll, 1));  //DS_OK
-	print_status_repr(sll_remove_tail(sll));     //DS_OK
+	print_status_repr(sll_insert_tail(sll, 1)); //DS_OK
+	print_status_repr(sll_remove_tail(sll));	//DS_OK
 
-	print_status_repr(sll_insert_tail(sll, 1));  //DS_OK
-	print_status_repr(sll_remove_at(sll, 0));    //DS_OK
-
-	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_OK
-	print_status_repr(sll_remove_head(sll));     //DS_OK
+	print_status_repr(sll_insert_tail(sll, 1)); //DS_OK
+	print_status_repr(sll_remove_at(sll, 0));   //DS_OK
 
 	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_OK
-	print_status_repr(sll_remove_tail(sll));     //DS_OK
+	print_status_repr(sll_remove_head(sll));	 //DS_OK
 
 	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_OK
-	print_status_repr(sll_remove_at(sll, 0));    //DS_OK
+	print_status_repr(sll_remove_tail(sll));	 //DS_OK
 
-	print_status_repr(sll_remove_head(sll));     // DS_ERR_INVALID_OPERATION
-	print_status_repr(sll_remove_tail(sll));     // DS_ERR_INVALID_OPERATION
-	print_status_repr(sll_remove_at(sll, 0));    // DS_ERR_INVALID_OPERATION
+	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_OK
+	print_status_repr(sll_remove_at(sll, 0));	//DS_OK
 
-	sll_display(sll);                            // Empty
+	print_status_repr(sll_remove_head(sll));  // DS_ERR_INVALID_OPERATION
+	print_status_repr(sll_remove_tail(sll));  // DS_ERR_INVALID_OPERATION
+	print_status_repr(sll_remove_at(sll, 0)); // DS_ERR_INVALID_OPERATION
+
+	sll_display(sll); // Empty
 
 	sll_delete_list(&sll);
 
@@ -258,22 +271,23 @@ int SinglyLinkedListTests(void)
 	print_status_repr(sll_insert_at(sll, 1, 0)); //DS_ERR_NULL_POINTER
 	print_status_repr(sll_insert_tail(sll, 1));  //DS_ERR_NULL_POINTER
 
-	print_status_repr(sll_remove_head(sll));     //DS_ERR_NULL_POINTER
-	print_status_repr(sll_remove_at(sll, 0));    //DS_ERR_NULL_POINTER
-	print_status_repr(sll_remove_tail(sll));     //DS_ERR_NULL_POINTER
+	print_status_repr(sll_remove_head(sll));  //DS_ERR_NULL_POINTER
+	print_status_repr(sll_remove_at(sll, 0)); //DS_ERR_NULL_POINTER
+	print_status_repr(sll_remove_tail(sll));  //DS_ERR_NULL_POINTER
 
 	// Occurrance
 	sll_find_occurrance_first(sll_even, 16, &l);
 	sll_remove_at(sll_even, l);
-	
+
 	sll_find_occurrance_first(sll_even, 32, &l);
 	sll_remove_at(sll_even, l);
 
 	sll_display(sll_even);
-	
+
 	sll_get_length(sll_even, &l);
 
-	for (z = 0; z < l; z++) {
+	for (z = 0; z < l; z++)
+	{
 		sll_update_node_data(sll_even, z, 0);
 	}
 
@@ -290,7 +304,8 @@ int SinglyLinkedListTests(void)
 	// Link and unlink
 	sll_init_list(&sll);
 
-	for (i = 110; i > 100; i--) {
+	for (i = 110; i > 100; i--)
+	{
 		if (i % 2 != 0)
 			sll_insert_tail(sll, i);
 	}
@@ -314,7 +329,8 @@ int SinglyLinkedListTests(void)
 	for (i = 0; i > -5; i--)
 		sll_insert_tail(sll_result, i);
 
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 10; i++)
+	{
 		if (i % 2 == 0)
 			sll_insert_tail(sll_even, i);
 		else
@@ -326,11 +342,11 @@ int SinglyLinkedListTests(void)
 
 	// Link even to odd making even list empty
 	sll_link(sll_odd, sll_even);
-	
+
 	sll_display(sll_odd);
 	print_status_repr(sll_get_length(sll_odd, &len));
 	printf("\nLength: %zu\n", len);
-	
+
 	sll_display(sll_even);
 	print_status_repr(sll_get_length(sll_even, &len));
 	printf("\nLength: %zu\n", len);
@@ -399,7 +415,8 @@ int SinglyLinkedListTests(void)
 
 	sll_get_length(sll, &len);
 
-	for (l = 0; l < len; l++) {
+	for (l = 0; l < len; l++)
+	{
 		sll_display(sll);
 
 		sll_switch_ends(sll);
@@ -416,8 +433,9 @@ int SinglyLinkedListTests(void)
 
 	sll_display(sll);
 
-	for (i = 0; i < 100; i++) {
-		
+	for (i = 0; i < 100; i++)
+	{
+
 		l = rand() % len;
 
 		printf("\nSwitch head with %zu", l);
@@ -426,7 +444,8 @@ int SinglyLinkedListTests(void)
 		sll_display(sll);
 	}
 
-	for (i = 0; i < 100; i++) {
+	for (i = 0; i < 100; i++)
+	{
 
 		l = rand() % len;
 
@@ -436,16 +455,17 @@ int SinglyLinkedListTests(void)
 		sll_display(sll);
 	}
 
-	for (i = 0; i < 1000; i++) {
+	for (i = 0; i < 1000; i++)
+	{
 
 		l = rand() % len;
 		f = rand() % len;
 
-		if (sll_switch_nodes(sll, l, f) == DS_OK) {
+		if (sll_switch_nodes(sll, l, f) == DS_OK)
+		{
 			printf("\nSwitch nodes %zu with %zu", l, f);
 			sll_display(sll);
 		}
-
 	}
 
 	sll_delete_list(&sll);
@@ -456,17 +476,20 @@ int SinglyLinkedListTests(void)
 
 	sll_init_list(&sll);
 
-	for (i = 0; i < 10; i++) {
+	for (i = 0; i < 10; i++)
+	{
 		sll_insert_tail(sll, i);
 	}
 
 	sll_get_length(sll, &len);
 
-	for (k = 0; k < 10; k++) {
+	for (k = 0; k < 10; k++)
+	{
 
 		printf("\nScramble: ");
 
-		for (i = 0; i < 20; i++) {
+		for (i = 0; i < 20; i++)
+		{
 
 			l = rand() % len;
 			f = rand() % len;
@@ -516,7 +539,8 @@ int SinglyLinkedListTests(void)
 
 	sll_init_list(&sll2);
 
-	for (i = 0; i < 8; i++) {
+	for (i = 0; i < 8; i++)
+	{
 		sll_insert_head(sll1, rand() % 10);
 		sll_insert_head(sll2, rand() % 10);
 	}
@@ -596,16 +620,20 @@ int SLL_IO_TESTS()
 		sll_get_length(sll, &length);
 		len = 0;
 
-		if (j % 2 == 0 && length < l_max) {
+		if (j % 2 == 0 && length < l_max)
+		{
 			// Insert
-			if (k % 2 == 0) {
+			if (k % 2 == 0)
+			{
 				// Insert
-				if (c == 0) {
+				if (c == 0)
+				{
 					// Head
 					printf("\nsll_insert_head()");
 					sll_insert_head(sll, rand() % max);
 				}
-				else if (c == 1) {
+				else if (c == 1)
+				{
 					// Middle
 					printf("\nsll_insert_at()");
 					if (length != 0)
@@ -613,21 +641,25 @@ int SLL_IO_TESTS()
 					printf(" position %zu", len);
 					sll_insert_at(sll, rand() % max, len);
 				}
-				else {
+				else
+				{
 					// Tail
 					printf("\nsll_insert_tail()");
 					sll_insert_tail(sll, rand() % max);
 				}
 			}
-			else {
+			else
+			{
 				// Push
-				if (c == 0) {
+				if (c == 0)
+				{
 					// Head
 					printf("\nsll_insert_node_head()");
 					sll_make_node(&node, rand() % max);
 					sll_insert_node_head(sll, node);
 				}
-				else if (c == 1) {
+				else if (c == 1)
+				{
 					// Middle
 					printf("\nsll_insert_node_at()");
 					if (length != 0)
@@ -636,7 +668,8 @@ int SLL_IO_TESTS()
 					sll_make_node(&node, rand() % max);
 					sll_insert_node_at(sll, node, len);
 				}
-				else {
+				else
+				{
 					// Tail
 					printf("\nsll_insert_node_tail()");
 					sll_make_node(&node, rand() % max);
@@ -645,16 +678,20 @@ int SLL_IO_TESTS()
 			}
 			// End
 		}
-		else {
+		else
+		{
 			// Remove
-			if (k % 2 == 0) {
+			if (k % 2 == 0)
+			{
 				// Slice
-				if (c == 0) {
+				if (c == 0)
+				{
 					// Head
 					printf("\nsll_remove_head()");
 					sll_remove_head(sll);
 				}
-				else if (c == 1) {
+				else if (c == 1)
+				{
 					// Middle
 					printf("\nsll_remove_at()");
 					if (length != 0)
@@ -662,21 +699,25 @@ int SLL_IO_TESTS()
 					printf(" position %zu", len);
 					sll_remove_at(sll, len);
 				}
-				else {
+				else
+				{
 					// Tail
 					printf("\nsll_remove_tail()");
 					sll_remove_tail(sll);
 				}
 			}
-			else {
+			else
+			{
 				// Pop
-				if (c == 0) {
+				if (c == 0)
+				{
 					// Head
 					printf("\nsll_remove_node_head()");
 					sll_remove_node_head(sll, &node);
 					free(node);
 				}
-				else if (c == 1) {
+				else if (c == 1)
+				{
 					// Middle
 					printf("\nsll_remove_node_at()");
 					if (length != 0)
@@ -685,7 +726,8 @@ int SLL_IO_TESTS()
 					sll_remove_node_at(sll, &node, len);
 					free(node);
 				}
-				else {
+				else
+				{
 					// Tail
 					printf("\nsll_remove_node_tail()");
 					sll_remove_node_tail(sll, &node);
@@ -707,7 +749,6 @@ int SLL_IO_TESTS()
 		printf("\nMinimum value: %d at position %zu", value, position);
 
 		printf("\n---------- ---------- ---------- ---------- ----------");
-
 	}
 
 	printf("\nFinal list size: %zu", sll->length);

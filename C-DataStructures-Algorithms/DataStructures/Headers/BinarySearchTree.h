@@ -11,10 +11,17 @@
 #pragma once
 
 #ifdef __cplusplus
-extern "C" {
+extern "C"
+{
 #endif
 
 #include "Core.h"
+
+#ifndef BT_PRINT_SPACES
+
+#define BT_PRINT_SPACES 4
+
+#endif
 
 	/**
 	 * A @c BinarySearchTreeNode is what a @c BinarySearchTree is composed of.
@@ -22,12 +29,13 @@ extern "C" {
 	 * child, one to its right child and another to its parent, being NULL if
 	 * that Node is the @c root.
 	 */
-	typedef struct BinarySearchTreeNode {
-		int data;                           /*!< Node's data */
-		size_t level;                       /*!< On what level the Node is in */
-		struct BinarySearchTreeNode *right; /*!< Pointer to right child */
-		struct BinarySearchTreeNode *left;  /*!< Pointer to left child */
-		struct BinarySearchTreeNode *parent;/*!< Pointer to parent Node */
+	typedef struct BinarySearchTreeNode
+	{
+		int data;							 /*!< Node's data */
+		size_t level;						 /*!< On what level the Node is in */
+		struct BinarySearchTreeNode *right;  /*!< Pointer to right child */
+		struct BinarySearchTreeNode *left;   /*!< Pointer to left child */
+		struct BinarySearchTreeNode *parent; /*!< Pointer to parent Node */
 	} BinarySearchTreeNode;
 
 	/**
@@ -42,17 +50,18 @@ extern "C" {
 	 *
 	 * @note For simplicity the keys of each node are actually its data.
 	 */
-	typedef struct BinarySearchTree {
-		size_t depth;                       /*!< @c BinarySearchTree depth */
-		size_t size;                        /*!< Total @c BinarySearchTree elements */
-		struct BinarySearchTreeNode *root;  /*!< Pointer to the very first node in the @c BinarySearchTree */
+	typedef struct BinarySearchTree
+	{
+		size_t depth;					   /*!< @c BinarySearchTree depth */
+		size_t size;					   /*!< Total @c BinarySearchTree elements */
+		struct BinarySearchTreeNode *root; /*!< Pointer to the very first node in the @c BinarySearchTree */
 	} BinarySearchTree;
 
 	Status bst_init_tree(BinarySearchTree **bst);
 	Status bst_init_node(BinarySearchTreeNode **node);
 
-	BinarySearchTree * bst_get_tree(void);
-	BinarySearchTreeNode * bst_get_node(int value);
+	BinarySearchTree *bst_get_tree(void);
+	BinarySearchTreeNode *bst_get_node(int value);
 
 	Status bst_make_node(BinarySearchTreeNode **node, int value);
 
@@ -84,7 +93,7 @@ extern "C" {
 	Status bst_traversal_postorder(BinarySearchTreeNode *node);
 
 	Status bst_traversal_leaves(BinarySearchTreeNode *node);
-	
+
 #ifdef __cplusplus
 }
 #endif;
