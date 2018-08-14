@@ -12,7 +12,7 @@ The Documentation is based on Doxygen. You can view it in the source code or run
 
 * Document this shit up!
 * Make a Clock structure for timing code (wrapping ```clock_t```)
-* Add all prime related functions
+* Add all prime related functions [########  ]
 
 ### Medium Priority
 
@@ -78,9 +78,10 @@ Caesar Cipher                [######### ]     Docs     [          ]
 
 ```
 Prime factors                not started      Docs     not started
-Is Prime                     not started      Docs     not started
-Nth Prime                    not started      Docs     not started
-Biggest prime lower than     not started      Docs     not started
+Is Prime                     [##########]     Docs     [          ]
+Nth Prime                    [##########]     Docs     [          ]
+Biggest prime lower than     not started      Docs     [          ]
+Lowest prime greater than    [##########]     Docs     [          ]
 ```
 
 #### Mathematical Algorithms

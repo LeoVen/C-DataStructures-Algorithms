@@ -210,6 +210,12 @@
     <ClCompile Include="Algorithms\Sorting\InsertionSort.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Algorithms\Prime\Prime.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Algorithms\Tests\PrimeTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructures\Headers\Array.h">
@@ -308,5 +314,11 @@
     <ClInclude Include="DataStructures\Headers\QueueArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Algorithms\Headers\Prime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
 </Project>

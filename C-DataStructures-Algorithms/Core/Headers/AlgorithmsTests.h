@@ -22,6 +22,8 @@ extern "C" {
 
 	int SortingTests(void);
 
+	int PrimeTests(void);
+
 #ifdef __cplusplus
 }
 #endif

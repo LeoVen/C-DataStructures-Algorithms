@@ -153,7 +153,9 @@
   <ItemGroup>
     <ClCompile Include="Algorithms\AlgorithmsMenu.c" />
     <ClCompile Include="Algorithms\Cryptography\CaesarCipher.c" />
+    <ClCompile Include="Algorithms\Prime\Prime.c" />
     <ClCompile Include="Algorithms\Sorting\InsertionSort.c" />
+    <ClCompile Include="Algorithms\Tests\PrimeTests.c" />
     <ClCompile Include="Algorithms\Utility\UserInput.c" />
     <ClCompile Include="Algorithms\Utility\Random.c" />
     <ClCompile Include="Algorithms\Mathematics\Josephus.c" />
@@ -219,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Algorithms\Headers\Cryptography.h" />
+    <ClInclude Include="Algorithms\Headers\Prime.h" />
     <ClInclude Include="Algorithms\Headers\Random.h" />
     <ClInclude Include="Algorithms\Headers\Mathematics.h" />
     <ClInclude Include="Algorithms\Headers\UserInput.h" />
@@ -250,6 +253,9 @@
     <ClInclude Include="DataStructures\Headers\StructureConversions.h" />
     <ClInclude Include="DataStructures\Headers\Trie.h" />
     <ClInclude Include="DataStructures\Headers\Vector.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -16,9 +16,10 @@
 int dev_short_cut(void)
 {
 
-	SStringTests();
+	//SStringTests();
 	//DynamicArrayTests();
-	//SortingTests();
+
+	PrimeTests();
 
 	printf("\nPress enter to continue...");
 	_getch();
