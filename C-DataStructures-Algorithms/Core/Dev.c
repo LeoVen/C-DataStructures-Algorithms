@@ -20,7 +20,12 @@ int dev_short_cut(void)
 	//DynamicArrayTests();
 
 	//PrimeTests();
-	ClockTests();
+	//ClockTests();
+
+	StackArrayTests();
+	QueueArrayTests();
+	DynamicArrayTests();
+	SStringTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

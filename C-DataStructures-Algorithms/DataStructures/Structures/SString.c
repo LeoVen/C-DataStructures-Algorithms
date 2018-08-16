@@ -562,10 +562,16 @@ Status str_realloc(String *str)
 
 	str->capacity *= str->growth_rate;
 
-	str->buffer = realloc(str->buffer, sizeof(char) * str->capacity);
+	char *new_buffer = realloc(str->buffer, sizeof(char) * str->capacity);
 
-	if (!(str->buffer))
+	if (!new_buffer)
+	{
+		str->capacity /= str->growth_rate;
+
 		return DS_ERR_ALLOC;
+	}
+
+	str->buffer = new_buffer;
 
 	str->buffer[str->len] = '\0';
 

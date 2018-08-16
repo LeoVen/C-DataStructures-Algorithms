@@ -10,6 +10,9 @@
 
 #include "QueueArray.h"
 
+int QUA_TIME_TESTS(void);
+int QUA_REALLOC_TEST(void);
+
 int QueueArrayTests(void)
 {
 	printf("\n");
@@ -20,12 +23,14 @@ int QueueArrayTests(void)
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
+	//QUA_TIME_TESTS();
+	QUA_REALLOC_TEST();
+
 	QueueArray *q;
 
 	qua_init(&q);
 
-	int i, val;
-	size_t s;
+	int i;
 
 	for (i = 0; i < 100; i++)
 		qua_enqueue(q, i);
@@ -42,13 +47,24 @@ int QueueArrayTests(void)
 
 	qua_display(q);
 
-	qua_erase(&q);
+	qua_delete(&q);
+
+	printf("\n");
+	return 0;
+}
+
+int QUA_TIME_TESTS(void)
+{
+	int i;
+	QueueArray *q;
+
+	qua_init(&q);
 
 	// TIMING INSERTION AND REMOVAL
 	clock_t begin;
 	clock_t end;
 
-	size_t Q_SIZE = 100000;
+	size_t s, Q_SIZE = 100000;
 
 	size_t partition = Q_SIZE / 1000; // FOR EACH ONE THOUSAND REMOVALS
 
@@ -91,6 +107,37 @@ int QueueArrayTests(void)
 
 	free(times);
 
+	return 0;
+}
+
+int QUA_REALLOC_TEST(void)
+{
 	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ------ QUA_REALLOC_TEST ------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
+	QueueArray *queue;
+
+	qua_init(&queue);
+
+	queue->growth_rate = 10000000000; // oops! wrong!
+
+	// Testing realloc
+	int i;
+	for (i = 0; i < 10; i++)
+		qua_enqueue(queue, i);
+
+	qua_display(queue);
+
+	qua_delete(&queue);
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
 	return 0;
 }

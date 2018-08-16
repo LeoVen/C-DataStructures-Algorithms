@@ -11,11 +11,10 @@
 #include "DynamicArray.h"
 
 int DAR_IO_TESTS(void);
+int DAR_REALLOC_TEST(void);
 
 int DynamicArrayTests(void)
 {
-	//DAR_IO_TESTS();
-
 	printf("\n");
 	printf(" +-------------------------------------+\n");
 	printf(" |                                     |\n");
@@ -23,6 +22,9 @@ int DynamicArrayTests(void)
 	printf(" |                                     |\n");
 	printf(" +-------------------------------------+\n");
 	printf("\n");
+
+	//DAR_IO_TESTS();
+	DAR_REALLOC_TEST();
 
 	DynamicArray *array;
 
@@ -113,7 +115,7 @@ int DAR_IO_TESTS(void)
 {
 	printf("\n");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
-	printf("\n ---------- ---------- --------- Begin tests --------- ---------- ----------");
+	printf("\n ---------- ---------- --------- DAR_IO_TESTS -------- ---------- ----------");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
 
@@ -206,6 +208,38 @@ int DAR_IO_TESTS(void)
 
 	printf("\n---------- ---------- ---------- ---------- ----------");
 	printf("\nFinal Dynamic Array size: %zu", array->size);
+
+	dar_delete(&array);
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
+	return 0;
+}
+
+int DAR_REALLOC_TEST(void)
+{
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ------ DAR_REALLOC_TEST ------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
+	DynamicArray *array;
+
+	dar_init(&array);
+
+	array->growth_rate = 10000000000; // oops! wrong!
+
+	// Testing realloc
+	int i;
+	for (i = 0; i < 10; i++)
+		dar_insert_back(array, i);
+
+	dar_display(array);
 
 	dar_delete(&array);
 

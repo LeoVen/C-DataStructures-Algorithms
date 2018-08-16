@@ -267,10 +267,16 @@ Status qua_realloc(QueueArray *qua)
 
 	qua->capacity *= qua->growth_rate;
 
-	qua->buffer = realloc(qua->buffer, sizeof(int) * qua->capacity);
+	int *new_buffer = realloc(qua->buffer, sizeof(int) * qua->capacity);
 
-	if (!(qua->buffer))
+	if (!new_buffer)
+	{
+		qua->capacity /= qua->growth_rate;
+
 		return DS_ERR_ALLOC;
+	}
+
+	qua->buffer = new_buffer;
 
 	return DS_OK;
 }

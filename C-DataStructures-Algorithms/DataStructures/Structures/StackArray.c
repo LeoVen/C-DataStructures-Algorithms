@@ -244,10 +244,16 @@ Status sta_realloc(StackArray *sta)
 
 	sta->capacity *= sta->growth_rate;
 
-	sta->buffer = realloc(sta->buffer, sizeof(int) * sta->capacity);
+	int *new_buffer = realloc(sta->buffer, sizeof(int) * sta->capacity);
 
-	if (!(sta->buffer))
+	if (!new_buffer)
+	{
+		sta->capacity /= sta->growth_rate;
+
 		return DS_ERR_ALLOC;
+	}
+
+	sta->buffer = new_buffer;
 
 	return DS_OK;
 }

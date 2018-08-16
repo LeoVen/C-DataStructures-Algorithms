@@ -10,6 +10,8 @@
 
 #include "StackArray.h"
 
+int STA_REALLOC_TEST(void);
+
 int StackArrayTests(void)
 {
 	printf("\n");
@@ -41,6 +43,40 @@ int StackArrayTests(void)
 
 	sta_delete(&stack);
 
+	STA_REALLOC_TEST();
+
 	printf("\n");
+	return 0;
+}
+
+int STA_REALLOC_TEST(void)
+{
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ------ STA_REALLOC_TEST ------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
+	StackArray *stack;
+
+	sta_init(&stack);
+
+	stack->growth_rate = 10000000000; // oops! wrong!
+
+	// Testing realloc
+	int i;
+	for (i = 0; i < 10; i++)
+		sta_push(stack, i);
+
+	sta_display(stack);
+
+	sta_delete(&stack);
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
 	return 0;
 }

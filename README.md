@@ -16,6 +16,7 @@ The Documentation is based on Doxygen. You can view it in the source code or run
 
 ### Medium Priority
 
+* Separate tests into testing units for I/O and other specific things
 * Work on empty structures like ```AVLTree``` and ```SparseMatrix```
 * Add mathematical algorithms
 

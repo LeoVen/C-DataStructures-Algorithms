@@ -659,10 +659,16 @@ Status dar_realloc(DynamicArray *dar)
 
 	dar->capacity *= dar->growth_rate;
 
-	dar->buffer = realloc(dar->buffer, sizeof(int) * dar->capacity);
+	int *new_buffer = realloc(dar->buffer, sizeof(int) * dar->capacity);
 
-	if (!(dar->buffer))
+	if (!new_buffer)
+	{
+		dar->capacity /= dar->growth_rate;
+
 		return DS_ERR_ALLOC;
+	}
+
+	dar->buffer = new_buffer;
 
 	return DS_OK;
 }
