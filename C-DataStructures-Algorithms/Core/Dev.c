@@ -19,7 +19,8 @@ int dev_short_cut(void)
 	//SStringTests();
 	//DynamicArrayTests();
 
-	PrimeTests();
+	//PrimeTests();
+	ClockTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

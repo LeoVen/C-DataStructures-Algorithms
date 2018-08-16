@@ -108,9 +108,6 @@
     <ClCompile Include="Core\Dev.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DataStructures\Tests\DS_SortingTests.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DataStructures\Structures\SparseMatrix.c">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -216,6 +213,12 @@
     <ClCompile Include="Algorithms\Tests\PrimeTests.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataStructures\Structures\Clock.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DataStructures\Tests\ClockTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructures\Headers\Array.h">
@@ -315,6 +318,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Algorithms\Headers\Prime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DataStructures\Headers\Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

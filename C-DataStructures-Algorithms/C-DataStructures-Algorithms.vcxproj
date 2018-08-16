@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -179,6 +179,8 @@
     <ClCompile Include="DataStructures\Structures\BinaryTree.c" />
     <ClCompile Include="DataStructures\Structures\CircularBuffer.c" />
     <ClCompile Include="DataStructures\Structures\CircularLinkedList.c" />
+    <ClCompile Include="DataStructures\Structures\Clock.c" />
+    <ClCompile Include="DataStructures\Tests\ClockTests.c" />
     <ClCompile Include="DataStructures\Structures\Deque.c" />
     <ClCompile Include="DataStructures\Structures\DoublyLinkedList.c" />
     <ClCompile Include="DataStructures\Structures\DynamicArray.c" />
@@ -210,7 +212,6 @@
     <ClCompile Include="DataStructures\Tests\QueueArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\QueueTests.c" />
     <ClCompile Include="DataStructures\Tests\SinglyLinkedListTests.c" />
-    <ClCompile Include="DataStructures\Tests\DS_SortingTests.c" />
     <ClCompile Include="DataStructures\Tests\SparseMatrixTests.c" />
     <ClCompile Include="DataStructures\Tests\StackArrayTests.c" />
     <ClCompile Include="DataStructures\Tests\StackTests.c" />
@@ -253,6 +254,7 @@
     <ClInclude Include="DataStructures\Headers\StructureConversions.h" />
     <ClInclude Include="DataStructures\Headers\Trie.h" />
     <ClInclude Include="DataStructures\Headers\Vector.h" />
+    <ClInclude Include="DataStructures\Headers\Clock.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md" />

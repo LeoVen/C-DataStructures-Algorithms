@@ -182,38 +182,29 @@ bool ds_switch_function(int f)
 
 int ds_all(void)
 {
-	SinglyLinkedListTests();
-	DoublyLinkedListTests();
-	CircularLinkedListTests();
-	SparseMatrixTests();
-
-	StackTests();
-	StackArrayTests();
-
-	QueueTests();
-	QueueArrayTests();
-	DequeTests();
-	PriorityQueueTests();
-	CircularBufferTests();
-
-	BinaryTreeTests();
-	BinarySearchTreeTests();
-	AVLTreeTests();
-	TrieTests();
-
 	ArrayTests();
+	AVLTreeTests();
+	BinarySearchTreeTests();
+	BinaryTreeTests();
+	CircularBufferTests();
+	CircularLinkedListTests();
+	ClockTests();
+	DequeTests();
+	DoublyLinkedListTests();
 	DynamicArrayTests();
-
-	VectorTests();
-
-	StructureConversionsTests();
-
-	SStringTests();
-
-	SortingTests();
-
 	HashMapTests();
 	HashSetTests();
+	PriorityQueueTests();
+	QueueArrayTests();
+	QueueTests();
+	SinglyLinkedListTests();
+	SparseMatrixTests();
+	SStringTests();
+	StackArrayTests();
+	StackTests();
+	StructureConversionsTests();
+	TrieTests();
+	VectorTests();
 
 	return 0;
 }

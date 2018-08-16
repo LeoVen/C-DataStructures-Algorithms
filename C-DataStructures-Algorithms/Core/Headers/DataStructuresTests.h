@@ -47,6 +47,8 @@ extern "C" {
 	int HashMapTests(void);
 	int HashSetTests(void);
 
+	int ClockTests(void);
+
 #ifdef __cplusplus
 }
 #endif

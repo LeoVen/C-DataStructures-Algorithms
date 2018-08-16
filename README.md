@@ -11,8 +11,8 @@ The Documentation is based on Doxygen. You can view it in the source code or run
 ### Hight Priority
 
 * Document this shit up!
-* Make a Clock structure for timing code (wrapping ```clock_t```)
-* Add all prime related functions [########  ]
+* Make a ```Clock``` structure for timing code (wrapping ```clock_t```) + Documentation
+* Add all prime related functions + Documentation
 
 ### Medium Priority
 
@@ -21,7 +21,7 @@ The Documentation is based on Doxygen. You can view it in the source code or run
 
 ### Low Priority
 
-* Make a Dynamic HashSet
+* Make a ```HashSet```'s buffer have a dynamic size
 * Decide what the heck I'm going to do with ```Vector``` structure
 
 ### Long-term
@@ -122,4 +122,10 @@ Array Generators             [#         ]     Docs     [          ]
 String Generators            not started      Docs     not started
 Text Generators              not started      Docs     not started
 Lorem Ipsum                  not started      Docs     not started
+```
+
+#### Utility
+
+```
+Clock                        [##########]     Docs     [          ]
 ```
