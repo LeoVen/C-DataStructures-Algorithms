@@ -23,7 +23,7 @@ extern "C"
 	// +-------------------------------------+
 	Status convert_sll_to_arr(SinglyLinkedList *sll, Array **array);
 
-	Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **darr);
+	Status convert_sll_to_darr(SinglyLinkedList *sll, DynamicArray **dar);
 
 	Status convert_sll_to_dll(SinglyLinkedList *sll, DoublyLinkedList **dll);
 
@@ -31,13 +31,13 @@ extern "C"
 	// |              DAR -> X               |
 	// +-------------------------------------+
 
-	Status convert_darr_to_sll(DynamicArray **darr, SinglyLinkedList **sll);
+	Status convert_darr_to_sll(DynamicArray **dar, SinglyLinkedList **sll);
 
 	// +-------------------------------------+
 	// |              AAR -> X               |
 	// +-------------------------------------+
 
-	Status convert_arr_to_dar(Array *arr, DynamicArray **darr);
+	Status convert_arr_to_dar(Array *arr, DynamicArray **dar);
 
 #ifdef __cplusplus
 }

@@ -40,7 +40,7 @@ int StructureConversionsTests(void)
 	convert_sll_to_darr(sll, &darray);
 
 	for (i = 0; i < 20; i++)
-		dar_insert_back(&darray, 99);
+		dar_insert_back(darray, 99);
 
 	dar_display(darray);
 
@@ -59,7 +59,7 @@ int StructureConversionsTests(void)
 	convert_arr_to_dar(array, &darray);
 
 	for (i = 0; i < 5; i++)
-		dar_insert_back(&darray, 12);
+		dar_insert_back(darray, 12);
 
 	dar_display(darray);
 

@@ -16,16 +16,7 @@
 int dev_short_cut(void)
 {
 
-	//SStringTests();
-	//DynamicArrayTests();
-
-	//PrimeTests();
-	//ClockTests();
-
-	StackArrayTests();
-	QueueArrayTests();
-	DynamicArrayTests();
-	SStringTests();
+	StructureConversionsTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

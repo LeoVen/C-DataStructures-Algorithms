@@ -1146,7 +1146,7 @@ Status dll_copy_list(DoublyLinkedList *dll, DoublyLinkedList **result)
 		if (st != DS_OK)
 			return st;
 
-		st = sll_insert_node_tail((*result), copy);
+		st = dll_insert_node_tail((*result), copy);
 
 		if (st != DS_OK)
 			return st;

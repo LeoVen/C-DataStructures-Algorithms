@@ -144,8 +144,6 @@ size_t prm_gt(size_t n)
 	for (i = n + fix; ; i += 2)
 		if (prm_is_prime(i))
 			return i;
-
-	return 0;
 }
 
 //Status prm_factors(size_t n, size_t **result)
