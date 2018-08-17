@@ -65,10 +65,16 @@ Status str_make(String **str, char *string)
 			new_capacity *= _STRING_GROW_RATE;
 		}
 
-		(*str)->buffer = realloc((*str)->buffer, sizeof(char) * new_capacity);
+		char *new_buffer = realloc((*str)->buffer, sizeof(char) * new_capacity);
 
-		if (!((*str)->buffer))
+		if (!new_buffer)
+		{
+			(*str)->capacity = _STRING_INIT_SIZE;
+
 			return DS_ERR_ALLOC;
+		}
+
+		(*str)->buffer = new_buffer;
 
 		(*str)->capacity = new_capacity;
 	}
@@ -101,6 +107,9 @@ Status str_get_string(String *str, const char **result)
 		return DS_ERR_INVALID_OPERATION;
 
 	char *string = malloc(sizeof(char) * (str->len + 1));
+
+	if (!string)
+		return DS_ERR_ALLOC;
 
 	size_t i;
 	for (i = 0; i < str->len; i++)

@@ -53,12 +53,12 @@ int PrimeTests(void)
 	printf("\n");
 
 	for (i = 3; i < 25; i++)
-		printf("\nThe closest prime lower than %d is %zu", i, p->lt(i));
+		printf("\nThe closest prime lower than %zu is %zu", i, p->lt(i));
 
 	printf("\n");
 
 	for (i = 2; i < 25; i++)
-		printf("\nThe closest prime greater than %d is %zu", i, p->gt(i));
+		printf("\nThe closest prime greater than %zu is %zu", i, p->gt(i));
 
 	prm_delete(&p);
 

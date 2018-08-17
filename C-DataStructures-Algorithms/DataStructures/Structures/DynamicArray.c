@@ -639,15 +639,23 @@ Status dar_grow(DynamicArray *dar, size_t size)
 	if (dar->capacity >= size)
 		return DS_OK;
 
+	size_t temp_cap = dar->capacity;
+
 	while (dar->capacity < size)
 	{
 		dar->capacity *= dar->growth_rate;
 	}
 
-	dar->buffer = realloc(dar->buffer, sizeof(int) * dar->capacity);
+	int *new_buffer = realloc(dar->buffer, sizeof(int) * dar->capacity);
 
-	if (!(dar->buffer))
-		return DS_ERR_ALLOC;
+	if (!new_buffer)
+	{
+		dar->capacity = temp_cap;
+
+		return DS_OK;
+	}
+
+	dar->buffer = new_buffer;
 
 	return DS_OK;
 }

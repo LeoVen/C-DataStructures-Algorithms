@@ -326,7 +326,7 @@ int STR_REALLOC_TEST(void)
 
 	String *str;
 
-	dar_init(&str);
+	str_init(&str);
 
 	str->growth_rate = 10000000000; // oops! wrong!
 

@@ -47,6 +47,9 @@ Status map_init_entry(HashMapEntry **entry, int value)
 {
 	*entry = malloc(sizeof(HashMapEntry));
 
+	if (!(*entry))
+		return DS_ERR_ALLOC;
+
 	(*entry)->value = value;
 	(*entry)->hash = 0;
 
@@ -63,6 +66,9 @@ Status map_init_entry(HashMapEntry **entry, int value)
 Status map_make_entry(HashMapEntry **entry, char *key, int value, size_t hash)
 {
 	*entry = malloc(sizeof(HashMapEntry));
+
+	if (!(*entry))
+		return DS_ERR_ALLOC;
 
 	(*entry)->key = _strdup(key);
 	(*entry)->value = value;

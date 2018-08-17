@@ -70,6 +70,9 @@ int QUA_TIME_TESTS(void)
 
 	double *times = malloc(sizeof(double) * partition);
 
+	if (!times)
+		return -1;
+
 	// INSERTION IS CALCULATED ONCE
 	begin = clock();
 
