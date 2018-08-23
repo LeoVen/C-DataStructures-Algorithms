@@ -31,6 +31,8 @@ Status str_init(String **str)
 	if (!((*str)->buffer))
 		return DS_ERR_ALLOC;
 
+	(*str)->buffer[0] = '\0';
+
 	(*str)->capacity = _STRING_INIT_SIZE;
 	(*str)->growth_rate = _STRING_GROW_RATE;
 
@@ -520,8 +522,44 @@ size_t str_len(String *str)
 	return str->len;
 }
 
-//Status str_compare(String *str1, String *str2, int *result)
+Status str_compare(String *str1, String *str2, int *result)
+{
+	if (str1 == NULL || str2 == NULL)
+		return DS_ERR_NULL_POINTER;
 
+	if (str_greater(str1, str2))
+		*result = 1;
+	else if (str_lesser(str1, str2))
+		*result = -1;
+	else
+		*result = 0;
+
+	return DS_OK;
+}
+
+// If str1 is greater than str2
+bool str_greater(String *str1, String *str2)
+{
+	if (str1 == NULL || str2 == NULL)
+		return false;
+
+	size_t i, len = (str1->len > str2->len) ? str2->len : str1->len;
+	
+	for (i = 0; i < len; i++)
+	{
+		if (str1->buffer[i] > str2->buffer[i])
+			return true;
+		else if (str1->buffer[i] < str2->buffer[i])
+			return false;
+	}
+
+	if (str1->len > str2->len)
+		return true;
+
+	return false;
+}
+
+// If str1 equals str2
 bool str_equals(String *str1, String *str2)
 {
 	if (str1 == NULL || str2 == NULL)
@@ -533,6 +571,46 @@ bool str_equals(String *str1, String *str2)
 	size_t i;
 	for (i = 0; i < str1->len; i++)
 		if (str1->buffer[i] != str2->buffer[i])
+			return false;
+
+	return true;
+}
+
+// If str1 is lesser than str2
+bool str_lesser(String *str1, String *str2)
+{
+	if (str1 == NULL || str2 == NULL)
+		return false;
+
+	size_t i, len = (str1->len > str2->len) ? str2->len : str1->len;
+
+	for (i = 0; i < len; i++)
+	{
+		if (str1->buffer[i] < str2->buffer[i])
+			return true;
+		else if (str1->buffer[i] > str2->buffer[i])
+			return false;
+	}
+
+	if (str1->len < str2->len)
+		return true;
+
+	return false;
+}
+
+bool str_equals_str(String *str, const char *string)
+{
+	if (str == NULL || string == NULL)
+		return false;
+
+	size_t len = strlen(string);
+
+	if (str->len != len)
+		return false;
+
+	size_t i;
+	for (i = 0; i < len; i++)
+		if (str->buffer[i] != string[i])
 			return false;
 
 	return true;

@@ -86,8 +86,12 @@ extern "C"
 	Status str_length(String *str, size_t *result);
 	size_t str_len(String *str);
 
-	//Status str_compare(String *str1, String *str2, int *result);
+	Status str_compare(String *str1, String *str2, int *result);
+	bool str_greater(String *str1, String *str2);
 	bool str_equals(String *str1, String *str2);
+	bool str_lesser(String *str1, String *str2);
+
+	bool str_equals_str(String *str, const char *string);
 
 	//Status str_copy(String *str, String **result);
 	//Status str_swap(String *str1, String *str2);
