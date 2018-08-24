@@ -16,7 +16,7 @@
 int dev_short_cut(void)
 {
 
-	StructureConversionsTests();
+	SStringTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

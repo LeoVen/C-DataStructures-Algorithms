@@ -59,7 +59,7 @@ extern "C"
 	Status str_push_char_at(String *str, const char ch, size_t index);
 	Status str_push_char_back(String *str, const char ch);
 
-	//Status str_push_front(String *str, const char *ch);
+	Status str_push_front(String *str, const char *ch);
 	//Status str_push_at(String *str, const char *ch, size_t index);
 	//Status str_push_back(String *str, const char *ch);
 

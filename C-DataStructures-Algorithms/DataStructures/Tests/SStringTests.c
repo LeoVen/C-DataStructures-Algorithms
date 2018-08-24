@@ -13,6 +13,7 @@
 int STR_IO_TESTS_0(void);
 int STR_IO_TESTS_1(void);
 int STR_REALLOC_TEST(void);
+int STR_COMPARE_TEST(void);
 
 int SStringTests(void)
 {
@@ -25,8 +26,9 @@ int SStringTests(void)
 	printf("\n");
 
 	//STR_IO_TESTS_0();
-	//STR_IO_TESTS_1();
-	STR_REALLOC_TEST();
+	STR_IO_TESTS_1();
+	//STR_REALLOC_TEST();
+	//STR_COMPARE_TEST();
 
 	String *str0, *str1, *str2, *str3;
 	Status st;
@@ -308,6 +310,27 @@ int STR_IO_TESTS_1(void)
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
 
+	String *test;
+
+	Status st = str_init(&test);
+
+	if (st != DS_OK)
+		return st;
+
+	while (test->len < 200)
+	{
+		st += str_push_front(test, "Oi eu sou o goku. ");
+		
+		if (st != DS_OK)
+			return st;
+	}
+
+	printf("\n%s", test->buffer);
+
+	str_delete(&test);
+
+	str_init(&test);
+
 	printf("\n");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
@@ -344,6 +367,46 @@ int STR_REALLOC_TEST(void)
 	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
+
+	return 0;
+}
+
+int STR_COMPARE_TEST(void)
+{
+	String *s1, *s2, *s3, *s4, *s5;
+
+	Status st = 0;
+	st += str_make(&s1, "/home");
+	st += str_make(&s2, "array");
+	st += str_make(&s3, "Array");
+	st += str_make(&s4, "arrayy");
+	st += str_make(&s5, "/home");
+
+	if (st != DS_OK)
+		return st;
+
+	if (str_greater(s3, s2))
+		printf("\n\n%8s  is greater than  %8s", s3->buffer, s2->buffer);
+
+	if (str_equals(s1, s5))
+		printf("\n%8s       equals      %8s", s1->buffer, s5->buffer);
+
+	if (str_lesser(s4, s2))
+		printf("\n%8s   is lesser than  %8s\n\n", s4->buffer, s2->buffer);
+
+	if (str_greater(s5, s3))
+		printf("\n\n%8s  is greater than  %8s", s5->buffer, s3->buffer);
+
+	if (!str_equals(s2, s3))
+		printf("\n%8s   is not equal to   %8s", s2->buffer, s3->buffer);
+
+	if (str_lesser(s2, s1))
+		printf("\n%8s   is lesser than  %8s\n\n", s2->buffer, s1->buffer);
+
+	str_delete(&s1);
+	str_delete(&s2);
+	str_delete(&s3);
+	str_delete(&s4);
 
 	return 0;
 }

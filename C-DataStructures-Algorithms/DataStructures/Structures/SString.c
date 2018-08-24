@@ -232,7 +232,43 @@ Status str_push_char_back(String *str, const char ch)
 	return DS_OK;
 }
 
-//Status str_push_front(String *str, const char *ch)
+Status str_push_front(String *str, const char *ch)
+{
+	if (str == NULL || ch == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t len = strlen(ch);
+
+	if (len == 0)
+		return DS_ERR_INVALID_ARGUMENT;
+
+	Status st;
+
+	while (!str_buffer_fits(str, len))
+	{
+		st = str_realloc(str);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	size_t i;
+	for (i = str->len; i > 0; i--)
+	{
+		str->buffer[i + len - 1] = str->buffer[i - 1];
+	}
+
+	for (i = 0; i < len; i++)
+	{
+		str->buffer[i] = ch[i];
+	}
+
+	str->len += len;
+
+	str->buffer[str->len] = '\0';
+
+	return DS_OK;
+}
 
 //Status str_push_at(String *str, const char *ch, size_t index)
 
@@ -547,9 +583,9 @@ bool str_greater(String *str1, String *str2)
 	
 	for (i = 0; i < len; i++)
 	{
-		if (str1->buffer[i] > str2->buffer[i])
+		if (str1->buffer[i] - str2->buffer[i] < 0)
 			return true;
-		else if (str1->buffer[i] < str2->buffer[i])
+		else if (str1->buffer[i] - str2->buffer[i] > 0)
 			return false;
 	}
 
@@ -586,16 +622,16 @@ bool str_lesser(String *str1, String *str2)
 
 	for (i = 0; i < len; i++)
 	{
-		if (str1->buffer[i] < str2->buffer[i])
+		if (str1->buffer[i] - str2->buffer[i] > 0)
 			return true;
-		else if (str1->buffer[i] > str2->buffer[i])
+		else if (str1->buffer[i] - str2->buffer[i] < 0)
 			return false;
 	}
 
 	if (str1->len < str2->len)
-		return true;
+		return false;
 
-	return false;
+	return true;
 }
 
 bool str_equals_str(String *str, const char *string)
