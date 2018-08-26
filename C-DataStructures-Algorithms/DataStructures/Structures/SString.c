@@ -48,7 +48,7 @@ Status str_init(String **str)
  */
 Status str_make(String **str, char *string)
 {
-	size_t length = strlen(string);
+	size_t length = str_len(string);
 
 	if (length == 0)
 		return DS_ERR_INVALID_ARGUMENT;
@@ -237,7 +237,7 @@ Status str_push_front(String *str, const char *ch)
 	if (str == NULL || ch == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	size_t len = strlen(ch);
+	size_t len = str_len(ch);
 
 	if (len == 0)
 		return DS_ERR_INVALID_ARGUMENT;
@@ -270,9 +270,93 @@ Status str_push_front(String *str, const char *ch)
 	return DS_OK;
 }
 
-//Status str_push_at(String *str, const char *ch, size_t index)
+Status str_push_at(String *str, const char *ch, size_t index)
+{
+	if (str == NULL || ch == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status str_push_back(String *str, const char *ch)
+	Status st;
+
+	if (index == 0)
+	{
+		st = str_push_front(str, ch);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else if (index == str->len)
+	{
+		st = str_push_back(str, ch);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else
+	{
+		size_t len = str_len(ch);
+
+		if (len == 0)
+			return DS_ERR_INVALID_ARGUMENT;
+
+		while (!str_buffer_fits(str, len))
+		{
+			st = str_realloc(str);
+
+			if (st != DS_OK)
+				return st;
+		}
+
+		size_t i, j;
+		for (i = str->len; i >= index; i--)
+		{
+			str->buffer[i + len] = str->buffer[i];
+		}
+
+		for (i = index, j = 0; i < index + len; i++, j++)
+		{
+			str->buffer[i] = ch[j];
+		}
+
+		str->len += len;
+
+		str->buffer[str->len] = '\0';
+	}
+
+	return DS_OK;
+}
+
+Status str_push_back(String *str, const char *ch)
+{
+	if (str == NULL || ch == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	size_t len = str_len(ch);
+
+	if (len == 0)
+		return DS_ERR_INVALID_ARGUMENT;
+
+	Status st;
+
+	while (!str_buffer_fits(str, len))
+	{
+		st = str_realloc(str);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	size_t i, j;
+	for (i = str->len, j = 0; i < len + str->len; i++, j++)
+	{
+		str->buffer[i] = ch[j];
+	}
+
+	str->len += len;
+
+	str->buffer[str->len] = '\0';
+
+	return DS_OK;
+}
 
 Status str_prepend(String *str1, String *str2)
 {
@@ -310,7 +394,55 @@ Status str_prepend(String *str1, String *str2)
 	return DS_OK;
 }
 
-//Status str_add(String *str1, String *str2, size_t index)
+Status str_add(String *str1, String *str2, size_t index)
+{
+	if (str1 == NULL || str2 == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st;
+
+	if (index == 0)
+	{
+		st = str_prepend(str1, str2);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else if (index == str1->len)
+	{
+		st = str_append(str1, str2);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else
+	{
+		while (!str_buffer_fits(str1, str2->len))
+		{
+			st = str_realloc(str1);
+
+			if (st != DS_OK)
+				return st;
+		}
+
+		size_t i, j;
+		for (i = str1->len; i >= index; i--)
+		{
+			str1->buffer[i + str2->len] = str1->buffer[i];
+		}
+
+		for (i = index, j = 0; i < index + str2->len; i++, j++)
+		{
+			str1->buffer[i] = str2->buffer[j];
+		}
+
+		str1->len += str2->len;
+
+		str1->buffer[str1->len] = '\0';
+	}
+
+	return DS_OK;
+}
 
 Status str_append(String *str1, String *str2)
 {
@@ -428,7 +560,7 @@ Status str_pop_char_back(String *str)
 
 //Status str_remove(String *str, size_t from, size_t to)
 
-//Status str_slice(String *str, size_t from, size_t to, const char *result)
+//Status str_slice(String *str, size_t from, size_t to, String *result)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
@@ -543,19 +675,22 @@ Status str_back(String *str, char *result)
 	return DS_OK;
 }
 
-Status str_length(String *str, size_t *result)
+size_t str_length(String *str)
 {
 	if (str == NULL)
-		return DS_ERR_NULL_POINTER;
+		return 0;
 
-	*result = str->len;
-
-	return DS_OK;
+	return str->len;
 }
 
-size_t str_len(String *str)
+size_t str_len(char *ch)
 {
-	return str->len;
+	char *h = ch;
+
+	while (*ch)
+		++ch;
+
+	return ch - h;
 }
 
 Status str_compare(String *str1, String *str2, int *result)
@@ -639,7 +774,7 @@ bool str_equals_str(String *str, const char *string)
 	if (str == NULL || string == NULL)
 		return false;
 
-	size_t len = strlen(string);
+	size_t len = str_len(string);
 
 	if (str->len != len)
 		return false;
@@ -651,6 +786,12 @@ bool str_equals_str(String *str, const char *string)
 
 	return true;
 }
+
+// Returns true if str1 has substring str2
+//bool str_substring(String *str1, String *str2)
+
+// Returns true if str has substring ch
+//bool str_substr(String *str, const char *ch)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |

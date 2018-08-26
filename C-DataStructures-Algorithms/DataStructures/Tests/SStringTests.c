@@ -27,8 +27,8 @@ int SStringTests(void)
 
 	//STR_IO_TESTS_0();
 	STR_IO_TESTS_1();
-	//STR_REALLOC_TEST();
-	//STR_COMPARE_TEST();
+	STR_REALLOC_TEST();
+	STR_COMPARE_TEST();
 
 	String *str0, *str1, *str2, *str3;
 	Status st;
@@ -41,9 +41,9 @@ int SStringTests(void)
 	str_display(str1);
 	str_display(str2);
 
-	printf("\nLength: %zu", str_len(str0));
-	printf("\nLength: %zu", str_len(str1));
-	printf("\nLength: %zu", str_len(str2));
+	printf("\nLength: %zu", str_length(str0));
+	printf("\nLength: %zu", str_length(str1));
+	printf("\nLength: %zu", str_length(str2));
 
 	String *lotr;
 
@@ -58,7 +58,7 @@ In the Land of Mordor where the Shadows lie.");
 
 	str_display(lotr);
 
-	printf("\nLength: %zu", str_len(lotr));
+	printf("\nLength: %zu", str_length(lotr));
 
 	str_delete(&str0);
 	str_delete(&str1);
@@ -317,19 +317,53 @@ int STR_IO_TESTS_1(void)
 	if (st != DS_OK)
 		return st;
 
-	while (test->len < 200)
+	while (test->len < 50)
+	{
+		st += str_push_back(test, "Kame hame ha! ");
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	while (test->len < 100)
 	{
 		st += str_push_front(test, "Oi eu sou o goku. ");
 		
 		if (st != DS_OK)
 			return st;
 	}
-
+	
 	printf("\n%s", test->buffer);
 
 	str_delete(&test);
 
 	str_init(&test);
+
+	st += str_push_back(test, "Hellorld");
+	st += str_push_at(test, "o W", 4);
+
+	if (st != DS_OK)
+		return st;
+
+	str_display(test);
+	printf("Length: %zu", test->len);
+
+	String *lorem;
+
+	st = str_make(&lorem, " Lorem Ipsum");
+
+	if (st != DS_OK)
+		return st;
+
+	st = str_add(test, lorem, 5);
+
+	if (st != DS_OK)
+		return st;
+
+	str_display(test);
+	printf("Length: %zu", test->len);
+
+	str_delete(&test);
 
 	printf("\n");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");

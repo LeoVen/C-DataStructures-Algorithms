@@ -60,11 +60,11 @@ extern "C"
 	Status str_push_char_back(String *str, const char ch);
 
 	Status str_push_front(String *str, const char *ch);
-	//Status str_push_at(String *str, const char *ch, size_t index);
-	//Status str_push_back(String *str, const char *ch);
+	Status str_push_at(String *str, const char *ch, size_t index);
+	Status str_push_back(String *str, const char *ch);
 
 	Status str_prepend(String *str1, String *str2);
-	//Status str_add(String *str1, String *str2, size_t index);
+	Status str_add(String *str1, String *str2, size_t index);
 	Status str_append(String *str1, String *str2);
 
 	Status str_pop_char_front(String *str);
@@ -72,7 +72,7 @@ extern "C"
 	Status str_pop_char_back(String *str);
 
 	//Status str_remove(String *str, size_t from, size_t to);
-	//Status str_slice(String *str, size_t from, size_t to, const char *result);
+	//Status str_slice(String *str, size_t from, size_t to, String *result);
 
 	Status str_display(String *str);
 	Status str_display_raw(String *str);
@@ -83,8 +83,8 @@ extern "C"
 	Status str_back(String *str, char *result);
 	Status str_front(String *str, char *result);
 
-	Status str_length(String *str, size_t *result);
-	size_t str_len(String *str);
+	size_t str_length(String *str);
+	size_t str_len(char *ch);
 
 	Status str_compare(String *str1, String *str2, int *result);
 	bool str_greater(String *str1, String *str2);
@@ -92,6 +92,9 @@ extern "C"
 	bool str_lesser(String *str1, String *str2);
 
 	bool str_equals_str(String *str, const char *string);
+
+	//bool str_substring(String *str1, String *str2);
+	//bool str_substr(String *str, const char *ch);
 
 	//Status str_copy(String *str, String **result);
 	//Status str_swap(String *str1, String *str2);
