@@ -17,8 +17,12 @@
 extern "C" {
 #endif
 
-#include <stdio.h>
+
+#define _CRTDBG_MAP_ALLOC  
 #include <stdlib.h>
+#include <crtdbg.h>
+
+#include <stdio.h>
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>

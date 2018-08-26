@@ -25,7 +25,7 @@ int SStringTests(void)
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	//STR_IO_TESTS_0();
+	STR_IO_TESTS_0();
 	STR_IO_TESTS_1();
 	STR_REALLOC_TEST();
 	STR_COMPARE_TEST();
@@ -298,6 +298,8 @@ int STR_IO_TESTS_0(void)
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
 	printf("\n");
 
+	str_delete(&str);
+
 	return 0;
 }
 
@@ -364,6 +366,7 @@ int STR_IO_TESTS_1(void)
 	printf("Length: %zu", test->len);
 
 	str_delete(&test);
+	str_delete(&lorem);
 
 	printf("\n");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
@@ -441,6 +444,7 @@ int STR_COMPARE_TEST(void)
 	str_delete(&s2);
 	str_delete(&s3);
 	str_delete(&s4);
+	str_delete(&s5);
 
 	return 0;
 }
