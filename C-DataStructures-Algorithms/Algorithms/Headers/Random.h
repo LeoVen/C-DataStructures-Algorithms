@@ -22,7 +22,7 @@ extern "C"
 	Status random_int_between(int *result, int min, int max);
 
 	//Status random_char(char **ch);
-	//Status random_array_char(int **string, size_t size);
+	Status random_array_char(char **string, size_t size);
 
 #ifdef __cplusplus
 }

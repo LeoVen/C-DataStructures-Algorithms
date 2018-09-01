@@ -590,18 +590,15 @@ Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position)
 	bool found = false;
 
 	size_t i;
-	for (i = 0; i < dar->size; i++)
+	for (i = dar->size; i > 0; i--)
 	{
 		if (dar->buffer[i] == value)
 		{
 			*position = i;
 
-			found = true;
+			return DS_OK;
 		}
 	}
-
-	if (found)
-		return DS_OK;
 
 	return DS_ERR_NOT_FOUND;
 }

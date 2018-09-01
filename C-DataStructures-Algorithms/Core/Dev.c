@@ -16,7 +16,8 @@
 int dev_short_cut(void)
 {
 
-	SStringTests();
+	DynamicArrayTests();
+	//SStringTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

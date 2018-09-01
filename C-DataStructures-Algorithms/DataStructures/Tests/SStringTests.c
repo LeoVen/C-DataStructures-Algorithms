@@ -9,6 +9,7 @@
  */
 
 #include "SString.h"
+#include "Random.h"
 
 int STR_IO_TESTS_0(void);
 int STR_IO_TESTS_1(void);
@@ -25,10 +26,10 @@ int SStringTests(void)
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	STR_IO_TESTS_0();
+	//STR_IO_TESTS_0();
 	STR_IO_TESTS_1();
-	STR_REALLOC_TEST();
-	STR_COMPARE_TEST();
+	//STR_REALLOC_TEST();
+	//STR_COMPARE_TEST();
 
 	String *str0, *str1, *str2, *str3;
 	Status st;
@@ -367,6 +368,50 @@ int STR_IO_TESTS_1(void)
 
 	str_delete(&test);
 	str_delete(&lorem);
+
+	str_init(&test);
+
+	int choice;
+	size_t at;
+	char *content;
+	while (test->len < 400)
+	{
+		choice = rand() % 3;
+
+		random_array_char(&content, rand() % 20);
+
+		if (choice == 0)
+		{
+			// Insert front
+			str_push_front(test, content);
+		}
+		else if (choice == 1)
+		{
+			// Insert at
+			if (test->len == 0)
+			{
+				str_push_at(test, content, 0);
+			}
+			else
+			{
+				str_push_at(test, content, rand() % test->len);
+			}
+		}
+		else
+		{
+			// Insert back
+			str_push_back(test, content);
+		}
+
+		free(content);
+		content = NULL;
+
+		printf("\n");
+		str_display(test);
+		printf("\n");
+	}
+
+	str_delete(&test);
 
 	printf("\n");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");

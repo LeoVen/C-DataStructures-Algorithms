@@ -24,6 +24,7 @@ extern "C"
 #define _STRING_GROW_RATE 2
 
 #endif
+
 	/**
 	 * @brief A wrapper for an array of characters
 	 *

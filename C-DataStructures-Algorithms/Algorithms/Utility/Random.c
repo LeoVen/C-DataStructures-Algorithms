@@ -38,4 +38,25 @@ Status random_int_between(int *result, int min, int max)
 }
 
 //Status random_char(char **ch);
-//Status random_array_char(int **string, size_t size);
+
+Status random_array_char(char **string, size_t size)
+{
+	(*string) = malloc(sizeof(char) * (size + 1));
+
+	if (!(*string))
+		return DS_ERR_ALLOC;
+
+	const char *alpha = " ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 ";
+
+	size_t len = strlen(alpha);
+
+	size_t i;
+	for (i = 0; i < size; i++)
+	{
+		(*string)[i] = alpha[rand() % len];
+	}
+
+	(*string)[size] = '\0';
+
+	return DS_OK;
+}
