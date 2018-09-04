@@ -23,7 +23,6 @@ Status bst_init_tree(BinarySearchTree **bst)
 
 	(*bst)->root = NULL;
 
-	(*bst)->depth = 0;
 	(*bst)->size = 0;
 
 	return DS_OK;
@@ -57,7 +56,6 @@ BinarySearchTree *bst_get_tree(void)
 
 	bst->root = NULL;
 
-	bst->depth = 0;
 	bst->size = 0;
 
 	return bst;
@@ -106,13 +104,6 @@ Status bst_insert(BinarySearchTree *bst, int value)
 	if (bst == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	BinarySearchTreeNode *node;
-
-	Status st = bst_make_node(&node, value);
-
-	if (st != DS_OK)
-		return st;
-
 	BinarySearchTreeNode *scan = bst->root;
 	BinarySearchTreeNode *before = NULL;
 
@@ -120,22 +111,23 @@ Status bst_insert(BinarySearchTree *bst, int value)
 	{
 		before = scan;
 
-		if (scan->data < value)
+		if (scan->data > value)
 			scan = scan->left;
-		else if (scan->data > value)
+		else if (scan->data < value)
 			scan = scan->right;
 		else
-		{
-
-			free(node);
-
 			return DS_OK;
-		}
 	}
+
+	BinarySearchTreeNode *node;
+
+	Status st = bst_make_node(&node, value);
+
+	if (st != DS_OK)
+		return st;
 
 	if (before == NULL)
 	{
-
 		node->parent = NULL;
 
 		bst->root = node;
@@ -148,12 +140,10 @@ Status bst_insert(BinarySearchTree *bst, int value)
 	node->parent = before;
 	node->level = before->level + 1;
 
-	bst->depth = node->level;
-
 	if (before->data < value)
-		before->left = node;
-	else
 		before->right = node;
+	else
+		before->left = node;
 
 	(bst->size)++;
 
@@ -217,14 +207,14 @@ Status bst_display_raw(BinarySearchTreeNode *node)
 	if (node == NULL)
 		return DS_OK;
 
-	bst_display_raw(node->left);
+	bst_display_raw(node->right);
 
 	size_t i;
 	for (i = 0; i < node->level * BT_PRINT_SPACES; i++)
 		printf(" ");
 	printf("%d\n", node->data);
 
-	bst_display_raw(node->right);
+	bst_display_raw(node->left);
 
 	return DS_OK;
 }
@@ -234,7 +224,7 @@ Status bst_display_interactive(BinarySearchTreeNode *node)
 	if (node == NULL)
 		return DS_OK;
 
-	bst_display_interactive(node->left);
+	bst_display_interactive(node->right);
 
 	size_t i;
 	for (i = 0; i < node->level; i++)
@@ -245,7 +235,7 @@ Status bst_display_interactive(BinarySearchTreeNode *node)
 	else
 		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->data, node->level, bst_height(node) - 1);
 
-	bst_display_interactive(node->right);
+	bst_display_interactive(node->left);
 
 	return DS_OK;
 }
@@ -255,7 +245,7 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 	if (node == NULL)
 		return DS_OK;
 
-	bst_display_clean(node->left);
+	bst_display_clean(node->right);
 
 	size_t i;
 	for (i = 0; i < node->level; i++)
@@ -266,7 +256,7 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 	else
 		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->data, node->level, bst_height(node) - 1);
 
-	bst_display_clean(node->right);
+	bst_display_clean(node->left);
 
 	return DS_OK;
 }
@@ -275,13 +265,31 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status bst_delete(BinarySearchTreeNode **node)
+Status bst_delete(BinarySearchTree **bst)
 {
-	if ((*node)->left != NULL)
-		bst_delete(&((*node)->left));
+	if (*bst == NULL)
+		return DS_ERR_NULL_POINTER;
 
-	if ((*node)->right != NULL)
-		bst_delete(&((*node)->right));
+	Status st = bst_delete_node(&((*bst)->root));
+
+	if (st != DS_OK)
+		return st;
+
+	free(*bst);
+
+	*bst = NULL;
+
+	return DS_OK;
+}
+
+Status bst_delete_node(BinarySearchTreeNode **node)
+{
+	if (*node == NULL)
+		return DS_OK;
+
+	bst_delete_node(&((*node)->right));
+
+	bst_delete_node(&((*node)->left));
 
 	free((*node));
 
@@ -293,14 +301,10 @@ Status bst_erase(BinarySearchTree **bst)
 	if ((*bst) == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	Status st = bst_delete(&((*bst)->root));
+	Status st = bst_delete(bst);
 
 	if (st != DS_OK)
 		return st;
-
-	free(*bst);
-
-	(*bst) = NULL;
 
 	st = bst_init_tree(bst);
 
