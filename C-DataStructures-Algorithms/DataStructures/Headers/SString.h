@@ -54,15 +54,15 @@ extern "C"
 	Status str_init(String **str);
 	Status str_make(String **str, char *content);
 
-	Status str_get_string(String *str, const char **result);
+	Status str_get_string(String *str, char **result);
 
-	Status str_push_char_front(String *str, const char ch);
-	Status str_push_char_at(String *str, const char ch, size_t index);
-	Status str_push_char_back(String *str, const char ch);
+	Status str_push_char_front(String *str, char ch);
+	Status str_push_char_at(String *str, char ch, size_t index);
+	Status str_push_char_back(String *str, char ch);
 
-	Status str_push_front(String *str, const char *ch);
-	Status str_push_at(String *str, const char *ch, size_t index);
-	Status str_push_back(String *str, const char *ch);
+	Status str_push_front(String *str, char *ch);
+	Status str_push_at(String *str, char *ch, size_t index);
+	Status str_push_back(String *str, char *ch);
 
 	Status str_prepend(String *str1, String *str2);
 	Status str_add(String *str1, String *str2, size_t index);
@@ -92,13 +92,13 @@ extern "C"
 	bool str_equals(String *str1, String *str2);
 	bool str_lesser(String *str1, String *str2);
 
-	bool str_equals_str(String *str, const char *string);
+	bool str_equals_str(String *str, char *string);
 
 	//bool str_substring(String *str1, String *str2);
-	//bool str_substr(String *str, const char *ch);
+	//bool str_substr(String *str, char *ch);
 
-	//Status str_copy(String *str, String **result);
-	//Status str_swap(String *str1, String *str2);
+	Status str_copy(String *str, String **result);
+	Status str_swap(String **str1, String **str2);
 
 	bool str_buffer_full(String *str);
 	bool str_buffer_empty(String *str);

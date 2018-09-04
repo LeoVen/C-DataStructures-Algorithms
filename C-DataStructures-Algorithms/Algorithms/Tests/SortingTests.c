@@ -52,19 +52,19 @@ int SortingTests(void)
 	size_t i, j;
 
 	int *arr;
-	char *names[3] = {"Selection Sort", "Insertion Sort", "Bubble Sort"};
+	char *names[3] = {"Selection Sort", "Insertion Sort", "Quicksort"};
 
 	Status (*sorting_functions[3])(int *, size_t);
 
 	sorting_functions[0] = sort_selection_array_int;
 	sorting_functions[1] = sort_insertion_array_int;
-	sorting_functions[2] = sort_bubble_array_int;
+	sorting_functions[2] = sort_quicksort_array_int;
 
-	for (j = 0; j < 2; j++)
+	for (j = 0; j < 3; j++)
 	{
 		size = 10000;
 
-		for (i = 0; i < 8; i++)
+		for (i = 0; i < 4; i++)
 		{
 			random_array_int(&arr, size);
 
@@ -81,6 +81,21 @@ int SortingTests(void)
 			size += 10000;
 		}
 	}
+	size = 10000000;
+
+	random_array_int(&arr, size);
+
+	begin = clock();
+	sort_quicksort_array_int(arr, size);
+	end = clock();
+
+	result = (double)(end - begin) / CLOCKS_PER_SEC;
+
+	printf("\nResult of QuickSort for %zu integers: %lf", size, result);
+
+	//display_array_int(arr, size);
+
+	free(arr);
 
 	printf("\n");
 	return 0;

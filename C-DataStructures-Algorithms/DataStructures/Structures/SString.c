@@ -98,7 +98,7 @@ Status str_make(String **str, char *string)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status str_get_string(String *str, const char **result)
+Status str_get_string(String *str, char **result)
 {
 	(*result) = NULL;
 
@@ -128,7 +128,7 @@ Status str_get_string(String *str, const char **result)
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-Status str_push_char_front(String *str, const char ch)
+Status str_push_char_front(String *str, char ch)
 {
 	if (str == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -158,7 +158,7 @@ Status str_push_char_front(String *str, const char ch)
 	return DS_OK;
 }
 
-Status str_push_char_at(String *str, const char ch, size_t index)
+Status str_push_char_at(String *str, char ch, size_t index)
 {
 	if (str == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -208,7 +208,7 @@ Status str_push_char_at(String *str, const char ch, size_t index)
 	return DS_OK;
 }
 
-Status str_push_char_back(String *str, const char ch)
+Status str_push_char_back(String *str, char ch)
 {
 	if (str == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -232,7 +232,7 @@ Status str_push_char_back(String *str, const char ch)
 	return DS_OK;
 }
 
-Status str_push_front(String *str, const char *ch)
+Status str_push_front(String *str, char *ch)
 {
 	if (str == NULL || ch == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -270,7 +270,7 @@ Status str_push_front(String *str, const char *ch)
 	return DS_OK;
 }
 
-Status str_push_at(String *str, const char *ch, size_t index)
+Status str_push_at(String *str, char *ch, size_t index)
 {
 	if (str == NULL || ch == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -325,7 +325,7 @@ Status str_push_at(String *str, const char *ch, size_t index)
 	return DS_OK;
 }
 
-Status str_push_back(String *str, const char *ch)
+Status str_push_back(String *str, char *ch)
 {
 	if (str == NULL || ch == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -571,12 +571,13 @@ Status str_display(String *str)
 	if (str == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	printf("\n");
-
 	if (str_buffer_empty(str))
+	{
+		printf("\nString\n[ empty ]\n");
 		return DS_OK;
+	}
 
-	printf("String\n%s\n", str->buffer);
+	printf("\nString\n%s\n", str->buffer);
 
 	return DS_OK;
 }
@@ -769,7 +770,7 @@ bool str_lesser(String *str1, String *str2)
 	return true;
 }
 
-bool str_equals_str(String *str, const char *string)
+bool str_equals_str(String *str, char *string)
 {
 	if (str == NULL || string == NULL)
 		return false;
@@ -791,14 +792,50 @@ bool str_equals_str(String *str, const char *string)
 //bool str_substring(String *str1, String *str2)
 
 // Returns true if str has substring ch
-//bool str_substr(String *str, const char *ch)
+//bool str_substr(String *str, char *ch)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status str_copy(String *str, String **result)
-//Status str_swap(String *str1, String *str2)
+Status str_copy(String *str, String **result)
+{
+	*result = NULL;
+
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = str_init(result);
+
+	if (st != DS_OK)
+		return st;
+
+	while (!str_buffer_fits(*result, str->len))
+	{
+		st = str_realloc(*result);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	char *s1 = str->buffer, *s2 = (*result)->buffer;
+
+	while (*s2++ = *s1++);
+
+	(*result)->len = str->len;
+
+	return DS_OK;
+}
+
+Status str_swap(String **str1, String **str2)
+{
+	String *temp = (*str1);
+
+	(*str1) = (*str2);
+	(*str2) = temp;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |

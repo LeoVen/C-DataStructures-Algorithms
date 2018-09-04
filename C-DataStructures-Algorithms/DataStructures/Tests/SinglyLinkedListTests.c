@@ -6,9 +6,6 @@
  *
  * @brief Test Cases for @c SinglyLinkedList implementations in C
  *
- * Here all functions are tested to assure that they operate as expected. Note
- * that not all test cases are performed.
- *
  */
 
 #include "SinglyLinkedList.h"

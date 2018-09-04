@@ -15,6 +15,7 @@ int STR_IO_TESTS_0(void);
 int STR_IO_TESTS_1(void);
 int STR_REALLOC_TEST(void);
 int STR_COMPARE_TEST(void);
+int STR_COPY_TESTS(void);
 
 int SStringTests(void)
 {
@@ -27,9 +28,10 @@ int SStringTests(void)
 	printf("\n");
 
 	//STR_IO_TESTS_0();
-	STR_IO_TESTS_1();
+	//STR_IO_TESTS_1();
 	//STR_REALLOC_TEST();
 	//STR_COMPARE_TEST();
+	STR_COPY_TESTS();
 
 	String *str0, *str1, *str2, *str3;
 	Status st;
@@ -455,6 +457,12 @@ int STR_REALLOC_TEST(void)
 
 int STR_COMPARE_TEST(void)
 {
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ------ STR_COMPARE_TEST ------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
 	String *s1, *s2, *s3, *s4, *s5;
 
 	Status st = 0;
@@ -490,6 +498,74 @@ int STR_COMPARE_TEST(void)
 	str_delete(&s3);
 	str_delete(&s4);
 	str_delete(&s5);
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
+	return 0;
+}
+
+int STR_COPY_TESTS(void)
+{
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- -------- STR_COPY_TEST -------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
+
+	String *s1, *s2;
+
+	char *c;
+
+	Status st = str_init(&s1);
+
+	if (st != DS_OK)
+		return st;
+	
+	st += random_array_char(&c, rand() % 100);
+
+	st += str_push_back(s1, c);
+
+	if (st != DS_OK)
+		return st;
+
+	st = str_copy(s1, &s2);
+
+	if (st != DS_OK)
+		return st;
+
+	printf("\nS1");
+	str_display(s1);
+
+	str_erase(&s1);
+
+	printf("\nS1 (erase)");
+	str_display(s1);
+
+	printf("\nS2");
+	str_display(s2);
+
+	str_swap(&s1, &s2);
+
+	printf("\nS1 (after swap)");
+	str_display(s1);
+
+	printf("\nS2 (after swap)");
+	str_display(s2);
+
+	free(c);
+
+	str_delete(&s1);
+	str_delete(&s2);
+
+	printf("\n");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- End tests ---------- ---------- ----------");
+	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");
+	printf("\n");
 
 	return 0;
 }
