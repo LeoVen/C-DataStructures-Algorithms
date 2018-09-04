@@ -16,9 +16,8 @@
 int dev_short_cut(void)
 {
 
-	//SortingTests();
-	//DynamicArrayTests();
-	SStringTests();
+	//AVLTreeTests();
+	BinarySearchTreeTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

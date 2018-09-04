@@ -67,8 +67,6 @@ int BinarySearchTreeTests(void)
 	printf("\nLeaves: \n");
 	bst_traversal_leaves(b->root);
 
-	printf("\nTree depth: %zu", b->depth);
-
 	BinarySearchTree *b2;
 
 	bst_init_tree(&b2);
@@ -78,8 +76,9 @@ int BinarySearchTreeTests(void)
 
 	bst_display_wrapper(b2, -1);
 
-	bst_erase(&b);
-	bst_erase(&b2);
+	bst_delete(&bst);
+	bst_delete(&b);
+	bst_delete(&b2);
 
 	printf("\n");
 	return 0;

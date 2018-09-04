@@ -42,17 +42,15 @@ extern "C"
 	 * A @c BinarySearchTree is much like a @c BinaryTree but now with a rule
 	 * for inserting the nodes. This now makes every @c BinarySearchTreeNode
 	 * binded to its descriptor, the @c BinarySearchTree, which has a size
-	 * variable counting the amount of elements in that tree, a depth variable
-	 * which keeps track of the deepest leaf and a pointer to the first node
-	 * added, the @c root. The insertion rule is that every Node to the left
-	 * must have a lower (key) value (data in this case) than its parent,
-	 * higher values to the right and no duplicate nodes.
+	 * variable counting the amount of elements in that tree and a pointer to
+	 * the first node added, the @c root. The insertion rule is that every Node
+	 * to the left must have a lower (key) value (data in this case) than its
+	 * parent, higher values to the right and no duplicate nodes.
 	 *
 	 * @note For simplicity the keys of each node are actually its data.
 	 */
 	typedef struct BinarySearchTree
 	{
-		size_t depth;					   /*!< @c BinarySearchTree depth */
 		size_t size;					   /*!< Total @c BinarySearchTree elements */
 		struct BinarySearchTreeNode *root; /*!< Pointer to the very first node in the @c BinarySearchTree */
 	} BinarySearchTree;
@@ -77,8 +75,8 @@ extern "C"
 	Status bst_display_interactive(BinarySearchTreeNode *node);
 	Status bst_display_clean(BinarySearchTreeNode *node);
 
-	Status bst_delete(BinarySearchTreeNode **node);
-	Status bst_erase(BinarySearchTree **bst);
+	Status bst_delete(BinarySearchTree **bst);
+	Status bst_delete_node(BinarySearchTreeNode **node);
 
 	//Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);
 	//Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);
