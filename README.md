@@ -36,7 +36,7 @@ The Documentation is based on Doxygen. You can view it in the source code or run
 
 ```
 Array                        [#######   ]     Docs     [          ]
-AVLTree                      [#         ]     Docs     [          ]
+AVLTree                      [####      ]     Docs     [          ]
 BinarySearchTree             [########  ]     Docs     [          ]
 BinaryTree                   [#######   ]     Docs     [          ]
 BTree                        not started      Docs     not started
