@@ -17,32 +17,32 @@ extern "C"
 
 #include "Core.h"
 
-#ifndef _QUEUE_ARRAY_SPEC
-#define _QUEUE_ARRAY_SPEC
+#ifndef QUEUE_ARRAY_SPEC
+#define QUEUE_ARRAY_SPEC
 
-#define _QUEUE_ARRAY_INIT_SIZE 8
-#define _QUEUE_ARRAY_GROW_RATE 2
+#define QUEUE_ARRAY_INIT_SIZE 8
+#define QUEUE_ARRAY_GROW_RATE 2
 
 #endif
 
 	/**
-	* A @c QueueArray is a buffered @c Queue with FIFO operations, (First-int
-	* First-out), so the first item added is the first one to be removed. It
-	* also has the ability to increase in size.
-	*
-	* @b Advantages over @c Queue
-	* - Fast insertion
-	* - No need of pointers, only the data is allocated in memory
-	*
-	* @b Drawbacks
-	* - Slow removal as all items must be shifted
-	* - When the @c QueueArray is full the buffer needs to be reallocated
-	*
-	* @b Functions
-	*
-	* @c QueueArray.c
-	*
-	*/
+	 * A @c QueueArray is a buffered @c Queue with FIFO operations, (First-int
+	 * First-out), so the first item added is the first one to be removed. It
+	 * also has the ability to increase in size.
+	 *
+	 * @b Advantages over @c Queue
+	 * - Fast insertion
+	 * - No need of pointers, only the data is allocated in memory
+	 *
+	 * @b Drawbacks
+	 * - Slow removal as all items must be shifted
+	 * - When the @c QueueArray is full the buffer needs to be reallocated
+	 *
+	 * @b Functions
+	 *
+	 * @c QueueArray.c
+	 *
+	 */
 	typedef struct QueueArray
 	{
 		int *buffer;		/*!< @c QueueArray data buffer */

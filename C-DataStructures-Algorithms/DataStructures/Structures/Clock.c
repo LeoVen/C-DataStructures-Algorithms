@@ -21,7 +21,7 @@ Status clk_init(Clock **clk)
 	if (!(*clk))
 		return DS_ERR_ALLOC;
 
-	(*clk)->buffer = malloc(sizeof(double) * _CLOCK_BUFFER_SIZE);
+	(*clk)->buffer = malloc(sizeof(double) * CLOCK_BUFFER_SIZE);
 
 	if (!((*clk)->buffer))
 		return DS_ERR_ALLOC;
@@ -29,7 +29,7 @@ Status clk_init(Clock **clk)
 	(*clk)->buff_size = 0;
 
 	(*clk)->time = 0.0;
-	(*clk)->state = _CLOCK_STOPPED;
+	(*clk)->state = CLOCK_STOPPED;
 
 	(*clk)->start = clk_start;
 	(*clk)->stop = clk_stop;
@@ -57,7 +57,7 @@ Status clk_start(Clock *clk)
 	clk->timer = clock();
 	clk->lap_timer = clock();
 
-	clk->state = _CLOCK_RUNNING;
+	clk->state = CLOCK_RUNNING;
 
 	return DS_OK;
 }
@@ -74,7 +74,7 @@ Status clk_stop(Clock *clk)
 
 	clk->time += (double)(t - clk->timer) / CLOCKS_PER_SEC;
 
-	clk->state = _CLOCK_STOPPED;
+	clk->state = CLOCK_STOPPED;
 
 	return DS_OK;
 }
@@ -87,7 +87,7 @@ Status clk_lap(Clock *clk)
 	if (clk_is_stopped(clk))
 		return DS_ERR_INVALID_OPERATION;
 
-	if (clk->buff_size == _CLOCK_BUFFER_SIZE - 1)
+	if (clk->buff_size == CLOCK_BUFFER_SIZE - 1)
 		return DS_ERR_FULL;
 
 	clock_t t = clock();
@@ -189,10 +189,10 @@ Status clk_erase(Clock **clk)
 
 bool clk_is_running(Clock *clk)
 {
-	return clk->state == _CLOCK_RUNNING;
+	return clk->state == CLOCK_RUNNING;
 }
 
 bool clk_is_stopped(Clock *clk)
 {
-	return clk->state == _CLOCK_STOPPED;
+	return clk->state == CLOCK_STOPPED;
 }

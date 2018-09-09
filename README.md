@@ -81,7 +81,7 @@ Caesar Cipher                [######### ]     Docs     [          ]
 Prime factors                not started      Docs     not started
 Is Prime                     [##########]     Docs     [          ]
 Nth Prime                    [##########]     Docs     [          ]
-Biggest prime lower than     not started      Docs     [          ]
+Biggest prime lower than     [##########]      Docs     [          ]
 Lowest prime greater than    [##########]     Docs     [          ]
 ```
 
@@ -112,7 +112,7 @@ Jump Search                  not started      Docs     not started
 Bubble Sort                  [###       ]     Docs     [          ]
 Selection Sort               [###       ]     Docs     [          ]
 Insertion Sort               [###       ]     Docs     [          ]
-Quick Sort                   not started      Docs     not started
+Quick Sort                   [###       ]     Docs     not started
 Merge Sort                   not started      Docs     not started
 ```
 

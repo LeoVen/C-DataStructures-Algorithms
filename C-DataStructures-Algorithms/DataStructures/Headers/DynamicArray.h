@@ -17,11 +17,11 @@ extern "C"
 
 #include "Core.h"
 
-#ifndef _DYNAMIC_ARRAY_SPEC
-#define _DYNAMIC_ARRAY_SPEC
+#ifndef DYNAMIC_ARRAY_SPEC
+#define DYNAMIC_ARRAY_SPEC
 
-#define _DYNAMIC_ARRAY_INIT_SIZE 8
-#define _DYNAMIC_ARRAY_GROW_RATE 2
+#define DYNAMIC_ARRAY_INIT_SIZE 8
+#define DYNAMIC_ARRAY_GROW_RATE 2
 
 #endif
 

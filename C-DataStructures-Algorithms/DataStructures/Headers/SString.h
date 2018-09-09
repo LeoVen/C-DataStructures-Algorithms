@@ -17,11 +17,11 @@ extern "C"
 
 #include "Core.h"
 
-#ifndef _STRING_SPEC
-#define _STRING_SPEC
+#ifndef STRING_SPEC
+#define STRING_SPEC
 
-#define _STRING_INIT_SIZE 8
-#define _STRING_GROW_RATE 2
+#define STRING_INIT_SIZE 8
+#define STRING_GROW_RATE 2
 
 #endif
 

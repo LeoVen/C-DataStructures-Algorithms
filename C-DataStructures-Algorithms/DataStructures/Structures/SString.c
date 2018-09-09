@@ -26,15 +26,15 @@ Status str_init(String **str)
 	if (!(*str))
 		return DS_ERR_ALLOC;
 
-	(*str)->buffer = malloc(sizeof(char) * _STRING_INIT_SIZE);
+	(*str)->buffer = malloc(sizeof(char) * STRING_INIT_SIZE);
 
 	if (!((*str)->buffer))
 		return DS_ERR_ALLOC;
 
 	(*str)->buffer[0] = '\0';
 
-	(*str)->capacity = _STRING_INIT_SIZE;
-	(*str)->growth_rate = _STRING_GROW_RATE;
+	(*str)->capacity = STRING_INIT_SIZE;
+	(*str)->growth_rate = STRING_GROW_RATE;
 
 	(*str)->len = 0;
 
@@ -60,18 +60,18 @@ Status str_make(String **str, char *string)
 
 	if ((*str)->capacity <= length)
 	{
-		size_t new_capacity = _STRING_INIT_SIZE;
+		size_t new_capacity = STRING_INIT_SIZE;
 
 		while (new_capacity <= length)
 		{
-			new_capacity *= _STRING_GROW_RATE;
+			new_capacity *= STRING_GROW_RATE;
 		}
 
 		char *new_buffer = realloc((*str)->buffer, sizeof(char) * new_capacity);
 
 		if (!new_buffer)
 		{
-			(*str)->capacity = _STRING_INIT_SIZE;
+			(*str)->capacity = STRING_INIT_SIZE;
 
 			return DS_ERR_ALLOC;
 		}

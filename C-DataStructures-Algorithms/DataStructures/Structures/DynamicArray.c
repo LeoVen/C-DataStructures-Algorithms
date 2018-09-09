@@ -21,13 +21,13 @@ Status dar_init(DynamicArray **dar)
 	if (!(*dar))
 		return DS_ERR_ALLOC;
 
-	(*dar)->buffer = calloc(_DYNAMIC_ARRAY_INIT_SIZE, sizeof(int));
+	(*dar)->buffer = calloc(DYNAMIC_ARRAY_INIT_SIZE, sizeof(int));
 
 	if (!((*dar)->buffer))
 		return DS_ERR_ALLOC;
 
-	(*dar)->capacity = _DYNAMIC_ARRAY_INIT_SIZE;
-	(*dar)->growth_rate = _DYNAMIC_ARRAY_GROW_RATE;
+	(*dar)->capacity = DYNAMIC_ARRAY_INIT_SIZE;
+	(*dar)->growth_rate = DYNAMIC_ARRAY_GROW_RATE;
 
 	(*dar)->size = 0;
 

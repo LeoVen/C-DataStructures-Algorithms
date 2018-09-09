@@ -17,12 +17,12 @@ extern "C"
 
 #include "Core.h"
 
-#ifndef _CLOCK_SPEC
-#define _CLOCK_SPEC
+#ifndef CLOCK_SPEC
+#define CLOCK_SPEC
 
-#define _CLOCK_BUFFER_SIZE 50
-#define _CLOCK_RUNNING 1
-#define _CLOCK_STOPPED 0
+#define CLOCK_BUFFER_SIZE 50
+#define CLOCK_RUNNING 1
+#define CLOCK_STOPPED 0
 
 #endif
 

@@ -17,11 +17,11 @@ extern "C"
 
 #include "Core.h"
 
-#ifndef _STACK_ARRAY_SPEC
-#define _STACK_ARRAY_SPEC
+#ifndef STACK_ARRAY_SPEC
+#define STACK_ARRAY_SPEC
 
-#define _STACK_ARRAY_INIT_SIZE 8
-#define _STACK_ARRAY_GROW_RATE 2
+#define STACK_ARRAY_INIT_SIZE 8
+#define STACK_ARRAY_GROW_RATE 2
 
 #endif
 

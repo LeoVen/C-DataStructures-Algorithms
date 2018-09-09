@@ -21,13 +21,13 @@ Status sta_init(StackArray **sta)
 	if (!(*sta))
 		return DS_ERR_ALLOC;
 
-	(*sta)->buffer = malloc(sizeof(int) * _STACK_ARRAY_INIT_SIZE);
+	(*sta)->buffer = malloc(sizeof(int) * STACK_ARRAY_INIT_SIZE);
 
 	if (!((*sta)->buffer))
 		return DS_ERR_ALLOC;
 
-	(*sta)->capacity = _STACK_ARRAY_INIT_SIZE;
-	(*sta)->growth_rate = _STACK_ARRAY_GROW_RATE;
+	(*sta)->capacity = STACK_ARRAY_INIT_SIZE;
+	(*sta)->growth_rate = STACK_ARRAY_GROW_RATE;
 
 	(*sta)->height = 0;
 

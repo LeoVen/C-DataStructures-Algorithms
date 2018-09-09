@@ -21,13 +21,13 @@ Status qua_init(QueueArray **qua)
 	if (!(*qua))
 		return DS_ERR_ALLOC;
 
-	(*qua)->buffer = malloc(sizeof(int) * _QUEUE_ARRAY_INIT_SIZE);
+	(*qua)->buffer = malloc(sizeof(int) * QUEUE_ARRAY_INIT_SIZE);
 
 	if (!((*qua)->buffer))
 		return DS_ERR_ALLOC;
 
-	(*qua)->capacity = _QUEUE_ARRAY_INIT_SIZE;
-	(*qua)->growth_rate = _QUEUE_ARRAY_GROW_RATE;
+	(*qua)->capacity = QUEUE_ARRAY_INIT_SIZE;
+	(*qua)->growth_rate = QUEUE_ARRAY_GROW_RATE;
 
 	(*qua)->length = 0;
 
