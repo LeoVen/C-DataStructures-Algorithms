@@ -71,10 +71,10 @@ extern "C"
 
 	Status dar_remove_keys(DynamicArray *dar, int value);
 
-	Status dar_display(DynamicArray *darr);
-	Status dar_display_raw(DynamicArray *darr);
+	Status dar_display(DynamicArray *dar);
+	Status dar_display_raw(DynamicArray *dar);
 
-	Status dar_delete(DynamicArray **darr);
+	Status dar_delete(DynamicArray **dar);
 	Status dar_erase(DynamicArray **dar);
 
 	size_t dar_cap(DynamicArray *dar);

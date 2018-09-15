@@ -96,6 +96,7 @@ extern "C"
 
 	//bool str_substring(String *str1, String *str2);
 	//bool str_substr(String *str, char *ch);
+	//Status str_reverse(String *str);
 
 	Status str_copy(String *str, String **result);
 	Status str_swap(String **str1, String **str2);

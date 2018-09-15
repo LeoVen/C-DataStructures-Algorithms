@@ -92,8 +92,10 @@ extern "C"
 
 	int avl_balance_factor(AVLTreeNode *node);
 
-	Status avl_rotate_right(AVLTreeNode **node_y);
-	Status avl_rotate_left(AVLTreeNode **node_x);
+	Status avl_rotate_right(AVLTreeNode **node_z);
+	Status avl_rotate_left(AVLTreeNode **node_z);
+	Status avl_rotate_right_left(AVLTreeNode **node_z);
+	Status avl_rotate_left_right(AVLTreeNode **node_z);
 
 	Status avl_rebalance(AVLTree *avl, AVLTreeNode *node);
 

@@ -37,6 +37,14 @@ Status random_int_between(int *result, int min, int max)
 	return DS_OK;
 }
 
+int randint(int min, int max)
+{
+	if (max <= min)
+		return 0;
+
+	return rand() % (max + 1 - min) + min;
+}
+
 //Status random_char(char **ch);
 
 Status random_array_char(char **string, size_t size)

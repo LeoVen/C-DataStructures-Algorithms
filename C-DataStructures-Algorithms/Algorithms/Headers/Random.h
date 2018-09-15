@@ -20,6 +20,7 @@ extern "C"
 	Status random_array_int(int **array, size_t size);
 
 	Status random_int_between(int *result, int min, int max);
+	int randint(int min, int max);
 
 	//Status random_char(char **ch);
 	Status random_array_char(char **string, size_t size);

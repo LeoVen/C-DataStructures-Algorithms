@@ -35,4 +35,6 @@ Status sort_quicksort_array_int(int *array, size_t arr_size)
 
 	sort_quicksort_array_int(array, i);
 	sort_quicksort_array_int(array + i, arr_size - i);
+
+	return DS_OK;
 }

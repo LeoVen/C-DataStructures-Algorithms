@@ -9,6 +9,7 @@
  */
 
 #include "AVLTree.h"
+#include "Random.h"
 
 int AVLTreeTests(void)
 {
@@ -29,7 +30,7 @@ int AVLTreeTests(void)
 		return -1;
 
 	int i;
-	for (i = 0; i < 10; i++)
+	for (i = 101; i < 356; i++)
 	{
 		st = avl_insert(avl, i);
 
@@ -42,13 +43,14 @@ int AVLTreeTests(void)
 
 	printf("\n\n\n");
 	avl_display_raw(avl->root, 0);
+	printf("\n\nTotal elements: %zu\n", avl->size);
 
 	st = avl_erase(&avl);
 
 	if (st != DS_OK)
 		return st;
 
-	for (i = 0; i > -10; i--)
+	for (i = -101; i > -356; i--)
 	{
 		st = avl_insert(avl, i);
 
@@ -61,19 +63,20 @@ int AVLTreeTests(void)
 
 	printf("\n\n\n");
 	avl_display_raw(avl->root, 0);
-	/*
+	printf("\n\nTotal elements: %zu\n", avl->size);
+	
 	st = avl_erase(&avl);
 
 	if (st != DS_OK)
 		return st;
 
-	avl_insert(avl, 10);
 	avl_insert(avl, 8);
+	avl_insert(avl, 10);
 	avl_insert(avl, 9);
 
 	printf("\n\n\n");
 	avl_display_raw(avl->root, 0);
-
+	
 	st = avl_erase(&avl);
 
 	if (st != DS_OK)
@@ -88,9 +91,11 @@ int AVLTreeTests(void)
 	
 	avl_erase(&avl);
 
-	for (i = 0; i < 20; i++)
+	int avl_min = 101, avl_max = 355;
+
+	for (i = 0; i < 2000; i++)
 	{
-		st = avl_insert(avl, rand() % 40);
+		st = avl_insert(avl, randint(avl_min, avl_max));
 
 		if (st != DS_OK)
 		{
@@ -101,7 +106,7 @@ int AVLTreeTests(void)
 
 	printf("\n\n\n");
 	avl_display_raw(avl->root, 0);
-	*/
+	
 	avl_delete(&avl);
 
 	printf("\n");
