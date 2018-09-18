@@ -41,7 +41,7 @@ Status bst_init_node(BinarySearchTreeNode **node)
 	(*node)->parent = NULL;
 
 	(*node)->level = 0;
-	(*node)->data = 0;
+	(*node)->key = 0;
 
 	return DS_OK;
 }
@@ -71,7 +71,7 @@ BinarySearchTreeNode *bst_get_node(int value)
 	node->parent = NULL;
 
 	node->level = 0;
-	node->data = value;
+	node->key = value;
 
 	return node;
 }
@@ -83,7 +83,7 @@ Status bst_make_node(BinarySearchTreeNode **node, int value)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->data = value;
+	(*node)->key = value;
 
 	(*node)->left = NULL;
 	(*node)->right = NULL;
@@ -111,9 +111,9 @@ Status bst_insert(BinarySearchTree *bst, int value)
 	{
 		before = scan;
 
-		if (scan->data > value)
+		if (scan->key > value)
 			scan = scan->left;
-		else if (scan->data < value)
+		else if (scan->key < value)
 			scan = scan->right;
 		else
 			return DS_OK;
@@ -140,7 +140,7 @@ Status bst_insert(BinarySearchTree *bst, int value)
 	node->parent = before;
 	node->level = before->level + 1;
 
-	if (before->data < value)
+	if (before->key < value)
 		before->right = node;
 	else
 		before->left = node;
@@ -155,9 +155,6 @@ Status bst_insert(BinarySearchTree *bst, int value)
 // +-------------------------------------------------------------------------------------------------+
 
 //Status bst_remove(BinarySearchTree *bst, int value)
-
-// Unlink subtree from referenced node (removes link with parent)
-//Status bst_unlink(BinarySearchTreeNode *ref)
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
@@ -212,7 +209,7 @@ Status bst_display_raw(BinarySearchTreeNode *node)
 	size_t i;
 	for (i = 0; i < node->level * BT_PRINT_SPACES; i++)
 		printf(" ");
-	printf("%d\n", node->data);
+	printf("%d\n", node->key);
 
 	bst_display_raw(node->left);
 
@@ -231,9 +228,9 @@ Status bst_display_interactive(BinarySearchTreeNode *node)
 		printf("|-------");
 
 	if (node->parent != NULL)
-		printf("<%d(%d)[D-%zu|H-%zu]\n", node->parent->data, node->data, node->level, bst_height(node) - 1);
+		printf("<%d(%d)[D-%zu|H-%zu]\n", node->parent->key, node->key, node->level, bst_height(node) - 1);
 	else
-		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->data, node->level, bst_height(node) - 1);
+		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->key, node->level, bst_height(node) - 1);
 
 	bst_display_interactive(node->left);
 
@@ -252,9 +249,9 @@ Status bst_display_clean(BinarySearchTreeNode *node)
 		printf("|       ");
 
 	if (node->parent != NULL)
-		printf("<%d(%d)[D-%zu|H-%zu]\n", node->parent->data, node->data, node->level, bst_height(node) - 1);
+		printf("<%d(%d)[D-%zu|H-%zu]\n", node->parent->key, node->key, node->level, bst_height(node) - 1);
 	else
-		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->data, node->level, bst_height(node) - 1);
+		printf("<%d(%d)[D-%zu|H-%zu]\n", 0, node->key, node->level, bst_height(node) - 1);
 
 	bst_display_clean(node->left);
 
@@ -318,8 +315,118 @@ Status bst_erase(BinarySearchTree **bst)
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);
-//Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);
+Status bst_key_max(BinarySearchTree *bst, int *result)
+{
+	*result = 0;
+
+	if (bst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (bst_is_empty(bst))
+		return DS_ERR_INVALID_OPERATION;
+
+	BinarySearchTreeNode *scan = bst->root;
+
+	while (scan->right != NULL)
+	{
+		scan = scan->right;
+	}
+
+	*result = scan->key;
+
+	return DS_OK;
+}
+
+Status bst_key_min(BinarySearchTree *bst, int *result)
+{
+	*result = 0;
+
+	if (bst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (bst_is_empty(bst))
+		return DS_ERR_INVALID_OPERATION;
+
+	BinarySearchTreeNode *scan = bst->root;
+
+	while (scan->left != NULL)
+	{
+		scan = scan->left;
+	}
+
+	*result = scan->key;
+
+	return DS_OK;
+}
+
+Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result)
+{
+	*result = NULL;
+
+	if (bst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (bst_is_empty(bst))
+		return DS_ERR_INVALID_OPERATION;
+
+	BinarySearchTreeNode *scan = bst->root;
+
+	while (scan->right != NULL)
+	{
+		scan = scan->right;
+	}
+
+	*result = scan;
+
+	return DS_OK;
+}
+
+Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result)
+{
+	*result = NULL;
+
+	if (bst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (bst_is_empty(bst))
+		return DS_ERR_INVALID_OPERATION;
+
+	BinarySearchTreeNode *scan = bst->root;
+
+	while (scan->left != NULL)
+	{
+		scan = scan->left;
+	}
+
+	*result = scan;
+
+	return DS_OK;
+}
+
+Status bst_search(BinarySearchTree *bst, int key, BinarySearchTreeNode **result)
+{
+	*result = NULL;
+
+	if (bst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (bst_is_empty(bst))
+		return DS_ERR_INVALID_OPERATION;
+
+	BinarySearchTreeNode *scan = bst->root;
+
+	while (scan->key != key)
+	{
+		if (scan->key < key)
+			scan = scan->right;
+		else if (scan->key > key)
+			scan = scan->left;
+	}
+
+	*result = scan;
+
+	return DS_OK;
+}
 
 bool bst_is_empty(BinarySearchTree *bst)
 {
@@ -373,7 +480,7 @@ Status bst_traversal_preorder(BinarySearchTreeNode *node)
 	if (node == NULL)
 		return DS_OK;
 
-	printf(" %d", node->data);
+	printf(" %d", node->key);
 
 	bst_traversal_preorder(node->right);
 
@@ -389,7 +496,7 @@ Status bst_traversal_inorder(BinarySearchTreeNode *node)
 
 	bst_traversal_inorder(node->right);
 
-	printf(" %d", node->data);
+	printf(" %d", node->key);
 
 	bst_traversal_inorder(node->left);
 
@@ -405,7 +512,7 @@ Status bst_traversal_postorder(BinarySearchTreeNode *node)
 
 	bst_traversal_postorder(node->left);
 
-	printf(" %d", node->data);
+	printf(" %d", node->key);
 
 	return DS_OK;
 }
@@ -422,7 +529,7 @@ Status bst_traversal_leaves(BinarySearchTreeNode *node)
 	}
 	if (node->left == NULL && node->right == NULL)
 	{
-		printf(" %d", node->data);
+		printf(" %d", node->key);
 	}
 
 	return DS_OK;

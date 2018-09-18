@@ -31,8 +31,8 @@ extern "C"
 	 */
 	typedef struct BinarySearchTreeNode
 	{
-		int data;							 /*!< Node's data */
-		size_t level;						 /*!< On what level the Node is in */
+		int key;                             /*!< Node's key */
+		size_t level;                        /*!< On what level the Node is in */
 		struct BinarySearchTreeNode *right;  /*!< Pointer to right child */
 		struct BinarySearchTreeNode *left;   /*!< Pointer to left child */
 		struct BinarySearchTreeNode *parent; /*!< Pointer to parent Node */
@@ -67,9 +67,6 @@ extern "C"
 
 	//Status bst_remove(BinarySearchTree *bst, int value);
 
-	// Unlink subtree from referenced node (removes link with parent)
-	//Status bst_unlink(BinarySearchTreeNode *ref);
-
 	Status bst_display_wrapper(BinarySearchTree *bst, int display);
 	Status bst_display_raw(BinarySearchTreeNode *node);
 	Status bst_display_interactive(BinarySearchTreeNode *node);
@@ -77,9 +74,14 @@ extern "C"
 
 	Status bst_delete(BinarySearchTree **bst);
 	Status bst_delete_node(BinarySearchTreeNode **node);
+	Status bst_erase(BinarySearchTree **bst);
 
-	//Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);
-	//Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);
+	Status bst_key_max(BinarySearchTree *bst, int *result);
+	Status bst_key_min(BinarySearchTree *bst, int *result);
+	Status bst_find_max(BinarySearchTree *bst, BinarySearchTreeNode **result);
+	Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);
+
+	Status bst_search(BinarySearchTree *bst, int key, BinarySearchTreeNode **result);
 
 	bool bst_is_empty(BinarySearchTree *bst);
 

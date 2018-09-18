@@ -38,6 +38,7 @@ The Documentation is based on Doxygen. You can view it in the source code or run
 Array                        [#######   ]     Docs     [          ]
 AVLTree                      [####      ]     Docs     [          ]
 BinarySearchTree             [########  ]     Docs     [          ]
+BinaryHeap                   not started      Docs     not started
 BinaryTree                   [#######   ]     Docs     [          ]
 BTree                        not started      Docs     not started
 CircularBuffer               [##########]     Docs     [          ]
@@ -48,7 +49,6 @@ DoublyLinkedList             [######    ]     Docs     [#         ]
 DynamicArray                 [#######   ]     Docs     [          ]
 HashMap                      [########  ]     Docs     [          ]
 HashSet                      [######### ]     Docs     [          ]
-BinaryHeap                   not started      Docs     not started
 PriorityQueue                [#######   ]     Docs     [          ]
 Queue                        [##########]     Docs     [          ]
 QueueArray                   [######### ]     Docs     [          ]
@@ -56,6 +56,7 @@ RedBlackTree                 not started      Docs     not started
 SinglyLinkedList             [######### ]     Docs     [########  ]
 SkipList                     not started      Docs     not started
 SparseMatrix                 [#         ]     Docs     [          ]
+SplayTree                    not started      Docs     not started
 String                       [######    ]     Docs     [          ]
 Stack                        [######### ]     Docs     [          ]
 StackArray                   [######### ]     Docs     [          ]
