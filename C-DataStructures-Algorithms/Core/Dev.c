@@ -17,7 +17,7 @@ int dev_short_cut(void)
 {
 
 	AVLTreeTests();
-	//BinarySearchTreeTests();
+	BinarySearchTreeTests();
 	//SinglyLinkedListInteractive();
 
 	printf("\nPress enter to continue...");

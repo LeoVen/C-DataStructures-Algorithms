@@ -16,7 +16,7 @@ int AVLTreeTests(void)
 	printf("\n");
 	printf(" +-------------------------------------+\n");
 	printf(" |                                     |\n");
-	printf(" |               AVL Tree              |\n");
+	printf(" |              C AVL Tree             |\n");
 	printf(" |                                     |\n");
 	printf(" +-------------------------------------+\n");
 	printf("\n");
@@ -42,8 +42,14 @@ int AVLTreeTests(void)
 	}
 
 	printf("\n\n\n");
-	avl_display_raw(avl->root, 0);
+	avl_display_wrapper(avl, -1);
 	printf("\n\nTotal elements: %zu\n", avl->size);
+
+	avl_traversal_wrapper(avl, -1);
+	avl_traversal_wrapper(avl, 0);
+	avl_traversal_wrapper(avl, 1);
+	printf("\nLeaves\n");
+	avl_traversal_leaves(avl->root);
 
 	st = avl_erase(&avl);
 
@@ -62,8 +68,14 @@ int AVLTreeTests(void)
 	}
 
 	printf("\n\n\n");
-	avl_display_raw(avl->root, 0);
+	avl_display_wrapper(avl, -1);
 	printf("\n\nTotal elements: %zu\n", avl->size);
+
+	avl_traversal_wrapper(avl, -1);
+	avl_traversal_wrapper(avl, 0);
+	avl_traversal_wrapper(avl, 1);
+	printf("\nLeaves\n");
+	avl_traversal_leaves(avl->root);
 	
 	st = avl_erase(&avl);
 
@@ -75,7 +87,7 @@ int AVLTreeTests(void)
 	avl_insert(avl, 9);
 
 	printf("\n\n\n");
-	avl_display_raw(avl->root, 0);
+	avl_display_wrapper(avl, 0);
 	
 	st = avl_erase(&avl);
 
@@ -87,7 +99,7 @@ int AVLTreeTests(void)
 	avl_insert(avl, 9);
 
 	printf("\n\n\n");
-	avl_display_raw(avl->root, 0);
+	avl_display_wrapper(avl, 0);
 	
 	avl_erase(&avl);
 
@@ -105,7 +117,13 @@ int AVLTreeTests(void)
 	}
 
 	printf("\n\n\n");
-	avl_display_raw(avl->root, 0);
+	avl_display_wrapper(avl, 1);
+
+	avl_traversal_wrapper(avl, -1);
+	avl_traversal_wrapper(avl, 0);
+	avl_traversal_wrapper(avl, 1);
+	printf("\nLeaves\n");
+	avl_traversal_leaves(avl->root);
 	
 	avl_delete(&avl);
 

@@ -13,7 +13,7 @@
 Status sort_quicksort_array_int(int *array, size_t arr_size)
 {
 	if (arr_size < 2)
-		return;
+		return DS_OK;
 
 	size_t pivot = array[arr_size / 2];
 

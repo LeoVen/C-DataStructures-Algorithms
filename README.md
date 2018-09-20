@@ -36,8 +36,8 @@ The Documentation is based on Doxygen. You can view it in the source code or run
 
 ```
 Array                        [#######   ]     Docs     [          ]
-AVLTree                      [####      ]     Docs     [          ]
-BinarySearchTree             [########  ]     Docs     [          ]
+AVLTree                      [######### ]     Docs     [          ]
+BinarySearchTree             [######### ]     Docs     [          ]
 BinaryHeap                   not started      Docs     not started
 BinaryTree                   [#######   ]     Docs     [          ]
 BTree                        not started      Docs     not started
@@ -57,7 +57,7 @@ SinglyLinkedList             [######### ]     Docs     [########  ]
 SkipList                     not started      Docs     not started
 SparseMatrix                 [#         ]     Docs     [          ]
 SplayTree                    not started      Docs     not started
-String                       [######    ]     Docs     [          ]
+String                       [########  ]     Docs     [          ]
 Stack                        [######### ]     Docs     [          ]
 StackArray                   [######### ]     Docs     [          ]
 Trie                         [##        ]     Docs     [          ]

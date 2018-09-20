@@ -32,7 +32,7 @@ extern "C"
 	 */
 	typedef struct AVLTreeNode
 	{
-		int data;					/*!< Node's data */
+		int key;                    /*!< Node's key */
 		int height;				    /*!< Node's Height */
 		struct AVLTreeNode *right;  /*!< Pointer to right child */
 		struct AVLTreeNode *left;   /*!< Pointer to left child */
@@ -65,30 +65,33 @@ extern "C"
 
 	//Status avl_remove(BinarySearchTree *avl, int value);
 
-	//Status avl_display_wrapper(AVLTree *avl, int display);
+	Status avl_display_wrapper(AVLTree *avl, int display);
 	Status avl_display_raw(AVLTreeNode *node, size_t spaces);
-	//Status avl_display_interactive(AVLTreeNode *node);
-	//Status avl_display_clean(AVLTreeNode *node);
+	Status avl_display_interactive(AVLTreeNode *node, size_t spaces);
+	Status avl_display_clean(AVLTreeNode *node, size_t spaces);
 
 	Status avl_delete(AVLTree **avl);
 	Status avl_delete_node(AVLTreeNode **node);
 	Status avl_erase(AVLTree **avl);
 
-	//Status avl_find_max(AVLTree *avl, AVLTreeNode **result);
-	//Status avl_find_min(AVLTree *avl, AVLTreeNode **result);
+	Status avl_key_max(AVLTree *avl, int *result);
+	Status avl_key_min(AVLTree *avl, int *result);
+	Status avl_find_max(AVLTree *avl, AVLTreeNode **result);
+	Status avl_find_min(AVLTree *avl, AVLTreeNode **result);
 	
-	int avl_height(AVLTreeNode *node);
-
 	bool avl_contains(AVLTreeNode *root, int value);
 	
 	bool avl_is_empty(AVLTree *avl);
 
-	//Status avl_traversal_wrapper(AVLTree *avl, int traversal);
-	//Status avl_traversal_preorder(AVLTreeNode *node);
-	//Status avl_traversal_inorder(AVLTreeNode *node);
-	//Status avl_traversal_postorder(AVLTreeNode *node);
+	int avl_height(AVLTreeNode *node);
+	int avl_depth(AVLTreeNode *node);
 
-	//Status avl_traversal_leaves(AVLTreeNode *node);
+	Status avl_traversal_wrapper(AVLTree *avl, int traversal);
+	Status avl_traversal_preorder(AVLTreeNode *node);
+	Status avl_traversal_inorder(AVLTreeNode *node);
+	Status avl_traversal_postorder(AVLTreeNode *node);
+
+	Status avl_traversal_leaves(AVLTreeNode *node);
 
 	int avl_balance_factor(AVLTreeNode *node);
 

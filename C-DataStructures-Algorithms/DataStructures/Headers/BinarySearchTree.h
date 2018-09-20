@@ -32,7 +32,6 @@ extern "C"
 	typedef struct BinarySearchTreeNode
 	{
 		int key;                             /*!< Node's key */
-		size_t level;                        /*!< On what level the Node is in */
 		struct BinarySearchTreeNode *right;  /*!< Pointer to right child */
 		struct BinarySearchTreeNode *left;   /*!< Pointer to left child */
 		struct BinarySearchTreeNode *parent; /*!< Pointer to parent Node */
@@ -68,9 +67,9 @@ extern "C"
 	//Status bst_remove(BinarySearchTree *bst, int value);
 
 	Status bst_display_wrapper(BinarySearchTree *bst, int display);
-	Status bst_display_raw(BinarySearchTreeNode *node);
-	Status bst_display_interactive(BinarySearchTreeNode *node);
-	Status bst_display_clean(BinarySearchTreeNode *node);
+	Status bst_display_raw(BinarySearchTreeNode *node, size_t spaces);
+	Status bst_display_interactive(BinarySearchTreeNode *node, size_t spaces);
+	Status bst_display_clean(BinarySearchTreeNode *node, size_t spaces);
 
 	Status bst_delete(BinarySearchTree **bst);
 	Status bst_delete_node(BinarySearchTreeNode **node);
@@ -86,6 +85,7 @@ extern "C"
 	bool bst_is_empty(BinarySearchTree *bst);
 
 	size_t bst_height(BinarySearchTreeNode *node);
+	size_t bst_depth(BinarySearchTreeNode *node);
 
 	Status bst_traversal_wrapper(BinarySearchTree *bst, int traversal);
 	Status bst_traversal_preorder(BinarySearchTreeNode *node);

@@ -35,7 +35,7 @@ Status avl_init_node(AVLTreeNode **node)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->data = 0;
+	(*node)->key = 0;
 	(*node)->height = 1;
 
 	(*node)->left = NULL;
@@ -56,7 +56,7 @@ Status avl_make_node(AVLTreeNode **node, int value)
 	if (!(*node))
 		return DS_ERR_ALLOC;
 
-	(*node)->data = value;
+	(*node)->key = value;
 	(*node)->height = 1;
 
 	(*node)->left = NULL;
@@ -102,9 +102,9 @@ Status avl_insert(AVLTree *avl, int value)
 		{
 			before = scan;
 
-			if (scan->data > value)
+			if (scan->key > value)
 				scan = scan->left;
-			else if (scan->data < value)
+			else if (scan->key < value)
 				scan = scan->right;
 			else
 				return DS_OK;
@@ -119,7 +119,7 @@ Status avl_insert(AVLTree *avl, int value)
 
 		node->parent = before;
 
-		if (before->data < value)
+		if (before->key < value)
 			before->right = node;
 		else
 			before->left = node;
@@ -145,7 +145,49 @@ Status avl_insert(AVLTree *avl, int value)
 // |                                             Display                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status avl_display_wrapper(AVLTree *avl, int display)
+Status avl_display_wrapper(AVLTree *avl, int display)
+{
+	if (avl == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (avl_is_empty(avl))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st;
+
+	if (display)
+	{
+		printf("\n+----------------------+");
+		printf("\n|       AVL Tree       |");
+		printf("\n+----------------------+\n");
+	}
+	
+
+	switch (display)
+	{
+	case -1:
+		printf("\n<PARENT(DATA)[D-DEPTH|H-HEIGHT]\n\n");
+		st = avl_display_clean(avl->root, 0);
+		break;
+	case 0:
+		printf("\n");
+		st = avl_display_raw(avl->root, 0);
+		break;
+	case 1:
+		printf("\n<PARENT(DATA)[D-DEPTH|H-HEIGHT]\n\n");
+		st = avl_display_interactive(avl->root, 0);
+		break;
+	default:
+		return DS_ERR_INVALID_ARGUMENT;
+	}
+
+	printf("\n");
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
 
 Status avl_display_raw(AVLTreeNode *node, size_t spaces)
 {
@@ -154,18 +196,58 @@ Status avl_display_raw(AVLTreeNode *node, size_t spaces)
 
 	avl_display_raw(node->right, spaces + 1);
 
-	int i;
-	for (i = 0; i < spaces * (BT_PRINT_SPACES + 2); i++)
+	size_t i;
+	for (i = 0; i < spaces * BT_PRINT_SPACES; i++)
 		printf(" ");
-	printf("<%d(%d)%d\n", (node->parent ? node->parent->data : 0), node->data, node->height);
+
+	printf("%d\n", node->key);
 
 	avl_display_raw(node->left, spaces + 1);
 
 	return DS_OK;
 }
 
-//Status avl_display_interactive(AVLTreeNode *node)
-//Status avl_display_clean(AVLTreeNode *node)
+Status avl_display_interactive(AVLTreeNode *node, size_t spaces)
+{
+	if (node == NULL)
+		return DS_OK;
+
+	avl_display_interactive(node->right, spaces + 1);
+
+	size_t i;
+	for (i = 0; i < spaces; i++)
+		printf("|-------");
+
+	if (node->parent != NULL)
+		printf("<%d(%d)[D-%d|H-%d]\n", node->parent->key, node->key, avl_depth(node), node->height - 1);
+	else
+		printf("<%d(%d)[D-%d|H-%d]\n", 0, node->key, avl_depth(node), node->height - 1);
+
+	avl_display_interactive(node->left, spaces + 1);
+
+	return DS_OK;
+}
+
+Status avl_display_clean(AVLTreeNode *node, size_t spaces)
+{
+	if (node == NULL)
+		return DS_OK;
+
+	avl_display_clean(node->right, spaces + 1);
+
+	size_t i;
+	for (i = 0; i < spaces; i++)
+		printf("|       ");
+
+	if (node->parent != NULL)
+		printf("<%d(%d)[D-%d|H-%d]\n", node->parent->key, node->key, avl_depth(node), node->height - 1);
+	else
+		printf("<%d(%d)[D-%d|H-%d]\n", 0, node->key, avl_depth(node), node->height - 1);
+
+	avl_display_clean(node->left, spaces + 1);
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Resets                                              |
@@ -220,25 +302,96 @@ Status avl_erase(AVLTree **avl)
 	return DS_OK;
 }
 
-//Status avl_delete(BinarySearchTreeNode **node)
-//Status avl_erase(BinarySearchTree **avl)
-
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status avl_find_max(AVLTree *avl, AVLTreeNode **result)
-//Status avl_find_min(AVLTree *avl, AVLTreeNode **result)
-
-int avl_height(AVLTreeNode *node)
+Status avl_key_max(AVLTree *avl, int *result)
 {
-	if (node == NULL)
-		return 0;
+	*result = 0;
 
-	int height_l = (node->left == NULL) ? 0 : node->left->height;
-	int height_r = (node->right == NULL) ? 0 : node->right->height;
-		
-	return 1 + ((height_l >= height_r) ? height_l : height_r);
+	if (avl == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (avl_is_empty(avl))
+		return DS_ERR_INVALID_OPERATION;
+
+	AVLTreeNode *scan = avl->root;
+
+	while (scan->right != NULL)
+	{
+		scan = scan->right;
+	}
+
+	*result = scan->key;
+
+	return DS_OK;
+}
+
+Status avl_key_min(AVLTree *avl, int *result)
+{
+	*result = 0;
+
+	if (avl == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (avl_is_empty(avl))
+		return DS_ERR_INVALID_OPERATION;
+
+	AVLTreeNode *scan = avl->root;
+
+	while (scan->left != NULL)
+	{
+		scan = scan->left;
+	}
+
+	*result = scan->key;
+
+	return DS_OK;
+}
+
+Status avl_find_max(AVLTree *avl, AVLTreeNode **result)
+{
+	*result = 0;
+
+	if (avl == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (avl_is_empty(avl))
+		return DS_ERR_INVALID_OPERATION;
+
+	AVLTreeNode *scan = avl->root;
+
+	while (scan->right != NULL)
+	{
+		scan = scan->right;
+	}
+
+	*result = scan;
+
+	return DS_OK;
+}
+
+Status avl_find_min(AVLTree *avl, AVLTreeNode **result)
+{
+	*result = 0;
+
+	if (avl == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (avl_is_empty(avl))
+		return DS_ERR_INVALID_OPERATION;
+
+	AVLTreeNode *scan = avl->root;
+
+	while (scan->left != NULL)
+	{
+		scan = scan->left;
+	}
+
+	*result = scan;
+
+	return DS_OK;
 }
 
 bool avl_contains(AVLTreeNode *root, int value)
@@ -246,9 +399,9 @@ bool avl_contains(AVLTreeNode *root, int value)
 	if (root == NULL)
 		return false;
 
-	if (value > root->data)
+	if (value > root->key)
 		return avl_contains(root->left, value);
-	else if (value < root->data)
+	else if (value < root->key)
 		return avl_contains(root->right, value);
 	else
 		return true;
@@ -259,16 +412,135 @@ bool avl_is_empty(AVLTree *avl)
 	return avl->size == 0;
 }
 
+int avl_height(AVLTreeNode *node)
+{
+	if (node == NULL)
+		return 0;
+
+	int height_l = (node->left == NULL) ? 0 : node->left->height;
+	int height_r = (node->right == NULL) ? 0 : node->right->height;
+
+	return 1 + ((height_l >= height_r) ? height_l : height_r);
+}
+
+int avl_depth(AVLTreeNode *node)
+{
+	if (node == NULL)
+		return 0;
+
+	AVLTreeNode *scan = node;
+
+	int depth = 0;
+
+	while (scan->parent != NULL)
+	{
+		scan = scan->parent;
+
+		depth++;
+	}
+
+	return depth;
+}
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                           Traversal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status avl_traversal_wrapper(AVLTree *avl, int traversal)
-//Status avl_traversal_preorder(AVLTreeNode *node)
-//Status avl_traversal_inorder(AVLTreeNode *node)
-//Status avl_traversal_postorder(AVLTreeNode *node)
+Status avl_traversal_wrapper(AVLTree *avl, int traversal)
+{
+	if (avl == NULL)
+		return DS_ERR_NULL_POINTER;
 
-//Status avl_traversal_leaves(AVLTreeNode *node)
+	if (avl_is_empty(avl))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st;
+
+	switch (traversal)
+	{
+	case -1:
+		printf("\nPreorder Traversal\n");
+		st = avl_traversal_preorder(avl->root);
+		break;
+	case 0:
+		printf("\nInorder Traversal\n");
+		st = avl_traversal_inorder(avl->root);
+		break;
+	case 1:
+		printf("\nPostorder Traversal\n");
+		st = avl_traversal_postorder(avl->root);
+		break;
+	default:
+		return DS_ERR_INVALID_ARGUMENT;
+	}
+
+	printf("\n");
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
+
+Status avl_traversal_preorder(AVLTreeNode *node)
+{
+	if (node == NULL)
+		return DS_OK;
+
+	printf(" %d", node->key);
+
+	avl_traversal_preorder(node->left);
+
+	avl_traversal_preorder(node->right);
+
+	return DS_OK;
+}
+
+Status avl_traversal_inorder(AVLTreeNode *node)
+{
+	if (node == NULL)
+		return DS_OK;
+
+	avl_traversal_inorder(node->left);
+
+	printf(" %d", node->key);
+
+	avl_traversal_inorder(node->right);
+
+	return DS_OK;
+}
+
+Status avl_traversal_postorder(AVLTreeNode *node)
+{
+	if (node == NULL)
+		return DS_OK;
+
+	avl_traversal_postorder(node->left);
+
+	avl_traversal_postorder(node->right);
+
+	printf(" %d", node->key);
+
+	return DS_OK;
+}
+
+Status avl_traversal_leaves(AVLTreeNode *node)
+{
+	if (node->left != NULL)
+	{
+		avl_traversal_leaves(node->left);
+	}
+	if (node->right != NULL)
+	{
+		avl_traversal_leaves(node->right);
+	}
+	if (node->left == NULL && node->right == NULL)
+	{
+		printf(" %d", node->key);
+	}
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             AVL                                                 |
@@ -323,7 +595,7 @@ Status avl_rotate_right(AVLTreeNode **node_z)
 	// Update parent of root
 	if (node_zp != NULL)
 	{
-		if (node_zp->data > node_y->data)
+		if (node_zp->key > node_y->key)
 			node_zp->left = node_y;
 		else
 			node_zp->right = node_y;
@@ -378,7 +650,7 @@ Status avl_rotate_left(AVLTreeNode **node_z)
 	// Update parent of root
 	if (node_zp != NULL)
 	{
-		if (node_zp->data > node_y->data)
+		if (node_zp->key > node_y->key)
 			node_zp->left = node_y;
 		else
 			node_zp->right = node_y;
@@ -445,7 +717,7 @@ Status avl_rotate_right_left(AVLTreeNode **node_z)
 	// Update parent of root
 	if (node_zp != NULL)
 	{
-		if (node_zp->data > node_x->data)
+		if (node_zp->key > node_x->key)
 			node_zp->left = node_x;
 		else
 			node_zp->right = node_x;
@@ -512,7 +784,7 @@ Status avl_rotate_left_right(AVLTreeNode **node_z)
 	// Update parent of root
 	if (node_zp != NULL)
 	{
-		if (node_zp->data > node_x->data)
+		if (node_zp->key > node_x->key)
 			node_zp->left = node_x;
 		else
 			node_zp->right = node_x;
@@ -551,7 +823,7 @@ Status avl_rebalance(AVLTree *avl, AVLTreeNode *node)
 
 	AVLTreeNode *scan = node;
 
-	int balance, value = node->data;
+	int balance, value = node->key;
 
 	bool is_root = false;
 
@@ -566,7 +838,7 @@ Status avl_rebalance(AVLTree *avl, AVLTreeNode *node)
 		balance = avl_balance_factor(scan);
 
 		// Left Left
-		if (balance > 1 && value < scan->left->data)
+		if (balance > 1 && value < scan->left->key)
 		{
 			st = avl_rotate_right(&scan);
 
@@ -575,7 +847,7 @@ Status avl_rebalance(AVLTree *avl, AVLTreeNode *node)
 		}
 
 		// Right Right
-		if (balance < -1 && value > scan->right->data)
+		if (balance < -1 && value > scan->right->key)
 		{
 			st = avl_rotate_left(&scan);
 
@@ -584,7 +856,7 @@ Status avl_rebalance(AVLTree *avl, AVLTreeNode *node)
 		}
 
 		// Left Right
-		if (balance > 1 && value > scan->left->data && scan->left->right != NULL)
+		if (balance > 1 && value > scan->left->key && scan->left->right != NULL)
 		{
 			st = avl_rotate_left_right(&scan);
 
@@ -593,7 +865,7 @@ Status avl_rebalance(AVLTree *avl, AVLTreeNode *node)
 		}
 
 		// Right Left
-		if (balance < -1 && value < scan->right->data && scan->right->left != NULL)
+		if (balance < -1 && value < scan->right->key && scan->right->left != NULL)
 		{
 			st = avl_rotate_right_left(&scan);
 
