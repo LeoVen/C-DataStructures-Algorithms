@@ -46,7 +46,19 @@ extern "C"
 	 * to the left must have a lower (key) value (data in this case) than its
 	 * parent, higher values to the right and no duplicate nodes.
 	 *
-	 * @note For simplicity the keys of each node are actually its data.
+	 * @b Advantages over @c BinaryTree
+	 * - All nodes are ordered by their @c key value where the left node has a
+	 * key lower and the right node has a higher key value
+	 * - Useful to implement binary search algorithm
+	 *
+	 * @b Drawbacks
+	 * - The tree structure might be askew with worst case search as
+	 * <code>O(n)</code>
+	 * - The search might not always be <code>O(log n)</code>
+	 *
+	 * @b Functions
+	 *
+	 * @c BinarySearchTree.c
 	 */
 	typedef struct BinarySearchTree
 	{

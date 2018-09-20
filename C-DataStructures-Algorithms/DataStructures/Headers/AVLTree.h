@@ -40,15 +40,22 @@ extern "C"
 	} AVLTreeNode;
 
 	/**
-	 * A @c AVLTree is much like a @c BinarySearchTree but now with a rule
-	 * for inserting the nodes. This now makes every @c BinarySearchTreeNode
-	 * binded to its descriptor, the @c BinarySearchTree, which has a size
-	 * variable counting the amount of elements in that tree and a pointer to
-	 * the first node added, the @c root. The insertion rule is that every Node
-	 * to the left must have a lower (key) value (data in this case) than its
-	 * parent, higher values to the right and no duplicate nodes.
+	 * A @c AVLTree is much like a @c BinarySearchTree where the difference
+	 * between heights of left and right subtrees cannot be more than one for
+	 * all nodes. To maintain this property left and right rotations are used.
 	 *
-	 * @note For simplicity the keys of each node are actually its data.
+	 * @b Advantages over @c BinarySearchTree
+	 * - The height of an @c AVLTree is always <code>log n</code> so all
+	 * operations like search, insert and remove are running on
+	 * <code>O(log n)</code>
+	 *
+	 * @b Drawbacks
+	 * - Insertion is slower because to maintain the AVL property many
+	 * rotations are needed
+	 *
+	 * @b Functions
+	 *
+	 * @c BinarySearchTree.c
 	 */
 	typedef struct AVLTree
 	{
