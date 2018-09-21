@@ -16,6 +16,8 @@ extern "C" {
 
 	int CryptographyTests(void);
 
+	int BacktrackingTests(void);
+
 	int GeneratorsTests(void);
 
 	int MathematicsTests(void);

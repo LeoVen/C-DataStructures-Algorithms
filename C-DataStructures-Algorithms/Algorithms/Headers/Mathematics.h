@@ -15,7 +15,7 @@ extern "C"
 {
 #endif
 
-#include "Algorithms.h"
+#include "Core.h"
 
 	size_t Josephus(size_t n, size_t k);
 

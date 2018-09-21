@@ -15,7 +15,7 @@ extern "C"
 {
 #endif
 
-#include "Algorithms.h"
+#include "Core.h"
 
 	Status random_array_int(int **array, size_t size);
 

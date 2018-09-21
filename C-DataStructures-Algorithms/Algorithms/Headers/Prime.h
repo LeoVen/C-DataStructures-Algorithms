@@ -15,7 +15,7 @@ extern "C"
 {
 #endif
 
-#include "Algorithms.h"
+#include "Core.h"
 
 	// A prime struct that helps finding prime sequences
 	typedef struct Prime

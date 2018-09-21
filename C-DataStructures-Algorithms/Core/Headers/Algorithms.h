@@ -21,6 +21,7 @@ extern "C" {
 #include "Random.h"
 #include "Mathematics.h"
 #include "Sorting.h"
+#include "Backtracking.h"
 
 	int AlgorithmsMenu(void);
 

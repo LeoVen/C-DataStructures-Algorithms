@@ -15,7 +15,7 @@ extern "C"
 {
 #endif
 
-#include "Algorithms.h"
+#include "Core.h"
 
 	Status sort_bubble_array_int(int *array, size_t arr_size);
 	Status sort_selection_array_int(int *array, size_t arr_size);

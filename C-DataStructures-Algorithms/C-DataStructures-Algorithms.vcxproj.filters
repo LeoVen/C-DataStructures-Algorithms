@@ -222,6 +222,12 @@
     <ClCompile Include="Algorithms\Sorting\QuickSort.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Algorithms\Backtracking\Queens.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Algorithms\Tests\BacktrackingTests.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataStructures\Headers\Array.h">
@@ -324,6 +330,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DataStructures\Headers\Clock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Algorithms\Headers\Backtracking.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
