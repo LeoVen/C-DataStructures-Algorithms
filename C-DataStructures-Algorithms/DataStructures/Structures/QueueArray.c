@@ -100,6 +100,8 @@ Status qua_dequeue(QueueArray *qua, int *value)
 		qua->buffer[i] = qua->buffer[i + 1];
 	}
 
+	(qua->length)--;
+
 	return DS_OK;
 }
 
