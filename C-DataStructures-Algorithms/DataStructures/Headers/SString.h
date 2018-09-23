@@ -101,6 +101,11 @@ extern "C"
 	Status str_copy(String *str, String **result);
 	Status str_swap(String **str1, String **str2);
 
+	Status str_case_upper(String *str);
+	Status str_case_lower(String *str);
+	//Status str_capitalize(String *str);
+	//Status str_tile(String *str);
+
 	bool str_buffer_full(String *str);
 	bool str_buffer_empty(String *str);
 	bool str_buffer_fits(String *str, size_t str_len);

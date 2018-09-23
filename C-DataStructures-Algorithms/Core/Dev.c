@@ -18,7 +18,8 @@ int dev_short_cut(void)
 
 	//AVLTreeTests();
 	//BinarySearchTreeTests();
-	BacktrackingTests();
+	//BacktrackingTests();
+	SStringTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

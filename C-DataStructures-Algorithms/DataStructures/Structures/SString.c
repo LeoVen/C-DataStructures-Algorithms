@@ -840,6 +840,58 @@ Status str_swap(String **str1, String **str2)
 }
 
 // +-------------------------------------------------------------------------------------------------+
+// |                                            Others                                               |
+// +-------------------------------------------------------------------------------------------------+
+
+Status str_case_upper(String *str)
+{
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str))
+		return DS_ERR_INVALID_OPERATION;
+
+	char ch;
+
+	size_t i;
+	for (i = 0; i < str->len; i++)
+	{
+		ch = str->buffer[i];
+		
+		if (ch >= 'a' && ch <= 'z')
+			str->buffer[i] -= 32;
+	}
+
+	return DS_OK;
+}
+
+Status str_case_lower(String *str)
+{
+	if (str == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (str_buffer_empty(str))
+		return DS_ERR_INVALID_OPERATION;
+
+	char ch;
+
+	size_t i;
+	for (i = 0; i < str->len; i++)
+	{
+		ch = str->buffer[i];
+
+		if (ch >= 'A' && ch <= 'Z')
+			str->buffer[i] += 32;
+	}
+
+	return DS_OK;
+}
+
+//Status str_capitalize(String *str);
+
+//Status str_tile(String *str);
+
+// +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |
 // +-------------------------------------------------------------------------------------------------+
 

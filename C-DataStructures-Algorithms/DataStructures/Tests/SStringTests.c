@@ -31,7 +31,7 @@ int SStringTests(void)
 	//STR_IO_TESTS_1();
 	//STR_REALLOC_TEST();
 	//STR_COMPARE_TEST();
-	STR_COPY_TESTS();
+	//STR_COPY_TESTS();
 
 	String *str0, *str1, *str2, *str3;
 	Status st;
@@ -167,6 +167,14 @@ In the Land of Mordor where the Shadows lie.");
 	str_make(&str3, "Lord of the Rings: ");
 
 	str_prepend(str1, str3);
+
+	str_display(str1);
+
+	str_case_upper(str1);
+
+	str_display(str1);
+
+	str_case_lower(str1);
 
 	str_display(str1);
 
