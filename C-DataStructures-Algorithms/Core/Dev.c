@@ -16,10 +16,13 @@
 int dev_short_cut(void)
 {
 
-	//AVLTreeTests();
-	//BinarySearchTreeTests();
-	//BacktrackingTests();
-	SStringTests();
+	ArrayTests();
+	BinaryTreeTests();
+	CircularBufferTests();
+	CircularLinkedListTests();
+	DequeTests();
+	DoublyLinkedListTests();
+	PriorityQueueTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

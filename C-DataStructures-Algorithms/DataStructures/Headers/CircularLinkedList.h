@@ -61,9 +61,6 @@ extern "C"
 	Status cll_init_list(CircularLinkedList **cli);
 	Status cll_init_node(CircularLinkedNode **cln);
 
-	CircularLinkedList *cll_get_list(void);
-	CircularLinkedNode *cll_get_node(int value);
-
 	Status cll_get_length(CircularLinkedList *cll, size_t *result);
 
 	Status cll_make_node(CircularLinkedNode **cln, int value);
@@ -94,6 +91,8 @@ extern "C"
 
 	Status cll_delete(CircularLinkedList **cll);
 	Status cll_erase(CircularLinkedList **cll);
+
+	size_t cll_length(CircularLinkedList *cll);
 
 	//Status cll_frequency(CircularLinkedList *cll, int key, size_t *frequency);
 

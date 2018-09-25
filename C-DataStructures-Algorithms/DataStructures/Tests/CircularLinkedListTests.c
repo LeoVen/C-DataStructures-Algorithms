@@ -27,10 +27,6 @@ int CircularLinkedListTests(void)
 
 	cll_init_list(&cll);
 
-	CircularLinkedNode *cln;
-
-	cll_init_node(&cln);
-
 	int i;
 	for (i = 0; i < 20; i++)
 	{
@@ -59,9 +55,7 @@ int CircularLinkedListTests(void)
 	cll_iter_before(cll);
 	cll_display(cll);
 
-	size_t cll_len;
-
-	cll_get_length(cll, &cll_len);
+	size_t cll_len = cll_length(cll);
 
 	for (i = 0; i < cll_len; i++)
 	{

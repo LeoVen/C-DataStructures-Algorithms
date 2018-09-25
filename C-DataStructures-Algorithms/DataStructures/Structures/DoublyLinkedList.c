@@ -46,28 +46,6 @@ Status dll_init_node(DoublyLinkedNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-DoublyLinkedList *dll_get_list(void)
-{
-	DoublyLinkedList *dll = malloc(sizeof(DoublyLinkedList));
-
-	dll->length = 0;
-	dll->head = NULL;
-	dll->tail = NULL;
-
-	return dll;
-}
-
-DoublyLinkedNode *dll_get_node(int value)
-{
-	DoublyLinkedNode *node = malloc(sizeof(DoublyLinkedNode));
-
-	node->data = value;
-	node->next = NULL;
-	node->prev = NULL;
-
-	return node;
-}
-
 Status dll_make_node(DoublyLinkedNode **node, int value)
 {
 	(*node) = malloc(sizeof(DoublyLinkedNode));
@@ -94,6 +72,7 @@ Status dll_get_length(DoublyLinkedList *dll, size_t *result)
 	while (scan != NULL)
 	{
 		scan = scan->next;
+
 		(*result)++;
 	}
 
@@ -854,6 +833,14 @@ bool dll_exists(DoublyLinkedList *dll, int key)
 	}
 
 	return false;
+}
+
+size_t dll_length(DoublyLinkedList *dll)
+{
+	if (dll == NULL)
+		return 0;
+
+	return dll->length;
 }
 
 bool dll_is_empty(DoublyLinkedList *dll)

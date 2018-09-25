@@ -30,7 +30,7 @@ int CircularBufferTests(void)
 	{
 		cbf_display(cbf);
 		if (i % 2 == 0)
-			cbf_add(cbf, i);
+			cbf_insert(cbf, i);
 		else
 			cbf_remove(cbf, &j);
 	}
@@ -39,7 +39,7 @@ int CircularBufferTests(void)
 
 	for (i = 0; i < 100; i++)
 	{
-		cbf_add(cbf, 0); // Adding 0's that don't count as empty
+		cbf_insert(cbf, 0); // Adding 0's that don't count as empty
 	}
 
 	// Should print DS_OK in a total of the buffer length
@@ -54,6 +54,24 @@ int CircularBufferTests(void)
 	cbf_display(cbf);
 
 	cbf_delete(&cbf);
+
+	CircularBuffer *buffer = NULL;
+
+	if (cbf_init(&buffer, 100) == DS_OK)
+	{
+		for (i = 100; i < 190; i++)
+			cbf_insert(buffer, i);
+
+		for (i = 0; i < 90; i++)
+			cbf_remove(buffer, &j);
+
+		for (i = 190; i < 220; i++)
+			cbf_insert(buffer, i);
+	}
+
+	cbf_display(buffer);
+
+	cbf_delete(&buffer);
 
 	printf("\n");
 	return 0;

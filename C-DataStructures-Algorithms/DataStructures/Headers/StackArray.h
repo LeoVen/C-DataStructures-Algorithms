@@ -53,7 +53,6 @@ extern "C"
 	Status sta_init(StackArray **sta);
 
 	Status sta_get_height(StackArray *sta, size_t *result);
-	size_t sta_height(StackArray *sta);
 
 	Status sta_push(StackArray *sta, int value);
 
@@ -68,6 +67,8 @@ extern "C"
 
 	Status sta_look(StackArray *sta, int *result);
 	int sta_peek(StackArray *sta);
+
+	size_t sta_height(StackArray *sta);
 
 	bool sta_is_empty(StackArray *sta);
 	bool sta_is_full(StackArray *sta);

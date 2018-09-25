@@ -32,11 +32,7 @@ Status bt_init_node(BinaryTree **leaf, int value)
 	return DS_OK;
 }
 
-// +-------------------------------------------------------------------------------------------------+
-// |                                            Getters                                              |
-// +-------------------------------------------------------------------------------------------------+*
-
-BinaryTree *bt_get_node(int value)
+BinaryTree* bt_get_node(int value)
 {
 	BinaryTree *leaf = malloc(sizeof(BinaryTree));
 
@@ -140,26 +136,14 @@ Status bt_display_raw(BinaryTree *root)
 
 Status bt_delete(BinaryTree **bt)
 {
-	if ((*bt)->left == NULL && (*bt)->right == NULL)
-	{
-
-		if ((*bt)->parent != NULL)
-		{
-
-			if ((*bt)->parent->right == (*bt))
-				(*bt)->parent->right = NULL;
-			else
-				(*bt)->parent->left = NULL;
-		}
-
-		free((*bt));
-
+	if (*bt == NULL)
 		return DS_OK;
-	}
 
 	bt_delete(&((*bt)->right));
 
 	bt_delete(&((*bt)->left));
+
+	free(*bt);
 
 	return DS_OK;
 }

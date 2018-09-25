@@ -47,29 +47,6 @@ Status que_init_node(QueueNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Queue *que_get_queue(void)
-{
-	Queue *que = malloc(sizeof(Queue));
-
-	que->front = NULL;
-	que->rear = NULL;
-
-	que->length = 0;
-
-	return que;
-}
-
-QueueNode *que_get_node(int value)
-{
-	QueueNode *node = malloc(sizeof(QueueNode));
-
-	node->prev = NULL;
-
-	node->data = value;
-
-	return node;
-}
-
 Status que_make_node(QueueNode **node, int value)
 {
 	(*node) = malloc(sizeof(QueueNode));
@@ -98,9 +75,9 @@ Status que_get_length(Queue *que, size_t *result)
 
 	while (scan != NULL)
 	{
-		(*result)++;
-
 		scan = scan->prev;
+
+		(*result)++;
 	}
 
 	if ((*result) != que->length)
@@ -352,6 +329,14 @@ Status que_peek_rear(Queue *que, int *result)
 	*result = que->rear->data;
 
 	return DS_OK;
+}
+
+size_t que_length(Queue *que)
+{
+	if (que == NULL)
+		return 0;
+
+	return que->length;
 }
 
 bool que_is_empty(Queue *que)

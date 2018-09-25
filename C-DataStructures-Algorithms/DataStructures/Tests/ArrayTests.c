@@ -196,6 +196,7 @@ int ArrayTests(void)
 	arr_delete(&arr);
 	arr_delete(&array);
 	arr_delete(&sArray);
+	arr_delete(&result);
 
 	printf("\n");
 	return 0;

@@ -54,7 +54,6 @@ extern "C"
 	Status qua_init(QueueArray **qua);
 
 	Status qua_get_length(QueueArray *qua, size_t *result);
-	size_t qua_length(QueueArray *qua);
 
 	Status qua_enqueue(QueueArray *qua, int value);
 
@@ -69,6 +68,9 @@ extern "C"
 
 	Status qua_peek_front(QueueArray *qua, int *result);
 	Status qua_peek_rear(QueueArray *qua, int *result);
+
+	size_t qua_length(QueueArray *qua);
+	size_t qua_capacity(QueueArray *qua);
 
 	bool qua_is_empty(QueueArray *qua);
 	bool qua_is_full(QueueArray *qua);

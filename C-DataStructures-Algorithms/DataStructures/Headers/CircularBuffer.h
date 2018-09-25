@@ -27,21 +27,17 @@ extern "C"
 	 */
 	typedef struct CircularBuffer
 	{
-		bool is_empty;	 /*!< If buffer is empty or not */
-		size_t length;	 /*!< Current Buffer length */
+		bool is_empty;     /*!< If buffer is empty or not */
+		size_t length;     /*!< Current Buffer length */
 		size_t max_length; /*!< Maximum Buffer length */
-		size_t start;	  /*!< Where elements are added */
-		size_t end;		   /*!< Where elements are removed */
-		int *buffer;	   /*!< Buffer */
+		size_t start;      /*!< Where elements are added */
+		size_t end;        /*!< Where elements are removed */
+		int *buffer;       /*!< Buffer */
 	} CircularBuffer;
 
 	Status cbf_init(CircularBuffer **squ, size_t length);
 
-	CircularBuffer *cbf_get(size_t size);
-
-	Status cbf_get_length(CircularBuffer *cbf, size_t *result);
-
-	Status cbf_add(CircularBuffer *cbf, int value);
+	Status cbf_insert(CircularBuffer *cbf, int value);
 
 	Status cbf_remove(CircularBuffer *cbf, int *value);
 
@@ -51,6 +47,8 @@ extern "C"
 	Status cbf_erase(CircularBuffer **cbf);  // Erases and init
 
 	Status cbf_wrap(CircularBuffer *cbf);
+
+	size_t cbf_length(CircularBuffer *cbf);
 
 	bool cbf_is_empty(CircularBuffer *cbf);
 	bool cbf_is_full(CircularBuffer *cbf);

@@ -44,19 +44,6 @@ int PriorityQueueTests(void)
 
 	prq_erase_queue(&prq);
 
-	prq_enqueue_node(prq, prq_get_node(0, 20));
-	prq_enqueue_node(prq, prq_get_node(1, 10));
-	prq_enqueue_node(prq, prq_get_node(2, 12));
-	prq_enqueue_node(prq, prq_get_node(3, 11));
-	prq_enqueue_node(prq, prq_get_node(4, 11));
-	prq_enqueue_node(prq, prq_get_node(5, 11));
-	prq_enqueue_node(prq, prq_get_node(6, 13));
-	prq_enqueue_node(prq, prq_get_node(7, 21));
-	prq_enqueue_node(prq, prq_get_node(8, 20));
-
-	prq_display(prq);
-	// front <- 7 <- 0 <- 8 <- 6 <- 2 <- 3 <- 4 <- 5 <- 1 <- rear
-
 	int highest, lowest;
 
 	prq_priority_highest(prq, &highest);

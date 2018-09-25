@@ -45,35 +45,6 @@ Status bst_init_node(BinarySearchTreeNode **node)
 	return DS_OK;
 }
 
-// +-------------------------------------------------------------------------------------------------+
-// |                                            Getters                                              |
-// +-------------------------------------------------------------------------------------------------+*
-
-BinarySearchTree *bst_get_tree(void)
-{
-	BinarySearchTree *bst = malloc(sizeof(BinarySearchTree));
-
-	bst->root = NULL;
-
-	bst->size = 0;
-
-	return bst;
-}
-
-BinarySearchTreeNode *bst_get_node(int value)
-{
-	BinarySearchTreeNode *node = malloc(sizeof(BinarySearchTreeNode));
-
-	node->left = NULL;
-	node->right = NULL;
-
-	node->parent = NULL;
-
-	node->key = value;
-
-	return node;
-}
-
 Status bst_make_node(BinarySearchTreeNode **node, int value)
 {
 	(*node) = malloc(sizeof(BinarySearchTreeNode));

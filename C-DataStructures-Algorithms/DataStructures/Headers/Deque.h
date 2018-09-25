@@ -59,9 +59,6 @@ extern "C"
 	Status deq_init_queue(Deque **deq);
 	Status deq_init_node(DequeNode **node);
 
-	Deque *deq_get_queue(void);
-	DequeNode *deq_get_node(int value);
-
 	Status deq_make_node(DequeNode **node, int value);
 
 	Status deq_get_length(Deque *deq, size_t *result);
@@ -85,6 +82,8 @@ extern "C"
 
 	Status deq_peek_front(Deque *deq, int *result);
 	Status deq_peek_rear(Deque *deq, int *result);
+
+	size_t deq_length(Deque *deq);
 
 	bool deq_is_empty(Deque *deq);
 

@@ -67,9 +67,6 @@ extern "C"
 	Status dll_init_list(DoublyLinkedList **dll);
 	Status dll_init_node(DoublyLinkedNode **node);
 
-	DoublyLinkedList *dll_get_list(void);
-	DoublyLinkedNode *dll_get_node(int value);
-
 	Status dll_make_node(DoublyLinkedNode **node, int value);
 
 	Status dll_get_length(DoublyLinkedList *dll, size_t *result);
@@ -105,6 +102,8 @@ extern "C"
 
 	Status dll_contains(DoublyLinkedList *dll, int key, bool *result);
 	bool dll_exists(DoublyLinkedList *dll, int key);
+
+	size_t dll_length(DoublyLinkedList *dll);
 
 	bool dll_is_empty(DoublyLinkedList *dll);
 	//Status dll_is_sorted(DoublyLinkedList *dll, bool *result);

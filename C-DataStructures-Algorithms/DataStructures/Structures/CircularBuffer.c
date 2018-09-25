@@ -38,43 +38,10 @@ Status cbf_init(CircularBuffer **cbf, size_t length)
 }
 
 // +-------------------------------------------------------------------------------------------------+
-// |                                            Getters                                              |
-// +-------------------------------------------------------------------------------------------------+
-
-CircularBuffer *cbf_get(size_t length)
-{
-	CircularBuffer *cbf = malloc(sizeof(CircularBuffer));
-
-	cbf->buffer = calloc(length, sizeof(int));
-
-	cbf->max_length = length;
-	cbf->length = 0;
-
-	cbf->is_empty = true;
-
-	cbf->start = 0;
-	cbf->end = 0;
-
-	return cbf;
-}
-
-Status cbf_get_length(CircularBuffer *cbf, size_t *result)
-{
-	*result = 0;
-
-	if (cbf == NULL)
-		return DS_ERR_NULL_POINTER;
-
-	*result = cbf->length;
-
-	return DS_OK;
-}
-
-// +-------------------------------------------------------------------------------------------------+
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-Status cbf_add(CircularBuffer *cbf, int value)
+Status cbf_insert(CircularBuffer *cbf, int value)
 {
 	if (cbf == NULL)
 		return DS_ERR_NULL_POINTER;
@@ -130,13 +97,20 @@ Status cbf_display(CircularBuffer *cbf)
 	if (cbf == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	printf("\nCircular Buffer\n[");
+	if (cbf_is_empty(cbf))
+	{
+		printf("\nCircular Buffer\n[ empty ]\n");
+
+		return DS_OK;
+	}
+
+	printf("\nCircular Buffer\n[ ");
 
 	size_t i;
-	for (i = 0; i < cbf->max_length; i++)
-		printf(" [%d]", cbf->buffer[i]);
+	for (i = 0; i < cbf->max_length - 1; i++)
+		printf("%d, ", cbf->buffer[i]);
 
-	printf(" ]\n");
+	printf("%d ]\n", cbf->buffer[cbf->max_length - 1]);
 
 	return DS_OK;
 }
@@ -197,6 +171,14 @@ Status cbf_erase(CircularBuffer **cbf)
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
+
+size_t cbf_length(CircularBuffer *cbf)
+{
+	if (cbf == NULL)
+		return 0;
+
+	return cbf->length;
+}
 
 bool cbf_is_empty(CircularBuffer *cbf)
 {

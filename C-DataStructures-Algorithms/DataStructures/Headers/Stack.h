@@ -56,9 +56,6 @@ extern "C"
 	Status stk_init_stack(Stack **stk);
 	Status stk_init_box(StackBox **box);
 
-	Stack *stk_get_stack(void);
-	StackBox *stk_get_box(int value);
-
 	Status stk_make_box(StackBox **box, int value);
 
 	Status stk_get_height(Stack *stk, size_t *result);
@@ -78,6 +75,8 @@ extern "C"
 
 	Status stk_look(Stack *stk, int *result);
 	int stk_peek(Stack *stk);
+
+	size_t stk_height(Stack *stk);
 
 	bool stk_is_empty(Stack *stk);
 

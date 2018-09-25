@@ -48,30 +48,6 @@ Status deq_init_node(DequeNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Deque *deq_get_queue(void)
-{
-	Deque *deq = malloc(sizeof(Deque));
-
-	deq->front = NULL;
-	deq->rear = NULL;
-
-	deq->length = 0;
-
-	return deq;
-}
-
-DequeNode *deq_get_node(int value)
-{
-	DequeNode *node = malloc(sizeof(DequeNode));
-
-	node->prev = NULL;
-	node->next = NULL;
-
-	node->data = value;
-
-	return node;
-}
-
 Status deq_make_node(DequeNode **node, int value)
 {
 	(*node) = malloc(sizeof(DequeNode));
@@ -469,6 +445,14 @@ Status deq_peek_rear(Deque *deq, int *result)
 	*result = deq->rear->data;
 
 	return DS_OK;
+}
+
+size_t deq_length(Deque *deq)
+{
+	if (deq == NULL)
+		return 0;
+
+	return deq->length;
 }
 
 bool deq_is_empty(Deque *deq)

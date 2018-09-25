@@ -48,11 +48,6 @@ Status sta_get_height(StackArray *sta, size_t *result)
 	return DS_OK;
 }
 
-size_t sta_height(StackArray *sta)
-{
-	return sta->height;
-}
-
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
@@ -215,6 +210,14 @@ Status sta_look(StackArray *sta, int *result)
 int sta_peek(StackArray *sta)
 {
 	return sta->buffer[sta->height - 1];
+}
+
+size_t sta_height(StackArray *sta)
+{
+	if (sta == NULL)
+		return 0;
+
+	return sta->height;
 }
 
 bool sta_is_empty(StackArray *sta)

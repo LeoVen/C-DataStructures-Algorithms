@@ -104,69 +104,6 @@ Status sll_init_node(SinglyLinkedNode **node)
 // +-------------------------------------------------------------------------------------------------+
 
 /**
- * @brief Initializes a new @c SinglyLinkedList and returns it as a result.
- *
- * This functions uses malloc to allocate a new @c SinglyLinkedList, sets
- * @c length to 0 and points @c head and @c tail to @c NULL, and finally
- * returns the new List.
- *
- * @return Returns a new @c SinglyLinkedList with length of 0.
- *
- * @see sll_init_list()
- *
- * @b Usage
- * @code{.c}
- * SinglyLinkedList *sll = sll_get_list();
- * @endcode
- *
- * @note Avoid using this function as it does not return a status code and
- * does not check for failures. Give preference to @c sll_init_list().
- */
-SinglyLinkedList *sll_get_list(void)
-{
-	SinglyLinkedList *sll = malloc(sizeof(SinglyLinkedList));
-
-	sll->length = 0;
-	sll->head = NULL;
-	sll->tail = NULL;
-
-	return sll;
-}
-
-/**
- * @brief Initializes a new @c SinglyLinkedNode and returns it as a
- * result.
- *
- * This function uses malloc to allocate a new @c SinglyLinkedNode, sets Node
- * @c data to the value parameter, its @c *next pointer to @c NULL and finally
- * returns the new Node.
- *
- * @param[in] value Node value
- *
- * @return Returns a new @c SinglyLinkedNode with data of given parameter
- *
- * @see sll_init_node()
- *
- * @b Usage
- * @code{.c}
- * SinglyLinkedNode *node = sll_get_node(12);
- * @endcode
- *
- * @note Avoid using this function as it does not return a @c Status code and
- * does not check for failures. Give preference to @c sll_init_node() or
- * @c sll_make_node().
-*/
-SinglyLinkedNode *sll_get_node(int value)
-{
-	SinglyLinkedNode *node = malloc(sizeof(SinglyLinkedNode));
-
-	node->data = value;
-	node->next = NULL;
-
-	return node;
-}
-
-/**
  * @brief Initializes a new @c SinglyLinkedNode with a value
  *
  * This function allows you to make a @c SinglyLinkedNode by passing
@@ -231,13 +168,14 @@ Status sll_get_length(SinglyLinkedList *sll, size_t *result)
 	if (sll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	SinglyLinkedNode *scanner = sll->head;
+	SinglyLinkedNode *scan = sll->head;
 
 	*result = 0;
 
-	while (scanner != NULL)
+	while (scan != NULL)
 	{
-		scanner = scanner->next;
+		scan = scan->next;
+
 		(*result)++;
 	}
 
@@ -1684,6 +1622,14 @@ bool sll_exists(SinglyLinkedList *sll, int key)
 	}
 
 	return false;
+}
+
+size_t sll_length(SinglyLinkedList *sll)
+{
+	if (sll == NULL)
+		return 0;
+
+	return sll->length;
 }
 
 bool sll_is_empty(SinglyLinkedList *sll)

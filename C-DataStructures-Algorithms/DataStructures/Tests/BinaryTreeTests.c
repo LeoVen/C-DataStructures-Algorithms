@@ -66,9 +66,9 @@ int BinaryTreeTests(void)
 	printf("\n");
 	bt_traversal_postorder(root);
 
-	// Almost right
-	bt_delete(&b_L);
 	bt_display(root);
+
+	bt_delete(&root);
 
 	printf("\n");
 	return 0;

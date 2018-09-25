@@ -63,9 +63,6 @@ extern "C"
 	Status sll_init_list(SinglyLinkedList **sll);
 	Status sll_init_node(SinglyLinkedNode **node);
 
-	SinglyLinkedList *sll_get_list(void);
-	SinglyLinkedNode *sll_get_node(int value);
-
 	Status sll_make_node(SinglyLinkedNode **node, int value);
 
 	Status sll_get_length(SinglyLinkedList *sll, size_t *result);
@@ -101,6 +98,8 @@ extern "C"
 
 	Status sll_contains(SinglyLinkedList *sll, int key, bool *result);
 	bool sll_exists(SinglyLinkedList *sll, int key);
+
+	size_t sll_length(SinglyLinkedList *sll);
 
 	bool sll_is_empty(SinglyLinkedList *sll);
 	Status sll_is_sorted(SinglyLinkedList *sll, bool *result);

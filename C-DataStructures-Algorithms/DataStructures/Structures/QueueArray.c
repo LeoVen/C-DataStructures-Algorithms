@@ -48,11 +48,6 @@ Status qua_get_length(QueueArray *qua, size_t *result)
 	return DS_OK;
 }
 
-size_t qua_length(QueueArray *qua)
-{
-	return qua->length;
-}
-
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
@@ -240,6 +235,22 @@ Status qua_peek_rear(QueueArray *qua, int *result)
 	*result = qua->buffer[qua->length - 1];
 
 	return DS_OK;
+}
+
+size_t qua_length(QueueArray *qua)
+{
+	if (qua == NULL)
+		return 0;
+
+	return qua->length;
+}
+
+size_t qua_capacity(QueueArray *qua)
+{
+	if (qua == NULL)
+		return 0;
+
+	return qua->capacity;
 }
 
 bool qua_is_empty(QueueArray *qua)

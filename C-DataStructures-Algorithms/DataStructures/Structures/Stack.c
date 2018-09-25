@@ -44,26 +44,6 @@ Status stk_init_box(StackBox **box)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Stack *stk_get_stack(void)
-{
-	Stack *stk = malloc(sizeof(Stack));
-
-	stk->height = 0;
-	stk->top = NULL;
-
-	return stk;
-}
-
-StackBox *stk_get_box(int value)
-{
-	StackBox *box = malloc(sizeof(StackBox));
-
-	box->below = NULL;
-	box->data = value;
-
-	return box;
-}
-
 Status stk_make_box(StackBox **box, int value)
 {
 	(*box) = malloc(sizeof(StackBox));
@@ -293,6 +273,14 @@ Status stk_look(Stack *stk, int *result)
 int stk_peek(Stack *stk)
 {
 	return stk->top->data;
+}
+
+size_t stk_height(Stack *stk)
+{
+	if (stk == NULL)
+		return 0;
+
+	return stk->height;
 }
 
 bool stk_is_empty(Stack *stk)

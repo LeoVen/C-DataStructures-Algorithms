@@ -48,30 +48,6 @@ Status prq_init_node(PriorityQueueNode **node)
 // |                                            Getters                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-PriorityQueue *prq_get_queue(void)
-{
-	PriorityQueue *prq = malloc(sizeof(PriorityQueue));
-
-	prq->front = NULL;
-	prq->rear = NULL;
-
-	prq->length = 0;
-
-	return prq;
-}
-
-PriorityQueueNode *prq_get_node(int value, int priority)
-{
-	PriorityQueueNode *node = malloc(sizeof(PriorityQueueNode));
-
-	node->prev = NULL;
-
-	node->data = value;
-	node->priority = priority;
-
-	return node;
-}
-
 Status prq_make_node(PriorityQueueNode **node, int value, int priority)
 {
 	(*node) = malloc(sizeof(PriorityQueueNode));
@@ -399,6 +375,14 @@ Status prq_peek_rear(PriorityQueue *prq, int *result)
 	*result = prq->rear->data;
 
 	return DS_OK;
+}
+
+size_t prq_length(PriorityQueue *prq)
+{
+	if (prq == NULL)
+		return 0;
+
+	return prq->length;
 }
 
 bool prq_is_empty(PriorityQueue *prq)

@@ -59,9 +59,6 @@ extern "C"
 	Status prq_init_queue(PriorityQueue **prq);
 	Status prq_init_node(PriorityQueueNode **node);
 
-	PriorityQueue *prq_get_queue(void);
-	PriorityQueueNode *prq_get_node(int value, int priority);
-
 	Status prq_make_node(PriorityQueueNode **node, int value, int priority);
 
 	Status prq_get_length(PriorityQueue *prq, size_t *result);
@@ -81,6 +78,8 @@ extern "C"
 
 	Status prq_peek_front(PriorityQueue *prq, int *result);
 	Status prq_peek_rear(PriorityQueue *prq, int *result);
+
+	size_t prq_length(PriorityQueue *prq);
 
 	bool prq_is_empty(PriorityQueue *prq);
 

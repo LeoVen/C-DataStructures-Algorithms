@@ -41,45 +41,30 @@ Status cll_init_node(CircularLinkedNode **cln)
 }
 
 // +-------------------------------------------------------------------------------------------------+
-// |                                            Getters                                              |
+// |                                             Getters                                             |
 // +-------------------------------------------------------------------------------------------------+
-
-CircularLinkedList *cll_get_list(void)
-{
-	CircularLinkedList *cll = malloc(sizeof(CircularLinkedList));
-
-	cll->curr = NULL;
-	cll->length = 0;
-
-	return cll;
-}
-
-CircularLinkedNode *cll_get_node(int value)
-{
-	CircularLinkedNode *cln = malloc(sizeof(CircularLinkedNode));
-
-	cln->data = value;
-	cln->next = NULL;
-
-	return cln;
-}
 
 Status cll_get_length(CircularLinkedList *cll, size_t *result)
 {
 	if (cll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	// TODO implement with while pointer does not point to the same memory
-	// location as the first pointer
+	CircularLinkedNode *scan;
 
-	*result = cll->length;
+	*result = 0;
+
+	while (scan != NULL)
+	{
+		scan = scan->next;
+
+		(*result)++;
+	}
+
+	if ((*result) != cll->length)
+		return DS_ERR_UNEXPECTED_RESULT;
 
 	return DS_OK;
 }
-
-// +-------------------------------------------------------------------------------------------------+
-// |                                              Node                                               |
-// +-------------------------------------------------------------------------------------------------+
 
 Status cll_make_node(CircularLinkedNode **cln, int value)
 {
@@ -418,6 +403,14 @@ Status cll_erase(CircularLinkedList **cll)
 // |                                             Search                                              |
 // +-------------------------------------------------------------------------------------------------+
 
+size_t cll_length(CircularLinkedList *cll)
+{
+	if (cll == NULL)
+		return 0;
+
+	return cll->length;
+}
+
 //Status cll_frequency(CircularLinkedList *cll, int key, size_t *frequency)
 
 //Status cll_contains(CircularLinkedList *cll, int key, bool *result)
@@ -486,6 +479,8 @@ Status cll_josephus(size_t n, size_t k, size_t *result)
 	}
 	else
 		return DS_ERR_UNEXPECTED_RESULT;
+
+	cll_delete(&cll);
 
 	return DS_OK;
 }
