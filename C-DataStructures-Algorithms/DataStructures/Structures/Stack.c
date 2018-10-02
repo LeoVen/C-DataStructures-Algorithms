@@ -130,7 +130,10 @@ Status stk_slice(Stack *stk)
 
 	stk->top = stk->top->below;
 
-	free(kill);
+	Status st = stk_delete_box(&kill);
+
+	if (st != DS_OK)
+		return st;
 
 	(stk->height)--;
 
@@ -163,14 +166,14 @@ Status stk_display(Stack *stk)
 	if (stk->height == 0 || stk->top == NULL)
 	{
 
-		printf("\nC Stack\n[ empty]\n");
+		printf("\nStack\n[ empty]\n");
 
 		return DS_OK;
 	}
 
 	StackBox *scan = stk->top;
 
-	printf("\nC Stack");
+	printf("\nStack");
 
 	while (scan != NULL)
 	{
@@ -221,10 +224,17 @@ Status stk_delete_stack(Stack **stk)
 
 	StackBox *prev = (*stk)->top;
 
+	Status st;
+
 	while ((*stk)->top != NULL)
 	{
 		(*stk)->top = (*stk)->top->below;
-		free(prev);
+
+		st = stk_delete_box(&prev);
+
+		if (st != DS_OK)
+			return st;
+		
 		prev = (*stk)->top;
 	}
 

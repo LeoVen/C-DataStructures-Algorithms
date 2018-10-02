@@ -89,8 +89,8 @@ extern "C"
 	Status prq_priority_highest(PriorityQueue *prq, int *result);
 	Status prq_priority_lowest(PriorityQueue *prq, int *result);
 
-	//Status prq_copy_node(PriorityQueueNode *node, PriorityQueueNode **result);
-	//Status prq_copy_queue(PriorityQueue *prq, PriorityQueue **result);
+	Status prq_copy_node(PriorityQueueNode *node, PriorityQueueNode **result);
+	Status prq_copy_queue(PriorityQueue *prq, PriorityQueue **result);
 
 #ifdef __cplusplus
 }

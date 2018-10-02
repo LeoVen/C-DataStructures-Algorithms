@@ -794,6 +794,10 @@ bool str_equals_str(String *str, char *string)
 // Returns true if str has substring ch
 //bool str_substr(String *str, char *ch)
 
+//Status str_find_substring(String *str, String *key, size_t *pos)
+
+//Status str_find_substr(String *str, char *string, size_t *pos)
+
 //Status str_reverse(String *str)
 
 // +-------------------------------------------------------------------------------------------------+

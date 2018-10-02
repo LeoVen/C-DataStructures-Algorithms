@@ -90,8 +90,8 @@ extern "C"
 	Status deq_find_max(Deque *deq, int *result);
 	Status deq_find_min(Deque *deq, int *result);
 
-	//Status deq_copy_node(DequeNode *node, DequeNode **result);
-	//Status deq_copy_queue(Deque *que, Deque **result);
+	Status deq_copy_node(DequeNode *node, DequeNode **result);
+	Status deq_copy_queue(Deque *deq, Deque **result);
 
 #ifdef __cplusplus
 }

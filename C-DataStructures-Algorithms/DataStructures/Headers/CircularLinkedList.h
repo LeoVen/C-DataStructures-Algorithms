@@ -61,8 +61,6 @@ extern "C"
 	Status cll_init_list(CircularLinkedList **cli);
 	Status cll_init_node(CircularLinkedNode **cln);
 
-	Status cll_get_length(CircularLinkedList *cll, size_t *result);
-
 	Status cll_make_node(CircularLinkedNode **cln, int value);
 
 	Status cll_insert_first(CircularLinkedList *cll, int value);

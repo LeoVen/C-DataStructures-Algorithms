@@ -490,5 +490,47 @@ Status prq_priority_lowest(PriorityQueue *prq, int *result)
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status prq_copy_node(PriorityQueueNode *node, PriorityQueueNode **result)
-//Status prq_copy_queue(PriorityQueue *prq, PriorityQueue **result)
+Status prq_copy_node(PriorityQueueNode *node, PriorityQueueNode **result)
+{
+	if (node == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = prq_make_node(result, node->data, node->priority);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
+
+Status prq_copy_queue(PriorityQueue *prq, PriorityQueue **result)
+{
+	*result = NULL;
+
+	if (prq == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = prq_init_queue(result);
+
+	if (st != DS_OK)
+		return st;
+
+	if (prq_is_empty(prq))
+	{
+		return DS_OK;
+	}
+
+	PriorityQueueNode *scan = prq->front;
+
+	while (scan != NULL)
+	{
+		st = prq_enqueue(*result, scan->data, scan->priority);
+
+		if (st != DS_OK)
+			return st;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}

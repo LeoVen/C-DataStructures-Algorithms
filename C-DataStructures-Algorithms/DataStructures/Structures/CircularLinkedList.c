@@ -44,28 +44,6 @@ Status cll_init_node(CircularLinkedNode **cln)
 // |                                             Getters                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status cll_get_length(CircularLinkedList *cll, size_t *result)
-{
-	if (cll == NULL)
-		return DS_ERR_NULL_POINTER;
-
-	CircularLinkedNode *scan;
-
-	*result = 0;
-
-	while (scan != NULL)
-	{
-		scan = scan->next;
-
-		(*result)++;
-	}
-
-	if ((*result) != cll->length)
-		return DS_ERR_UNEXPECTED_RESULT;
-
-	return DS_OK;
-}
-
 Status cll_make_node(CircularLinkedNode **cln, int value)
 {
 	*cln = malloc(sizeof(CircularLinkedNode));

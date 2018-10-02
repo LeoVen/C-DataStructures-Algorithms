@@ -49,8 +49,8 @@ extern "C"
 	  */
 	typedef struct Stack
 	{
-		size_t height; /*!< @c Stack Height */
-		StackBox *top; /*!< @c StackBox on top */
+		size_t height;        /*!< @c Stack Height */
+		struct StackBox *top; /*!< @c StackBox on top */
 	} Stack;
 
 	Status stk_init_stack(Stack **stk);

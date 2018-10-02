@@ -57,7 +57,38 @@ Status dar_make(DynamicArray **dar, int *array, size_t arr_size)
 // |                                            Insertion                                            |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status dar_insert(DynamicArray *dar, int *array, size_t arr_size, size_t index)
+Status dar_insert(DynamicArray *dar, int *array, size_t arr_size, size_t index)
+{
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (index > dar->size)
+		return DS_ERR_INVALID_POSITION;
+
+	Status st;
+
+	while (!dar_fits(dar, arr_size))
+	{
+		st = dar_realloc(dar);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	for (size_t i = dar->size; i > index; i--)
+	{
+		dar->buffer[i + arr_size - 1] = dar->buffer[i - 1];
+	}
+
+	for (size_t i = index, j = 0; j < arr_size; i++, j++)
+	{
+		dar->buffer[i] = array[j];
+	}
+
+	dar->size += arr_size;
+
+	return DS_OK;
+}
 
 Status dar_insert_front(DynamicArray *dar, int value)
 {
@@ -173,7 +204,50 @@ Status dar_update(DynamicArray *dar, int value, size_t index)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status dar_remove(DynamicArray *dar, size_t from, size_t to)
+Status dar_remove(DynamicArray *dar, size_t from, size_t to)
+{
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (from > to)
+		return DS_ERR_INVALID_ARGUMENT;
+
+	if (to >= dar->size)
+		return DS_ERR_INVALID_POSITION;
+
+	if (dar_is_empty(dar))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st;
+
+	// 'from' and 'to' are inclusive
+	size_t distance = to - from + 1;
+
+	if (from == to)
+	{
+		st = dar_remove_at(dar, from);
+
+		if (st != DS_OK)
+			return st;
+
+		return DS_OK;
+	}
+	else if (to == dar->size - 1)
+	{
+		dar->size -= distance;
+
+		return DS_OK;
+	}
+
+	for (size_t i = from, j = to + 1; j <= dar->size - 1; i++, j++)
+	{
+		dar->buffer[i] = dar->buffer[j];
+	}
+
+	dar->size -= distance;
+
+	return DS_OK;
+}
 
 Status dar_remove_front(DynamicArray *dar)
 {
@@ -407,6 +481,11 @@ bool dar_is_full(DynamicArray *dar)
 	return dar->size == dar->capacity;
 }
 
+bool dar_fits(DynamicArray *dar, size_t size)
+{
+	return (dar->size + size) <= dar->capacity;
+}
+
 Status dar_find_max(DynamicArray *dar, int *result)
 {
 	*result = 0;
@@ -587,8 +666,6 @@ Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position)
 	if (dar_is_empty(dar))
 		return DS_ERR_INVALID_OPERATION;
 
-	bool found = false;
-
 	size_t i;
 	for (i = dar->size; i > 0; i--)
 	{
@@ -607,12 +684,154 @@ Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position)
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status dar_copy(DynamicArray *dar, DynamicArray **result)
+Status dar_copy(DynamicArray *dar, DynamicArray **result)
+{
+	if (dar == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = dar_init(result);
+
+	if (st != DS_OK)
+		return st;
+
+	if (dar_is_empty(dar))
+		return DS_OK;
+
+	while (!dar_fits(*result, dar->size))
+	{
+		st = dar_realloc(*result);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	size_t i;
+	for (i = 0; i < dar->size; i++)
+	{
+		(*result)->buffer[i] = dar->buffer[i];
+	}
+
+	(*result)->size = dar->size;
+
+	return DS_OK;
+}
 
 //Status dar_merge_sorted(DynamicArray *dar1, DynamicArray *dar2, DynamicArray **result);
 
-//Status dar_append(DynamicArray *dar1, DynamicArray *dar2)
-//Status dar_prepend(DynamicArray *dar1, DynamicArray *dar2)
+Status dar_prepend(DynamicArray *dar1, DynamicArray *dar2)
+{
+	if (dar1 == NULL || dar2 == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar2))
+		return DS_OK;
+
+	Status st;
+
+	while (!dar_fits(dar1, dar2->size))
+	{
+		st = dar_realloc(dar1);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	size_t i;
+	for (i = dar1->size; i > 0; i--)
+	{
+		dar1->buffer[i + dar2->size - 1] = dar1->buffer[i - 1];
+	}
+
+	for (i = 0; i < dar2->size; i++)
+	{
+		dar1->buffer[i] = dar2->buffer[i];
+	}
+
+	dar1->size += dar2->size;
+
+	return DS_OK;
+}
+
+Status dar_add(DynamicArray *dar1, DynamicArray *dar2, size_t index)
+{
+	if (dar1 == NULL || dar2 == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar2))
+		return DS_OK;
+
+	Status st;
+
+	if (index == dar1->size)
+	{
+		st = dar_append(dar1, dar2);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else if (index == 0)
+	{
+		st = dar_prepend(dar1, dar2);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else
+	{
+		while (!dar_fits(dar1, dar2->size))
+		{
+			st = dar_realloc(dar1);
+
+			if (st != DS_OK)
+				return st;
+		}
+
+		size_t i, j;
+		for (i = dar1->size; i >= index; i--)
+		{
+			dar1->buffer[i + dar2->size] = dar1->buffer[i];
+		}
+
+		for (i = index, j = 0; i < index + dar2->size; i++, j++)
+		{
+			dar1->buffer[i] = dar2->buffer[j];
+		}
+
+		dar1->size += dar2->size;
+
+	}
+
+	return DS_OK;
+}
+
+Status dar_append(DynamicArray *dar1, DynamicArray *dar2)
+{
+	if (dar1 == NULL || dar2 == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (dar_is_empty(dar2))
+		return DS_OK;
+
+	Status st;
+
+	while (!dar_fits(dar1, dar2->size))
+	{
+		st = dar_realloc(dar1);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	size_t i, j;
+	for (i = dar1->size, j = 0; i < dar1->size + dar2->size - 1; i++, j++)
+	{
+		dar1->buffer[i] = dar2->buffer[j];
+	}
+
+	dar1->size += dar2->size;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                           Sorting                                               |

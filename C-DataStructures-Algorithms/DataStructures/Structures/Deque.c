@@ -512,5 +512,45 @@ Status deq_find_min(Deque *deq, int *result)
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status deq_copy_node(DequeNode *node, DequeNode **result)
-//Status deq_copy_queue(Deque *que, Deque **result)
+Status deq_copy_node(DequeNode *node, DequeNode **result)
+{
+	if (node == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = deq_make_node(result, node->data);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
+
+Status deq_copy_queue(Deque *deq, Deque **result)
+{
+	*result = NULL;
+
+	if (deq == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = deq_init_queue(result);
+
+	if (st != DS_OK)
+		return st;
+
+	if (deq_is_empty(deq))
+		return DS_OK;
+
+	DequeNode *scan = deq->front;
+
+	while (scan != NULL)
+	{
+		st = deq_enqueue_rear(*result, scan->data);
+
+		if (st != DS_OK)
+			return st;
+
+		scan = scan->prev;
+	}
+
+	return DS_OK;
+}

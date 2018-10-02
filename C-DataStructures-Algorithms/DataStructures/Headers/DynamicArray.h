@@ -55,16 +55,14 @@ extern "C"
 	Status dar_init(DynamicArray **dar);
 	Status dar_make(DynamicArray **dar, int *array, size_t arr_size);
 
-	Status dar_get(DynamicArray *dar, size_t index, int *result);
-
-	//Status dar_insert(DynamicArray *dar, int *array, size_t arr_size, size_t index);
+	Status dar_insert(DynamicArray *dar, int *array, size_t arr_size, size_t index);
 	Status dar_insert_front(DynamicArray *dar, int value);
 	Status dar_insert_at(DynamicArray *dar, int value, size_t index);
 	Status dar_insert_back(DynamicArray *dar, int value);
 
 	Status dar_update(DynamicArray *dar, int value, size_t index);
 
-	//Status dar_remove(DynamicArray *dar, size_t from, size_t to);
+	Status dar_remove(DynamicArray *dar, size_t from, size_t to);
 	Status dar_remove_front(DynamicArray *dar);
 	Status dar_remove_at(DynamicArray *dar, size_t index);
 	Status dar_remove_back(DynamicArray *dar);
@@ -77,11 +75,14 @@ extern "C"
 	Status dar_delete(DynamicArray **dar);
 	Status dar_erase(DynamicArray **dar);
 
+	Status dar_get(DynamicArray *dar, size_t index, int *result);
+
 	size_t dar_cap(DynamicArray *dar);
 	size_t dar_size(DynamicArray *dar);
 
 	bool dar_is_empty(DynamicArray *dar);
 	bool dar_is_full(DynamicArray *dar);
+	bool dar_fits(DynamicArray *dar, size_t size);
 
 	Status dar_find_max(DynamicArray *dar, int *result);
 	Status dar_find_min(DynamicArray *dar, int *result);
@@ -96,11 +97,12 @@ extern "C"
 	Status dar_find_occurrance_first(DynamicArray *dar, int value, size_t *position);
 	Status dar_find_occurrance_last(DynamicArray *dar, int value, size_t *position);
 
-	//Status dar_copy(DynamicArray *dar, DynamicArray **result);
+	Status dar_copy(DynamicArray *dar, DynamicArray **result);
 	//Status dar_merge_sorted(DynamicArray *dar1, DynamicArray *dar2, DynamicArray **result);
 
-	//Status dar_append(DynamicArray *dar1, DynamicArray *dar2);
-	//Status dar_prepend(DynamicArray *dar1, DynamicArray *dar2);
+	Status dar_append(DynamicArray *dar1, DynamicArray *dar2);
+	Status dar_add(DynamicArray *dar1, DynamicArray *dar2, size_t index);
+	Status dar_prepend(DynamicArray *dar1, DynamicArray *dar2);
 
 	//Status dar_is_sorted(DynamicArray *dar, bool *result);
 	//Status dar_reverse(DynamicArray *dar);

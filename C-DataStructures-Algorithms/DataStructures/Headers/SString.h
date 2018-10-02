@@ -96,6 +96,10 @@ extern "C"
 
 	//bool str_substring(String *str1, String *str2);
 	//bool str_substr(String *str, char *ch);
+
+	//Status str_find_substring(String *str, String *key, size_t *pos);
+	//Status str_find_substr(String *str, char *string, size_t *pos);
+
 	//Status str_reverse(String *str);
 
 	Status str_copy(String *str, String **result);
