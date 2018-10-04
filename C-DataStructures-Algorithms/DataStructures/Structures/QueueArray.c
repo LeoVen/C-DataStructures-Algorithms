@@ -31,6 +31,9 @@ Status qua_init(QueueArray **qua)
 
 	(*qua)->length = 0;
 
+	(*qua)->front = 0;
+	(*qua)->rear = 0;
+
 	return DS_OK;
 }
 
@@ -64,8 +67,22 @@ Status qua_enqueue(QueueArray *qua, int value)
 		if (st != DS_OK)
 			return st;
 	}
+	else if (qua->rear == qua->capacity)
+	{
+		// Shift
+		size_t i, j;
+		for (i = 0, j = qua->front; j < qua->rear; i++, j++)
+		{
+			qua->buffer[i] = qua->buffer[j];
+		}
 
-	qua->buffer[qua->length] = value;
+		qua->front = 0;
+		qua->rear = qua->length;
+	}
+
+	qua->buffer[qua->rear] = value;
+
+	(qua->rear)++;
 
 	(qua->length)++;
 
@@ -86,16 +103,18 @@ Status qua_dequeue(QueueArray *qua, int *value)
 	if (qua_is_empty(qua))
 		return DS_ERR_INVALID_OPERATION;
 
-	*value = qua->buffer[0];
+	*value = qua->buffer[qua->front];
 
-	size_t i;
-
-	for (i = 0; i < qua->length - 1; i++)
-	{
-		qua->buffer[i] = qua->buffer[i + 1];
-	}
+	(qua->front)++;
 
 	(qua->length)--;
+
+	if (qua_is_empty(qua))
+	{
+		qua->front = 0;
+
+		qua->rear = 0;
+	}
 
 	return DS_OK;
 }
@@ -108,14 +127,16 @@ Status qua_pop(QueueArray *qua)
 	if (qua_is_empty(qua))
 		return DS_ERR_INVALID_OPERATION;
 
-	size_t i;
-
-	for (i = 0; i < qua->length - 1; i++)
-	{
-		qua->buffer[i] = qua->buffer[i + 1];
-	}
+	(qua->front)++;
 
 	(qua->length)--;
+
+	if (qua_is_empty(qua))
+	{
+		qua->front = 0;
+
+		qua->rear = 0;
+	}
 
 	return DS_OK;
 }
@@ -140,7 +161,7 @@ Status qua_display(QueueArray *qua)
 	printf("\nQueueArray\nfront <-");
 
 	size_t i;
-	for (i = 0; i < qua->length; i++)
+	for (i = qua->front; i < qua->rear; i++)
 		printf(" %d <-", qua->buffer[i]);
 
 	printf(" rear\n");
@@ -159,7 +180,7 @@ Status qua_display_raw(QueueArray *qua)
 		return DS_OK;
 
 	int i;
-	for (i = 0; i < qua->length; i++)
+	for (i = qua->front; i < qua->rear; i++)
 		printf("%d ", qua->buffer[i]);
 
 	printf("\n");
@@ -217,7 +238,7 @@ Status qua_peek_front(QueueArray *qua, int *result)
 	if (qua_is_empty(qua))
 		return DS_ERR_INVALID_OPERATION;
 
-	*result = qua->buffer[0];
+	*result = qua->buffer[qua->front];
 
 	return DS_OK;
 }
@@ -232,7 +253,7 @@ Status qua_peek_rear(QueueArray *qua, int *result)
 	if (qua_is_empty(qua))
 		return DS_ERR_INVALID_OPERATION;
 
-	*result = qua->buffer[qua->length - 1];
+	*result = qua->buffer[qua->rear - 1];
 
 	return DS_OK;
 }
@@ -263,11 +284,45 @@ bool qua_is_full(QueueArray *qua)
 	return qua->length == qua->capacity;
 }
 
+bool qua_fits(QueueArray *qua, size_t size)
+{
+	return (qua->length + size) <= qua->capacity;
+}
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status qua_copy(QueueArray *qua, QueueArray **result)
+Status qua_copy(QueueArray *qua, QueueArray **result)
+{
+	if (qua == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = qua_init(result);
+
+	if (qua_is_empty(qua))
+		return DS_OK;
+
+	while (!qua_fits(*result, qua->length))
+	{
+		st = qua_realloc(*result);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	size_t i, j;
+	for (i = 0, j = qua->front; j < qua->rear; i++, j++)
+	{
+		(*result)->buffer[i] = qua->buffer[j];
+	}
+
+	(*result)->rear = qua->length;
+
+	(*result)->length = qua->length;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |

@@ -230,11 +230,45 @@ bool sta_is_full(StackArray *sta)
 	return (sta->height == sta->capacity);
 }
 
+bool sta_fits(StackArray *sta, size_t size)
+{
+	return (sta->height + size) <= sta->capacity;
+}
+
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Copy                                                |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status sta_copy(StackArray *sta, StackArray **result)
+Status sta_copy(StackArray *sta, StackArray **result)
+{
+	if (sta == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st = sta_init(result);
+
+	if (st != DS_OK)
+		return st;
+
+	if (sta_is_empty(sta))
+		return DS_OK;
+
+	while (!sta_fits(*result, sta->height))
+	{
+		st = sta_realloc(*result);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	for (size_t i = 0; i < sta->height; i++)
+	{
+		(*result)->buffer[i] = sta->buffer[i];
+	}
+
+	(*result)->height = sta->height;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                            Buffer                                               |

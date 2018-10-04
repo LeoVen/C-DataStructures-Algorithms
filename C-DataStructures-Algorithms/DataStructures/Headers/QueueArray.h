@@ -46,6 +46,8 @@ extern "C"
 	typedef struct QueueArray
 	{
 		int *buffer;		/*!< @c QueueArray data buffer */
+		size_t front;       /*!< Front of the queue where elements are removed */
+		size_t rear;        /*!< Back of the queue where elements are inserted */
 		size_t length;		/*!< @c QueueArray length */
 		size_t capacity;	/*!< @c QueueArray total capacity */
 		size_t growth_rate; /*!< @c QueueArray buffer growth rate */
@@ -74,8 +76,9 @@ extern "C"
 
 	bool qua_is_empty(QueueArray *qua);
 	bool qua_is_full(QueueArray *qua);
+	bool qua_fits(QueueArray *qua, size_t size);
 
-	//Status qua_copy(QueueArray *qua, QueueArray **result);
+	Status qua_copy(QueueArray *qua, QueueArray **result);
 
 	Status qua_realloc(QueueArray *qua);
 

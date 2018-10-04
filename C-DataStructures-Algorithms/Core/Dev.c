@@ -15,14 +15,8 @@
 
 int dev_short_cut(void)
 {
-
-	ArrayTests();
-	BinaryTreeTests();
-	CircularBufferTests();
-	CircularLinkedListTests();
-	DequeTests();
-	DoublyLinkedListTests();
-	PriorityQueueTests();
+	StackArrayTests();
+	QueueArrayTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

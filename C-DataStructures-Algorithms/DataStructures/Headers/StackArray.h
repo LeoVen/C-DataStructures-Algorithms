@@ -72,8 +72,9 @@ extern "C"
 
 	bool sta_is_empty(StackArray *sta);
 	bool sta_is_full(StackArray *sta);
+	bool sta_fits(StackArray *sta, size_t size);
 
-	//Status sta_copy(StackArray *sta, StackArray **result);
+	Status sta_copy(StackArray *sta, StackArray **result);
 
 	Status sta_realloc(StackArray *sta);
 

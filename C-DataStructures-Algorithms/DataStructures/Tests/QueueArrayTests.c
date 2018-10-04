@@ -23,14 +23,14 @@ int QueueArrayTests(void)
 	printf(" +-------------------------------------+\n");
 	printf("\n");
 
-	//QUA_TIME_TESTS();
+	QUA_TIME_TESTS();
 	QUA_REALLOC_TEST();
 
 	QueueArray *q;
 
 	qua_init(&q);
 
-	int i;
+	int i, j;
 
 	for (i = 0; i < 100; i++)
 		qua_enqueue(q, i);
@@ -41,13 +41,54 @@ int QueueArrayTests(void)
 	{
 		qua_pop(q);
 
-		if (q->length % 10 == 0)
+		if (q->length % 20 == 0)
 			qua_display(q);
 	}
 
 	qua_display(q);
 
 	qua_delete(&q);
+
+	qua_init(&q);
+
+	for (i = 0; i < 100; i++)
+	{
+		if (i % 2 == 0)
+			qua_enqueue(q, i);
+		else if (i % 3 == 0)
+			qua_dequeue(q, &j);
+
+		if (i % 20 == 0)
+		{
+			qua_display(q);
+
+			printf("\nLength   : %zu", q->length);
+			printf("\nCapacity : %zu", q->capacity);
+			printf("\nFront    : %zu", q->front);
+			printf("\nRear     : %zu", q->rear);
+
+		}
+	}
+
+	QueueArray *queue;
+
+	qua_copy(q, &queue);
+	
+	printf("\n\n\nOriginal\n--------\n");
+	qua_display(q);
+	printf("\nLength   : %zu", q->length);
+	printf("\nCapacity : %zu", q->capacity);
+	printf("\nFront    : %zu", q->front);
+	printf("\nRear     : %zu", q->rear);
+	printf("\nCopy\n----\n");
+	qua_display(queue);
+	printf("\nLength   : %zu", queue->length);
+	printf("\nCapacity : %zu", queue->capacity);
+	printf("\nFront    : %zu", queue->front);
+	printf("\nRear     : %zu", queue->rear);
+
+	qua_delete(&q);
+	qua_delete(&queue);
 
 	printf("\n");
 	return 0;
