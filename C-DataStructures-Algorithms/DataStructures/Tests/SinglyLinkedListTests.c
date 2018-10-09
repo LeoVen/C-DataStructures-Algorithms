@@ -10,7 +10,7 @@
 
 #include "SinglyLinkedList.h"
 
-int SLL_IO_TESTS();
+int SLL_IO_TESTS(void);
 
 int SinglyLinkedListTests(void)
 {
@@ -589,7 +589,7 @@ int SinglyLinkedListTests(void)
 	return 0;
 }
 
-int SLL_IO_TESTS()
+int SLL_IO_TESTS(void)
 {
 	printf("\n");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");

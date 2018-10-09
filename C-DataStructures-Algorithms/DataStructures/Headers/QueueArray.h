@@ -35,7 +35,7 @@ extern "C"
 	 * - No need of pointers, only the data is allocated in memory
 	 *
 	 * @b Drawbacks
-	 * - Slow removal as all items must be shifted
+	 * - Slow removal as all items sometimes must be shifted
 	 * - When the @c QueueArray is full the buffer needs to be reallocated
 	 *
 	 * @b Functions

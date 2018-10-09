@@ -66,29 +66,27 @@ Status cll_insert_after(CircularLinkedList *cll, int value)
 	if (cll == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	if (cll->length == 0)
-	{
+	Status st;
 
-		Status st = cll_insert_first(cll, value);
+	if (cll_is_empty(cll))
+	{
+		st = cll_insert_first(cll, value);
 
 		if (st != DS_OK)
 			return st;
 	}
 	else
 	{
-
 		CircularLinkedNode *cln;
-		cll_init_node(&cln);
 
-		if (!cln)
-			return DS_ERR_ALLOC;
+		st = cll_make_node(&cln, value);
 
-		cln->data = value;
+		if (st != DS_OK)
+			return st;
 
 		cln->next = cll->curr->next;
-		cll->curr->next = cln;
 
-		cll->curr = cll->curr->next;
+		cll->curr->next = cln;
 
 		(cll->length)++;
 	}
@@ -96,7 +94,45 @@ Status cll_insert_after(CircularLinkedList *cll, int value)
 	return DS_OK;
 }
 
-//Status cll_insert_before(CircularLinkedList *cll, int value)
+Status cll_insert_before(CircularLinkedList *cll, int value)
+{
+	if (cll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	Status st;
+
+	if (cll_is_empty(cll))
+	{
+		st = cll_insert_first(cll, value);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else
+	{
+		CircularLinkedNode *cln;
+
+		st = cll_make_node(&cln, value);
+
+		if (st != DS_OK)
+			return st;
+
+		st = cll_iter_before(cll);
+
+		if (st != DS_OK)
+			return st;
+
+		cln->next = cll->curr->next;
+
+		cll->curr->next = cln;
+
+		cll->curr = cln->next;
+
+		(cll->length)++;
+	}
+
+	return DS_OK;
+}
 
 //Status cll_push_after(CircularLinkedList *cll, CircularLinkedNode *node)
 //Status cll_push_before(CircularLinkedList *cll, CircularLinkedNode *node)
@@ -105,39 +141,10 @@ Status cll_insert_after(CircularLinkedList *cll, int value)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-Status cll_remove_after(CircularLinkedList *cll)
+Status cll_remove_after(CircularLinkedList *cll, int *result)
 {
-	if (cll == NULL)
-		return DS_ERR_NULL_POINTER;
+	*result = 0;
 
-	if (cll->length == 0 || cll->curr == NULL)
-		return DS_ERR_INVALID_OPERATION;
-
-	if (cll->length == 1)
-	{
-
-		Status st = cll_remove_last(cll);
-
-		if (st != DS_OK)
-			return st;
-	}
-	else
-	{
-
-		CircularLinkedNode *kill = cll->curr->next;
-
-		cll->curr->next = kill->next;
-
-		free(kill);
-
-		(cll->length)--;
-	}
-
-	return DS_OK;
-}
-
-Status cll_remove_current(CircularLinkedList *cll)
-{
 	if (cll == NULL)
 		return DS_ERR_NULL_POINTER;
 
@@ -148,30 +155,117 @@ Status cll_remove_current(CircularLinkedList *cll)
 
 	if (cll->length == 1)
 	{
-
-		st = cll_remove_last(cll);
+		st = cll_remove_last(cll, result);
 
 		if (st != DS_OK)
 			return st;
 	}
 	else
 	{
+		CircularLinkedNode *node = cll->curr->next;
 
-		st = cll_iter_before(cll);
+		*result = node->data;
+
+		cll->curr->next = node->next;
+
+		st = cll_delete_node(&node);
 
 		if (st != DS_OK)
 			return st;
 
-		st = cll_remove_after(cll);
-
-		if (st != DS_OK)
-			return st;
+		(cll->length)--;
 	}
 
 	return DS_OK;
 }
 
-//Status cll_remove_before(CircularLinkedList *cll)
+Status cll_remove_current(CircularLinkedList *cll, int *result)
+{
+	*result = 0;
+
+	if (cll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (cll_is_empty(cll))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st;
+
+	if (cll->length == 1)
+	{
+		st = cll_remove_last(cll, result);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else
+	{
+		st = cll_iter_before(cll);
+
+		if (st != DS_OK)
+			return st;
+
+		CircularLinkedNode *node = cll->curr->next;
+
+		*result = node->data;
+
+		cll->curr->next = node->next;
+
+		st = cll_delete_node(&node);
+
+		if (st != DS_OK)
+			return st;
+
+		(cll->length)--;
+	}
+
+	return DS_OK;
+}
+
+Status cll_remove_before(CircularLinkedList *cll, int *result)
+{
+	*result = 0;
+
+	if (cll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (cll_is_empty(cll))
+		return DS_ERR_INVALID_OPERATION;
+
+	Status st;
+
+	if (cll->length == 1)
+	{
+		st = cll_remove_last(cll, result);
+
+		if (st != DS_OK)
+			return st;
+	}
+	else
+	{
+		st = cll_iter(cll, cll->length - 2);
+
+		if (st != DS_OK)
+			return st;
+
+		CircularLinkedNode *node = cll->curr->next;
+
+		*result = node->data;
+
+		cll->curr->next = node->next;
+
+		st = cll_delete_node(&node);
+
+		if (st != DS_OK)
+			return st;
+
+		cll->curr = cll->curr->next;
+
+		(cll->length)--;
+	}
+
+	return DS_OK;
+}
 
 //Status cll_pop_after(CircularLinkedList *cll, CircularLinkedNode **result)
 //Status cll_pop_current(CircularLinkedList *cll, CircularLinkedNode **result)
@@ -190,14 +284,14 @@ Status cll_insert_first(CircularLinkedList *cll, int value)
 		return DS_ERR_INVALID_OPERATION;
 
 	CircularLinkedNode *cln;
-	cll_init_node(&cln);
 
-	if (!cln)
-		return DS_ERR_ALLOC;
+	Status st = cll_make_node(&cln, value);
 
-	cln->data = value;
+	if (st != DS_OK)
+		return st;
 
 	cll->curr = cln;
+
 	cln->next = cln;
 
 	(cll->length)++;
@@ -205,21 +299,28 @@ Status cll_insert_first(CircularLinkedList *cll, int value)
 	return DS_OK;
 }
 
-Status cll_remove_last(CircularLinkedList *cll)
+Status cll_remove_last(CircularLinkedList *cll, int *result)
 {
+	*result = 0;
+
 	if (cll == NULL)
-		return DS_ERR_NULL_POINTER;
+        return DS_ERR_NULL_POINTER;
 
-	if (cll->length == 0 || cll->length > 1)
-		return DS_ERR_INVALID_OPERATION;
+    if (cll->length != 1)
+        return DS_ERR_INVALID_OPERATION;
 
-	free(cll->curr);
+	*result = cll->curr->data;
 
-	cll->curr = NULL;
+    Status st = cll_delete_node(&(cll->curr));
 
-	(cll->length)--;
+    if (st != DS_OK)
+        return st;
 
-	return DS_OK;
+    cll->curr = NULL;
+
+    (cll->length)--;
+
+    return DS_OK;
 }
 
 // +-------------------------------------------------------------------------------------------------+
@@ -262,7 +363,7 @@ Status cll_iter_before(CircularLinkedList *cll)
 	if (cll->length == 0 || cll->curr == NULL)
 		return DS_ERR_INVALID_OPERATION;
 
-	int i;
+	size_t i;
 	for (i = 0; i < cll->length - 1; i++)
 		cll->curr = cll->curr->next;
 
@@ -280,7 +381,6 @@ Status cll_display(CircularLinkedList *cll)
 
 	if (cll->length == 0 || cll->curr == NULL)
 	{
-
 		printf("\nCircular Linked List\n[ empty ]\n");
 
 		return DS_OK;
@@ -288,15 +388,11 @@ Status cll_display(CircularLinkedList *cll)
 
 	CircularLinkedNode *scan = cll->curr;
 
-	/* For visual purposes only so the last node inserted is printed last */
-	scan = scan->next;
-
 	printf("\nCircular Linked List\n ->");
 
-	int i;
+	size_t i;
 	for (i = 0; i < cll->length; i++)
 	{
-
 		printf(" %d ->", scan->data);
 
 		scan = scan->next;
@@ -314,15 +410,11 @@ Status cll_display_raw(CircularLinkedList *cll)
 
 	CircularLinkedNode *scan = cll->curr;
 
-	/* For visual purposes only so the last node inserted is printed last */
-	scan = scan->next;
-
 	printf("\n");
 
 	int i;
 	for (i = 0; i < cll->length; i++)
 	{
-
 		printf(" %d", scan->data);
 
 		scan = scan->next;
@@ -337,19 +429,36 @@ Status cll_display_raw(CircularLinkedList *cll)
 // |                                             Resets                                              |
 // +-------------------------------------------------------------------------------------------------+
 
-Status cll_delete(CircularLinkedList **cll)
+Status cll_delete_node(CircularLinkedNode **cln)
+{
+	if ((*cln) == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	free(*cln);
+
+	return DS_OK;
+}
+
+Status cll_delete_list(CircularLinkedList **cll)
 {
 	if ((*cll) == NULL)
 		return DS_ERR_NULL_POINTER;
 
 	Status st;
 
-	while ((*cll)->curr != NULL)
+	CircularLinkedNode *prev = (*cll)->curr;
+
+	size_t i;
+	for (i = 0; i < (*cll)->length; i++)
 	{
-		st = cll_remove_after(*cll);
+		(*cll)->curr = (*cll)->curr->next;
+
+		st = cll_delete_node(&prev);
 
 		if (st != DS_OK)
 			return st;
+
+		prev = (*cll)->curr;
 	}
 
 	free(*cll);
@@ -364,7 +473,7 @@ Status cll_erase(CircularLinkedList **cll)
 	if ((*cll) == NULL)
 		return DS_ERR_NULL_POINTER;
 
-	Status st = cll_delete(cll);
+	Status st = cll_delete_list(cll);
 
 	if (st != DS_OK)
 		return st;
@@ -399,8 +508,57 @@ bool cll_is_empty(CircularLinkedList *cll)
 	return (cll->length == 0 || cll->curr == NULL);
 }
 
-//Status cll_find_max(CircularLinkedList *cll, int *result)
-//Status cll_find_min(CircularLinkedList *cll, int *result)
+Status cll_find_max(CircularLinkedList *cll, int *result)
+{
+	*result = 0;
+
+	if (cll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (cll_is_empty(cll))
+		return DS_ERR_INVALID_OPERATION;
+
+	CircularLinkedNode *scan = cll->curr;
+
+	*result = scan->data;
+
+	size_t i;
+	for (i = 0; i < cll->length; i++)
+	{
+		if (scan->data > *result)
+			*result = scan->data;
+
+		scan = scan->next;
+	}
+
+	return DS_OK;
+}
+
+Status cll_find_min(CircularLinkedList *cll, int *result)
+{
+	*result = 0;
+
+	if (cll == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (cll_is_empty(cll))
+		return DS_ERR_INVALID_OPERATION;
+
+	CircularLinkedNode *scan = cll->curr;
+
+	*result = scan->data;
+
+	size_t i;
+	for (i = 0; i < cll->length; i++)
+	{
+		if (scan->data < *result)
+			*result = scan->data;
+
+		scan = scan->next;
+	}
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Extras                                              |
@@ -436,7 +594,7 @@ Status cll_josephus(size_t n, size_t k, size_t *result)
 		return DS_ERR_ALLOC;
 
 	size_t i;
-	int val = 1;
+	int j, val = 1;
 	for (i = 1; i <= n; i++)
 	{
 
@@ -448,7 +606,7 @@ Status cll_josephus(size_t n, size_t k, size_t *result)
 	while (cll->length > 1)
 	{
 		cll_iter(cll, k - 1);
-		cll_remove_after(cll);
+		cll_remove_after(cll, &j);
 	}
 
 	if (cll->length == 1)
@@ -458,7 +616,7 @@ Status cll_josephus(size_t n, size_t k, size_t *result)
 	else
 		return DS_ERR_UNEXPECTED_RESULT;
 
-	cll_delete(&cll);
+	cll_delete_list(&cll);
 
 	return DS_OK;
 }

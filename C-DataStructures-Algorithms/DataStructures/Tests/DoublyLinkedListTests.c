@@ -13,7 +13,7 @@
 
 #include "DoublyLinkedList.h"
 
-int DLL_IO_TESTS();
+int DLL_IO_TESTS(void);
 
 int DoublyLinkedListTests(void)
 {
@@ -162,7 +162,7 @@ int DoublyLinkedListTests(void)
 	return 0;
 }
 
-int DLL_IO_TESTS()
+int DLL_IO_TESTS(void)
 {
 	printf("\n");
 	printf("\n ---------- ---------- ---------- --------- ---------- ---------- ----------");

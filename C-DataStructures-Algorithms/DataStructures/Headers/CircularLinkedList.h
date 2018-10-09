@@ -54,7 +54,7 @@ extern "C"
 	 */
 	typedef struct CircularLinkedList
 	{
-		int length;						 /*!< List length */
+		size_t length;                   /*!< List length */
 		struct CircularLinkedNode *curr; /*!< Pointer to current node. Functions operate relative to this node */
 	} CircularLinkedList;
 
@@ -64,17 +64,17 @@ extern "C"
 	Status cll_make_node(CircularLinkedNode **cln, int value);
 
 	Status cll_insert_first(CircularLinkedList *cll, int value);
-	Status cll_remove_last(CircularLinkedList *cll);
+	Status cll_remove_last(CircularLinkedList *cll, int *result);
 
 	Status cll_insert_after(CircularLinkedList *cll, int value);
-	//Status cll_insert_before(CircularLinkedList *cll, int value);
+	Status cll_insert_before(CircularLinkedList *cll, int value);
 
 	//Status cll_push_after(CircularLinkedList *cll, CircularLinkedNode *node);
 	//Status cll_push_before(CircularLinkedList *cll, CircularLinkedNode *node);
 
-	Status cll_remove_after(CircularLinkedList *cll);
-	Status cll_remove_current(CircularLinkedList *cll);
-	//Status cll_remove_before(CircularLinkedList *cll);
+	Status cll_remove_after(CircularLinkedList *cll, int *result);
+	Status cll_remove_current(CircularLinkedList *cll, int *result);
+	Status cll_remove_before(CircularLinkedList *cll, int *result);
 
 	//Status cll_pop_after(CircularLinkedList *cll, CircularLinkedNode **result);
 	//Status cll_pop_current(CircularLinkedList *cll, CircularLinkedNode **result);
@@ -87,7 +87,8 @@ extern "C"
 	Status cll_display(CircularLinkedList *cll);
 	Status cll_display_raw(CircularLinkedList *cll);
 
-	Status cll_delete(CircularLinkedList **cll);
+	Status cll_delete_node(CircularLinkedNode **cln);
+	Status cll_delete_list(CircularLinkedList **cll);
 	Status cll_erase(CircularLinkedList **cll);
 
 	size_t cll_length(CircularLinkedList *cll);
@@ -99,8 +100,8 @@ extern "C"
 
 	bool cll_is_empty(CircularLinkedList *cll);
 
-	//Status cll_find_max(CircularLinkedList *cll, int *result);
-	//Status cll_find_min(CircularLinkedList *cll, int *result);
+	Status cll_find_max(CircularLinkedList *cll, int *result);
+	Status cll_find_min(CircularLinkedList *cll, int *result);
 
 	Status cll_josephus(size_t n, size_t k, size_t *result);
 

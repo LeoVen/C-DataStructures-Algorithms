@@ -35,13 +35,14 @@ extern "C"
 		int *buffer;       /*!< Buffer */
 	} CircularBuffer;
 
-	Status cbf_init(CircularBuffer **squ, size_t length);
+	Status cbf_init(CircularBuffer **cbf, size_t length);
 
 	Status cbf_insert(CircularBuffer *cbf, int value);
 
 	Status cbf_remove(CircularBuffer *cbf, int *value);
 
 	Status cbf_display(CircularBuffer *cbf);
+	Status cbf_display_raw(CircularBuffer *cbf);
 
 	Status cbf_delete(CircularBuffer **cbf); // Deletes structure
 	Status cbf_erase(CircularBuffer **cbf);  // Erases and init

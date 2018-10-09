@@ -42,13 +42,14 @@ BinaryHeap                   not started      Docs     not started
 BinaryTree                   [#######   ]     Docs     [          ]
 BTree                        not started      Docs     not started
 CircularBuffer               [##########]     Docs     [          ]
-CircularLinkedList           [######    ]     Docs     [          ]
+CircularLinkedList           [########  ]     Docs     [          ]
 Deque                        [######### ]     Docs     [          ]
 DequeArray                   not started      Docs     not started
 DoublyLinkedList             [######    ]     Docs     [#         ]
 DynamicArray                 [#######   ]     Docs     [          ]
 HashMap                      [########  ]     Docs     [          ]
 HashSet                      [######### ]     Docs     [          ]
+PriorityHeap                 not started      Docs     [          ]
 PriorityQueue                [#######   ]     Docs     [          ]
 Queue                        [##########]     Docs     [          ]
 QueueArray                   [######### ]     Docs     [          ]

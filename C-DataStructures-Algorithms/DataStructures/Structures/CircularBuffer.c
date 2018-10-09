@@ -52,7 +52,11 @@ Status cbf_insert(CircularBuffer *cbf, int value)
 	cbf->buffer[cbf->start] = value;
 
 	(cbf->start)++;
-	cbf_wrap(cbf);
+
+	Status st = cbf_wrap(cbf);
+
+	if (st != DS_OK)
+		return st;
 
 	(cbf->length)++;
 
@@ -78,7 +82,11 @@ Status cbf_remove(CircularBuffer *cbf, int *value)
 	cbf->buffer[cbf->end] = 0;
 
 	(cbf->end)++;
-	cbf_wrap(cbf);
+
+	Status st = cbf_wrap(cbf);
+
+	if (st != DS_OK)
+		return st;
 
 	(cbf->length)--;
 

@@ -15,8 +15,8 @@
 
 int dev_short_cut(void)
 {
-	StackArrayTests();
-	QueueArrayTests();
+	CircularLinkedListTests();
+	CircularBufferTests();
 
 	printf("\nPress enter to continue...");
 	_getch();
