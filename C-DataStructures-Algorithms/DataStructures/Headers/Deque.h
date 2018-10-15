@@ -52,8 +52,8 @@ extern "C"
 	typedef struct Deque
 	{
 		size_t length;			 /*!< Total @c Deque length */
-		struct DequeNode *front; /*!< Where @c QueueNode are removed */
-		struct DequeNode *rear;  /*!< Where @c QueueNode are inserted */
+		struct DequeNode *front; /*!< First node at the front of the @c Deque */
+		struct DequeNode *rear;  /*!< First node at the rear of the @c Deque */
 	} Deque;
 
 	Status deq_init_queue(Deque **deq);

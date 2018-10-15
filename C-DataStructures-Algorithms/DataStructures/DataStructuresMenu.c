@@ -189,6 +189,7 @@ int ds_all(void)
 	CircularBufferTests();
 	CircularLinkedListTests();
 	ClockTests();
+	DequeArrayTests();
 	DequeTests();
 	DoublyLinkedListTests();
 	DynamicArrayTests();

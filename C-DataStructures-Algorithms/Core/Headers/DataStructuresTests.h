@@ -25,6 +25,7 @@ extern "C" {
 	int QueueTests(void);
 	int QueueArrayTests(void);
 	int DequeTests(void);
+	int DequeArrayTests(void);
 	int PriorityQueueTests(void);
 	int CircularBufferTests(void);
 

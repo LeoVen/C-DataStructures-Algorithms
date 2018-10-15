@@ -300,6 +300,9 @@ Status qua_copy(QueueArray *qua, QueueArray **result)
 
 	Status st = qua_init(result);
 
+	if (st != DS_OK)
+		return st;
+
 	if (qua_is_empty(qua))
 		return DS_OK;
 
