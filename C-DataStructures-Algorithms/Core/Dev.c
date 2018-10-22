@@ -15,7 +15,7 @@
 
 int dev_short_cut(void)
 {
-	DequeArrayTests();
+	CircularLinkedListTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

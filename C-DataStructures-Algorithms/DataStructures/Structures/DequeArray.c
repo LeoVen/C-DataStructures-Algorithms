@@ -378,7 +378,7 @@ Status dqa_realloc(DequeArray *dqa)
 
 	dqa->buffer = new_buffer;
 
-	size_t real_rear = (dqa->rear - 1) & (old_capacity - 1);
+	size_t real_rear = (dqa->rear == 0) ? dqa->capacity - 1 : dqa->rear - 1;
 
 	if (dqa->front > real_rear)
 	{

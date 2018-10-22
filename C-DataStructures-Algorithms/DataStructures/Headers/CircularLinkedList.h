@@ -19,17 +19,18 @@ extern "C"
 
 	/**
 	 * A @c CircularLinkedNode is what a @c CircularLinkedList is composed of.
-	 * They are exactly the same as @c SinglyLinkedNode. The differentiation of
+	 * They are exactly the same as @c DoublyLinkedNode. The differentiation of
 	 * both was made so that no structure depends on another.
 	 */
 	typedef struct CircularLinkedNode
 	{
 		int data;						 /*!< Pointer to node's content */
 		struct CircularLinkedNode *next; /*!< Pointer to the next node on the list */
+		struct CircularLinkedNode *prev; /*!< Pointer to the previous node on the list */
 	} CircularLinkedNode;
 
 	/**
-	 * A @c CircularLinkedList is a structure much like a @c SinglyLinkedList
+	 * A @c CircularLinkedList is a structure much like a @c DoublyLinkedList
 	 * except that the nodes wrap around making it a circular structure. This
 	 * way only one pointer is necessarry as you won't have any problems like
 	 * pointing the @c *head pointer to the next node making the node before it
@@ -37,14 +38,11 @@ extern "C"
 	 * into an infinite loop as the list won't have a node pointing to @c NULL
 	 * as if it was the end of it.
 	 *
-	 * @b Advantages over @c SinglyLinkedList
+	 * @b Advantages over @c DoublyLinkedList
 	 * - Can be used to many problems where a circular structure is needed
 	 * - No need for a tail pointer as the list wraps around itself
-	 * - No chances of loosing reference to previous Nodes if the pointer to
-	 * the first element of the list moves forward
 	 *
 	 * @b Drawbacks
-	 * - Insertions at the end of the list are much slower
 	 * - The end of the list is relative and may change
 	 *
 	 * @b Functions
@@ -63,9 +61,6 @@ extern "C"
 
 	Status cll_make_node(CircularLinkedNode **cln, int value);
 
-	Status cll_insert_first(CircularLinkedList *cll, int value);
-	Status cll_remove_last(CircularLinkedList *cll, int *result);
-
 	Status cll_insert_after(CircularLinkedList *cll, int value);
 	Status cll_insert_before(CircularLinkedList *cll, int value);
 
@@ -80,9 +75,8 @@ extern "C"
 	//Status cll_pop_current(CircularLinkedList *cll, CircularLinkedNode **result);
 	//Status cll_pop_before(CircularLinkedList *cll, CircularLinkedNode **result);
 
-	Status cll_iter_next(CircularLinkedList *cll);
-	Status cll_iter(CircularLinkedList *cll, size_t positions);
-	Status cll_iter_before(CircularLinkedList *cll);
+	Status cll_iter_next(CircularLinkedList *cll, size_t positions);
+	Status cll_iter_prev(CircularLinkedList *cll, size_t positions);
 
 	Status cll_display(CircularLinkedList *cll);
 	Status cll_display_raw(CircularLinkedList *cll);

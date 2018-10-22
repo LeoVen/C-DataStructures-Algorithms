@@ -46,17 +46,29 @@ int CircularLinkedListTests(void)
 
 	cll_display(cll);
 
-	size_t n = 40, k = 13, result;
+	size_t n = 40, k = 13, result; // 14
 	if (cll_josephus(n, k, &result) == DS_OK)
 		printf("\n Josephus (%zu, %zu) = %zu\n", n, k, result);
 
-	cll_iter_before(cll);
+	n = 1390, k = 33; // 1187
+	if (cll_josephus(n, k, &result) == DS_OK)
+		printf("\n Josephus (%zu, %zu) = %zu\n", n, k, result);
+
+	n = 122, k = 244; // 44
+	if (cll_josephus(n, k, &result) == DS_OK)
+		printf("\n Josephus (%zu, %zu) = %zu\n", n, k, result);
+
+	n = 8873, k = 652; // 6911
+	if (cll_josephus(n, k, &result) == DS_OK)
+		printf("\n Josephus (%zu, %zu) = %zu\n", n, k, result);
+
+	cll_iter_prev(cll, 1);
 	cll_display(cll);
 
-	cll_iter_before(cll);
+	cll_iter_prev(cll, 1);
 	cll_display(cll);
 
-	cll_iter_before(cll);
+	cll_iter_prev(cll, 1);
 	cll_display(cll);
 
 	size_t cll_len = cll_length(cll);
@@ -90,7 +102,7 @@ int CLL_IO_TESTS(void)
 
 	size_t len, length = 0, l_max = 8, position = 0;
 	int i, j, node, oper, place, max = 100, value = 0;
-	for (i = 0; i < 10000; i++)
+	for (i = 0; i < 1000; i++)
 	{
 		printf("\n---------- ---------- ---------- ---------- ----------");
 
