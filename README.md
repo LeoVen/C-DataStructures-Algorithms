@@ -40,6 +40,7 @@ AVLTree                      [######### ]     Docs     [          ]
 BinarySearchTree             [######### ]     Docs     [          ]
 BinaryHeap                   not started      Docs     not started
 BinaryTree                   [#######   ]     Docs     [          ]
+BinomialHeap                 not started      Docs     not started
 BTree                        not started      Docs     not started
 CircularBuffer               [##########]     Docs     [          ]
 CircularLinkedList           [########  ]     Docs     [          ]

@@ -90,7 +90,7 @@ extern "C"
 	
 	bool avl_is_empty(AVLTree *avl);
 
-	int avl_height(AVLTreeNode *node);
+	int avl_height_update(AVLTreeNode *node);
 	int avl_depth(AVLTreeNode *node);
 
 	Status avl_traversal_wrapper(AVLTree *avl, int traversal);
@@ -100,12 +100,10 @@ extern "C"
 
 	Status avl_traversal_leaves(AVLTreeNode *node);
 
-	int avl_balance_factor(AVLTreeNode *node);
-
 	Status avl_rotate_right(AVLTreeNode **node_z);
 	Status avl_rotate_left(AVLTreeNode **node_z);
-	Status avl_rotate_right_left(AVLTreeNode **node_z);
-	Status avl_rotate_left_right(AVLTreeNode **node_z);
+
+	int avl_height(AVLTreeNode *node);
 
 	Status avl_rebalance(AVLTree *avl, AVLTreeNode *node);
 

@@ -412,7 +412,7 @@ bool avl_is_empty(AVLTree *avl)
 	return avl->size == 0;
 }
 
-int avl_height(AVLTreeNode *node)
+int avl_height_update(AVLTreeNode *node)
 {
 	if (node == NULL)
 		return 0;
@@ -546,14 +546,6 @@ Status avl_traversal_leaves(AVLTreeNode *node)
 // |                                             AVL                                                 |
 // +-------------------------------------------------------------------------------------------------+
 
-int avl_balance_factor(AVLTreeNode *node)
-{
-	if (node == NULL)
-		return 0;
-	
-	return ((node->left) ? node->left->height : 0) - ((node->right) ? node->right->height : 0);
-}
-
 /* Left-Left case
  *
  * T1, T2, T3 and T4 are subtrees.
@@ -588,9 +580,9 @@ Status avl_rotate_right(AVLTreeNode **node_z)
 	}
 	
 	// Update heights
-	(*node_z)->height = avl_height(*node_z);
+	(*node_z)->height = avl_height_update(*node_z);
 	
-	node_y->height = avl_height(node_y);
+	node_y->height = avl_height_update(node_y);
 
 	// Update parent of root
 	if (node_zp != NULL)
@@ -601,7 +593,7 @@ Status avl_rotate_right(AVLTreeNode **node_z)
 			node_zp->right = node_y;
 
 		// Update height
-		node_zp->height = avl_height(node_zp);
+		node_zp->height = avl_height_update(node_zp);
 	}
 
 	// New root node
@@ -643,9 +635,9 @@ Status avl_rotate_left(AVLTreeNode **node_z)
 	}
 	
 	// Update heights
-	(*node_z)->height = avl_height(*node_z);
+	(*node_z)->height = avl_height_update(*node_z);
 	
-	node_y->height = avl_height(node_y);
+	node_y->height = avl_height_update(node_y);
 
 	// Update parent of root
 	if (node_zp != NULL)
@@ -656,7 +648,7 @@ Status avl_rotate_left(AVLTreeNode **node_z)
 			node_zp->right = node_y;
 
 		// Update height
-		node_zp->height = avl_height(node_zp);
+		node_zp->height = avl_height_update(node_zp);
 	}
 
 	// New root node
@@ -665,152 +657,12 @@ Status avl_rotate_left(AVLTreeNode **node_z)
 	return DS_OK;
 }
 
-/* Right-Left Case
- *
- * T1, T2, T3 and T4 are subtrees.
- *
- *    Z                               Z                                 X
- *   / \                             / \                               /  \ 
- * T1   Y      Right Rotate (Y)    T1   X        Left Rotate(Z)      Z      Y
- *     / \     - - - - - - - - ->     /  \      - - - - - - - ->    / \    / \
- *    X   T4                         T2   Y                       T1  T2  T3  T4
- *   / \                                 /  \
- * T2   T3                              T3   T4
- */
-Status avl_rotate_right_left(AVLTreeNode **node_z)
-{
-	AVLTreeNode *node_zp = (*node_z)->parent; // Z parent
-	AVLTreeNode *node_y = (*node_z)->right;   // Y
-	AVLTreeNode *node_x = node_y->left;       // X
-	AVLTreeNode *sub2 = node_x->left;         // T2
-	AVLTreeNode *sub3 = node_x->right;        // T3
-
-	// Rotate
-	node_x->left = (*node_z);
-	node_x->right = node_y;
-
-	(*node_z)->right = sub2;
-
-	node_y->left = sub3;
-
-	// Modify parents
-	node_x->parent = node_zp;
-	(*node_z)->parent = node_x;
-	node_y->parent = node_x;
-
-	if (sub2 != NULL)
-	{
-		sub2->parent = (*node_z);
-	}
-
-	if (sub3 != NULL)
-	{
-		sub3->parent = node_y;
-	}
-
-	// Update heights
-	(*node_z)->height = avl_height(*node_z);
-	node_y->height = avl_height(node_y);
-	
-	node_x->height = avl_height(node_x);
-
-	// Update parent of root
-	if (node_zp != NULL)
-	{
-		if (node_zp->key > node_x->key)
-			node_zp->left = node_x;
-		else
-			node_zp->right = node_x;
-
-		// Update height
-		node_zp->height = avl_height(node_zp);
-	}
-
-	// New root node
-	*node_z = node_x;
-
-	return DS_OK;
-}
-
-/* Left-Right Case
- *
- * T1, T2, T3 and T4 are subtrees.
- *
- *      Z                                Z                              X
- *     / \                             /   \                           /  \ 
- *    Y   T4  Left Rotate (Y)         X    T4   Right Rotate(Z)      Y      Z
- *   / \      - - - - - - - - ->     /  \       - - - - - - - ->    / \    / \
- * T1   X                           Y    T3                       T1  T2 T3  T4
- *     / \                         / \
- *   T2   T3                     T1   T2
- */
-Status avl_rotate_left_right(AVLTreeNode **node_z)
-{
-	AVLTreeNode *node_zp = (*node_z)->parent; // Z parent
-	AVLTreeNode *node_y = (*node_z)->left;    // Y
-	AVLTreeNode *node_x = node_y->right;      // X
-	AVLTreeNode *sub2 = node_x->left;         // T2
-	AVLTreeNode *sub3 = node_x->right;        // T3
-
-	// Rotate
-	node_x->right = (*node_z);
-	node_x->left = node_y;
-
-	(*node_z)->left = sub3;
-
-	node_y->right = sub2;
-
-	// Modify parents
-	node_x->parent = node_zp;
-	(*node_z)->parent = node_x;
-	node_y->parent = node_x;
-
-	if (sub2 != NULL)
-	{
-		sub2->parent = node_y;
-	}
-
-	if (sub3 != NULL)
-	{
-		sub3->parent = (*node_z);
-	}
-
-	// Update heights
-	(*node_z)->height = avl_height(*node_z);
-	node_y->height = avl_height(node_y);
-	
-	node_x->height = avl_height(node_x);
-
-	// Update parent of root
-	if (node_zp != NULL)
-	{
-		if (node_zp->key > node_x->key)
-			node_zp->left = node_x;
-		else
-			node_zp->right = node_x;
-
-		// Update height
-		node_zp->height = avl_height(node_zp);
-	}
-
-	// New root node
-	*node_z = node_x;
-
-	return DS_OK;
-}
-
-Status avl_update_height(AVLTreeNode *node)
+int avl_height(AVLTreeNode *node)
 {
 	if (node == NULL)
-		return DS_OK;
+		return 0;
 
-	avl_update_height(node->left);
-
-	avl_update_height(node->right);
-
-	node->height = avl_height(node);
-
-	return DS_OK;
+	return node->height;
 }
 
 // Node is the newly inserted node
@@ -821,7 +673,7 @@ Status avl_rebalance(AVLTree *avl, AVLTreeNode *node)
 
 	Status st;
 
-	AVLTreeNode *scan = node;
+	AVLTreeNode *scan = node, *child = NULL;
 
 	int balance, value = node->key;
 
@@ -833,41 +685,44 @@ Status avl_rebalance(AVLTree *avl, AVLTreeNode *node)
 		if (scan->parent == NULL)
 			is_root = true;
 
-		scan->height = avl_height(scan);
+		scan->height = avl_height_update(scan);
 
-		balance = avl_balance_factor(scan);
+		balance = avl_height(scan->right) - avl_height(scan->left);
 
-		// Left Left
-		if (balance > 1 && value < scan->left->key)
+		// Right
+		if (balance >= 2)
 		{
-			st = avl_rotate_right(&scan);
+			child = scan->right;
 
-			if (st != DS_OK)
-				return st;
-		}
+			// Right Left
+			if (avl_height(child->right) < avl_height(child->left))
+			{
+				st = avl_rotate_right(&child);
 
-		// Right Right
-		if (balance < -1 && value > scan->right->key)
-		{
+				if (st != DS_OK)
+					return st;
+			}
+
 			st = avl_rotate_left(&scan);
 
 			if (st != DS_OK)
 				return st;
 		}
-
-		// Left Right
-		if (balance > 1 && value > scan->left->key && scan->left->right != NULL)
+		// Left
+		else if (balance <= -2)
 		{
-			st = avl_rotate_left_right(&scan);
+			child = scan->left;
 
-			if (st != DS_OK)
-				return st;
-		}
+			// Left Right
+			if (avl_height(child->left) < avl_height(child->right))
+			{
+				st = avl_rotate_left(&child);
 
-		// Right Left
-		if (balance < -1 && value < scan->right->key && scan->right->left != NULL)
-		{
-			st = avl_rotate_right_left(&scan);
+				if (st != DS_OK)
+					return st;
+			}
+
+			st = avl_rotate_right(&scan);
 
 			if (st != DS_OK)
 				return st;
