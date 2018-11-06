@@ -36,7 +36,8 @@ Status avl_init_node(AVLTreeNode **node)
 		return DS_ERR_ALLOC;
 
 	(*node)->key = 0;
-	(*node)->height = 1;
+	(*node)->count = 0;
+	(*node)->height = 0;
 
 	(*node)->left = NULL;
 	(*node)->right = NULL;
@@ -57,7 +58,8 @@ Status avl_make_node(AVLTreeNode **node, int value)
 		return DS_ERR_ALLOC;
 
 	(*node)->key = value;
-	(*node)->height = 1;
+	(*node)->count = 1;
+	(*node)->height = 0;
 
 	(*node)->left = NULL;
 	(*node)->right = NULL;
@@ -74,9 +76,6 @@ Status avl_insert(AVLTree *avl, int value)
 {
 	if (avl == NULL)
 		return DS_ERR_NULL_POINTER;
-
-	if (avl_contains(avl->root, value))
-		return DS_OK;
 
 	Status st;
 
@@ -107,7 +106,13 @@ Status avl_insert(AVLTree *avl, int value)
 			else if (scan->key < value)
 				scan = scan->right;
 			else
+			{
+				(scan->count)++;
+
+				(avl->size)++;
+
 				return DS_OK;
+			}
 		}
 
 		AVLTreeNode *node;
@@ -139,7 +144,216 @@ Status avl_insert(AVLTree *avl, int value)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status avl_remove(BinarySearchTree *avl, int value)
+Status avl_remove(AVLTree *avl, int value)
+{
+	if (avl == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (avl_is_empty(avl))
+		return DS_ERR_INVALID_OPERATION;
+
+	AVLTreeNode *temp, *unbalanced = NULL, *node = avl_node_find(avl->root, value);
+
+	if (node == NULL)
+		return DS_ERR_NOT_FOUND;
+
+	Status st;
+
+	bool is_root = node->parent == NULL;
+
+	if (node->count > 1)
+	{
+		(node->count)--;
+	}
+	else
+	{
+		// Deleting a leaf. No need to update parent pointers.
+		if (node->left == NULL && node->right == NULL)
+		{
+			// Deleting last element
+			if (is_root)
+				avl->root = NULL;
+			else
+			{
+				// Probably unbalanced node
+				unbalanced = node->parent;
+
+				// This is the right leaf of a node
+				if (node->parent->right == node)
+					node->parent->right = NULL;
+				// This is the left leaf of a node
+				else
+					node->parent->left = NULL;
+			}
+
+			free(node);
+		}
+		// Only right subtree. Need to update right subtree parent pointer.
+		else if (node->left == NULL)
+		{
+			// Short-circuit the right subtree
+			if (is_root)
+			{
+				avl->root = node->right;
+
+				avl->root->parent = NULL;
+			}
+			else
+			{
+				// Probably unbalanced node
+				unbalanced = node->parent;
+
+				// Linking the subtree parent pointer
+				node->right->parent = node->parent;
+
+				// This is the right child of a node
+				if (node->parent->right == node)
+					node->parent->right = node->right;
+				// This is the left child of a node
+				else
+					node->parent->left = node->right;
+			}
+
+			free(node);
+		}
+		// Only left subtree. Need to update left subtree parent pointer.
+		else if (node->right == NULL)
+		{
+			// Short-circuit the left subtree
+			if (is_root)
+			{
+				avl->root = node->left;
+
+				avl->root->parent = NULL;
+			}
+			else
+			{
+				// Probably unbalanced node
+				unbalanced = node->parent;
+
+				// Linking the subtree parent pointer
+				node->left->parent = node->parent;
+
+				// This is the right child of a node
+				if (node->parent->right == node)
+					node->parent->right = node->left;
+				// This is the left child of a node
+				else
+					node->parent->left = node->left;
+			}
+
+			free(node);
+		}
+		// Node has left and right subtrees
+		else
+		{
+			// Replace current value with successor's (temp) and then delete it.
+			// Note that we don't care about is_root since we are only replacing
+			// the node's contents.
+			temp = node->right;
+
+			// Finding successor node (temp)
+			while (temp->left != NULL)
+				temp = temp->left;
+
+			// Storing key in a temporary value
+			int temp_key = temp->key;
+			int temp_count = temp->count;
+
+			// Unbalanced node will be passed into balance function
+			unbalanced = temp->parent;
+
+			// Deleting temp
+			// This node can not be an inner node so there are only three
+			// options. Its a leaf, or it has either left or right subtrees
+			// but not both.
+			if (temp->left == NULL && temp->right == NULL)
+			{
+				// Can't be root
+
+				// This is the right leaf of a node
+				if (temp->parent->right == temp)
+					temp->parent->right = NULL;
+				// This is the left leaf of a node
+				else
+					temp->parent->left = NULL;
+
+				free(temp);
+			}
+			// Only right subtree. Need to update right subtree parent pointer.
+			else if (temp->left == NULL)
+			{
+				// Can't be root
+
+				// Linking the subtree parent pointer
+				temp->right->parent = temp->parent;
+
+				// This is the right child of a node
+				if (temp->parent->right == temp)
+					temp->parent->right = temp->right;
+				// This is the left child of a node
+				else
+					temp->parent->left = temp->right;
+
+				free(temp);
+			}
+			// Only left subtree. Need to update left subtree parent pointer.
+			else if (temp->right == NULL)
+			{
+				// Can't be root
+
+				// Linking the subtree parent pointer
+				temp->left->parent = temp->parent;
+
+				// This is the right child of a node
+				if (temp->parent->right == temp)
+					temp->parent->right = temp->left;
+				// This is the left child of a node
+				else
+					temp->parent->left = temp->left;
+
+				free(temp);
+			}
+			// Undefined behaviour
+			else
+				return DS_ERR_UNEXPECTED_RESULT;
+
+			// Finally switching values
+			node->key = temp_key;
+			node->count = temp_count;
+		}
+	}
+
+	(avl->size)--;
+
+	if (unbalanced != NULL)
+	{
+		st = avl_rebalance(avl, unbalanced);
+
+		if (st != DS_OK)
+			return st;
+	}
+
+	return DS_OK;
+}
+
+Status avl_pop(AVLTree *avl, int *result)
+{
+	if (avl == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (avl_is_empty(avl))
+		return DS_ERR_INVALID_OPERATION;
+
+	*result = avl->root->key;
+
+	Status st = avl_remove(avl, *result);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
@@ -407,9 +621,29 @@ bool avl_contains(AVLTreeNode *root, int value)
 		return true;
 }
 
+AVLTreeNode *avl_node_find(AVLTreeNode *root, int value)
+{
+	if (root == NULL)
+		return NULL;
+
+	AVLTreeNode *scan = root;
+
+	while (scan != NULL)
+	{
+		if (scan->key < value)
+			scan = scan->right;
+		else if (scan->key > value)
+			scan = scan->left;
+		else
+			return scan;
+	}
+
+	return NULL;
+}
+
 bool avl_is_empty(AVLTree *avl)
 {
-	return avl->size == 0;
+	return avl->size == 0 || avl->root == NULL;
 }
 
 int avl_height_update(AVLTreeNode *node)

@@ -33,6 +33,7 @@ extern "C"
 	typedef struct AVLTreeNode
 	{
 		int key;                    /*!< Node's key */
+		int count;                  /*!< Amount of keys */
 		int height;				    /*!< Node's Height */
 		struct AVLTreeNode *right;  /*!< Pointer to right child */
 		struct AVLTreeNode *left;   /*!< Pointer to left child */
@@ -70,7 +71,9 @@ extern "C"
 
 	Status avl_insert(AVLTree *avl, int value);
 
-	//Status avl_remove(BinarySearchTree *avl, int value);
+	Status avl_remove(AVLTree *avl, int value);
+
+	Status avl_pop(AVLTree *avl, int *result);
 
 	Status avl_display_wrapper(AVLTree *avl, int display);
 	Status avl_display_raw(AVLTreeNode *node, size_t spaces);
@@ -87,6 +90,7 @@ extern "C"
 	Status avl_find_min(AVLTree *avl, AVLTreeNode **result);
 	
 	bool avl_contains(AVLTreeNode *root, int value);
+	AVLTreeNode *avl_node_find(AVLTreeNode *root, int value);
 	
 	bool avl_is_empty(AVLTree *avl);
 
