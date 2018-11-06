@@ -15,7 +15,7 @@
 
 int dev_short_cut(void)
 {
-	AVLTreeTests();
+	BinarySearchTreeTests();
 
 	printf("\nPress enter to continue...");
 	_getch();

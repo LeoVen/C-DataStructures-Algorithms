@@ -41,6 +41,7 @@ Status bst_init_node(BinarySearchTreeNode **node)
 	(*node)->parent = NULL;
 
 	(*node)->key = 0;
+	(*node)->count = 0;
 
 	return DS_OK;
 }
@@ -53,6 +54,7 @@ Status bst_make_node(BinarySearchTreeNode **node, int value)
 		return DS_ERR_ALLOC;
 
 	(*node)->key = value;
+	(*node)->count = 1;
 
 	(*node)->left = NULL;
 	(*node)->right = NULL;
@@ -83,7 +85,13 @@ Status bst_insert(BinarySearchTree *bst, int value)
 		else if (scan->key < value)
 			scan = scan->right;
 		else
+		{
+			(bst->size)++;
+
+			(scan->count)++;
+
 			return DS_OK;
+		}
 	}
 
 	BinarySearchTreeNode *node;
@@ -120,7 +128,200 @@ Status bst_insert(BinarySearchTree *bst, int value)
 // |                                             Removal                                             |
 // +-------------------------------------------------------------------------------------------------+
 
-//Status bst_remove(BinarySearchTree *bst, int value)
+Status bst_remove(BinarySearchTree *bst, int value)
+{
+	if (bst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (bst_is_empty(bst))
+		return DS_ERR_INVALID_OPERATION;
+
+	BinarySearchTreeNode *temp, *node = bst_node_find(bst->root, value);
+
+	if (node == NULL)
+		return DS_ERR_NOT_FOUND;
+
+	Status st;
+
+	bool is_root = node->parent == NULL;
+
+	if (node->count > 1)
+	{
+		(node->count)--;
+	}
+	else
+	{
+		// Deleting a leaf. No need to update parent pointers.
+		if (node->left == NULL && node->right == NULL)
+		{
+			// Deleting last element
+			if (is_root)
+				bst->root = NULL;
+			else
+			{
+				// This is the right leaf of a node
+				if (node->parent->right == node)
+					node->parent->right = NULL;
+				// This is the left leaf of a node
+				else
+					node->parent->left = NULL;
+			}
+
+			free(node);
+		}
+		// Only right subtree. Need to update right subtree parent pointer.
+		else if (node->left == NULL)
+		{
+			// Short-circuit the right subtree
+			if (is_root)
+			{
+				bst->root = node->right;
+
+				bst->root->parent = NULL;
+			}
+			else
+			{
+				// Linking the subtree parent pointer
+				node->right->parent = node->parent;
+
+				// This is the right child of a node
+				if (node->parent->right == node)
+					node->parent->right = node->right;
+				// This is the left child of a node
+				else
+					node->parent->left = node->right;
+			}
+
+			free(node);
+		}
+		// Only left subtree. Need to update left subtree parent pointer.
+		else if (node->right == NULL)
+		{
+			// Short-circuit the left subtree
+			if (is_root)
+			{
+				bst->root = node->left;
+
+				bst->root->parent = NULL;
+			}
+			else
+			{
+				// Linking the subtree parent pointer
+				node->left->parent = node->parent;
+
+				// This is the right child of a node
+				if (node->parent->right == node)
+					node->parent->right = node->left;
+				// This is the left child of a node
+				else
+					node->parent->left = node->left;
+			}
+
+			free(node);
+		}
+		// Node has left and right subtrees
+		else
+		{
+			// Replace current value with successor's (temp) and then delete it.
+			// Note that we don't care about is_root since we are only replacing
+			// the node's contents.
+			temp = node->right;
+
+			// Finding successor node (temp)
+			while (temp->left != NULL)
+				temp = temp->left;
+
+			// Storing key in a temporary value
+			int temp_key = temp->key;
+			int temp_count = temp->count;
+
+			// Deleting temp
+			// This node can not be an inner node so there are only three
+			// options. Its a leaf, or it has either left or right subtrees
+			// but not both.
+			if (temp->left == NULL && temp->right == NULL)
+			{
+				// Can't be root
+
+				// This is the right leaf of a node
+				if (temp->parent->right == temp)
+					temp->parent->right = NULL;
+				// This is the left leaf of a node
+				else
+					temp->parent->left = NULL;
+
+				free(temp);
+			}
+			// Only right subtree. Need to update right subtree parent pointer.
+			else if (temp->left == NULL)
+			{
+				// Can't be root
+
+				// Linking the subtree parent pointer
+				temp->right->parent = temp->parent;
+
+				// This is the right child of a node
+				if (temp->parent->right == temp)
+					temp->parent->right = temp->right;
+				// This is the left child of a node
+				else
+					temp->parent->left = temp->right;
+
+				free(temp);
+			}
+			// Only left subtree. Need to update left subtree parent pointer.
+			else if (temp->right == NULL)
+			{
+				// Can't be root
+
+				// Linking the subtree parent pointer
+				temp->left->parent = temp->parent;
+
+				// This is the right child of a node
+				if (temp->parent->right == temp)
+					temp->parent->right = temp->left;
+				// This is the left child of a node
+				else
+					temp->parent->left = temp->left;
+
+				free(temp);
+			}
+			// Undefined behaviour
+			else
+				return DS_ERR_UNEXPECTED_RESULT;
+
+			// Finally switching values
+			node->key = temp_key;
+			node->count = temp_count;
+
+		}
+	}
+
+	(bst->size)--;
+
+	return DS_OK;
+}
+
+
+Status bst_pop(BinarySearchTree *bst, int *result)
+{
+	*result = 0;
+
+	if (bst == NULL)
+		return DS_ERR_NULL_POINTER;
+
+	if (bst_is_empty(bst))
+		return DS_ERR_INVALID_OPERATION;
+
+	*result = bst->root->key;
+
+	Status st = bst_remove(bst, *result);
+
+	if (st != DS_OK)
+		return st;
+
+	return DS_OK;
+}
 
 // +-------------------------------------------------------------------------------------------------+
 // |                                             Display                                             |
@@ -398,9 +599,29 @@ Status bst_search(BinarySearchTree *bst, int key, BinarySearchTreeNode **result)
 	return DS_OK;
 }
 
+BinarySearchTreeNode* bst_node_find(BinarySearchTreeNode *root, int value)
+{
+	if (root == NULL)
+		return NULL;
+
+	BinarySearchTreeNode *scan = root;
+
+	while (scan != NULL)
+	{
+		if (scan->key < value)
+			scan = scan->right;
+		else if (scan->key > value)
+			scan = scan->left;
+		else
+			return scan;
+	}
+
+	return NULL;
+}
+
 bool bst_is_empty(BinarySearchTree *bst)
 {
-	return (bst->root == NULL);
+	return bst->size == 0;
 }
 
 size_t bst_height(BinarySearchTreeNode *node)

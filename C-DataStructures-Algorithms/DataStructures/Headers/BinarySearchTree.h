@@ -32,6 +32,7 @@ extern "C"
 	typedef struct BinarySearchTreeNode
 	{
 		int key;                             /*!< Node's key */
+		int count;                           /*!< Amount of keys */
 		struct BinarySearchTreeNode *right;  /*!< Pointer to right child */
 		struct BinarySearchTreeNode *left;   /*!< Pointer to left child */
 		struct BinarySearchTreeNode *parent; /*!< Pointer to parent Node */
@@ -73,7 +74,9 @@ extern "C"
 
 	Status bst_insert(BinarySearchTree *bst, int value);
 
-	//Status bst_remove(BinarySearchTree *bst, int value);
+	Status bst_remove(BinarySearchTree *bst, int value);
+
+	Status bst_pop(BinarySearchTree *bst, int *result);
 
 	Status bst_display_wrapper(BinarySearchTree *bst, int display);
 	Status bst_display_raw(BinarySearchTreeNode *node, size_t spaces);
@@ -90,6 +93,7 @@ extern "C"
 	Status bst_find_min(BinarySearchTree *bst, BinarySearchTreeNode **result);
 
 	Status bst_search(BinarySearchTree *bst, int key, BinarySearchTreeNode **result);
+	BinarySearchTreeNode* bst_node_find(BinarySearchTreeNode *root, int value);
 
 	bool bst_is_empty(BinarySearchTree *bst);
 

@@ -22,6 +22,8 @@ int BinarySearchTreeTests(void)
 
 	BinarySearchTree *bst;
 
+	Status st;
+
 	bst_init_tree(&bst);
 
 	print_status_repr(bst_insert(bst, 100));
@@ -79,6 +81,42 @@ int BinarySearchTreeTests(void)
 	bst_delete(&bst);
 	bst_delete(&b);
 	bst_delete(&b2);
+
+	BinarySearchTree *tree;
+
+	int max1 = 0, max2 = 0, temp, j;
+
+	if (bst_init_tree(&tree) == DS_OK)
+	{
+		for (int i = 0; i < 200; i++)
+		{
+			temp = rand() % 193;
+
+			max1 += temp;
+
+			if (bst_insert(tree, temp) != DS_OK)
+				break;
+		}
+
+		while (!bst_is_empty(tree))
+		{
+			st = bst_pop(tree, &j);
+
+			if (st != DS_OK)
+			{
+				print_status_repr(st);
+
+				break;
+			}
+
+			max2 += j;
+		}
+
+		printf("\nTotal inserted values : %d", max1);
+		printf("\nTotal removed values  : %d", max2);
+	}
+
+	bst_delete(&tree);
 
 	printf("\n");
 	return 0;
